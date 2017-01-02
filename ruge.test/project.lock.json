@@ -2563,6 +2563,12 @@
         "framework": ".NETStandard,Version=v1.6",
         "dependencies": {
           "NETStandard.Library": "1.6.0"
+        },
+        "compile": {
+          "netstandard1.6/ruge.lib.dll": {}
+        },
+        "runtime": {
+          "netstandard1.6/ruge.lib.dll": {}
         }
       }
     }
@@ -7583,7 +7589,8 @@
     },
     "ruge.lib/1.0.0": {
       "type": "project",
-      "path": "../ruge.lib/project.json"
+      "path": "../ruge.lib/project.json",
+      "msbuildProject": "../ruge.lib/ruge.lib.xproj"
     }
   },
   "projectFileDependencyGroups": {

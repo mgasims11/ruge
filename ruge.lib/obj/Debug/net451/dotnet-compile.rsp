@@ -1,0 +1,30 @@
+--temp-output:C:\data\ruge\ruge.lib\obj\Debug\net451\
+--out:C:\data\ruge\ruge.lib\bin\Debug\net451\ruge.lib.dll
+--define:DEBUG
+--define:TRACE
+--define:NET451
+--suppress-warning:CS1701
+--suppress-warning:CS1702
+--suppress-warning:CS1705
+--optimize:False
+--debug-type:portable
+--output-name:ruge.lib
+--file-version:1.0.0.0
+--version:1.0.0.0
+--informational-version:1.0.0
+--target-framework:.NETFramework,Version=v4.5.1
+--reference:C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.1\mscorlib.dll
+--reference:C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.1\System.dll
+--reference:C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.1\System.Core.dll
+--reference:C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.1\Microsoft.CSharp.dll
+C:\data\ruge\ruge.lib\logic\CanvasManager.cs
+C:\data\ruge\ruge.lib\model\ActionType.cs
+C:\data\ruge\ruge.lib\model\Canvas.cs
+C:\data\ruge\ruge.lib\model\Control.cs
+C:\data\ruge\ruge.lib\model\ControlType.cs
+C:\data\ruge\ruge.lib\model\EngineAction.cs
+C:\data\ruge\ruge.lib\model\EngineActionEventArgs.cs
+C:\data\ruge\ruge.lib\model\EngineCanvasActionEventArgs.cs
+C:\data\ruge\ruge.lib\model\EngineControlActionEventArgs.1.cs
+C:\data\ruge\ruge.lib\model\UserAction.cs
+C:\data\ruge\ruge.lib\model\XYPair.cs
