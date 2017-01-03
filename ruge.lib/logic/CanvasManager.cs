@@ -29,13 +29,12 @@ namespace ruge.lib.logic {
             var canvas = new Canvas() {
                     CanvasId = Guid.NewGuid(),
                     Dimensions = new XYPair() {
-                        X = 1920,
-                        Y = 1080
+                        X = height,
+                        Y = width
                     }
                 };
             _canvas = canvas;
-            this.RaiseEngineActionEvent(_canvas, ActionType.Create);
-            
+            this.RaiseEngineActionEvent(_canvas, ActionType.Create);            
             return canvas;
         }
 
