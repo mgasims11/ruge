@@ -6,6 +6,8 @@ namespace ruge.lib.model {
         public XYPair Location {get;set;}
         public XYPair Size {get;set;}
         public string VisualURI {get;set;}
+        public string VisualURIHover { get; set; }
+        public string VisualURIPressed { get; set; }
         public string Text {get;set;}
     }   
 }

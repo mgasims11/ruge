@@ -25,7 +25,6 @@ namespace Ruge.Win.Test
     {
 
         private CanvasManager _canvasManager;
-        private double _snapX, _snapY;
 
         public MainWindow()
         {
@@ -44,8 +43,19 @@ namespace Ruge.Win.Test
             _canvasManager = new CanvasManager();
             _canvasManager.EngineActionEvent += _canvasManager_EngineActionEvent;
             _canvasManager.CreateCanvas(20, 20);
-            _canvasManager.AddControl(ControlType.Clickable, 1, 1, 0, 0, "https://b.fastcompany.net/multisite_files/fastcompany/imagecache/inline-small/inline/2015/09/3050613-inline-i-2-googles-new-logo-copy.png", "");
-            //_canvasManager.AddControl(ControlType.Clickable, 10, 10, 2, 2, "https://b.fastcompany.net/multisite_files/fastcompany/imagecache/inline-small/inline/2015/09/3050613-inline-i-2-googles-new-logo-copy.png", "");
+            for (var i = 0; i <= 19; i++)
+                for (var j = 0; j <= 19; j++)
+                {
+                    _canvasManager.AddControl(
+                        ControlType.Clickable,
+                        1, 1,
+                        i, j,
+                        "https://b.fastcompany.net/multisite_files/fastcompany/imagecache/inline-small/inline/2015/09/3050613-inline-i-2-googles-new-logo-copy.png",
+                        "https://b.fastcompany.net/multisite_files/fastcompany/imagecache/inline-small/inline/2015/09/3050613-inline-i-2-googles-new-logo-copy.png",
+                        "https://b.fastcompany.net/multisite_files/fastcompany/imagecache/inline-small/inline/2015/09/3050613-inline-i-2-googles-new-logo-copy.png",
+                        "");
+                }
+                    
         }
 
         private void _canvasManager_EngineActionEvent(object sender, EngineActionEventArgs e)
@@ -81,8 +91,19 @@ namespace Ruge.Win.Test
                         b.Name = 'C' + o.Control.ControlId.ToString().Replace("-","");
                         b.BorderThickness = new Thickness(0.0);
                         ImageBrush ib = new ImageBrush();
-                        ib.ImageSource = new BitmapImage(new Uri(o.Control.VisualURI));
+                        ib.ImageSource = new BitmapImage(new Uri(o.Control.VisualURI));                       
                         b.SetValue(BackgroundProperty, ib);
+
+                        var trigger = new EventTrigger(b.MouseEnter);
+                        //Task - need to find out how to add a routed event fo rmouseover
+                        trigger.RoutedEvent = 
+
+
+                        t.Property = IsMouseOverProperty;
+                        t.Value = true;
+                        t.Setters.Add(new Setter(BackgroundProperty, new ImageBrush(new BitmapImage(new Uri(o.Control.VisualURI)))));
+                        b.Triggers.Add(t);
+                        
 
                         MainCanvas.Children.Add(b);
                         break;

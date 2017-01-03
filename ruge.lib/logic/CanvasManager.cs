@@ -38,7 +38,7 @@ namespace ruge.lib.logic {
             return canvas;
         }
 
-        public void AddControl(ControlType controlType, int height, int width, int x, int y, string uri,string text)
+        public void AddControl(ControlType controlType, int height, int width, int x, int y, string uri,string uriHover, string uriPressed, string text)
         {
             var control = new Control();
             control.ControlId = Guid.NewGuid();
@@ -46,6 +46,8 @@ namespace ruge.lib.logic {
             control.Location = new XYPair() {X=x,Y=y};
             control.Size = new XYPair() {X=height,Y=width};
             control.VisualURI = uri;
+            control.VisualURIHover = uriHover;
+            control.VisualURIPressed = uriPressed;
             control.Text = text;
             RaiseEngineActionEvent(control,ActionType.Create);
         }
