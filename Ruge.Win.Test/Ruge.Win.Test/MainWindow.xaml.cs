@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using ruge.lib;
 using ruge.lib.logic;
 using ruge.lib.model;
+using Ruge.Win.Test.Controls;
 
 namespace Ruge.Win.Test
 {
@@ -53,6 +54,8 @@ namespace Ruge.Win.Test
                         "https://b.fastcompany.net/multisite_files/fastcompany/imagecache/inline-small/inline/2015/09/3050613-inline-i-2-googles-new-logo-copy.png",
                         "https://b.fastcompany.net/multisite_files/fastcompany/imagecache/inline-small/inline/2015/09/3050613-inline-i-2-googles-new-logo-copy.png",
                         "https://b.fastcompany.net/multisite_files/fastcompany/imagecache/inline-small/inline/2015/09/3050613-inline-i-2-googles-new-logo-copy.png",
+                        "https://b.fastcompany.net/multisite_files/fastcompany/imagecache/inline-small/inline/2015/09/3050613-inline-i-2-googles-new-logo-copy.png",
+                        "https://b.fastcompany.net/multisite_files/fastcompany/imagecache/inline-small/inline/2015/09/3050613-inline-i-2-googles-new-logo-copy.png"
                         "");
                 }
                     
@@ -83,29 +86,38 @@ namespace Ruge.Win.Test
                 switch (o.Control.ControlType)
                 {
                     case ControlType.Clickable:
-                        var b = new Button();
-                        b.SetValue(WidthProperty, (double)o.Control.Size.X);
-                        b.SetValue(HeightProperty, (double)o.Control.Size.Y);
-                        b.SetValue(TopProperty, (double)o.Control.Location.X);
-                        b.SetValue(LeftProperty, (double)o.Control.Location.Y);
-                        b.Name = 'C' + o.Control.ControlId.ToString().Replace("-","");
-                        b.BorderThickness = new Thickness(0.0);
-                        ImageBrush ib = new ImageBrush();
-                        ib.ImageSource = new BitmapImage(new Uri(o.Control.VisualURI));                       
-                        b.SetValue(BackgroundProperty, ib);
+                        MainCanvas.Children.Add(
+                            new Clickable(
+                                o.Control.ControlId,
+                                o.Control.Size.X,
+                                o.Control.Size.Y,
+                            )
+                        );
 
-                        var trigger = new EventTrigger(b.MouseEnter);
+                        //var b = new Button();
+                        //b.SetValue(WidthProperty, (double)o.Control.Size.X);
+                        //b.SetValue(HeightProperty, (double)o.Control.Size.Y);
+                        c.SetValue(TopProperty, (double)o.Control.Location.X);
+                        c.SetValue(LeftProperty, (double)o.Control.Location.Y);
+                        //b.Name = 'C' + o.Control.ControlId.ToString().Replace("-","");
+                        //b.BorderThickness = new Thickness(0.0);
+                        //ImageBrush ib = new ImageBrush();
+                        //ib.ImageSource = new BitmapImage(new Uri(o.Control.VisualURI));                       
+                        //b.SetValue(BackgroundProperty, ib);
+                        //b.MouseEnter += B_MouseEnter;
+            
+                        //var trigger = new EventTrigger(b.MouseEnter);
                         //Task - need to find out how to add a routed event fo rmouseover
-                        trigger.RoutedEvent = 
+                        //trigger.RoutedEvent = 
 
 
-                        t.Property = IsMouseOverProperty;
-                        t.Value = true;
-                        t.Setters.Add(new Setter(BackgroundProperty, new ImageBrush(new BitmapImage(new Uri(o.Control.VisualURI)))));
-                        b.Triggers.Add(t);
+                        //t.Property = IsMouseOverProperty;
+                        //t.Value = true;
+                        //t.Setters.Add(new Setter(BackgroundProperty, new ImageBrush(new BitmapImage(new Uri(o.Control.VisualURI)))));
+                        //b.Triggers.Add(t);
                         
 
-                        MainCanvas.Children.Add(b);
+
                         break;
                     case ControlType.Text:
                      
@@ -113,5 +125,6 @@ namespace Ruge.Win.Test
                 }
             }
         }
+
     }
 }
