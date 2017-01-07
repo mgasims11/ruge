@@ -1,5 +1,7 @@
 {
     "projects": [
-        "ruge.lib", "ruge.test"
+      "ruge.lib",
+      "ruge.test",
+      "."
     ]
 }

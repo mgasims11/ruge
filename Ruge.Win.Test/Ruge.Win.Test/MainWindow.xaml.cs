@@ -28,7 +28,7 @@
     public partial class MainWindow : Window
     {
 
-        private CanvasManager _canvasManager;
+        
 
         public MainWindow()
         {
@@ -44,23 +44,7 @@
 
         private void Test()
         {
-            _canvasManager = new CanvasManager();
-            _canvasManager.EngineActionEvent += _canvasManager_EngineActionEvent;
-            _canvasManager.CreateCanvas(20, 20);
-            for (var i = 0; i <= 19; i++)
-                for (var j = 0; j <= 19; j++)
-                {
-                    _canvasManager.AddControl(
-                        ControlType.Clickable,
-                        1, 1,
-                        i, j,
-                        @"C:\data\ruge\SampleImages\image.png",
-                        @"C:\data\ruge\SampleImages\hover.png",
-                        @"C:\data\ruge\SampleImages\down.png",                        
-                        @"C:\data\ruge\SampleImages\disabled.png",
-                        "");
-                }
-                    
+          
         }
 
         private void _canvasManager_EngineActionEvent(object sender, EngineActionEventArgs e)

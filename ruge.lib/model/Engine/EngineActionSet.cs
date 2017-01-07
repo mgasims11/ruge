@@ -1,8 +1,8 @@
 namespace ruge.lib.model.engine {
-    using ruge.lib.model;
-    using ruge.lib.model.controls;
+    using System.Collections.Generic;
+    
     public class EngineActionSet
     {
-        
+        public List<EngineAction> EngineActions { get; set; }
     }
 }

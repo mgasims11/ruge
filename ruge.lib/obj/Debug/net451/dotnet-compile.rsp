@@ -26,7 +26,9 @@ C:\data\ruge\ruge.lib\model\Controls\ControlType.cs
 C:\data\ruge\ruge.lib\model\Engine\EngineAction.cs
 C:\data\ruge\ruge.lib\model\Engine\EngineActionEventArgs.cs
 C:\data\ruge\ruge.lib\model\Engine\EngineActionSet.cs
+C:\data\ruge\ruge.lib\model\Engine\EngineActionSetEventArgs.cs
 C:\data\ruge\ruge.lib\model\Engine\EngineActionType.cs
 C:\data\ruge\ruge.lib\model\Engine\EngineCanvasActionEventArgs.cs
 C:\data\ruge\ruge.lib\model\Engine\EngineControlActionEventArgs.cs
 C:\data\ruge\ruge.lib\model\User\UserAction.cs
+C:\data\ruge\ruge.lib\model\User\UserActionType.cs
