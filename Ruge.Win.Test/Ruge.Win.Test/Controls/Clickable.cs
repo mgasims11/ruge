@@ -10,7 +10,7 @@ using System.Windows.Media.Imaging;
 
 namespace Ruge.Win.Test.Controls
 {
-    public class Clickable : Button
+    public class Clickable : Image
     {
         private string _backgroundIdle, _backgroundHover, _backgroundDown, _backgroundDisabled;
         private string _backgroundCurrent;
@@ -20,7 +20,6 @@ namespace Ruge.Win.Test.Controls
             SetValue(WidthProperty, (double)width);
             SetValue(HeightProperty, (double)height);           
             Name = 'C' + guid.ToString().Replace("-", "");
-            BorderThickness = new Thickness(0.0);
             MouseEnter += Clickable_MouseEnter;
             MouseDown += Clickable_MouseDown;
             MouseLeave += Clickable_MouseLeave;
@@ -72,9 +71,8 @@ namespace Ruge.Win.Test.Controls
             else
                 _backgroundCurrent = _backgroundDisabled;
 
-            ImageBrush ib = new ImageBrush();
-            ib.ImageSource = new BitmapImage(new Uri(_backgroundCurrent));
-            SetValue(BackgroundProperty, ib);
+            var bi = new BitmapImage(new Uri(_backgroundCurrent));
+            SetValue(SourceProperty, bi);
         }
     }
 }

@@ -1,4 +1,4 @@
-namespace ruge.lib.model
+namespace ruge.lib.model.controls
 {
     using System;
     public class Canvas

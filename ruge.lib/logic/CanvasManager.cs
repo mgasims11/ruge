@@ -3,6 +3,9 @@ namespace ruge.lib.logic {
     using System;
     using System.Collections.Generic;
     using ruge.lib.model;
+    using ruge.lib.model.controls;
+    using ruge.lib.model.engine;
+
     public class CanvasManager {
         public delegate void EngineActionEventHandler(object sender, EngineActionEventArgs e);
         public event EngineActionEventHandler EngineActionEvent;
@@ -15,12 +18,13 @@ namespace ruge.lib.logic {
             }
         }
 
-        public void RaiseEngineActionEvent(Control control, ActionType actionType) {
+        public void RaiseEngineActionEvent(Control control, EngineActionType actionType) {
             var args = new EngineControlActionEventArgs(control, actionType);
             this.RaiseEngineActionEvent(this,args);
+            //var x = new ruge.lib.model.engine.EngineControlActionEventArgs(control, actionType);
         }
 
-        public void RaiseEngineActionEvent(Canvas canvas, ActionType actionType) {
+        public void RaiseEngineActionEvent(Canvas canvas, EngineActionType actionType) {
            var args = new EngineCanvasActionEventArgs(canvas, actionType);
            this.RaiseEngineActionEvent(this,args);
         }   
@@ -34,22 +38,33 @@ namespace ruge.lib.logic {
                     }
                 };
             _canvas = canvas;
-            this.RaiseEngineActionEvent(_canvas, ActionType.Create);            
+            this.RaiseEngineActionEvent(_canvas, EngineActionType.Create);            
             return canvas;
         }
 
-        public void AddControl(ControlType controlType, int height, int width, int x, int y, string uri,string uriHover, string uriPressed, string text)
+        public Guid AddControl(
+            ControlType controlType,
+            int height, int width,
+            int x, int y,
+            string uriIdle,
+            string uriHover,
+            string uriDown,
+            string uriDisabled,
+            string text)
         {
             var control = new Control();
             control.ControlId = Guid.NewGuid();
             control.ControlType = controlType;
             control.Location = new XYPair() {X=x,Y=y};
             control.Size = new XYPair() {X=height,Y=width};
-            control.VisualURI = uri;
+            control.VisualURIIdle = uriIdle;
             control.VisualURIHover = uriHover;
-            control.VisualURIPressed = uriPressed;
+            control.VisualURIDown = uriDown;
+            control.VisualURIDisabled = uriDisabled;
             control.Text = text;
-            RaiseEngineActionEvent(control,ActionType.Create);
+            RaiseEngineActionEvent(control,EngineActionType.Create);
+
+            return control.ControlId;
         }
     }
 }

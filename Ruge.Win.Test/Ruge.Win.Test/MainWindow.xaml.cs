@@ -1,24 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using ruge.lib;
-using ruge.lib.logic;
-using ruge.lib.model;
-using Ruge.Win.Test.Controls;
-
-namespace Ruge.Win.Test
+﻿namespace Ruge.Win.Test
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using System.Windows;
+    using System.Windows.Controls;
+    using System.Windows.Data;
+    using System.Windows.Documents;
+    using System.Windows.Input;
+    using System.Windows.Media;
+    using System.Windows.Media.Imaging;
+    using System.Windows.Navigation;
+    using System.Windows.Shapes;
+    using ruge.lib;
+    using ruge.lib.logic;
+    using ruge.lib.model;
+    using ruge.lib.model.controls;
+    using ruge.lib.model.engine;
+    using ruge.lib.model.user;
+    using Ruge.Win.Test.Controls;
+
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
@@ -51,11 +54,10 @@ namespace Ruge.Win.Test
                         ControlType.Clickable,
                         1, 1,
                         i, j,
-                        "https://b.fastcompany.net/multisite_files/fastcompany/imagecache/inline-small/inline/2015/09/3050613-inline-i-2-googles-new-logo-copy.png",
-                        "https://b.fastcompany.net/multisite_files/fastcompany/imagecache/inline-small/inline/2015/09/3050613-inline-i-2-googles-new-logo-copy.png",
-                        "https://b.fastcompany.net/multisite_files/fastcompany/imagecache/inline-small/inline/2015/09/3050613-inline-i-2-googles-new-logo-copy.png",
-                        "https://b.fastcompany.net/multisite_files/fastcompany/imagecache/inline-small/inline/2015/09/3050613-inline-i-2-googles-new-logo-copy.png",
-                        "https://b.fastcompany.net/multisite_files/fastcompany/imagecache/inline-small/inline/2015/09/3050613-inline-i-2-googles-new-logo-copy.png"
+                        @"C:\data\ruge\SampleImages\image.png",
+                        @"C:\data\ruge\SampleImages\hover.png",
+                        @"C:\data\ruge\SampleImages\down.png",                        
+                        @"C:\data\ruge\SampleImages\disabled.png",
                         "");
                 }
                     
@@ -68,15 +70,15 @@ namespace Ruge.Win.Test
                 var o = (EngineCanvasActionEventArgs)e;
                 switch (o.ActionType)
                 {
-                    case ActionType.Create:
+                    case EngineActionType.Create:
                         MainCanvas.SetValue(WidthProperty, (double)o.Canvas.Dimensions.X);
                         MainCanvas.SetValue(HeightProperty, (double)o.Canvas.Dimensions.Y);
                         break;
-                    case ActionType.Update:
+                    case EngineActionType.Update:
                         MainCanvas.SetValue(WidthProperty, (double)o.Canvas.Dimensions.X);
                         MainCanvas.SetValue(HeightProperty, (double)o.Canvas.Dimensions.Y);
                         break;
-                    case ActionType.Delete:
+                    case EngineActionType.Delete:
                         break;
                 }
             }
@@ -86,45 +88,24 @@ namespace Ruge.Win.Test
                 switch (o.Control.ControlType)
                 {
                     case ControlType.Clickable:
-                        MainCanvas.Children.Add(
+                        var clickable = 
                             new Clickable(
                                 o.Control.ControlId,
                                 o.Control.Size.X,
                                 o.Control.Size.Y,
-                            )
-                        );
-
-                        //var b = new Button();
-                        //b.SetValue(WidthProperty, (double)o.Control.Size.X);
-                        //b.SetValue(HeightProperty, (double)o.Control.Size.Y);
-                        c.SetValue(TopProperty, (double)o.Control.Location.X);
-                        c.SetValue(LeftProperty, (double)o.Control.Location.Y);
-                        //b.Name = 'C' + o.Control.ControlId.ToString().Replace("-","");
-                        //b.BorderThickness = new Thickness(0.0);
-                        //ImageBrush ib = new ImageBrush();
-                        //ib.ImageSource = new BitmapImage(new Uri(o.Control.VisualURI));                       
-                        //b.SetValue(BackgroundProperty, ib);
-                        //b.MouseEnter += B_MouseEnter;
-            
-                        //var trigger = new EventTrigger(b.MouseEnter);
-                        //Task - need to find out how to add a routed event fo rmouseover
-                        //trigger.RoutedEvent = 
-
-
-                        //t.Property = IsMouseOverProperty;
-                        //t.Value = true;
-                        //t.Setters.Add(new Setter(BackgroundProperty, new ImageBrush(new BitmapImage(new Uri(o.Control.VisualURI)))));
-                        //b.Triggers.Add(t);
-                        
-
+                                o.Control.VisualURIIdle,
+                                o.Control.VisualURIHover,
+                                o.Control.VisualURIDown,
+                                o.Control.VisualURIDisabled
+                                );
+                        MainCanvas.Children.Add(clickable);
+                        clickable.SetValue(TopProperty, (double)o.Control.Location.X);
+                        clickable.SetValue(LeftProperty, (double)o.Control.Location.Y);
 
                         break;
-                    case ControlType.Text:
-                     
-                        break;
+                }
+            }
                 }
             }
         }
 
-    }
-}
