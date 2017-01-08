@@ -21,30 +21,61 @@
     using ruge.lib.model.engine;
     using ruge.lib.model.user;
     using Ruge.Win.Test.Controls;
+    using FirstGame;
 
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
+        private CanvasManager _canvasManager = null;
 
-        
 
         public MainWindow()
         {
             InitializeComponent();
             this.Loaded += MainWindow_Loaded;
-            
+
         }
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            Test();
+            var myGame = new MyGame();
+            _canvasManager.EngineActionSetEvent += _canvasManager_EngineActionSetEvent;
         }
 
-        private void Test()
+        private void _canvasManager_EngineActionSetEvent(object sender, EngineActionSetEventArgs e)
         {
-          
+            foreach (var action in e.EngineActionSet.EngineActions)
+            {
+                if (action.ActionType == EngineActionType.Create || action.ActionType == EngineActionType.Update)
+                {
+                    Render(action.Control);
+                }
+            }
+        }
+
+        private void Render(ruge.lib.model.controls.Control control)
+        {
+            switch (control.ControlType)
+            {
+                case ControlType.Clickable:
+                    var clickable =
+                        new Clickable(
+                            control.ControlId,
+                            control.Size.X,
+                            control.Size.Y,
+                            control.VisualURIIdle,
+                            control.VisualURIHover,
+                            control.VisualURIDown,
+                            control.VisualURIDisabled
+                            );
+                    MainCanvas.Children.Add(clickable);
+                    clickable.SetValue(TopProperty, (double)control.Location.X);
+                    clickable.SetValue(LeftProperty, (double)control.Location.Y);
+
+                    break;
+            }
         }
 
         private void _canvasManager_EngineActionEvent(object sender, EngineActionEventArgs e)
@@ -66,30 +97,7 @@
                         break;
                 }
             }
-            if (e is EngineControlActionEventArgs)
-            {
-                var o = (EngineControlActionEventArgs)e;
-                switch (o.Control.ControlType)
-                {
-                    case ControlType.Clickable:
-                        var clickable = 
-                            new Clickable(
-                                o.Control.ControlId,
-                                o.Control.Size.X,
-                                o.Control.Size.Y,
-                                o.Control.VisualURIIdle,
-                                o.Control.VisualURIHover,
-                                o.Control.VisualURIDown,
-                                o.Control.VisualURIDisabled
-                                );
-                        MainCanvas.Children.Add(clickable);
-                        clickable.SetValue(TopProperty, (double)o.Control.Location.X);
-                        clickable.SetValue(LeftProperty, (double)o.Control.Location.Y);
-
-                        break;
-                }
-            }
-                }
-            }
         }
+    }
+}
 

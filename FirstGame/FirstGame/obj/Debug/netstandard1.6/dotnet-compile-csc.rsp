@@ -5,7 +5,7 @@
 -nowarn:CS1702
 -nowarn:CS1705
 -t:library
--debug:full
+-debug:portable
 -nostdlib
 -nologo
 "C:\data\ruge\FirstGame\FirstGame\obj\Debug\netstandard1.6\dotnet-compile.assemblyinfo.cs"

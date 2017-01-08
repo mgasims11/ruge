@@ -2,6 +2,7 @@
     "projects": [
       "ruge.lib",
       "ruge.test",
-      "."
+      ".",
+      "FirstGame"
     ]
 }

@@ -13,6 +13,8 @@ namespace ruge.lib.logic {
         public delegate void EngineActionSetEventHandler(object sender, EngineActionSetEventArgs e);
         public event EngineActionSetEventHandler EngineActionSetEvent;
 
+        private EngineActionSet _engineActionSet = new EngineActionSet();
+
         private Canvas _canvas = null;
 
     private List<Control> _controls = new List<Control>();
@@ -33,9 +35,9 @@ namespace ruge.lib.logic {
            this.RaiseEngineActionEvent(this,args);
         }
 
-        public void RaiseEngineActionSetEvent(Canvas canvas, EngineActionSet engineActionSet)
+        public void RaiseEngineActionSetEvent(CanvasManager canvasManager, EngineActionSet engineActionSet)
         {
-            var args = new EngineActionSetEventArgs(canvas, engineActionSet);
+            var args = new EngineActionSetEventArgs(this, engineActionSet);
 
             if (this.EngineActionSetEvent != null)
             {
@@ -81,8 +83,25 @@ namespace ruge.lib.logic {
             return control.ControlId;
         }
 
-        public void Send()
+        public void SendEngineActionSet()
         {
+            this.RaiseEngineActionSetEvent(this, _engineActionSet);
+            InitializeEngineActionSet();
+        }
+
+        public void InitializeEngineActionSet()
+        {
+            _engineActionSet.CanvasId = _canvas.CanvasId;
+            _engineActionSet.EngineActions.Clear();
+        }
+
+        public void AddEngineAction(Control control)
+        {
+            var engineAction = new EngineAction();
+            engineAction.ActionType = EngineActionType.Create;
+            engineAction.Control = control;
+
+            _engineActionSet.EngineActions.Add(engineAction);
         }
     }
 }

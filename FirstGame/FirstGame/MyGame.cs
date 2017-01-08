@@ -5,7 +5,7 @@
     using System.Linq;
     using System.Threading.Tasks;
     using ruge.lib;
-    
+
     using ruge.lib.logic;
     using ruge.lib.model.controls;
     using ruge.lib.model.engine;
@@ -14,15 +14,24 @@
 
     public class MyGame
     {
+        public CanvasManager CanvasManager { get; set; }
+
+        public MyGame()
+        {
+            CanvasManager = new CanvasManager();
+        }
+
         public void Start()
         {            
-            var _canvasManager = new CanvasManager();
-            //_canvasManager.EngineActionEvent += _canvasManager_EngineActionEvent;
-            _canvasManager.CreateCanvas(20, 20);
+            
+            CanvasManager = new CanvasManager();
+            CanvasManager.EngineActionEvent += CanvasManager_EngineActionEvent;
+            CanvasManager.CreateCanvas(20, 20);
+            
             for (var i = 0; i <= 19; i++)
                 for (var j = 0; j <= 19; j++)
                 {
-                    _canvasManager.AddControl(
+                    CanvasManager.AddControl(
                         ControlType.Clickable,
                         1, 1,
                         i, j,
@@ -33,6 +42,10 @@
                         "");
                 }
         }
-    }
-        
+
+        private void CanvasManager_EngineActionEvent(object sender, EngineActionEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+    }        
 }
