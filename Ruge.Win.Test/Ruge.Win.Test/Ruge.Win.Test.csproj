@@ -35,6 +35,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FirstGame">
+      <HintPath>..\..\FirstGame\bin\Debug\net451\FirstGame.dll</HintPath>
+    </Reference>
     <Reference Include="ruge.lib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\ruge.lib\bin\Debug\net451\ruge.lib.dll</HintPath>
@@ -99,12 +102,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\FirstGame\FirstGame\FirstGame.xproj">
-      <Project>{68a6190b-ffc0-4fd6-a7bb-afc86f80ac05}</Project>
-      <Name>FirstGame</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

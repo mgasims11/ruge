@@ -54,7 +54,9 @@ namespace ruge.lib.logic {
                     }
                 };
             _canvas = canvas;
-            this.RaiseEngineActionEvent(_canvas, EngineActionType.Create);            
+            this.RaiseEngineActionEvent(_canvas, EngineActionType.Create);
+            this.InitializeEngineActionSet();
+                      
             return canvas;
         }
 
@@ -78,7 +80,10 @@ namespace ruge.lib.logic {
             control.VisualURIDown = uriDown;
             control.VisualURIDisabled = uriDisabled;
             control.Text = text;
+
             RaiseEngineActionEvent(control,EngineActionType.Create);
+
+            AddEngineAction(control);
 
             return control.ControlId;
         }
@@ -91,8 +96,9 @@ namespace ruge.lib.logic {
 
         public void InitializeEngineActionSet()
         {
+
             _engineActionSet.CanvasId = _canvas.CanvasId;
-            _engineActionSet.EngineActions.Clear();
+            _engineActionSet.EngineActions = new List<EngineAction>();
         }
 
         public void AddEngineAction(Control control)

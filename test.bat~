@@ -1,4 +1,4 @@
-cd ruge
+cd ruge.lib
 dotnet restore
 dotnet build
 cd ..\ruge.test

@@ -6,3 +6,8 @@ dotnet restore
 dotnet build
 dotnet test
 cd ..
+cd ..\FirstGame
+dotnet restore
+dotnet build
+dotnet test
+

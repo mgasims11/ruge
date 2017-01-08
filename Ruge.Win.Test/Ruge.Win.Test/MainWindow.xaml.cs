@@ -23,25 +23,25 @@
     using Ruge.Win.Test.Controls;
     using FirstGame;
 
+
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
-        private CanvasManager _canvasManager = null;
-
 
         public MainWindow()
-        {
+        {            
             InitializeComponent();
             this.Loaded += MainWindow_Loaded;
-
         }
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
             var myGame = new MyGame();
-            _canvasManager.EngineActionSetEvent += _canvasManager_EngineActionSetEvent;
+            myGame.CanvasManager.EngineActionSetEvent += _canvasManager_EngineActionSetEvent;
+            myGame.Start();
+            
         }
 
         private void _canvasManager_EngineActionSetEvent(object sender, EngineActionSetEventArgs e)
@@ -73,7 +73,6 @@
                     MainCanvas.Children.Add(clickable);
                     clickable.SetValue(TopProperty, (double)control.Location.X);
                     clickable.SetValue(LeftProperty, (double)control.Location.Y);
-
                     break;
             }
         }

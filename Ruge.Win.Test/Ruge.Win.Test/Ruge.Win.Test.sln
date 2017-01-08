@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ruge.Win.Test", "Ruge.Win.T
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "ruge.lib", "..\..\ruge.lib\ruge.lib.xproj", "{1A713C83-91FD-4DC9-B052-40BDEC614C9C}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "FirstGame", "..\..\FirstGame\FirstGame\FirstGame.xproj", "{68A6190B-FFC0-4FD6-A7BB-AFC86F80AC05}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "FirstGame", "..\..\FirstGame\FirstGame.xproj", "{68A6190B-FFC0-4FD6-A7BB-AFC86F80AC05}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
