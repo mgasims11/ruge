@@ -19,7 +19,21 @@
         public MyGame()
         {
             CanvasManager = new CanvasManager();
+            CanvasManager.UserActionEvent += CanvasManager_UserActionEvent;
         }
+
+        private void CanvasManager_UserActionEvent(object sender, UserActionEventArgs e)
+        {
+            switch (e.UserAction.UserActionType)
+            {
+                case UserActionType.Click:
+                    var c = CanvasManager.GetControl(e.UserAction.ControlId);
+                    CanvasManager.AddEngineAction(c,EngineActionType.Update);
+
+                    break;
+            }
+        }
+
         public void Start()
         {
             CanvasManager.CreateCanvas(20, 20);

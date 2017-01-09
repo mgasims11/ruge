@@ -6,9 +6,9 @@
         xmlns:local="clr-namespace:Ruge.Win.Test"
         mc:Ignorable="d"
         Title="MainWindow" >
-    <Viewbox>
-            <Canvas x:Name="MainCanvas" Background="Green">
-            </Canvas>
-    </Viewbox>
 
+    <Viewbox>
+        <Canvas x:Name="MainCanvas" Background="Green">
+        </Canvas>
+    </Viewbox>
 </Window>

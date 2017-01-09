@@ -63,4 +63,6 @@
 "C:\data\ruge\ruge.lib\model\Engine\EngineCanvasActionEventArgs.cs"
 "C:\data\ruge\ruge.lib\model\Engine\EngineControlActionEventArgs.cs"
 "C:\data\ruge\ruge.lib\model\User\UserAction.cs"
+"C:\data\ruge\ruge.lib\model\User\UserActionEventArgs.cs"
+"C:\data\ruge\ruge.lib\model\User\UserActionSet.cs"
 "C:\data\ruge\ruge.lib\model\User\UserActionType.cs"

@@ -40,8 +40,29 @@
         {
             var myGame = new MyGame();
             myGame.CanvasManager.EngineActionSetEvent += _canvasManager_EngineActionSetEvent;
-            myGame.Start();
-            
+            myGame.CanvasManager.EngineActionEvent += CanvasManager_EngineActionEvent;
+            myGame.Start();            
+        }
+
+        private void CanvasManager_EngineActionEvent(object sender, EngineActionEventArgs e)
+        {
+            if (e is EngineCanvasActionEventArgs)
+            {
+                var o = (EngineCanvasActionEventArgs)e;
+                switch (o.ActionType)
+                {
+                    case EngineActionType.Create:
+                        MainCanvas.SetValue(WidthProperty, (double)o.Canvas.Dimensions.X);
+                        MainCanvas.SetValue(HeightProperty, (double)o.Canvas.Dimensions.Y);
+                        break;
+                    case EngineActionType.Update:
+                        MainCanvas.SetValue(WidthProperty, (double)o.Canvas.Dimensions.X);
+                        MainCanvas.SetValue(HeightProperty, (double)o.Canvas.Dimensions.Y);
+                        break;
+                    case EngineActionType.Delete:
+                        break;
+                }
+            }
         }
 
         private void _canvasManager_EngineActionSetEvent(object sender, EngineActionSetEventArgs e)
@@ -73,29 +94,15 @@
                     MainCanvas.Children.Add(clickable);
                     clickable.SetValue(TopProperty, (double)control.Location.X);
                     clickable.SetValue(LeftProperty, (double)control.Location.Y);
+                    clickable.MouseDown += Clickable_MouseDown;
                     break;
             }
         }
 
-        private void _canvasManager_EngineActionEvent(object sender, EngineActionEventArgs e)
+        private void Clickable_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (e is EngineCanvasActionEventArgs)
-            {
-                var o = (EngineCanvasActionEventArgs)e;
-                switch (o.ActionType)
-                {
-                    case EngineActionType.Create:
-                        MainCanvas.SetValue(WidthProperty, (double)o.Canvas.Dimensions.X);
-                        MainCanvas.SetValue(HeightProperty, (double)o.Canvas.Dimensions.Y);
-                        break;
-                    case EngineActionType.Update:
-                        MainCanvas.SetValue(WidthProperty, (double)o.Canvas.Dimensions.X);
-                        MainCanvas.SetValue(HeightProperty, (double)o.Canvas.Dimensions.Y);
-                        break;
-                    case EngineActionType.Delete:
-                        break;
-                }
-            }
+            var control = sender as Clickable;
+            CanvasManager.
         }
     }
 }
