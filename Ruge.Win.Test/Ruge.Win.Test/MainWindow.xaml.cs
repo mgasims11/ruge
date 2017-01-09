@@ -29,6 +29,7 @@
     /// </summary>
     public partial class MainWindow : Window
     {
+        MyGame _myGame = new MyGame();
 
         public MainWindow()
         {            
@@ -38,10 +39,9 @@
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            var myGame = new MyGame();
-            myGame.CanvasManager.EngineActionSetEvent += _canvasManager_EngineActionSetEvent;
-            myGame.CanvasManager.EngineActionEvent += CanvasManager_EngineActionEvent;
-            myGame.Start();            
+            _myGame.CanvasManager.EngineActionSetEvent += _canvasManager_EngineActionSetEvent;
+            _myGame.CanvasManager.EngineActionEvent += CanvasManager_EngineActionEvent;
+            _myGame.Start();            
         }
 
         private void CanvasManager_EngineActionEvent(object sender, EngineActionEventArgs e)
@@ -102,7 +102,10 @@
         private void Clickable_MouseDown(object sender, MouseButtonEventArgs e)
         {
             var control = sender as Clickable;
-            CanvasManager.
+            var userAction = new UserAction() { ControlId = control.Name, UserActionType = UserActionType.Click};
+            var userActionSet = new UserActionSet();            
+            userActionSet.UserActions.Add(userAction);
+            _myGame.CanvasManager.ReceiveUserActionSet(userActionSet);            
         }
     }
 }

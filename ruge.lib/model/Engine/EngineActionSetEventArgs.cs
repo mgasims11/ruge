@@ -6,7 +6,7 @@
     using ruge.lib.model.controls;
     public class EngineActionSetEventArgs
     {
-        public Guid CanvasId { get; private set; }
+        public string CanvasId { get; private set; }
         public EngineActionSet EngineActionSet { get; private set; }
 
         public EngineActionSetEventArgs(CanvasManager canvasManager, EngineActionSet engineActionSet)

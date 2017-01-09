@@ -28,8 +28,9 @@
             {
                 case UserActionType.Click:
                     var c = CanvasManager.GetControl(e.UserAction.ControlId);
+                    c.VisualURIIdle = @"C:\data\ruge\SampleImages\negative.png";
                     CanvasManager.AddEngineAction(c,EngineActionType.Update);
-
+                    CanvasManager.SendEngineActionSet();
                     break;
             }
         }

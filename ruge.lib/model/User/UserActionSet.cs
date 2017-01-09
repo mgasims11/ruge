@@ -4,7 +4,11 @@ namespace ruge.lib.model.user {
     
     public class UserActionSet
     {
-        public Guid CanvasId { get; set; }
         public List<UserAction> UserActions { get; set; }
+
+        public UserActionSet()
+        {
+            this.UserActions = new List<UserAction>();
+        }
     }
 }

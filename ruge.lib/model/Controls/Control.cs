@@ -1,7 +1,7 @@
 namespace ruge.lib.model.controls {
     using System;
     public class Control  {
-        public Guid ControlId {get;set;}
+        public string ControlId {get;set;}
         public ControlType ControlType {get;set;}
         public XYPair Location {get;set;}
         public XYPair Size {get;set;}

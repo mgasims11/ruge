@@ -15,11 +15,11 @@ namespace Ruge.Win.Test.Controls
         private string _backgroundIdle, _backgroundHover, _backgroundDown, _backgroundDisabled;
         private string _backgroundCurrent;
 
-        public Clickable(Guid guid, int width, int height, string backgroundIdle, string backgroundHover, string backgroundDown, string backgroundDisabled)
+        public Clickable(string controlid, int width, int height, string backgroundIdle, string backgroundHover, string backgroundDown, string backgroundDisabled)
         {
             SetValue(WidthProperty, (double)width);
-            SetValue(HeightProperty, (double)height);           
-            Name = 'C' + guid.ToString().Replace("-", "");
+            SetValue(HeightProperty, (double)height);
+            Name = controlid;
             MouseEnter += Clickable_MouseEnter;
             MouseDown += Clickable_MouseDown;
             MouseLeave += Clickable_MouseLeave;

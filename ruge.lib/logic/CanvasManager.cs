@@ -53,7 +53,7 @@ namespace ruge.lib.logic {
 
         public Canvas CreateCanvas(int height, int width) {
             var canvas = new Canvas() {
-                    CanvasId = Guid.NewGuid(),
+                    CanvasId = "C" + Guid.NewGuid().ToString().Replace("-", ""),
                     Dimensions = new XYPair() {
                         X = height,
                         Y = width
@@ -66,12 +66,12 @@ namespace ruge.lib.logic {
             return canvas;
         }
 
-        public Control GetControl(Guid controlId)
+        public Control GetControl(string controlId)
         {
             return _controls.FirstOrDefault<Control>(c => c.ControlId == controlId);
         }
 
-        public Guid AddControl(
+        public string AddControl(
             ControlType controlType,
             int height, int width,
             int x, int y,
@@ -82,7 +82,7 @@ namespace ruge.lib.logic {
             string text)
         {
             var control = new Control();
-            control.ControlId = Guid.NewGuid();
+            control.ControlId = "C" + Guid.NewGuid().ToString().Replace("-", "");
             control.ControlType = controlType;
             control.Location = new XYPair() {X=x,Y=y};
             control.Size = new XYPair() {X=height,Y=width};
@@ -93,9 +93,9 @@ namespace ruge.lib.logic {
             control.Text = text;
 
             RaiseEngineActionEvent(control,EngineActionType.Create);
-
             AddEngineAction(control, EngineActionType.Create);
 
+            this._controls.Add(control);
             return control.ControlId;
         }
 
@@ -125,13 +125,13 @@ namespace ruge.lib.logic {
         {
             foreach (var userAction in userActionSet.UserActions)
             {
-                this.RaiseUserActionEvent(userActionSet.CanvasId, userAction);
+                this.RaiseUserActionEvent(userAction);
             }
         }
 
-        public void RaiseUserActionEvent(Guid canvasId, UserAction userAction)
+        public void RaiseUserActionEvent(UserAction userAction)
         {
-            var args = new UserActionEventArgs(canvasId, userAction);
+            var args = new UserActionEventArgs(userAction);
             if (this.UserActionEvent != null)
             {
                 this.UserActionEvent(this, args);

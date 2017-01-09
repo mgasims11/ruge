@@ -4,7 +4,12 @@ namespace ruge.lib.model.engine {
 
     public class EngineActionSet
     {
-        public Guid CanvasId { get; set; }
+        public string CanvasId { get; set; }
         public List<EngineAction> EngineActions { get; set; }
+
+        public EngineActionSet()
+        {
+            this.EngineActions = new List<EngineAction>();
+        }                
     }
 }
