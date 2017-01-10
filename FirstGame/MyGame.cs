@@ -39,21 +39,28 @@
         {
             CanvasManager.CreateCanvas(20, 20);
 
-            for (var i = 0; i <= 19; i++)
-            {
-                for (var j = 0; j <= 19; j++)
-                {
-                    CanvasManager.AddControl(
-                        ControlType.Clickable,
-                        1, 1,
-                        i, j,
-                        @"C:\data\ruge\SampleImages\image.png",
-                        @"C:\data\ruge\SampleImages\hover.png",
-                        @"C:\data\ruge\SampleImages\down.png",
-                        @"C:\data\ruge\SampleImages\disabled.png",
-                        "");
-                }
-            }
+            //for (var i = 0; i <= 19; i++)
+            //{
+            //    for (var j = 0; j <= 19; j++)
+            //    {
+            //        CanvasManager.AddControl(
+            //            ControlType.Clickable,
+            //            1, 1,
+            //            i, j,
+            //            @"C:\data\ruge\SampleImages\image.png",
+            //            @"C:\data\ruge\SampleImages\hover.png",
+            //            @"C:\data\ruge\SampleImages\down.png",
+            //            @"C:\data\ruge\SampleImages\disabled.png",
+            //            "");
+            //    }
+            //}
+            CanvasManager.AddControl(
+                ControlType.TextInput,
+                4, 1,
+                2, 2,
+                null, null, null, null,
+                "Hello World");
+            
             CanvasManager.SendEngineActionSet();
         }    
     }        

@@ -10,17 +10,17 @@ using System.Windows.Media.Imaging;
 
 namespace Ruge.Win.Test.Controls
 {
-    public class Clickable : Image
+    public class TextInput : TextBox
     {
         private string _backgroundIdle, _backgroundHover, _backgroundDown, _backgroundDisabled;
         private string _backgroundCurrent;
 
-        public Clickable(string controlid, int width, int height, string backgroundIdle, string backgroundHover, string backgroundDown, string backgroundDisabled, string text)
+        public TextInput(string controlid, int width, int height, string backgroundIdle, string backgroundHover, string backgroundDown, string backgroundDisabled, string text)
         {           
             SetValue(WidthProperty, (double)width);
             SetValue(HeightProperty, (double)height);
             Name = controlid;
-            if (!String.IsNullOrEmpty(text)) SetValue(ToolTipProperty, text);
+            IsEnabled = true;
             MouseEnter += Clickable_MouseEnter;
             MouseDown += Clickable_MouseDown;
             MouseLeave += Clickable_MouseLeave;
@@ -67,13 +67,16 @@ namespace Ruge.Win.Test.Controls
 
         private void SetBackground(string imageUrl)
         {
-            if (IsEnabled)
-                _backgroundCurrent = imageUrl;
-            else
-                _backgroundCurrent = _backgroundDisabled;
+            if (!String.IsNullOrEmpty(imageUrl))
+            {
+                if (IsEnabled)
+                    _backgroundCurrent = imageUrl;
+                else
+                    _backgroundCurrent = _backgroundDisabled;
 
-            var bi = new BitmapImage(new Uri(_backgroundCurrent));
-            SetValue(SourceProperty, bi);
+                var bi = new BitmapImage(new Uri(_backgroundCurrent));
+                SetValue(BackgroundProperty, bi);
+            }
         }
     }
 }

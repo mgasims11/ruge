@@ -89,12 +89,29 @@
                             control.VisualURIIdle,
                             control.VisualURIHover,
                             control.VisualURIDown,
-                            control.VisualURIDisabled
+                            control.VisualURIDisabled,
+                            control.Text
                             );
                     MainCanvas.Children.Add(clickable);
                     clickable.SetValue(TopProperty, (double)control.Location.X);
                     clickable.SetValue(LeftProperty, (double)control.Location.Y);
                     clickable.MouseDown += Clickable_MouseDown;
+                    break;
+
+                case ControlType.TextInput:
+                    var textInput = new TextInput(
+                          control.ControlId,
+                            control.Size.X,
+                            control.Size.Y,
+                            control.VisualURIIdle,
+                            control.VisualURIHover,
+                            control.VisualURIDown,
+                            control.VisualURIDisabled,
+                            control.Text
+                        );
+                    MainCanvas.Children.Add(textInput);
+                    textInput.SetValue(TopProperty, (double)control.Location.X);
+                    textInput.SetValue(LeftProperty, (double)control.Location.Y);
                     break;
             }
         }
