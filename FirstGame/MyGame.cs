@@ -56,7 +56,7 @@
             //}
             CanvasManager.AddControl(
                 ControlType.TextInput,
-                4, 1,
+                12, 1,
                 2, 2,
                 null, null, null, null,
                 "Hello World");

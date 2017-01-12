@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Drawing;
 
 namespace Ruge.Win.Test.Controls
 {
@@ -15,24 +16,60 @@ namespace Ruge.Win.Test.Controls
         private string _backgroundIdle, _backgroundHover, _backgroundDown, _backgroundDisabled;
         private string _backgroundCurrent;
 
-        public TextInput(string controlid, int width, int height, string backgroundIdle, string backgroundHover, string backgroundDown, string backgroundDisabled, string text)
+        public TextInput(string controlid, int width, int height, string backgroundIdle, string backgroundHover, string backgroundDown, string backgroundDisabled, string text) :base()
         {           
             SetValue(WidthProperty, (double)width);
             SetValue(HeightProperty, (double)height);
+            SetValue(BorderThicknessProperty, new Thickness(0, 0, 0, 0));
+            SetValue(FontSizeProperty, new FontSizeConverter().ConvertFromString((height * .75).ToString() + "px"));
+            SetValue(PaddingProperty, new Thickness(0, 0, 0, 0));
+            SetValue(IsEnabledProperty, true);
+            SetValue(ScrollViewer.PaddingProperty, new Thickness(0, 0, 0, 0));
+
             Name = controlid;
-            IsEnabled = true;
             MouseEnter += Clickable_MouseEnter;
             MouseDown += Clickable_MouseDown;
             MouseLeave += Clickable_MouseLeave;
             MouseUp += Clickable_MouseUp;
-            IsEnabledChanged += Clickable_IsEnabledChanged;           
-
+            IsEnabledChanged += Clickable_IsEnabledChanged;
+            
             _backgroundIdle = backgroundIdle;
             _backgroundHover = backgroundHover;
             _backgroundDown = backgroundDown;
             _backgroundDisabled = backgroundDisabled;
 
             SetBackground(backgroundIdle);            
+        }
+
+        protected override void OnRender(DrawingContext drawingContext)
+        {
+            base.OnRender(drawingContext);
+            SetInnerMargin();
+
+        }
+        private void TextInput_Initialized(object sender, EventArgs e)
+        {
+            SetInnerMargin();
+        }
+
+        private void SetInnerMargin()
+        {
+            var b = VisualTreeHelper.GetChild(this,0);
+            var s = VisualTreeHelper.GetChild(b, 0);
+
+            s.SetValue(PaddingProperty, new Thickness(0, 0, 0, 0));
+            s.SetValue(MarginProperty, new Thickness(0, 0, 0, 0));
+            b.SetValue(PaddingProperty, new Thickness(0, 0, 0, 0));
+            b.SetValue(MarginProperty, new Thickness(0, 0, 0, 0));
+
+            //VisualTreeHelper.
+            //var contentHost = VisualTreeHelper.
+            //if (contentHost != null && contentHost.Content != null && contentHost.Content is FrameworkElement)
+            //{
+            //    var textBoxView = contentHost.Content as FrameworkElement;
+            //    textBoxView.Margin = new Thickness(0, 0, 0, 0);
+            //}
+
         }
 
         private void Clickable_MouseUp(object sender, System.Windows.Input.MouseButtonEventArgs e)

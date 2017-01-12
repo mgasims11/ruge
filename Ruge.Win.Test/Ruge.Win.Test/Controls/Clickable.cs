@@ -15,8 +15,9 @@ namespace Ruge.Win.Test.Controls
         private string _backgroundIdle, _backgroundHover, _backgroundDown, _backgroundDisabled;
         private string _backgroundCurrent;
 
-        public Clickable(string controlid, int width, int height, string backgroundIdle, string backgroundHover, string backgroundDown, string backgroundDisabled, string text)
-        {           
+        public Clickable(string controlid, int width, int height, string backgroundIdle, string backgroundHover, string backgroundDown, string backgroundDisabled, string text) : base()
+        {
+
             SetValue(WidthProperty, (double)width);
             SetValue(HeightProperty, (double)height);
             Name = controlid;
