@@ -5,6 +5,7 @@ namespace ruge.lib.logic {
     using System.Linq;
     using ruge.lib.model;
     using ruge.lib.model.controls;
+    using ruge.lib.model.controls.interfaces;
     using ruge.lib.model.engine;
     using ruge.lib.model.user;
 
@@ -23,7 +24,8 @@ namespace ruge.lib.logic {
 
         private Canvas _canvas = null;
 
-        private List<Control> _controls = new List<Control>();
+        private List<IControl> _controls = new List<IControl>();
+
         private void RaiseEngineActionEvent(object sender, EngineActionEventArgs args) {
             if (this.EngineActionEvent != null) {
                 this.EngineActionEvent(sender,args);
@@ -66,27 +68,44 @@ namespace ruge.lib.logic {
             return canvas;
         }
 
-        public Control GetControl(string controlId)
+        public IControl GetControl(string controlId)
         {
-            return _controls.FirstOrDefault<Control>(c => c.ControlId == controlId);
+            return _controls.FirstOrDefault<IControl>(c => c.ControlId == controlId);
+        }
+
+        public string AddControl(IControl control)
+        {
+
         }
 
         public string AddControl(
             ControlType controlType,
             int height, int width,
             int x, int y,
-            string uriIdle,
-            string uriHover,
-            string uriDown,
-            string uriDisabled,
+            string uri,
             string text)
         {
             var control = new Control();
+
+            string uriIdle = "";
+            string uriHover = "";
+            string uriDown = "";
+            string uriDisabled = "";
+            
+            if (!String.IsNullOrEmpty(uri))
+            {
+                var imageName = uri.Split('.');
+                uriIdle = imageName[0] + "_normal." + imageName[1];
+                uriHover = imageName[0] + "_hover." + imageName[1];
+                uriDown = imageName[0] + "_down." + imageName[1];
+                uriDisabled = imageName[0] + "_disabled." + imageName[1];
+            }
+
             control.ControlId = "C" + Guid.NewGuid().ToString().Replace("-", "");
             control.ControlType = controlType;
             control.Location = new XYPair() {X=x,Y=y};
             control.Size = new XYPair() {X=height,Y=width};
-            control.VisualURIIdle = uriIdle;
+            control.VisualURINormal = uriIdle;
             control.VisualURIHover = uriHover;
             control.VisualURIDown = uriDown;
             control.VisualURIDisabled = uriDisabled;

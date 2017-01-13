@@ -28,7 +28,7 @@
             {
                 case UserActionType.Click:
                     var c = CanvasManager.GetControl(e.UserAction.ControlId);
-                    c.VisualURIIdle = @"C:\data\ruge\SampleImages\negative.png";
+                    c.VisualURINormal = @"C:\data\ruge\SampleImages\GoogleNeg.png";
                     CanvasManager.AddEngineAction(c,EngineActionType.Update);
                     CanvasManager.SendEngineActionSet();
                     break;
@@ -37,28 +37,25 @@
 
         public void Start()
         {
-            CanvasManager.CreateCanvas(20, 20);
+            CanvasManager.CreateCanvas(100, 100);
 
-            //for (var i = 0; i <= 19; i++)
-            //{
-            //    for (var j = 0; j <= 19; j++)
-            //    {
-            //        CanvasManager.AddControl(
-            //            ControlType.Clickable,
-            //            1, 1,
-            //            i, j,
-            //            @"C:\data\ruge\SampleImages\image.png",
-            //            @"C:\data\ruge\SampleImages\hover.png",
-            //            @"C:\data\ruge\SampleImages\down.png",
-            //            @"C:\data\ruge\SampleImages\disabled.png",
-            //            "");
-            //    }
-            //}
+            for (var i = 0; i <= 95; i+=5)
+            {
+                for (var j = 0; j <= 95; j+=5)
+                {
+                    CanvasManager.AddControl(
+                        ControlType.Clickable,
+                        5, 5,
+                        i, j,
+                        @"C:\data\ruge\SampleImages\Google.png",
+                        "");
+                }
+            }
             CanvasManager.AddControl(
                 ControlType.TextInput,
-                12, 1,
-                2, 2,
-                null, null, null, null,
+                0, 90,
+                10, 10,
+                null,
                 "Hello World");
             
             CanvasManager.SendEngineActionSet();
