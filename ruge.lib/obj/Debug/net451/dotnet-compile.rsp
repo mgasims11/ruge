@@ -19,9 +19,14 @@
 --reference:C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.1\Microsoft.CSharp.dll
 C:\data\ruge\ruge.lib\logic\CanvasManager.cs
 C:\data\ruge\ruge.lib\logic\ClickableControlExtensions.cs
+C:\data\ruge\ruge.lib\logic\ControlHelper.cs
+C:\data\ruge\ruge.lib\logic\StaticImageControlExtensions.cs
+C:\data\ruge\ruge.lib\logic\TextControlExtensions.cs
+C:\data\ruge\ruge.lib\logic\TextInputControlExtensions.cs
 C:\data\ruge\ruge.lib\model\XYPair.cs
 C:\data\ruge\ruge.lib\model\Controls\Canvas.cs
 C:\data\ruge\ruge.lib\model\Controls\ClickableControl.cs
+C:\data\ruge\ruge.lib\model\Controls\Control.cs
 C:\data\ruge\ruge.lib\model\Controls\StaticImageControl.cs
 C:\data\ruge\ruge.lib\model\Controls\TextControl.cs
 C:\data\ruge\ruge.lib\model\Controls\TextInputControl.cs

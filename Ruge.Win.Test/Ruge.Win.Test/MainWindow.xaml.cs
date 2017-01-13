@@ -20,6 +20,7 @@
     using ruge.lib.model.controls;
     using ruge.lib.model.engine;
     using ruge.lib.model.user;
+    using ruge.lib.model.controls.interfaces;
     using Ruge.Win.Test.Controls;
     using FirstGame;
 
@@ -76,43 +77,44 @@
             }
         }
 
-        private void Render(ruge.lib.model.controls.Control control)
+        private void Render(IControl control)
         {
-            switch (control.ControlType)
+            if (control is ClickableControl)
             {
-                case ControlType.Clickable:
-                    var clickable =
-                        new Clickable(
+                var ClickableControl = control as ClickableControl;
+                var clickable = new Clickable(
                             control.ControlId,
                             control.Size.X,
                             control.Size.Y,
-                            control.VisualURIIdle,
-                            control.VisualURIHover,
-                            control.VisualURIDown,
-                            control.VisualURIDisabled,
-                            control.Text
+                            control.ImageUri,
+                            ClickableControl.ImageUriHover,
+                            ClickableControl.ImageUriDown,
+                            ClickableControl.ImageUriDisabled,
+                            ""
                             );
-                    MainCanvas.Children.Add(clickable);
-                    clickable.SetValue(TopProperty, (double)control.Location.X);
-                    clickable.SetValue(LeftProperty, (double)control.Location.Y);
-                    clickable.MouseDown += Clickable_MouseDown;
-                    break;
+                MainCanvas.Children.Add(clickable);
+                clickable.SetValue(TopProperty, (double)control.Location.X);
+                clickable.SetValue(LeftProperty, (double)control.Location.Y);
+                clickable.MouseDown += Clickable_MouseDown;
+            }
 
-                case ControlType.TextInput:
-                    var textInput = new TextInput(
-                          control.ControlId,
-                            control.Size.X,
-                            control.Size.Y,
-                            control.VisualURIIdle,
-                            control.VisualURIHover,
-                            control.VisualURIDown,
-                            control.VisualURIDisabled,
-                            control.Text
-                        );
-                    MainCanvas.Children.Add(textInput);
-                    textInput.SetValue(TopProperty, (double)control.Location.X);
-                    textInput.SetValue(LeftProperty, (double)control.Location.Y);
-                    break;
+            if (control is TextInputControl)
+            {
+                var textInputControl = control as TextInputControl;
+                var textInput = new TextInput(
+                    control.ControlId,
+                    control.Size.X,
+                    control.Size.Y,
+                    control.ImageUri,
+                    textInputControl.ImageUriHover,
+                    textInputControl.ImageUriDown,
+                    textInputControl.ImageUriDisabled,
+                    textInputControl.Text
+                );
+                MainCanvas.Children.Add(textInput);
+                textInput.SetValue(TopProperty, (double)control.Location.X);
+                textInput.SetValue(LeftProperty, (double)control.Location.Y);
+
             }
         }
 

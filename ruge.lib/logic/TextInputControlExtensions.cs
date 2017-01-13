@@ -9,16 +9,16 @@ namespace ruge.lib.logic
     using ruge.lib.model.controls;
     using ruge.lib.model.controls.interfaces;
 
-    public static class ClickableControlExtensions
+    public static class TextInputControlExtensions
     {
-        public static ClickableControl Create()
+        public static TextInputControl Create()
         {
-            var control = new ClickableControl();
+            var control = new TextInputControl();
             control.ControlId = ControlHelper.GetNewControlID();
             return control;
         }
 
-        public static ClickableControl X(this ClickableControl control, int x)
+        public static TextInputControl X(this TextInputControl control, int x)
         {
             if (control.Location == null)
             {
@@ -33,7 +33,7 @@ namespace ruge.lib.logic
             return control;
         }
 
-        public static ClickableControl Y(this ClickableControl control, int y)
+        public static TextInputControl Y(this TextInputControl control, int y)
         {
             if (control.Location == null)
             {
@@ -48,7 +48,7 @@ namespace ruge.lib.logic
             return control;
         }
 
-        public static ClickableControl Width(this ClickableControl control, int x)
+        public static TextInputControl Width(this TextInputControl control, int x)
         {
             if (control.Size == null)
             {
@@ -63,7 +63,7 @@ namespace ruge.lib.logic
             return control;
         }
 
-        public static ClickableControl Height(this ClickableControl control, int y)
+        public static TextInputControl Height(this TextInputControl control, int y)
         {
             if (control.Size == null)
             {
@@ -78,45 +78,22 @@ namespace ruge.lib.logic
             return control;
         }
 
-        public static ClickableControl ImageUri(this ClickableControl control, string uri)
+        public static TextInputControl ImageUri(this TextInputControl control, string uri)
         {
             control.ImageUri = uri;
-            UpdateEmptyUris(control,uri);
             return control;
         }
 
-        public static ClickableControl ControlState(this ClickableControl control, ControlState controlState)
+        public static TextInputControl ControlState(this TextInputControl control, ControlState controlState)
         {
             control.ControlState = controlState;
             return control;
         }
 
-        public static ClickableControl ImageUriHover(this ClickableControl control, string uri)
+        public static TextInputControl Text(this TextInputControl control, string text)
         {
-            control.ImageUriHover = uri;
-            UpdateEmptyUris(control, uri);
+            control.Text = text;
             return control;
-        }
-
-        public static ClickableControl ImageUriDown(this ClickableControl control, string uri)
-        {
-            control.ImageUriDown = uri;
-            UpdateEmptyUris(control, uri);
-            return control;
-        }
-
-        public static ClickableControl ImageUriDisabled(this ClickableControl control, string uri)
-        {
-            control.ImageUriDisabled = uri;
-            UpdateEmptyUris(control, uri);
-            return control;
-        }
-
-        private static void UpdateEmptyUris(ClickableControl control, string uri)
-        {
-            if (control.ImageUriHover == null) control.ImageUriHover = uri;
-            if (control.ImageUriDown == null) control.ImageUriDown = uri;
-            if (control.ImageUriDisabled == null) control.ImageUriDisabled = uri;
         }
     }
 }

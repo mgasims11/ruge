@@ -15,13 +15,13 @@ namespace Ruge.Win.Test.Controls
         private string _backgroundIdle, _backgroundHover, _backgroundDown, _backgroundDisabled;
         private string _backgroundCurrent;
 
-        public Clickable(string controlid, int width, int height, string backgroundIdle, string backgroundHover, string backgroundDown, string backgroundDisabled, string text) : base()
+        public Clickable(string controlid, int width, int height, string backgroundIdle, string backgroundHover, string backgroundDown, string backgroundDisabled, string tooltip) : base()
         {
 
             SetValue(WidthProperty, (double)width);
             SetValue(HeightProperty, (double)height);
             Name = controlid;
-            if (!String.IsNullOrEmpty(text)) SetValue(ToolTipProperty, text);
+            if (!String.IsNullOrEmpty(tooltip)) SetValue(ToolTipProperty, tooltip);
             MouseEnter += Clickable_MouseEnter;
             MouseDown += Clickable_MouseDown;
             MouseLeave += Clickable_MouseLeave;

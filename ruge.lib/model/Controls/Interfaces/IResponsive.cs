@@ -8,8 +8,8 @@ namespace ruge.lib.model.controls.interfaces
 {
     public interface IResponsive
     {
-        string ImageURIHover { get; set; }
-        string ImageURIDown { get; set; }
-        string ImageURIDisabled { get; set; }
+        string ImageUriHover { get; set; }
+        string ImageUriDown { get; set; }
+        string ImageUriDisabled { get; set; }
     }
 }

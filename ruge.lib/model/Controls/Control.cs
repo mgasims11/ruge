@@ -5,11 +5,13 @@ using System.Threading.Tasks;
 
 namespace ruge.lib.model.controls
 {
-   using controls;
+    using controls;
     using ruge.lib.model.controls.interfaces;
-    public class TextInputControl : Control, IText, IResponsive
+
+    public abstract class Control : IControl
     {
-        public string ImageUriDisabled
+        protected Dictionary<string,string> 
+        public string ControlId
         {
             get
             {
@@ -22,7 +24,7 @@ namespace ruge.lib.model.controls
             }
         }
 
-        public string ImageUriDown
+        public ControlState ControlState
         {
             get
             {
@@ -35,7 +37,7 @@ namespace ruge.lib.model.controls
             }
         }
 
-        public string ImageUriHover
+        public string ImageUri
         {
             get
             {
@@ -48,7 +50,20 @@ namespace ruge.lib.model.controls
             }
         }
 
-        public string Text
+        public XYPair Location
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public XYPair Size
         {
             get
             {

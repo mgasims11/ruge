@@ -32,8 +32,8 @@ namespace ruge.lib.logic {
             }
         }
         
-        public void RaiseEngineActionEvent(Control control, EngineActionType actionType) {
-            var args = new EngineControlActionEventArgs(control, actionType);
+        public void RaiseEngineActionEvent(IControl control, EngineActionType actionType) {
+            var args = new EngineControlActionEventArgs(control.ControlId, actionType);
             this.RaiseEngineActionEvent(this,args);
             //var x = new ruge.lib.model.engine.EngineControlActionEventArgs(control, actionType);
         }
@@ -75,48 +75,12 @@ namespace ruge.lib.logic {
 
         public string AddControl(IControl control)
         {
-
-        }
-
-        public string AddControl(
-            ControlType controlType,
-            int height, int width,
-            int x, int y,
-            string uri,
-            string text)
-        {
-            var control = new Control();
-
-            string uriIdle = "";
-            string uriHover = "";
-            string uriDown = "";
-            string uriDisabled = "";
-            
-            if (!String.IsNullOrEmpty(uri))
-            {
-                var imageName = uri.Split('.');
-                uriIdle = imageName[0] + "_normal." + imageName[1];
-                uriHover = imageName[0] + "_hover." + imageName[1];
-                uriDown = imageName[0] + "_down." + imageName[1];
-                uriDisabled = imageName[0] + "_disabled." + imageName[1];
-            }
-
-            control.ControlId = "C" + Guid.NewGuid().ToString().Replace("-", "");
-            control.ControlType = controlType;
-            control.Location = new XYPair() {X=x,Y=y};
-            control.Size = new XYPair() {X=height,Y=width};
-            control.VisualURINormal = uriIdle;
-            control.VisualURIHover = uriHover;
-            control.VisualURIDown = uriDown;
-            control.VisualURIDisabled = uriDisabled;
-            control.Text = text;
-
-            RaiseEngineActionEvent(control,EngineActionType.Create);
-            AddEngineAction(control, EngineActionType.Create);
-
             this._controls.Add(control);
+            this.RaiseEngineActionEvent(control, EngineActionType.Create);
+            this.AddEngineAction(control, EngineActionType.Create);
             return control.ControlId;
         }
+
 
         public void SendEngineActionSet()
         {
@@ -131,12 +95,11 @@ namespace ruge.lib.logic {
             _engineActionSet.EngineActions = new List<EngineAction>();
         }
 
-        public void AddEngineAction(Control control, EngineActionType actionType)
+        public void AddEngineAction(IControl control, EngineActionType actionType)
         {
             var engineAction = new EngineAction();
             engineAction.ActionType = actionType;
             engineAction.Control = control;
-
             _engineActionSet.EngineActions.Add(engineAction);
         }
 
