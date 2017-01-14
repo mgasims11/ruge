@@ -37,30 +37,24 @@
 
         public void Start()
         {
-            CanvasManager.CreateCanvas(100, 100);
+            CanvasManager.CreateCanvas(5, 5);
 
-            for (var i = 0; i <= 95; i += 5)
-            {
-                for (var j = 0; j <= 95; j += 5)
-                {
-                    var id = CanvasManager.AddControl(
-                        ClickableControlMaker.Create()
-                           .ControlState(ControlState.Enabled)
-                           .Height(5).Width(5)
-                           .X(i).Y(j)
-                           .UseImageUriTemplate(@"C:\data\ruge\SampleImages\Google_{event}.png", "{event}"));
-                    var c = CanvasManager.GetControl(id);
-                }
-            }
+            CanvasManager.AddControl(StaticImageControlMaker.Create().ImageUri(@"C:\data\ruge\SampleImages\Google_normal.png").Height(5).Width(5));
 
-        CanvasManager.AddControl(
-            TextInputControlMaker.Create()
-            .ControlState(ControlState.Enabled)
-            .Height(5).Width(15)
-            .X(10).Y(10)
-            .ImageUri(@"C:\data\ruge\SampleImages\Google_normal.png"));
+            CanvasManager.AddControl(TextControlMaker.Create().Height(1).Width(1).X(0).Y(0).Text("X"));
+            CanvasManager.AddControl(TextControlMaker.Create().Height(1).Width(1).X(2).Y(0).Text("X"));
+            CanvasManager.AddControl(TextControlMaker.Create().Height(1).Width(1).X(4).Y(0).Text("X"));
+
+            CanvasManager.AddControl(TextControlMaker.Create().Height(1).Width(1).X(0).Y(2).Text("X"));
+            CanvasManager.AddControl(TextControlMaker.Create().Height(1).Width(1).X(2).Y(2).Text("X"));
+            CanvasManager.AddControl(TextControlMaker.Create().Height(1).Width(1).X(4).Y(2).Text("X"));
+
+            CanvasManager.AddControl(TextControlMaker.Create().Height(1).Width(1).X(0).Y(4).Text("X"));
+            CanvasManager.AddControl(TextControlMaker.Create().Height(1).Width(1).X(2).Y(4).Text("X"));
+            CanvasManager.AddControl(TextControlMaker.Create().Height(1).Width(1).X(4).Y(4).Text("X"));
 
             CanvasManager.SendEngineActionSet();
+
         }
     }
 }

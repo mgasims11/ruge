@@ -79,41 +79,55 @@
 
         private void Render(IControl control)
         {
+            if (control is TextControl)
+            {
+                var c = control as TextControl;
+                var clientControl = new Text(
+                            c.ControlId,
+                            c.Size.X,
+                            c.Size.Y,
+                            c.Text
+                            );
+                MainCanvas.Children.Add(clientControl);
+                clientControl.SetValue(TopProperty, (double)control.Location.X);
+                clientControl.SetValue(LeftProperty, (double)control.Location.Y);
+            }
+
             if (control is ClickableControl)
             {
-                var ClickableControl = control as ClickableControl;
-                var clickable = new Clickable(
-                            control.ControlId,
-                            control.Size.X,
-                            control.Size.Y,
-                            control.ImageUri,
-                            ClickableControl.ImageUriHover,
-                            ClickableControl.ImageUriDown,
-                            ClickableControl.ImageUriDisabled,
+                var c = control as ClickableControl;
+                var clientControl = new Clickable(
+                            c.ControlId,
+                            c.Size.X,
+                            c.Size.Y,
+                            c.ImageUri,
+                            c.ImageUriHover,
+                            c.ImageUriDown,
+                            c.ImageUriDisabled,
                             ""
                             );
-                MainCanvas.Children.Add(clickable);
-                clickable.SetValue(TopProperty, (double)control.Location.X);
-                clickable.SetValue(LeftProperty, (double)control.Location.Y);
-                clickable.MouseDown += Clickable_MouseDown;
+                MainCanvas.Children.Add(clientControl);
+                clientControl.SetValue(TopProperty, (double)control.Location.X);
+                clientControl.SetValue(LeftProperty, (double)control.Location.Y);
+                clientControl.MouseDown += Clickable_MouseDown;
             }
 
             if (control is TextInputControl)
             {
-                var textInputControl = control as TextInputControl;
-                var textInput = new TextInput(
-                    control.ControlId,
-                    control.Size.X,
-                    control.Size.Y,
-                    control.ImageUri,
-                    textInputControl.ImageUriHover,
-                    textInputControl.ImageUriDown,
-                    textInputControl.ImageUriDisabled,
-                    textInputControl.Text
+                var c = control as TextInputControl;
+                var clientControl = new TextInput(
+                    c.ControlId,
+                    c.Size.X,
+                    c.Size.Y,
+                    c.ImageUri,
+                    c.ImageUriHover,
+                    c.ImageUriDown,
+                    c.ImageUriDisabled,
+                    c.Text
                 );
-                MainCanvas.Children.Add(textInput);
-                textInput.SetValue(TopProperty, (double)control.Location.X);
-                textInput.SetValue(LeftProperty, (double)control.Location.Y);
+                MainCanvas.Children.Add(clientControl);
+                clientControl.SetValue(TopProperty, (double)control.Location.X);
+                clientControl.SetValue(LeftProperty, (double)control.Location.Y);
 
             }
         }
