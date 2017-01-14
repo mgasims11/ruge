@@ -9,7 +9,7 @@ namespace ruge.lib.logic
     using ruge.lib.model.controls;
     using ruge.lib.model.controls.interfaces;
 
-    public static class StaticImageControlExtensions
+    public static class StaticImageControlMaker
     {
         public static StaticImageControl Create()
         {

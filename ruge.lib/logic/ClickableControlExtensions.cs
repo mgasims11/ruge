@@ -9,7 +9,7 @@ namespace ruge.lib.logic
     using ruge.lib.model.controls;
     using ruge.lib.model.controls.interfaces;
 
-    public static class ClickableControlExtensions
+    public static class ClickableControlMaker
     {
         public static ClickableControl Create()
         {
@@ -75,6 +75,21 @@ namespace ruge.lib.logic
             {
                 control.Size.Y = y;
             }
+            return control;
+        }
+
+        public static ClickableControl UseImageUriTemplate(this ClickableControl control, string template, string token)
+        {
+            UseImageUriTemplate(control, template, token, "normal", "hover", "down", "disabled");
+            return control;
+        }
+
+        public static ClickableControl UseImageUriTemplate(this ClickableControl control, string template, string token, string normal, string hover, string down, string disabled)
+        {
+            control.ImageUri = template.Replace(token,normal);
+            control.ImageUriHover = template.Replace(token, hover);
+            control.ImageUriDown = template.Replace(token, down);
+            control.ImageUriDisabled = template.Replace(token, disabled);
             return control;
         }
 

@@ -112,7 +112,7 @@ namespace Ruge.Win.Test.Controls
                     _backgroundCurrent = _backgroundDisabled;
 
                 var bi = new BitmapImage(new Uri(_backgroundCurrent));
-                SetValue(BackgroundProperty, bi);
+                //SetValue(BackgroundProperty, bi);
             }
         }
     }

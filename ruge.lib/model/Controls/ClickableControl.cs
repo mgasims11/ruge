@@ -9,43 +9,8 @@ namespace ruge.lib.model.controls
     using ruge.lib.model.controls.interfaces;
     public class ClickableControl : Control, IResponsive
     {
-        public string ImageUriDisabled
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        public string ImageUriDown
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        public string ImageUriHover
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }     
+        public string ImageUriDisabled { get; set; }
+        public string ImageUriDown { get; set; }
+        public string ImageUriHover { get; set; }
     }
 }

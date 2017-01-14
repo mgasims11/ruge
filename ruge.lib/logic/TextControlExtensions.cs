@@ -9,7 +9,7 @@ namespace ruge.lib.logic
     using ruge.lib.model.controls;
     using ruge.lib.model.controls.interfaces;
 
-    public static class TextControlExtensions
+    public static class TextControlMaker
     {
         public static TextControl Create()
         {

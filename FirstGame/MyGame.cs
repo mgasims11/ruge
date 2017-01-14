@@ -28,7 +28,7 @@
             {
                 case UserActionType.Click:
                     var c = CanvasManager.GetControl(e.UserAction.ControlId);
-                    c.ImageUri = @"C:\data\ruge\SampleImages\GoogleNeg.png";
+                    c.ImageUri = @"C:\data\ruge\SampleImages\GoogleNeg_normal.png";
                     CanvasManager.AddEngineAction(c, EngineActionType.Update);
                     CanvasManager.SendEngineActionSet();
                     break;
@@ -43,19 +43,22 @@
             {
                 for (var j = 0; j <= 95; j += 5)
                 {
-                    CanvasManager.AddControl(new ClickableControl()
+                    var id = CanvasManager.AddControl(
+                        ClickableControlMaker.Create()
                            .ControlState(ControlState.Enabled)
                            .Height(5).Width(5)
                            .X(i).Y(j)
-                           .ImageUri(@"C:\data\ruge\SampleImages\Google.png"));
+                           .UseImageUriTemplate(@"C:\data\ruge\SampleImages\Google_{event}.png", "{event}"));
+                    var c = CanvasManager.GetControl(id);
                 }
             }
 
-        CanvasManager.AddControl(new TextInputControl()
+        CanvasManager.AddControl(
+            TextInputControlMaker.Create()
             .ControlState(ControlState.Enabled)
             .Height(5).Width(15)
             .X(10).Y(10)
-            .ImageUri(@"C:\data\ruge\SampleImages\Google.png"));
+            .ImageUri(@"C:\data\ruge\SampleImages\Google_normal.png"));
 
             CanvasManager.SendEngineActionSet();
         }

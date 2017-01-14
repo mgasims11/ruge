@@ -10,70 +10,10 @@ namespace ruge.lib.model.controls
 
     public abstract class Control : IControl
     {
-        protected Dictionary<string,string> 
-        public string ControlId
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        public ControlState ControlState
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        public string ImageUri
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        public XYPair Location
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        public XYPair Size
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
+        public string ControlId { get; set; }
+        public ControlState ControlState { get; set; }        
+        public string ImageUri { get; set; }
+        public XYPair Location { get; set; }
+        public XYPair Size { get; set; }        
     }
 }
