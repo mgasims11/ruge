@@ -86,7 +86,10 @@
                             c.ControlId,
                             c.Size.X,
                             c.Size.Y,
-                            c.Text
+                            c.Text,
+                            200, 
+                            200,
+                            200 
                             );
                 MainCanvas.Children.Add(clientControl);
                 clientControl.SetValue(TopProperty, (double)control.Location.X);
@@ -110,6 +113,20 @@
                 clientControl.SetValue(TopProperty, (double)control.Location.X);
                 clientControl.SetValue(LeftProperty, (double)control.Location.Y);
                 clientControl.MouseDown += Clickable_MouseDown;
+            }
+
+            if (control is StaticImageControl)
+            {
+                var c = control as StaticImageControl;
+                var clientControl = new StaticImage(
+                            c.ControlId,
+                            c.Size.X,
+                            c.Size.Y,
+                            c.ImageUri
+                            );
+                MainCanvas.Children.Add(clientControl);
+                clientControl.SetValue(TopProperty, (double)control.Location.X);
+                clientControl.SetValue(LeftProperty, (double)control.Location.Y);
             }
 
             if (control is TextInputControl)

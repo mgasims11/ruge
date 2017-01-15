@@ -11,7 +11,6 @@
     using ruge.lib.model.engine;
     using ruge.lib.model.user;
 
-
     public class MyGame
     {
         public CanvasManager CanvasManager { get; set; }
@@ -27,8 +26,8 @@
             switch (e.UserAction.UserActionType)
             {
                 case UserActionType.Click:
-                    var c = CanvasManager.GetControl(e.UserAction.ControlId);
-                    c.ImageUri = @"C:\data\ruge\SampleImages\GoogleNeg_normal.png";
+                    var c = CanvasManager.GetControl(e.UserAction.ControlId) as ClickableControl;
+                    c.AllUris(@"C:\data\ruge\SampleImages\GoogleNeg_normal.png");
                     CanvasManager.AddEngineAction(c, EngineActionType.Update);
                     CanvasManager.SendEngineActionSet();
                     break;
@@ -37,24 +36,23 @@
 
         public void Start()
         {
-            CanvasManager.CreateCanvas(5, 5);
+            CanvasManager.CreateCanvas(14, 14);
 
-            CanvasManager.AddControl(StaticImageControlMaker.Create().ImageUri(@"C:\data\ruge\SampleImages\Google_normal.png").Height(5).Width(5));
+            CanvasManager.AddControl(StaticImageControlMaker.Create().Height(14).Width(14).X(0).Y(0).ImageUri(@"C:\data\ruge\SampleImages\background.jpg"));
 
-            CanvasManager.AddControl(TextControlMaker.Create().Height(1).Width(1).X(0).Y(0).Text("X"));
-            CanvasManager.AddControl(TextControlMaker.Create().Height(1).Width(1).X(2).Y(0).Text("X"));
-            CanvasManager.AddControl(TextControlMaker.Create().Height(1).Width(1).X(4).Y(0).Text("X"));
+            CanvasManager.AddControl(ClickableControlMaker.Create().Height(4).Width(4).X(0).Y(0).ImageUri(@"C:\data\ruge\SampleImages\O.png"));
+            CanvasManager.AddControl(ClickableControlMaker.Create().Height(4).Width(4).X(5).Y(0).ImageUri(@"C:\data\ruge\SampleImages\X.png"));
+            CanvasManager.AddControl(ClickableControlMaker.Create().Height(4).Width(4).X(10).Y(0).ImageUri(@"C:\data\ruge\SampleImages\O.png"));
 
-            CanvasManager.AddControl(TextControlMaker.Create().Height(1).Width(1).X(0).Y(2).Text("X"));
-            CanvasManager.AddControl(TextControlMaker.Create().Height(1).Width(1).X(2).Y(2).Text("X"));
-            CanvasManager.AddControl(TextControlMaker.Create().Height(1).Width(1).X(4).Y(2).Text("X"));
+            CanvasManager.AddControl(ClickableControlMaker.Create().Height(4).Width(4).X(0).Y(5).ImageUri(@"C:\data\ruge\SampleImages\X.png"));
+            CanvasManager.AddControl(ClickableControlMaker.Create().Height(4).Width(4).X(5).Y(5).ImageUri(@"C:\data\ruge\SampleImages\O.png"));
+            CanvasManager.AddControl(ClickableControlMaker.Create().Height(4).Width(4).X(10).Y(5).ImageUri(@"C:\data\ruge\SampleImages\X.png"));
 
-            CanvasManager.AddControl(TextControlMaker.Create().Height(1).Width(1).X(0).Y(4).Text("X"));
-            CanvasManager.AddControl(TextControlMaker.Create().Height(1).Width(1).X(2).Y(4).Text("X"));
-            CanvasManager.AddControl(TextControlMaker.Create().Height(1).Width(1).X(4).Y(4).Text("X"));
+            CanvasManager.AddControl(ClickableControlMaker.Create().Height(4).Width(4).X(0).Y(10).ImageUri(@"C:\data\ruge\SampleImages\O.png"));
+            CanvasManager.AddControl(ClickableControlMaker.Create().Height(4).Width(4).X(5).Y(10).ImageUri(@"C:\data\ruge\SampleImages\X.png"));
+            CanvasManager.AddControl(ClickableControlMaker.Create().Height(4).Width(4).X(10).Y(10).ImageUri(@"C:\data\ruge\SampleImages\O.png"));
 
             CanvasManager.SendEngineActionSet();
-
         }
     }
 }
