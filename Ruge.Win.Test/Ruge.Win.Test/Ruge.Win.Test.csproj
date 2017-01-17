@@ -35,8 +35,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="FirstGame">
-      <HintPath>..\..\FirstGame\bin\Debug\net451\FirstGame.dll</HintPath>
+    <Reference Include="JokerPoker1">
+      <HintPath>..\..\JokerPoker1\bin\Debug\net451\JokerPoker1.dll</HintPath>
     </Reference>
     <Reference Include="ruge.lib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

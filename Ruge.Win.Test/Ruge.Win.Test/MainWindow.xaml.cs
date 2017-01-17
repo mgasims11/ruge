@@ -22,7 +22,7 @@
     using ruge.lib.model.user;
     using ruge.lib.model.controls.interfaces;
     using Ruge.Win.Test.Controls;
-    using FirstGame;
+    using JokerPoker1;
 
 
     /// <summary>
@@ -30,19 +30,22 @@
     /// </summary>
     public partial class MainWindow : Window
     {
-        MyGame _myGame = new MyGame();
+
+        JokerPoker _myGame = new JokerPoker();
 
         public MainWindow()
-        {            
+        {
+          
             InitializeComponent();
             this.Loaded += MainWindow_Loaded;
         }
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
-        {
+        {          
+            _myGame.Start();
             _myGame.CanvasManager.EngineActionSetEvent += _canvasManager_EngineActionSetEvent;
             _myGame.CanvasManager.EngineActionEvent += CanvasManager_EngineActionEvent;
-            _myGame.Start();            
+            _myGame.Start();
         }
 
         private void CanvasManager_EngineActionEvent(object sender, EngineActionEventArgs e)
@@ -92,8 +95,8 @@
                             200 
                             );
                 MainCanvas.Children.Add(clientControl);
-                clientControl.SetValue(TopProperty, (double)control.Location.X);
-                clientControl.SetValue(LeftProperty, (double)control.Location.Y);
+                clientControl.SetValue(LeftProperty, (double)control.Location.X);
+                clientControl.SetValue(TopProperty, (double)control.Location.Y);                
             }
 
             if (control is ClickableControl)
@@ -110,8 +113,8 @@
                             ""
                             );
                 MainCanvas.Children.Add(clientControl);
-                clientControl.SetValue(TopProperty, (double)control.Location.X);
-                clientControl.SetValue(LeftProperty, (double)control.Location.Y);
+                clientControl.SetValue(LeftProperty, (double)control.Location.X);
+                clientControl.SetValue(TopProperty, (double)control.Location.Y);
                 clientControl.MouseDown += Clickable_MouseDown;
             }
 
@@ -125,8 +128,8 @@
                             c.ImageUri
                             );
                 MainCanvas.Children.Add(clientControl);
-                clientControl.SetValue(TopProperty, (double)control.Location.X);
-                clientControl.SetValue(LeftProperty, (double)control.Location.Y);
+                clientControl.SetValue(LeftProperty, (double)control.Location.X);
+                clientControl.SetValue(TopProperty, (double)control.Location.Y);
             }
 
             if (control is TextInputControl)
@@ -155,7 +158,7 @@
             var userAction = new UserAction() { ControlId = control.Name, UserActionType = UserActionType.Click};
             var userActionSet = new UserActionSet();            
             userActionSet.UserActions.Add(userAction);
-            _myGame.CanvasManager.ReceiveUserActionSet(userActionSet);            
+            //_myGame.CanvasManager.ReceiveUserActionSet(userActionSet);            
         }
     }
 }

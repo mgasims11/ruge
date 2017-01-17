@@ -1,0 +1,34 @@
+--temp-output:C:\data\ruge\cardEngine.lib\obj\Debug\net451\
+--out:C:\data\ruge\cardEngine.lib\bin\Debug\net451\cardEngine.lib.dll
+--define:DEBUG
+--define:TRACE
+--define:NET451
+--suppress-warning:CS1701
+--suppress-warning:CS1702
+--suppress-warning:CS1705
+--optimize:False
+--debug-type:portable
+--output-name:cardEngine.lib
+--file-version:1.0.0.0
+--version:1.0.0.0
+--informational-version:1.0.0
+--target-framework:.NETFramework,Version=v4.5.1
+--reference:C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.1\mscorlib.dll
+--reference:C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.1\System.dll
+--reference:C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.1\System.Core.dll
+--reference:C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.1\Microsoft.CSharp.dll
+C:\data\ruge\cardEngine.lib\Library.cs
+C:\data\ruge\cardEngine.lib\DataModel\Card.cs
+C:\data\ruge\cardEngine.lib\DataModel\CardBase.cs
+C:\data\ruge\cardEngine.lib\DataModel\CardLocation.cs
+C:\data\ruge\cardEngine.lib\DataModel\Deck.cs
+C:\data\ruge\cardEngine.lib\DataModel\DeckOptions.cs
+C:\data\ruge\cardEngine.lib\DataModel\Enums.cs
+C:\data\ruge\cardEngine.lib\DataModel\Table.cs
+C:\data\ruge\cardEngine.lib\Logic\CardLayoutManager.cs
+C:\data\ruge\cardEngine.lib\Logic\DeckLayoutManager.cs
+C:\data\ruge\cardEngine.lib\Logic\GameManager.cs
+C:\data\ruge\cardEngine.lib\Logic\Location.cs
+C:\data\ruge\cardEngine.lib\Logic\TableLayoutManager.cs
+C:\data\ruge\cardEngine.lib\Logic\TableManager.cs
+C:\data\ruge\cardEngine.lib\Logic\TableManagerEventArgs.cs

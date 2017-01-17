@@ -127,19 +127,23 @@ namespace ruge.lib.logic
             return control;
         }
 
-        public static void AllUris(this ClickableControl control, string uri)
+        public static ClickableControl AllUris(this ClickableControl control, string uri)
         {
             control.ImageUri = uri;
             control.ImageUriHover = uri;
             control.ImageUriDown = uri;
             control.ImageUriDisabled = uri;
+
+            return control;
         }
 
-        private static void UpdateEmptyUris(ClickableControl control, string uri)
+        private static ClickableControl UpdateEmptyUris(ClickableControl control, string uri)
         {
             if (control.ImageUriHover == null) control.ImageUriHover = uri;
             if (control.ImageUriDown == null) control.ImageUriDown = uri;
             if (control.ImageUriDisabled == null) control.ImageUriDisabled = uri;
+
+            return control;
         }
     }
 }

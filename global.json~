@@ -1,9 +1,7 @@
 {
     "projects": [
       "ruge.lib",
-      "ruge.test",
-      "FirstGame",
-      ".",
-      "FirstGame"
-    ]
+      "cardEngine.lib",
+      "JokerPoker1" ]
+	    
 }
