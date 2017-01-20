@@ -11,6 +11,7 @@
         "dependencies": {
           "NETStandard.Library": "1.6.0",
           "ruge.lib": "1.0.0",
+          "ruge.cardEngine": "1.0.0",
           "cardEngine.lib": "1.0.0"
         },
         "runtime": {
@@ -733,6 +734,16 @@
           "cardEngine.lib.dll": {}
         }
       },
+      "ruge.cardEngine/1.0.0": {
+        "dependencies": {
+          "NETStandard.Library": "1.6.0",
+          "cardEngine.lib": "1.0.0",
+          "ruge.lib": "1.0.0"
+        },
+        "runtime": {
+          "ruge.cardEngine.dll": {}
+        }
+      },
       "ruge.lib/1.0.0": {
         "dependencies": {
           "NETStandard.Library": "1.6.0"
@@ -1055,6 +1066,11 @@
       "sha512": "sha512-Mk2mKmPi0nWaoiYeotq1dgeNK1fqWh61+EK+w4Wu8SWuTYLzpUnschb59bJtGywaPq7SmTuPf44wrXRwbIrukg=="
     },
     "cardEngine.lib/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "ruge.cardEngine/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

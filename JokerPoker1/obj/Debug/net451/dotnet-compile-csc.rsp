@@ -11,6 +11,7 @@
 "C:\data\ruge\JokerPoker1\obj\Debug\net451\dotnet-compile.assemblyinfo.cs"
 -out:"C:\data\ruge\JokerPoker1\bin\Debug\net451\JokerPoker1.dll"
 -r:"C:\data\ruge\cardEngine.lib\bin\Debug\net451\cardEngine.lib.dll"
+-r:"C:\data\ruge\ruge.cardEngine\bin\Debug\net451\ruge.cardEngine.dll"
 -r:"C:\data\ruge\ruge.lib\bin\Debug\net451\ruge.lib.dll"
 -r:"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.1\mscorlib.dll"
 -r:"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.1\System.dll"

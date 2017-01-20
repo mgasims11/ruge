@@ -5,6 +5,7 @@
   },
   "dependencies": {
     "ruge.lib": "1.0.0-*",
+    "ruge.cardEngine": "1.0.0-*",
     "cardEngine.lib": "*"
   },
 

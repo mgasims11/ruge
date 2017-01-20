@@ -13,6 +13,20 @@
           "net451/cardEngine.lib.dll": {}
         }
       },
+      "ruge.cardEngine/1.0.0": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.5.1",
+        "dependencies": {
+          "cardEngine.lib": "1.0.0",
+          "ruge.lib": "1.0.0"
+        },
+        "compile": {
+          "net451/ruge.cardEngine.dll": {}
+        },
+        "runtime": {
+          "net451/ruge.cardEngine.dll": {}
+        }
+      },
       "ruge.lib/1.0.0": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5.1",
@@ -1014,6 +1028,21 @@
         },
         "runtime": {
           "netstandard1.5/cardEngine.lib.dll": {}
+        }
+      },
+      "ruge.cardEngine/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v1.5",
+        "dependencies": {
+          "NETStandard.Library": "1.5.0-rc2-24027",
+          "cardEngine.lib": "1.0.0",
+          "ruge.lib": "1.0.0"
+        },
+        "compile": {
+          "netstandard1.5/ruge.cardEngine.dll": {}
+        },
+        "runtime": {
+          "netstandard1.5/ruge.cardEngine.dll": {}
         }
       },
       "ruge.lib/1.0.0": {
@@ -2107,6 +2136,21 @@
         },
         "runtime": {
           "netstandard1.6/cardEngine.lib.dll": {}
+        }
+      },
+      "ruge.cardEngine/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v1.6",
+        "dependencies": {
+          "NETStandard.Library": "1.6.0",
+          "cardEngine.lib": "1.0.0",
+          "ruge.lib": "1.0.0"
+        },
+        "compile": {
+          "netstandard1.6/ruge.cardEngine.dll": {}
+        },
+        "runtime": {
+          "netstandard1.6/ruge.cardEngine.dll": {}
         }
       },
       "ruge.lib/1.0.0": {
@@ -7854,6 +7898,11 @@
       "path": "../cardEngine.lib/project.json",
       "msbuildProject": "../cardEngine.lib/cardEngine.lib.xproj"
     },
+    "ruge.cardEngine/1.0.0": {
+      "type": "project",
+      "path": "../ruge.cardEngine/project.json",
+      "msbuildProject": "../ruge.cardEngine/ruge.cardEngine.xproj"
+    },
     "ruge.lib/1.0.0": {
       "type": "project",
       "path": "../ruge.lib/project.json",
@@ -7863,6 +7912,7 @@
   "projectFileDependencyGroups": {
     "": [
       "cardEngine.lib",
+      "ruge.cardEngine >= 1.0.0-*",
       "ruge.lib >= 1.0.0-*"
     ],
     ".NETFramework,Version=v4.5.1": [],

@@ -43,8 +43,8 @@
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {          
             _myGame.Start();
-            _myGame.CanvasManager.EngineActionSetEvent += _canvasManager_EngineActionSetEvent;
-            _myGame.CanvasManager.EngineActionEvent += CanvasManager_EngineActionEvent;
+            //_myGame.CanvasManager.EngineActionSetEvent += _canvasManager_EngineActionSetEvent;
+            //_myGame.CanvasManager.EngineActionEvent += CanvasManager_EngineActionEvent;
             _myGame.Start();
         }
 

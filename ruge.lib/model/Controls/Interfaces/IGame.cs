@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ruge.lib.model.Controls.Interfaces
+namespace ruge.lib.model.controls.interfaces
 {
     public interface IGame
     {
