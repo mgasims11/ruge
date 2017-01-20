@@ -10,13 +10,13 @@
     using ruge.lib.model.controls;
     using ruge.lib.model.engine;
     using ruge.lib.model.user;
-    using ProCardLib.DataModel;
-    using ProCardLib.Logic;
+    using CardEngine.Logic;
+    using CardEngine.Model;
 
-    public class RugeDeck : Deck
+    public class RugeDeckManager : DeckManager
     {
         public List<XYPair> XYCardLocations;
-        public RugeDeck()
+        public RugeDeckManager()
         {
                 
         }

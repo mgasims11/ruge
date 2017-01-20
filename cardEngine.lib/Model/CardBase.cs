@@ -14,7 +14,7 @@
         public int Value {get;set;}
         public CardBase()
         {
-            this.CardId = Guid.NewGuid();
+            CardId = Guid.NewGuid();
         }
 
         public override string ToString()

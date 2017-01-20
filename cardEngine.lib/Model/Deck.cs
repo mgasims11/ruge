@@ -15,8 +15,8 @@
         public DeckOptions Options {get; set;}                           
         public Deck()
         {            
-            this.Cards = new List<Card>();
-            this.DeckId = Guid.NewGuid();         
+            Cards = new List<Card>();
+            DeckId = Guid.NewGuid();         
         }
 
         public override string ToString()

@@ -3,17 +3,43 @@
     using System;
     using System.Collections.Generic;
     using CardEngine.Model;
+    using CardEngine.Logic;
 
     public class DeckManager
     {
-        public EventHandler<DeckManagerEventArgs> DeckClearingEvent;
-        public EventHandler<DeckManagerEventArgs> DeckClearedEvent;
-        public EventHandler<DeckManagerEventArgs> DeckShufflingEvent;
-        public EventHandler<DeckManagerEventArgs> DeckShuffledEvent;
-        public EventHandler<DeckManagerEventArgs> DeckFillingEvent;
-        public EventHandler<DeckManagerEventArgs> DeckFilledEvent;
+        public delegate void DeckClearingEventHandler(object sender, DeckManagerEventArgs e);
+        public delegate void DeckClearedEventHandler(object sender, DeckManagerEventArgs e);
+        public delegate void DeckShufflingEventHandler(object sender, DeckManagerEventArgs e);
+        public delegate void DeckShuffledEventHandler(object sender, DeckManagerEventArgs e);
+        public delegate void DeckFillingEventHandler(object sender, DeckManagerEventArgs e);
+        public delegate void DeckFilledEventHandler(object sender, DeckManagerEventArgs e);
+        public delegate void CardAddingToDeckEventHandler(object sender, DeckManagerEventArgs e);
+        public delegate void CardAddedToDeckEventHandler(object sender, DeckManagerEventArgs e);
+        public delegate void CardRemovingFromDeckEventHandler(object sender, DeckManagerEventArgs e);
+        public delegate void CardRemovedFromDeckEventHandler(object sender, DeckManagerEventArgs e);
 
-        public Deck Deck = new Deck();
+        public event DeckClearingEventHandler DeckClearingEvent;
+        public event DeckClearedEventHandler DeckClearedEvent;
+        public event DeckClearedEventHandler DeckShufflingEvent;
+        public event DeckShuffledEventHandler DeckShuffledEvent;
+        public event DeckFillingEventHandler DeckFillingEvent;
+        public event DeckFilledEventHandler DeckFilledEvent;
+        public event CardAddingToDeckEventHandler CardAddingToDeckEvent;
+        public event CardAddedToDeckEventHandler CardAddedToDeckEvent;
+        public event CardRemovingFromDeckEventHandler CardRemovingFromDeckEvent;
+        public event CardRemovedFromDeckEventHandler CardRemovedFromDeckEvent;
+
+        public Deck Deck;
+
+        private DeckManager()
+        {
+            Deck = new Deck();
+        }
+
+        public static DeckManager Create()
+        {
+            return new DeckManager();
+        }
 
         public Deck DeckName(string deckName)
         {

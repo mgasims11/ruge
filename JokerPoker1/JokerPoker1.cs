@@ -12,34 +12,39 @@
     using ruge.lib.model.controls.interfaces;
     using ruge.lib.model.user;
     using ruge.cardEngine;
-    using ProCardLib.DataModel;
+    using CardEngine.Logic;
+    using CardEngine.Model;
     
-
     public class JokerPoker : IGame
     {     
         public RugeTableManager RugeTableManager;
-        public RugeDeck RugeSourceDeck;
-        public RugeDeck RugePlayerDeck;
+//        public RugeDeck RugeSourceDeck;
+        //public RugeDeck RugePlayerDeck;
         
         public JokerPoker()
         {
-            
-            RugeSourceDeck = new RugeDeck()
-            {
-                DeckName = "Poker Deck",
-                Options = new DeckOptions(52)
-            };
 
-            RugePlayerDeck = new RugeDeck()
-            {
-                DeckName = "Poker Deck",
-                Options = new DeckOptions(5)
-            };
+            //RugeSourceDeck = new RugeDeck()
+            //{
+            //    DeckName = "Poker Deck",
+            //    Options = new DeckOptions(52)
+            //};
 
-            RugeTableManager = new RugeTableManager();
-            RugeTableManager.Canvas.Dimensions = new XYPair() { X = 100, Y = 100 };
+            //RugePlayerDeck = new RugeDeck()
+            //{
+            //    DeckName = "Poker Deck",
+            //    Options = new DeckOptions(5)
+            //};
 
-            RugeTableManager.AddDecksToTable(RugeSourceDeck, RugePlayerDeck);
+            //RugeTableManager = new RugeTableManager();
+            //RugeTableManager.Canvas.Dimensions = new XYPair() { X = 100, Y = 100 };
+
+            //RugeTableManager.AddDecksToTable(RugeSourceDeck, RugePlayerDeck);
+
+            var tm = RugeTableManager.Create().Height(50).Width(50);
+            tm.TableName("Joker Poker").Decks(
+                DeckManager.Create().DeckName("Dealer Deck").Options(new DeckOptions(52)));
+                );
         } 
 
         private void UserActionEvent(object sender, UserActionEventArgs e)

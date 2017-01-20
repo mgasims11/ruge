@@ -2,22 +2,46 @@ namespace CardEngine.Logic
 {
     using System;
     using CardEngine.Model;
+    using CardEngine.Logic;
 
     public class TableManager
     {
-        public EventHandler<TableManagerEventArgs> TableClearingEvent;
-        public EventHandler<TableManagerEventArgs> TableClearedEvent;
-        public EventHandler<DeckManagerEventArgs> DeckAddingToTableEvent;
-        public EventHandler<DeckManagerEventArgs> DeckAddedToTableEvent;
-        public EventHandler<DeckManagerEventArgs> DeckBeingRemovedFromTableEvent;
-        public EventHandler<DeckManagerEventArgs> DeckRemovedFromTableEvent;
+        public delegate void TableClearingEventHandler(object sender, TableManagerEventArgs e);
+        public delegate void TableClearedEventHandler(object sender, TableManagerEventArgs e);
+        public delegate void DeckAddingToTableEventHandler(object sender, DeckManagerEventArgs e);
+        public delegate void DeckAddedToTableEventHandler(object sender, DeckManagerEventArgs e);
+        public delegate void DeckBeingRemovedFromTableEventHandler(object sender, DeckManagerEventArgs e);
+        public delegate void DeckRemovedFromTableEventHandler(object sender, DeckManagerEventArgs e);
 
+        public event TableClearingEventHandler TableClearingEvent;
+        public event TableClearedEventHandler TableClearedEvent;
+        public event DeckAddingToTableEventHandler DeckAddingToTableEvent;
+        public event DeckAddedToTableEventHandler DeckAddedToTableEvent;
+        public event DeckBeingRemovedFromTableEventHandler DeckBeingRemovedFromTableEvent;
+        public event DeckRemovedFromTableEventHandler DeckRemovedFromTableEvent;
 
         public Table Table {get;set;}
 
-        public TableManager()
+        private TableManager()
         {
-            this.Table = new Table();
+            Table = new Table();
+        }
+
+        public static TableManager Create()
+        {
+            return new TableManager();
+        }
+
+        public TableManager TableName(string tableName)
+        {
+            Table.TableName = tableName;
+            return this;
+        }
+
+        public TableManager Decks(params Deck[] decks)
+        {
+            AddDecksToTable(decks);
+            return this;
         }
 
         public void ClearTable()
@@ -26,10 +50,15 @@ namespace CardEngine.Logic
             {
                 TableClearingEvent(this, new TableManagerEventArgs(Table.TableId));
             }
+
             Table.Decks.Clear();
+
             if (TableClearedEvent != null)
-                TableClearedEvent(this,new TableManagerEventArgs(Table.TableId));
+            {
+                TableClearedEvent(this, new TableManagerEventArgs(Table.TableId));
+            }
         }
+
         public void AddDeckToTable(Deck deck)
         {
             if (DeckAddingToTableEvent != null)
@@ -52,7 +81,7 @@ namespace CardEngine.Logic
                 DeckBeingRemovedFromTableEvent(this, new DeckManagerEventArgs(deck.DeckId));
             }
 
-            Table.Decks.Add(deck);
+            Table.Decks.Remove(deck);
 
             if (DeckRemovedFromTableEvent != null)
             {
@@ -60,11 +89,6 @@ namespace CardEngine.Logic
             }
         }
  
- 
- 
-
-
-
         public void AddDecksToTable(params Deck[] decks)
         {            
             ClearTable();

@@ -9,7 +9,7 @@
     public class Table
     {
         public Guid TableId {get; protected set;}
-        public string TableName {get; protected set;}
+        public string TableName {get; set;}
         public List<Deck> Decks {get; protected set;}
         public Table()
         {
