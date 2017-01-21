@@ -13,13 +13,8 @@
     using CardEngine.Logic;
     using CardEngine.Model;
 
-    public class RugeDeckManager : DeckManager
+    public class RugeDeck : Deck
     {
-        public List<XYPair> XYCardLocations;
-
-        public static new RugeDeckManager Create()
-        {
-            return new RugeDeckManager();
-        }
+        public XYPair Offset { get; set; }
     }
 }

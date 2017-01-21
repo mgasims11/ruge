@@ -31,7 +31,7 @@
 
         public Deck Deck;
 
-        private DeckManager()
+        public DeckManager()
         {
             Deck = new Deck();
         }
@@ -41,17 +41,19 @@
             return new DeckManager();
         }
 
-        public Deck DeckName(string deckName)
+        public DeckManager DeckName(string deckName)
         {
             Deck.DeckName = deckName;
-            return Deck;
+            return this;
         }
 
-        public Deck Options(DeckOptions deckOptions)
+        public DeckManager Options(DeckOptions deckOptions)
         {
             Deck.Options = deckOptions;
-            return Deck;
+            return this;
         }
+
+
 
         public Deck Clear()
         {

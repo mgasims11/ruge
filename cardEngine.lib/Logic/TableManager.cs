@@ -22,7 +22,7 @@ namespace CardEngine.Logic
 
         public Table Table {get;set;}
 
-        private TableManager()
+        public TableManager()
         {
             Table = new Table();
         }

@@ -17,7 +17,7 @@
     {
         public Canvas Canvas;
 
-        public static RugeTableManager Create()
+        public static new RugeTableManager Create()
         {
             return new RugeTableManager();
         }
@@ -37,6 +37,12 @@
         public RugeTableManager()
         {
             Canvas = new Canvas();
+        }
+
+       public RugeTableManager RugeDecks(params RugeDeck[] decks)
+        {
+            AddDecksToTable(decks);
+            return this;
         }
     }
 }

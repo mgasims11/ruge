@@ -18,34 +18,22 @@
     public class JokerPoker : IGame
     {     
         public RugeTableManager RugeTableManager;
-//        public RugeDeck RugeSourceDeck;
-        //public RugeDeck RugePlayerDeck;
-        
         public JokerPoker()
         {
-
-            //RugeSourceDeck = new RugeDeck()
-            //{
-            //    DeckName = "Poker Deck",
-            //    Options = new DeckOptions(52)
-            //};
-
-            //RugePlayerDeck = new RugeDeck()
-            //{
-            //    DeckName = "Poker Deck",
-            //    Options = new DeckOptions(5)
-            //};
-
-            //RugeTableManager = new RugeTableManager();
-            //RugeTableManager.Canvas.Dimensions = new XYPair() { X = 100, Y = 100 };
-
-            //RugeTableManager.AddDecksToTable(RugeSourceDeck, RugePlayerDeck);
-
-            var tm = RugeTableManager.Create().Height(50).Width(50);
-            tm.TableName("Joker Poker").Decks(
-                DeckManager.Create().DeckName("Dealer Deck").Options(new DeckOptions(52)));
-                );
-        } 
+            var tm = RugeTableManager
+                .Create()
+                .Height(50)
+                .Width(50)
+                .Decks(
+                    RugeDeckManager.Create()
+                        .Options(new DeckOptions(52))
+                        .DeckName("Dealer Deck").Deck,
+                    RugeDeckManager.Create()
+                        .Options(new DeckOptions(52))
+                        .DeckName("Player Deck").Deck
+                    );
+        }            
+         
 
         private void UserActionEvent(object sender, UserActionEventArgs e)
         {

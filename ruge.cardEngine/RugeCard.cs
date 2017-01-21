@@ -1,9 +1,5 @@
 ﻿namespace ruge.cardEngine
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
     using ruge.cardEngine;
     using ruge.lib.logic;
     using ruge.lib.model;
@@ -13,13 +9,12 @@
     using CardEngine.Logic;
     using CardEngine.Model;
 
-    public class RugeDeckManager : DeckManager
+    public class RugeCard : Card
     {
-        public List<XYPair> XYCardLocations;
-
-        public static new RugeDeckManager Create()
+        public ClickableControl ClickableControl = new ClickableControl();
+        public RugeCard(CardLocation location, Ranks rank, Suits suit, Orientations orientation, Deck deck, int value): base(rank, suit, orientation, deck, value)
         {
-            return new RugeDeckManager();
+
         }
     }
 }
