@@ -14,6 +14,7 @@ namespace ruge.lib.model.controls
         public ControlState ControlState { get; set; }        
         public string ImageUri { get; set; }
         public XYPair Location { get; set; }
-        public XYPair Size { get; set; }        
+        public XYPair Size { get; set; }      
+        public Boolean IsVisible { get; set; }  
     }
 }

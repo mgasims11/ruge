@@ -29,4 +29,6 @@ C:\data\ruge\cardEngine.lib\Model\CardLocation.cs
 C:\data\ruge\cardEngine.lib\Model\Deck.cs
 C:\data\ruge\cardEngine.lib\Model\DeckOptions.cs
 C:\data\ruge\cardEngine.lib\Model\Enums.cs
+C:\data\ruge\cardEngine.lib\Model\ModelBase.cs
+C:\data\ruge\cardEngine.lib\Model\PropertyValueChangedEventArgs.cs
 C:\data\ruge\cardEngine.lib\Model\Table.cs
