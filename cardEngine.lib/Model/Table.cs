@@ -11,11 +11,13 @@
         public Guid TableId {get; protected set;}
         public string TableName {get; set;}
         public List<Deck> Decks {get; protected set;}
+        public string ImageUri { get; set; }
         public Table()
         {
             this.Decks = new List<Deck>();
             this.TableId = Guid.NewGuid();        
         }
+
         public override string ToString()
         {
             var sb = new StringBuilder();

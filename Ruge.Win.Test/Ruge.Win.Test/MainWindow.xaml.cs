@@ -22,6 +22,7 @@
     using ruge.lib.model.user;
     using ruge.lib.model.controls.interfaces;
     using Ruge.Win.Test.Controls;
+    using ruge.cardEngine;
     using JokerPoker1;
 
 
@@ -43,9 +44,10 @@
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {          
             _myGame.Start();
+            
             //_myGame.CanvasManager.EngineActionSetEvent += _canvasManager_EngineActionSetEvent;
-            //_myGame.CanvasManager.EngineActionEvent += CanvasManager_EngineActionEvent;
-            _myGame.Start();
+            //_myGame.RugeTableManager.RugeTableManager.EngineActionEvent += CanvasManager_EngineActionEvent;
+            //_myGame.Start();
         }
 
         private void CanvasManager_EngineActionEvent(object sender, EngineActionEventArgs e)
@@ -58,10 +60,12 @@
                     case EngineActionType.Create:
                         MainCanvas.SetValue(WidthProperty, (double)o.Canvas.Dimensions.X);
                         MainCanvas.SetValue(HeightProperty, (double)o.Canvas.Dimensions.Y);
+                        SetValue(BackgroundProperty, new BitmapImage(new Uri(o.Canvas.ImageUri)));
                         break;
                     case EngineActionType.Update:
                         MainCanvas.SetValue(WidthProperty, (double)o.Canvas.Dimensions.X);
                         MainCanvas.SetValue(HeightProperty, (double)o.Canvas.Dimensions.Y);
+                        SetValue(BackgroundProperty, new BitmapImage(new Uri(o.Canvas.ImageUri)));
                         break;
                     case EngineActionType.Delete:
                         break;

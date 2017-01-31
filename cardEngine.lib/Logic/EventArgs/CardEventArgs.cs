@@ -1,14 +1,15 @@
-namespace CardEngine.Logic
+namespace CardEngine.Logic.EventArgs
 {
     using System;
     using CardEngine.Model;
+    using CardEngine.Logic.Enums;
 
-    public class CardManagerEventArgs : EventArgs
+    public class CardEventArgs : EventArgs
     {
         public Guid DeckId {get;set;}
         public Guid CardId {get;set;}
 
-        public CardManagerEventArgs(Guid deckId, Guid cardId)
+        public CardEventArgs(Guid deckId, Guid cardId)
         {
             DeckId = deckId;
             CardId = cardId;

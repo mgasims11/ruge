@@ -5,5 +5,6 @@ namespace ruge.lib.model.controls
     {
             public string CanvasId {get;set;}
             public XYPair Dimensions {get;set;}
+            public string ImageUri { get; set; }
     }
 }

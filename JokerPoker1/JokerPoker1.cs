@@ -18,10 +18,12 @@
     public class JokerPoker : IGame
     {     
         public RugeTableManager RugeTableManager;
+
         public JokerPoker()
         {
-            var tm = RugeTableManager
+            RugeTableManager = RugeTableManager
                 .Create()
+                .ImageUri(@"C:\data\ruge\JokerPoker1\images\TableTop.png")
                 .Height(50)
                 .Width(50)
                 .Decks(
@@ -32,8 +34,11 @@
                         .Options(new DeckOptions(52))
                         .DeckName("Player Deck").Deck
                     );
-        }            
-         
+
+            //RugeTableManager.DeckAddedToTableEvent += RugeTableManager_DeckAddedToTableEvent;
+        }
+
+
 
         private void UserActionEvent(object sender, UserActionEventArgs e)
         {
@@ -41,8 +46,9 @@
 
         public void Start()
         {
-
-            //CanvasManager.CreateCanvas(100,60);
+            var cv = new CanvasManager();
+            cv.CreateCanvas(100,60);
+            //cv.AddControl           
 
             //string[] hand = new string[5];
 

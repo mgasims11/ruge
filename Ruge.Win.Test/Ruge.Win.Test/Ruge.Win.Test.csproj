@@ -35,12 +35,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="cardEngine.lib">
+      <HintPath>..\..\JokerPoker1\bin\Debug\net451\cardEngine.lib.dll</HintPath>
+    </Reference>
     <Reference Include="JokerPoker1">
       <HintPath>..\..\JokerPoker1\bin\Debug\net451\JokerPoker1.dll</HintPath>
     </Reference>
-    <Reference Include="ruge.lib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\ruge.lib\bin\Debug\net451\ruge.lib.dll</HintPath>
+    <Reference Include="ruge.cardEngine">
+      <HintPath>..\..\JokerPoker1\bin\Debug\net451\ruge.cardEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="ruge.lib">
+      <HintPath>..\..\JokerPoker1\bin\Debug\net451\ruge.lib.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />

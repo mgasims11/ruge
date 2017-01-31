@@ -10,6 +10,7 @@
     using ruge.lib.model.controls;
     using ruge.lib.model.engine;
     using ruge.lib.model.user;
+    using CardEngine;
     using CardEngine.Logic;
     using CardEngine.Model;
 
@@ -24,12 +25,14 @@
 
         public RugeTableManager Height(int height)
         {
+            if (Canvas.Dimensions == null) Canvas.Dimensions = new XYPair();
             Canvas.Dimensions.Y = height;
             return this;
         }
 
         public RugeTableManager Width(int width)
         {
+            if (Canvas.Dimensions == null) Canvas.Dimensions = new XYPair();
             Canvas.Dimensions.X = width;
             return this;
         }
@@ -44,5 +47,24 @@
             AddDecksToTable(decks);
             return this;
         }
+
+        public new RugeTableManager ImageUri(string imageUri)
+        {
+            base.ImageUri(imageUri);
+            return this;
+        }
+
+        public new RugeTableManager TableName(string tableName)
+        {
+            base.TableName(tableName);
+            return this;
+        }
+
+        public new RugeTableManager Decks(params Deck[] decks)
+        {
+            base.Decks(decks);
+            return this;
+        }
+
     }
 }
