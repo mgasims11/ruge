@@ -11,30 +11,31 @@
         public Guid CardId
         {
             get { return GetGuidProperty("CardId"); }
-            protected set { SetProperty("CardId", value); }
+            set { SetProperty("CardId", value); }
         }
 
         public Orientations Orientation
         {
             get { return (Orientations)GetIntProperty("Orientation"); }
-            protected set { SetProperty("Orientation", value); }         
+            set { SetProperty("Orientation", value); }         
         }
+
         public Guid HomeDeckId
         {
             get { return GetGuidProperty("HomeDeckId"); }
-            protected set { SetProperty("HomeDeckId", value); }
+            set { SetProperty("HomeDeckId", value); }
         }
 
         public string DisplayValue
         {
             get { return GetStringProperty("DisplayValue"); }
-            protected set { SetProperty("DisplayValue", value); }
+            set { SetProperty("DisplayValue", value); }
         }
 
         public int Value
         {
             get { return GetIntProperty("Value"); }
-            protected set { SetProperty("Value", value); }
+            set { SetProperty("Value", value); }
         }
 
         public CardBase()

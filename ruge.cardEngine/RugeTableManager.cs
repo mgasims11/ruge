@@ -18,7 +18,7 @@
     {
         public Canvas Canvas;
 
-        public static new RugeTableManager Create()
+        public static RugeTableManager Create()
         {
             return new RugeTableManager();
         }

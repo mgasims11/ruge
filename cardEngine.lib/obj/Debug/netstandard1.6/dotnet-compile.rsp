@@ -56,15 +56,19 @@
 --reference:C:\Users\Michael\.nuget\packages\System.Threading.Timer\4.0.1\ref\netstandard1.2\System.Threading.Timer.dll
 --reference:C:\Users\Michael\.nuget\packages\System.Xml.ReaderWriter\4.0.11\ref\netstandard1.3\System.Xml.ReaderWriter.dll
 --reference:C:\Users\Michael\.nuget\packages\System.Xml.XDocument\4.0.11\ref\netstandard1.3\System.Xml.XDocument.dll
-C:\data\ruge\cardEngine.lib\Logic\TableManager.cs
 C:\data\ruge\cardEngine.lib\Logic\TablemanagerCardLogic.cs
 C:\data\ruge\cardEngine.lib\Logic\TableManagerDeckLogic.cs
+C:\data\ruge\cardEngine.lib\Logic\TableManagerTableLogic.cs
 C:\data\ruge\cardEngine.lib\Logic\Enums\CardEventTypes.cs
 C:\data\ruge\cardEngine.lib\Logic\Enums\DeckEventTypes.cs
 C:\data\ruge\cardEngine.lib\Logic\Enums\TableEventTypes.cs
 C:\data\ruge\cardEngine.lib\Logic\EventArgs\CardEventArgs.cs
 C:\data\ruge\cardEngine.lib\Logic\EventArgs\DeckEventArgs.cs
+C:\data\ruge\cardEngine.lib\Logic\EventArgs\PropertyValueChangedEventArgs.cs
 C:\data\ruge\cardEngine.lib\Logic\EventArgs\TableEventArgs.cs
+C:\data\ruge\cardEngine.lib\Logic\FluentFactories\CardMaker.cs
+C:\data\ruge\cardEngine.lib\Logic\FluentFactories\DeckMaker.cs
+C:\data\ruge\cardEngine.lib\Logic\FluentFactories\TableMaker.cs
 C:\data\ruge\cardEngine.lib\Model\Card.cs
 C:\data\ruge\cardEngine.lib\Model\CardBase.cs
 C:\data\ruge\cardEngine.lib\Model\CardLocation.cs
@@ -72,5 +76,4 @@ C:\data\ruge\cardEngine.lib\Model\Deck.cs
 C:\data\ruge\cardEngine.lib\Model\DeckOptions.cs
 C:\data\ruge\cardEngine.lib\Model\Enums.cs
 C:\data\ruge\cardEngine.lib\Model\ModelBase.cs
-C:\data\ruge\cardEngine.lib\Model\PropertyValueChangedEventArgs.cs
 C:\data\ruge\cardEngine.lib\Model\Table.cs

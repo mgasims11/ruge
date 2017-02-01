@@ -40,7 +40,7 @@
         public event CardRemovingFromDeckEventHandler CardRemovingFromDeckEvent;
         public event CardRemovedFromDeckEventHandler CardRemovedFromDeckEvent;
 
-        protected Deck GetDeck(Guid deckId)
+        public Deck GetDeck(Guid deckId)
         {
             return Table.Decks.FirstOrDefault(d => d.DeckId == deckId);
         }
@@ -100,7 +100,7 @@
 
             for (var i = 0; i <= deck.Cards.Count - 1; i++)
             {
-                SwapCards(i, GetRandomCardIndex());
+                SwapCardsInDeck(deckId, i, GetRandomCardIndexFromDeck(deckId));
             }
 
             if (DeckShufflingEvent != null)
