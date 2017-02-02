@@ -10,35 +10,24 @@
 
     public partial class TableManager
     {
-        public delegate void DeckAddingToTableEventHandler(object sender, DeckEventArgs e);
-        public delegate void DeckAddedToTableEventHandler(object sender, DeckEventArgs e);
-        public delegate void DeckBeingRemovedFromTableEventHandler(object sender, DeckEventArgs e);
-        public delegate void DeckRemovedFromTableEventHandler(object sender, DeckEventArgs e);
-        public delegate void DeckClearingEventHandler(object sender, DeckEventArgs e);
-        public delegate void DeckClearedEventHandler(object sender, DeckEventArgs e);
-        public delegate void DeckShufflingEventHandler(object sender, DeckEventArgs e);
-        public delegate void DeckShuffledEventHandler(object sender, DeckEventArgs e);
-        public delegate void DeckFillingEventHandler(object sender, DeckEventArgs e);
-        public delegate void DeckFilledEventHandler(object sender, DeckEventArgs e);
-        public delegate void CardAddingToDeckEventHandler(object sender, DeckEventArgs e);
-        public delegate void CardAddedToDeckEventHandler(object sender, DeckEventArgs e);
-        public delegate void CardRemovingFromDeckEventHandler(object sender, DeckEventArgs e);
-        public delegate void CardRemovedFromDeckEventHandler(object sender, DeckEventArgs e);
+        public delegate void DeckEventHandler(object sender, DeckEventArgs e);
+        public event DeckEventHandler DeckEvent;
 
-        public event DeckAddingToTableEventHandler DeckAddingToTableEvent;
-        public event DeckAddedToTableEventHandler DeckAddedToTableEvent;
-        public event DeckBeingRemovedFromTableEventHandler DeckBeingRemovedFromTableEvent;
-        public event DeckRemovedFromTableEventHandler DeckRemovedFromTableEvent;
-        public event DeckClearingEventHandler DeckClearingEvent;
-        public event DeckClearedEventHandler DeckClearedEvent;
-        public event DeckShufflingEventHandler DeckShufflingEvent;
-        public event DeckShuffledEventHandler DeckShuffledEvent;
-        public event DeckFillingEventHandler DeckFillingEvent;
-        public event DeckFilledEventHandler DeckFilledEvent;
-        public event CardAddingToDeckEventHandler CardAddingToDeckEvent;
-        public event CardAddedToDeckEventHandler CardAddedToDeckEvent;
-        public event CardRemovingFromDeckEventHandler CardRemovingFromDeckEvent;
-        public event CardRemovedFromDeckEventHandler CardRemovedFromDeckEvent;
+        private void RaiseDeckEvent(DeckEventTypes eventType, Guid deckId, Guid cardId)
+        {
+            if (DeckEvent != null)
+            {
+                DeckEvent(this, new DeckEventArgs(eventType, deckId, cardId));
+            }
+        }
+
+        private void RaiseDeckEvent(DeckEventTypes eventType, Guid tableId)
+        {
+            if (DeckEvent != null)
+            {
+                DeckEvent(this, new DeckEventArgs(eventType, tableId));
+            }
+        }
 
         public Deck GetDeck(Guid deckId)
         {
@@ -49,17 +38,11 @@
         {
             var deck = GetDeck(deckId);
 
-            if (DeckClearingEvent != null)
-            {
-                DeckClearingEvent(this, new DeckEventArgs(DeckEventTypes.DeckClearing, deckId));
-            }
+            RaiseDeckEvent(DeckEventTypes.DeckClearing, deckId);
 
             deck.Cards.Clear();
 
-            if (DeckClearedEvent != null)
-            {
-                DeckClearedEvent(this, new DeckEventArgs(DeckEventTypes.DeckClearing, deckId));
-            }
+            RaiseDeckEvent(DeckEventTypes.DeckClearing, deckId);
 
             return deck;
         }
@@ -68,10 +51,7 @@
         {
             var deck = GetDeck(deckId);
 
-            if (DeckFillingEvent != null)
-            {
-                DeckFillingEvent(this, new DeckEventArgs(DeckEventTypes.DeckFilling, deck.DeckId));
-            }
+            RaiseDeckEvent(DeckEventTypes.DeckFilling, deck.DeckId);
 
             for (var suit = 1; suit <= 4 && deck.Cards.Count < deck.Options.MaxCards; suit++)
             {
@@ -81,10 +61,7 @@
                 }
             }
 
-            if (DeckFilledEvent != null)
-            {
-                DeckFilledEvent(this, new DeckEventArgs(DeckEventTypes.DeckFilled, deck.DeckId));
-            }
+            RaiseDeckEvent(DeckEventTypes.DeckFilled, deck.DeckId);
 
             return deck;
         }
@@ -93,20 +70,14 @@
         {
             var deck = GetDeck(deckId);
 
-            if (DeckShufflingEvent != null)
-            {
-                DeckShufflingEvent(this, new DeckEventArgs(DeckEventTypes.DeckShuffling, deck.DeckId));
-            }
+            RaiseDeckEvent(DeckEventTypes.DeckShuffling, deck.DeckId);
 
             for (var i = 0; i <= deck.Cards.Count - 1; i++)
             {
                 SwapCardsInDeck(deckId, i, GetRandomCardIndexFromDeck(deckId));
             }
 
-            if (DeckShufflingEvent != null)
-            {
-                DeckShuffledEvent(this, new DeckEventArgs(DeckEventTypes.DeckShuffled, deck.DeckId));
-            }
+            RaiseDeckEvent(DeckEventTypes.DeckShuffled, deck.DeckId);
 
             return deck;
         }

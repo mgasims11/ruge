@@ -6,12 +6,10 @@ namespace CardEngine.Logic.EventArgs
 
     public class CardEventArgs : EventArgs
     {
-        public Guid DeckId {get;set;}
         public Guid CardId {get;set;}
 
-        public CardEventArgs(Guid deckId, Guid cardId)
+        public CardEventArgs(CardEventTypes eventType, Guid cardId)
         {
-            DeckId = deckId;
             CardId = cardId;
         }
     }

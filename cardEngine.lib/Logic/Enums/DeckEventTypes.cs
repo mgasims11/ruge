@@ -16,10 +16,6 @@ namespace CardEngine.Logic.Enums
         CardAdding,
         CardAdded,
         CardRemoving,
-        CardRemoved,
-        DeckAddingToTable,
-        DeckAddedToTable,
-        DeckBeingRemoved,
-        DeckRemovedFromTable
+        CardRemoved,      
     }
 }

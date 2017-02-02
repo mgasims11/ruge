@@ -41,30 +41,5 @@
         {
             Canvas = new Canvas();
         }
-
-       public RugeTableManager RugeDecks(params RugeDeck[] decks)
-        {
-            AddDecksToTable(decks);
-            return this;
-        }
-
-        public new RugeTableManager ImageUri(string imageUri)
-        {
-            base.ImageUri(imageUri);
-            return this;
-        }
-
-        public new RugeTableManager TableName(string tableName)
-        {
-            base.TableName(tableName);
-            return this;
-        }
-
-        public new RugeTableManager Decks(params Deck[] decks)
-        {
-            base.Decks(decks);
-            return this;
-        }
-
     }
 }

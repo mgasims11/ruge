@@ -9,5 +9,9 @@ namespace CardEngine.Logic.Enums
     {
         TableClearing,
         TableCleared,
+        DeckAddingToTable,
+        DeckAddedToTable,
+        DeckBeingRemoved,
+        DeckRemovedFromTable
     }
 }

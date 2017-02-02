@@ -24,16 +24,19 @@
             RugeTableManager = RugeTableManager
                 .Create()
                 .ImageUri(@"C:\data\ruge\JokerPoker1\images\TableTop.png")
-                .Height(50)
-                .Width(50)
-                .Decks(
-                    RugeDeckManager.Create()
-                        .Options(new DeckOptions(52))
-                        .DeckName("Dealer Deck").Deck,
-                    RugeDeckManager.Create()
-                        .Options(new DeckOptions(52))
-                        .DeckName("Player Deck").Deck
-                    );
+                ;
+
+                //.ImageUri(@"C:\data\ruge\JokerPoker1\images\TableTop.png")
+                //.Height(50)
+                //.Width(50)
+                //.Decks(
+                //    RugeDeckManager.Create()
+                //        .Options(new DeckOptions(52))
+                //        .DeckName("Dealer Deck").Deck,
+                //    RugeDeckManager.Create()
+                //        .Options(new DeckOptions(52))
+                //        .DeckName("Player Deck").Deck
+                //    );
 
             //RugeTableManager.DeckAddedToTableEvent += RugeTableManager_DeckAddedToTableEvent;
         }

@@ -8,12 +8,9 @@ namespace CardEngine.Logic
        
     public partial class TableManager
     {
-        public delegate void TableClearingEventHandler(object sender, TableEventArgs e);
-        public delegate void TableClearedEventHandler(object sender, TableEventArgs e);
+        public delegate void TableEventHandler(object sender, TableEventArgs e);
+        public event TableEventHandler TableEvent;
 
-        public event TableClearingEventHandler TableClearingEvent;
-        public event TableClearedEventHandler TableClearedEvent;
-        
         public Table Table {get;set;}
 
         public TableManager()
@@ -21,49 +18,50 @@ namespace CardEngine.Logic
             Table = new Table();
         }
 
+        private void RaiseTableEvent(TableEventTypes eventType, Guid tableId, Guid deckId)
+        {
+            if (TableEvent != null)
+            {
+                TableEvent(this, new TableEventArgs(eventType,tableId, deckId));
+            }
+        }
+
+        private void RaiseTableEvent(TableEventTypes eventType, Guid tableId)
+        {
+            if (TableEvent != null)
+            {
+                TableEvent(this, new TableEventArgs(eventType, tableId));
+            }
+        }
+
         public void ClearTable()
         {
-            if (TableClearingEvent != null)
-            {
-                TableClearingEvent(this, new TableEventArgs(TableEventTypes.TableClearing, Table.TableId));
-            }
 
+            RaiseTableEvent(TableEventTypes.TableClearing, Table.TableId);
+           
             Table.Decks.Clear();
 
-            if (TableClearedEvent != null)
-            {
-                TableClearedEvent(this, new TableEventArgs(TableEventTypes.TableCleared, Table.TableId));
-            }
+            RaiseTableEvent(TableEventTypes.TableCleared, Table.TableId);
         }
 
         public void AddDeckToTable(Deck deck)
         {
-            if (DeckAddingToTableEvent != null)
-            {
-                DeckAddingToTableEvent(this, new DeckEventArgs(DeckEventTypes.DeckAddingToTable, deck.DeckId));
-            }
+            RaiseTableEvent(TableEventTypes.DeckAddingToTable, Table.TableId, deck.DeckId);
 
             Table.Decks.Add(deck);
 
-            if (DeckAddedToTableEvent != null)
-            {
-                DeckAddedToTableEvent(this, new DeckEventArgs(DeckEventTypes.DeckAddedToTable, deck.DeckId));
-            }
+            RaiseTableEvent(TableEventTypes.TableClearing, Table.TableId, deck.DeckId);
+
+            RaiseTableEvent(TableEventTypes.DeckAddedToTable, Table.TableId, deck.DeckId);
         }
 
         public void RemoveDeckFromTable(Deck deck)
-        {
-            if (DeckBeingRemovedFromTableEvent != null)
-            {
-                DeckBeingRemovedFromTableEvent(this, new DeckEventArgs(DeckEventTypes.DeckBeingRemoved, deck.DeckId));
-            }
-
+        {          
+            RaiseTableEvent(TableEventTypes.DeckBeingRemoved, deck.DeckId);
+           
             Table.Decks.Remove(deck);
 
-            if (DeckRemovedFromTableEvent != null)
-            {
-                DeckRemovedFromTableEvent(this, new DeckEventArgs(DeckEventTypes.DeckRemovedFromTable, deck.DeckId));
-            }
+            RaiseTableEvent(TableEventTypes.DeckRemovedFromTable, deck.DeckId);
         }
  
         public void AddDecksToTable(params Deck[] decks)

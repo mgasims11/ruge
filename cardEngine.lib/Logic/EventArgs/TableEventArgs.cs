@@ -6,19 +6,19 @@ namespace CardEngine.Logic.EventArgs
     
     public class TableEventArgs : EventArgs
     {
-
         public TableEventTypes TableEventType { get; private set; }
         public Guid TableId { get; set; }
+        public Guid DeckId { get; set; }
 
-        public TableEventArgs(Guid tableId)
+        public TableEventArgs(TableEventTypes tableEventType, Guid tableId, Guid deckId)
         {
             TableId = tableId;
+            DeckId = deckId;
         }
-
         public TableEventArgs(TableEventTypes tableEventType, Guid tableId)
         {
-            TableEventType = tableEventType;
             TableId = tableId;
+            DeckId = Guid.Empty;
         }
     }
 }
