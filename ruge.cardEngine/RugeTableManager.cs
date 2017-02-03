@@ -20,7 +20,7 @@
 
         public static RugeTableManager Create()
         {
-            return new RugeTableManager();
+            return new RugeTableManager();                      
         }
 
         public RugeTableManager Height(int height)
@@ -40,6 +40,39 @@
         public RugeTableManager()
         {
             Canvas = new Canvas();
+            TableEvent += TableEvent_Handler;
+            DeckEvent += DeckEvent_Handler;
+            CardEvent += CardEvent_Handler;
+
+        }
+
+        private void TableEvent_Handler(object sender, CardEngine.Logic.EventArgs.TableEventArgs e)
+        {
+            switch (e.TableEventType)
+            {
+                case CardEngine.Logic.Enums.TableEventTypes.TableClearing:
+                    break;
+                case CardEngine.Logic.Enums.TableEventTypes.TableCleared:
+                    break;
+                case CardEngine.Logic.Enums.TableEventTypes.DeckAddingToTable:
+                    break;
+                case CardEngine.Logic.Enums.TableEventTypes.DeckAddedToTable:
+                    break;
+                case CardEngine.Logic.Enums.TableEventTypes.DeckBeingRemoved:
+                    break;
+                case CardEngine.Logic.Enums.TableEventTypes.DeckRemovedFromTable:
+                    break;
+            }
+        }
+
+        private void DeckEvent_Handler(object sender, CardEngine.Logic.EventArgs.DeckEventArgs e)
+        {
+         
+        }
+
+        private void CardEvent_Handler(object sender, CardEngine.Logic.EventArgs.CardEventArgs e)
+        {
+         
         }
     }
 }

@@ -5,29 +5,11 @@
     using System.Collections.Generic;
     using CardEngine.Model;
     using CardEngine.Logic;
-    using CardEngine.Logic.EventArgs;
-    using CardEngine.Logic.Enums;
 
     public partial class TableManager
     {
         public delegate void DeckEventHandler(object sender, DeckEventArgs e);
         public event DeckEventHandler DeckEvent;
-
-        private void RaiseDeckEvent(DeckEventTypes eventType, Guid deckId, Guid cardId)
-        {
-            if (DeckEvent != null)
-            {
-                DeckEvent(this, new DeckEventArgs(eventType, deckId, cardId));
-            }
-        }
-
-        private void RaiseDeckEvent(DeckEventTypes eventType, Guid tableId)
-        {
-            if (DeckEvent != null)
-            {
-                DeckEvent(this, new DeckEventArgs(eventType, tableId));
-            }
-        }
 
         public Deck GetDeck(Guid deckId)
         {
@@ -37,13 +19,9 @@
         public Deck ClearDeck(Guid deckId)
         {
             var deck = GetDeck(deckId);
-
-            RaiseDeckEvent(DeckEventTypes.DeckClearing, deckId);
-
+            if (_renderer != null) { _renderer.DeckClearing(deck.DeckId); }
             deck.Cards.Clear();
-
-            RaiseDeckEvent(DeckEventTypes.DeckClearing, deckId);
-
+            if (_renderer != null) { _renderer.DeckCleared(deck.DeckId); }
             return deck;
         }
 
@@ -51,7 +29,7 @@
         {
             var deck = GetDeck(deckId);
 
-            RaiseDeckEvent(DeckEventTypes.DeckFilling, deck.DeckId);
+            if (_renderer != null) { _renderer.DeckFilling(deck.DeckId); }
 
             for (var suit = 1; suit <= 4 && deck.Cards.Count < deck.Options.MaxCards; suit++)
             {
@@ -61,7 +39,7 @@
                 }
             }
 
-            RaiseDeckEvent(DeckEventTypes.DeckFilled, deck.DeckId);
+            if (_renderer != null) { _renderer.DeckFilled(deck.DeckId); }
 
             return deck;
         }
@@ -70,26 +48,32 @@
         {
             var deck = GetDeck(deckId);
 
-            RaiseDeckEvent(DeckEventTypes.DeckShuffling, deck.DeckId);
+            if (_renderer != null) { _renderer.DeckShuffling(deck.DeckId); }
 
             for (var i = 0; i <= deck.Cards.Count - 1; i++)
             {
                 SwapCardsInDeck(deckId, i, GetRandomCardIndexFromDeck(deckId));
             }
 
-            RaiseDeckEvent(DeckEventTypes.DeckShuffled, deck.DeckId);
+            if (_renderer != null) { _renderer.DeckShuffled(deck.DeckId); }
 
             return deck;
         }
 
+        this whole card positioning thing needs to be thought out.
+
         public Deck SwapCardsInDeck(Guid deckId, int source, int destination)
         {
+
             var deck = GetDeck(deckId);
+
+            if (_renderer != null) { _renderer.CardsSwappingInDeck(deck.DeckId, deck.Cards[source].CardId, deck.Cards[destination].CardId); }
 
             var tempCard = deck.Cards[destination];
             deck.Cards[destination] = deck.Cards[source];
             deck.Cards[source] = tempCard;
 
+            if (_renderer != null) { _renderer.CardsSwappedInDeck(deck.DeckId, deck.Cards[source].CardId, deck.Cards[destination].CardId); }
             return deck;
         }
 
@@ -97,7 +81,11 @@
         {
             var deck = GetDeck(deckId);
 
+            if (_renderer != null) { _renderer.CardBeingRemovedFromDeck(deck.DeckId, deck.Cards[index].CardId); }
+
             deck.Cards.RemoveAt(index);
+
+            if (_renderer != null) { _renderer.CardRemovedFromDeck(deck.DeckId, deck.Cards[index].CardId); }
 
             return deck;
         }
@@ -108,9 +96,13 @@
             var sourceDeck = GetDeck(sourceDeckId);
 
             if (sourceDeck.Cards.Count > 0)
+            {
                 deck.Cards.Insert(0, sourceDeck.Cards[sourceIndex]);
+            }
             else
+            {
                 deck.Cards.Add(sourceDeck.Cards[sourceIndex]);
+            }
         
             RemoveCardFromDeck(sourceDeckId, sourceIndex);
         }
