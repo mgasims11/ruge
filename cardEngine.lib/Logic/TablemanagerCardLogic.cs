@@ -12,6 +12,13 @@
             return deck.Cards.FirstOrDefault(c => c.CardId == cardId);
         }
 
+        public int GetCardIndex(Guid deckId, Guid cardId)
+        {
+            var deck = GetDeck(deckId);
+            var card = deck.Cards.FirstOrDefault(c => c.CardId == cardId);
+            return deck.Cards.IndexOf(card);
+        }
+
         public void ChangeOrientation(Guid deckId, Guid cardId, Orientations orientation)
         {           
             var card = GetCard(deckId, cardId);

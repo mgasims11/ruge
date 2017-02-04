@@ -16,6 +16,14 @@
             return Table.Decks.FirstOrDefault(d => d.DeckId == deckId);
         }
 
+        public int GetDeckIndex(Guid deckId, Guid cardId)
+        {
+            var deck = GetDeck(deckId);
+            var card = deck.Cards.FirstOrDefault(c => c.CardId == cardId);
+            return deck.Cards.IndexOf(card);
+        }
+
+
         public Deck ClearDeck(Guid deckId)
         {
             var deck = GetDeck(deckId);
@@ -52,7 +60,7 @@
 
             for (var i = 0; i <= deck.Cards.Count - 1; i++)
             {
-                SwapCardsInDeck(deckId, i, GetRandomCardIndexFromDeck(deckId));
+                SwapCards(deckId, i, GetRandomCardIndexFromDeck(deckId));
             }
 
             if (_renderer != null) { _renderer.DeckShuffled(deck.DeckId); }
@@ -60,44 +68,98 @@
             return deck;
         }
 
-        this whole card positioning thing needs to be thought out.
-
-        public Deck SwapCardsInDeck(Guid deckId, int source, int destination)
+        public void SwapCards(Guid sourceDeckId, int sourceCardIndex, Guid destinationDeckId, int destinationCardIndex)
         {
+            var sourceDeck = GetDeck(sourceDeckId);
+            var destinationDeck = GetDeck(sourceDeckId);
 
-            var deck = GetDeck(deckId);
+            if (_renderer != null) { _renderer.CardsSwappingInDeck(sourceDeck.DeckId, sourceDeck.Cards[sourceCardIndex].CardId, destinationDeckId, destinationDeck.Cards[destinationCardIndex].CardId); }
 
-            if (_renderer != null) { _renderer.CardsSwappingInDeck(deck.DeckId, deck.Cards[source].CardId, deck.Cards[destination].CardId); }
+            var tempCard = destinationDeck.Cards[destinationCardIndex];
+            destinationDeck.Cards[destinationCardIndex] = sourceDeck.Cards[sourceCardIndex];
+            sourceDeck.Cards[sourceCardIndex] = tempCard;
 
-            var tempCard = deck.Cards[destination];
-            deck.Cards[destination] = deck.Cards[source];
-            deck.Cards[source] = tempCard;
-
-            if (_renderer != null) { _renderer.CardsSwappedInDeck(deck.DeckId, deck.Cards[source].CardId, deck.Cards[destination].CardId); }
-            return deck;
+            if (_renderer != null) { _renderer.CardsSwappedInDeck(sourceDeck.DeckId, sourceDeck.Cards[sourceCardIndex].CardId, destinationDeckId, destinationDeck.Cards[destinationCardIndex].CardId); }
         }
 
-        private Deck RemoveCardFromDeck(Guid deckId, int index)
+        public void SwapCards(Guid sourceDeckId, Guid sourceCardId, Guid destinationDeckId, Guid destinationCardId)
         {
-            var deck = GetDeck(deckId);
-
-            if (_renderer != null) { _renderer.CardBeingRemovedFromDeck(deck.DeckId, deck.Cards[index].CardId); }
-
-            deck.Cards.RemoveAt(index);
-
-            if (_renderer != null) { _renderer.CardRemovedFromDeck(deck.DeckId, deck.Cards[index].CardId); }
-
-            return deck;
+            var sourceCardIndex = GetCardIndex(sourceDeckId, sourceCardId);
+            var destinationCardIndex = GetCardIndex(destinationDeckId, destinationCardId);
+            SwapCards(sourceDeckId, sourceCardIndex, destinationDeckId, destinationCardIndex);
         }
 
-        public void DealCardToTopOfDeck(Guid deckId, Guid sourceDeckId, int sourceIndex)
+        public void SwapCards(Guid sourceDeckId, int sourceCardIndex, Guid destinationDeckId, Guid destinationCardId)
+        {
+            var destinationCardIndex = GetCardIndex(destinationDeckId, destinationCardId);
+            SwapCards(sourceDeckId, sourceCardIndex, destinationDeckId, destinationCardIndex);
+        }
+
+        public void SwapCards(Guid sourceDeckId, Guid sourceCardId, Guid destinationDeckId, int destinationCardIndex)
+        {
+            var sourceCardIndex = GetCardIndex(sourceDeckId, sourceCardId);
+            SwapCards(sourceDeckId, sourceCardIndex, destinationDeckId, destinationCardIndex);
+        }
+
+        public void SwapCards(Guid deckId, int sourceCardIndex, int destinationCardIndex)
+        {
+            SwapCards(deckId, sourceCardIndex, deckId, destinationCardIndex);
+        }
+
+        public void SwapCards(Guid deckId, Guid sourceCardId, int destinationCardIndex)
+        {
+            SwapCards(deckId, sourceCardId, deckId, destinationCardIndex);
+        }
+
+        public void SwapCards(Guid deckId, int sourceCardIndex, Guid destinationCardId)
+        {
+            SwapCards(deckId, sourceCardIndex, deckId, destinationCardId);
+        }
+
+        public void SwapCards(Guid deckId, Guid sourceCardId, Guid destinationCardId)
+        {
+            SwapCards(deckId, sourceCardId, deckId, destinationCardId);
+        }
+
+        public void RemoveCard(Guid deckId, int cardIndex)
         {
             var deck = GetDeck(deckId);
+            if (_renderer != null) { _renderer.CardBeingRemovedFromDeck(deck.DeckId, deck.Cards[cardIndex].CardId); }
+            deck.Cards.RemoveAt(cardIndex);
+            if (_renderer != null) { _renderer.CardRemovedFromDeck(deck.DeckId, deck.Cards[cardIndex].CardId); }            
+        }
+
+        public void RemoveCard(Guid deckId, Guid cardId)
+        {
+            var cardIndex = GetCardIndex(deckId, cardId);
+            RemoveCard(deckId, cardIndex);
+        }
+
+        public void MoveCard(Guid sourceDeckId, int sourceCardIndex, Guid destinationDeckId, int destinationCardIndex)
+        {
+            var sourceDeck = GetDeck(sourceDeckId);
+            var destinationDeck = GetDeck(destinationDeckId);
+            Card sourceCard = sourceDeck.Cards[sourceCardIndex];
+
+            _renderer.CardMoving(sourceDeckId, sourceCard.CardId, destinationDeckId);
+            destinationDeck.Cards.Insert(destinationCardIndex, sourceCard);
+            _renderer.CardMoved(sourceDeckId, sourceCard.CardId, destinationDeckId);
+        }
+
+        public void MoveCard(Guid sourceDeckId, Guid sourceCardId, Guid destinationDeckId, int destinationCardIndex)
+        {
+            int sourceCardIndex = GetCardIndex(sourceDeckId, sourceCardId);
+            MoveCard(sourceDeckId, sourceCardIndex, destinationDeckId, destinationCardIndex);
+        }
+
+        public void MoveCardToTopOfDeck(Guid destinationDeckId, Guid sourceDeckId, int sourceIndex)
+        {
+            var destinationDeck = GetDeck(destinationDeckId);
             var sourceDeck = GetDeck(sourceDeckId);
 
             if (sourceDeck.Cards.Count > 0)
             {
-                deck.Cards.Insert(0, sourceDeck.Cards[sourceIndex]);
+                destinationDeck.Cards.Insert(0, sourceDeck.Cards[sourceIndex]);
             }
             else
             {

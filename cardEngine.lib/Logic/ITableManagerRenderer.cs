@@ -28,8 +28,10 @@
         void CardAddedToDeck(Guid deckId, Guid cardId, int position);
         void CardBeingRemovedFromDeck(Guid deckId, Guid cardId);
         void CardRemovedFromDeck(Guid deckId, Guid cardId);
-        void CardsSwappingInDeck(Guid deckId, Guid cardId1, Guid cardId2);
-        void CardsSwappedInDeck(Guid deckId, Guid cardId, Guid cardId2);
+        void CardsSwappingInDeck(Guid soureceDeckId, Guid sourcecardId, Guid destinationDeckId, Guid destinationCardId);
+        void CardsSwappedInDeck(Guid soureceDeckId, Guid sourcecardId, Guid destinationDeckId, Guid destinationCardId);
+        void CardMoving(Guid sourceDeckId, Guid sourcecardId, Guid destinationDeckId);
+        void CardMoved(Guid sourceDeckId, Guid sourcecardId, Guid destinationDeckId);
 
         // Card Events
         void CardChangingOrientation(Guid cardId);
