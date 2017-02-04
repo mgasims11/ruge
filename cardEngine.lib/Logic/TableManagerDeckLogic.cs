@@ -8,9 +8,6 @@
 
     public partial class TableManager
     {
-        public delegate void DeckEventHandler(object sender, DeckEventArgs e);
-        public event DeckEventHandler DeckEvent;
-
         public Deck GetDeck(Guid deckId)
         {
             return Table.Decks.FirstOrDefault(d => d.DeckId == deckId);
@@ -143,6 +140,7 @@
 
             _renderer.CardMoving(sourceDeckId, sourceCard.CardId, destinationDeckId);
             destinationDeck.Cards.Insert(destinationCardIndex, sourceCard);
+            sourceDeck.Cards.Remove(sourceCard);
             _renderer.CardMoved(sourceDeckId, sourceCard.CardId, destinationDeckId);
         }
 
@@ -152,39 +150,39 @@
             MoveCard(sourceDeckId, sourceCardIndex, destinationDeckId, destinationCardIndex);
         }
 
-        public void MoveCardToTopOfDeck(Guid destinationDeckId, Guid sourceDeckId, int sourceIndex)
+        public void MoveCardToTopOfDeck(Guid sourceDeckId, Guid destinationDeckId, int sourceCardIndex)
         {
+            var sourceDeck = GetDeck(sourceDeckId);
             var destinationDeck = GetDeck(destinationDeckId);
-            var sourceDeck = GetDeck(sourceDeckId);
-
-            if (sourceDeck.Cards.Count > 0)
-            {
-                destinationDeck.Cards.Insert(0, sourceDeck.Cards[sourceIndex]);
-            }
-            else
-            {
-                deck.Cards.Add(sourceDeck.Cards[sourceIndex]);
-            }
-        
-            RemoveCardFromDeck(sourceDeckId, sourceIndex);
+            MoveCard(sourceDeckId, sourceCardIndex, destinationDeck.DeckId, 0);
         }
 
-        public void DealCardToBottomOfDeck(Guid deckId, Guid sourceDeckId, int sourceIndex)
+        public void MoveCardToTopOfDeck(Guid sourceDeckId, Guid destinationDeckId, Guid sourceCardId)
         {
-            var deck = GetDeck(deckId);
             var sourceDeck = GetDeck(sourceDeckId);
-
-            deck.Cards.Add(sourceDeck.Cards[sourceIndex]);
-            RemoveCardFromDeck(sourceDeckId, sourceIndex);
+            var destinationDeck = GetDeck(destinationDeckId);
+            MoveCard(sourceDeckId, sourceCardId, destinationDeck.DeckId, 0);
         }
 
-        public void DealCardToPositionInDeck(Guid deckId, Guid sourceDeckId, int sourceIndex,int destinationIndex)
-        {
-            var deck = GetDeck(deckId);
+        public void MoveCardToBottomOfDeck(Guid destinationDeckId, Guid sourceDeckId, int sourceCardIndex)
+        {            
             var sourceDeck = GetDeck(sourceDeckId);
+            var destinationDeck = GetDeck(destinationDeckId);
+            var sourceCard = sourceDeck.Cards[sourceCardIndex];
 
-            deck.Cards.Insert(destinationIndex, sourceDeck.Cards[sourceIndex]);
-            RemoveCardFromDeck(sourceDeckId, sourceIndex);
+            _renderer.CardMoving(sourceDeckId, sourceCard.CardId, destinationDeckId);
+            destinationDeck.Cards.Add(sourceCard);
+            sourceDeck.Cards.Remove(sourceCard);
+            _renderer.CardMoved(sourceDeckId, sourceCard.CardId, destinationDeckId);
+        }
+
+        public void MoveCardToBottomOfDeck(Guid destinationDeckId, Guid sourceDeckId, Guid sourceCardId)
+        {
+            var sourceCardIndex = GetCardIndex(sourceDeckId, sourceCardId);
+
+            _renderer.CardMoving(sourceDeckId, sourceCardId, destinationDeckId);
+            MoveCardToBottomOfDeck(destinationDeckId, sourceDeckId, sourceCardIndex);
+            _renderer.CardMoved(sourceDeckId, sourceCardId, destinationDeckId);
         }
 
         private int GetRandomCardIndexFromDeck(Guid deckId)

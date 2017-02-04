@@ -6,8 +6,6 @@ namespace CardEngine.Logic
        
     public partial class TableManager
     {
-        public delegate void TableEventHandler(object sender, TableEventArgs e);
-        public event TableEventHandler TableEvent;
         public Table Table {get;set;}
         public ITableManagerRenderer _renderer = null;
 

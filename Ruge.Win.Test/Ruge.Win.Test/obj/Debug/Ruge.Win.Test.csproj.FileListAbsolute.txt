@@ -19,3 +19,4 @@ C:\data\ruge\Ruge.Win.Test\Ruge.Win.Test\obj\Debug\Ruge.Win.Test.Properties.Reso
 C:\data\ruge\Ruge.Win.Test\Ruge.Win.Test\obj\Debug\Ruge.Win.Test.csproj.GenerateResource.Cache
 C:\data\ruge\Ruge.Win.Test\Ruge.Win.Test\obj\Debug\Ruge.Win.Test.exe
 C:\data\ruge\Ruge.Win.Test\Ruge.Win.Test\obj\Debug\Ruge.Win.Test.pdb
+C:\data\ruge\Ruge.Win.Test\Ruge.Win.Test\obj\Debug\Ruge.Win.Test.csprojResolveAssemblyReference.cache
