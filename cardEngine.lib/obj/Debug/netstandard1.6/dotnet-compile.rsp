@@ -57,7 +57,7 @@
 --reference:C:\Users\Michael\.nuget\packages\System.Xml.ReaderWriter\4.0.11\ref\netstandard1.3\System.Xml.ReaderWriter.dll
 --reference:C:\Users\Michael\.nuget\packages\System.Xml.XDocument\4.0.11\ref\netstandard1.3\System.Xml.XDocument.dll
 C:\data\ruge\cardEngine.lib\Logic\ITableManagerRenderer.cs
-C:\data\ruge\cardEngine.lib\Logic\TablemanagerCardLogic.cs
+C:\data\ruge\cardEngine.lib\Logic\TableManagerCardLogic.cs
 C:\data\ruge\cardEngine.lib\Logic\TableManagerDeckLogic.cs
 C:\data\ruge\cardEngine.lib\Logic\TableManagerTableLogic.cs
 C:\data\ruge\cardEngine.lib\Logic\EventArgs\PropertyValueChangedEventArgs.cs

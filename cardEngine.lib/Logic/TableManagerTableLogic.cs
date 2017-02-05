@@ -28,10 +28,9 @@ namespace CardEngine.Logic
         }
 
         public void AddDeckToTable(Deck deck)
-        {
-            if (_renderer != null) { _renderer.DeckAddingToTable(Table.TableId, deck.DeckId); }
+        {          
             Table.Decks.Add(deck);
-            if (_renderer != null) { _renderer.DeckAddedToTable(Table.TableId, deck.DeckId); }
+            if (_renderer != null) { _renderer.DeckAddedToTable(Table.TableId, deck); }
         }
 
         public void RemoveDeckFromTable(Deck deck)
@@ -43,7 +42,6 @@ namespace CardEngine.Logic
  
         public void AddDecksToTable(params Deck[] decks)
         {            
-            ClearTable();
             foreach(var deck in decks )
             {                
                 AddDeckToTable(deck);            

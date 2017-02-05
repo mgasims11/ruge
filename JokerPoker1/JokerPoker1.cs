@@ -17,53 +17,44 @@
     
     public class JokerPoker : IGame
     {     
-        public RugeTableManager RugeTableManager;
+        public RugeTableManagerRenderer _rugeTableManagerRenderer;
+        public TableManager _tableManager;
+
+        public Deck _dealerDeck = null;
+        public Deck _playerDeck = null;
+
 
         public JokerPoker()
         {
-            RugeTableManager = RugeTableManager
-                .Create()
-                .ImageUri(@"C:\data\ruge\JokerPoker1\images\TableTop.png")
-                ;
-
-                //.ImageUri(@"C:\data\ruge\JokerPoker1\images\TableTop.png")
-                //.Height(50)
-                //.Width(50)
-                //.Decks(
-                //    RugeDeckManager.Create()
-                //        .Options(new DeckOptions(52))
-                //        .DeckName("Dealer Deck").Deck,
-                //    RugeDeckManager.Create()
-                //        .Options(new DeckOptions(52))
-                //        .DeckName("Player Deck").Deck
-                //    );
-
-            //RugeTableManager.DeckAddedToTableEvent += RugeTableManager_DeckAddedToTableEvent;
-        }
-
-
-
-        private void UserActionEvent(object sender, UserActionEventArgs e)
-        {
+            _tableManager = new TableManager(new RugeTableManagerRenderer());
+            _tableManager.Table.TableName = "Joker Poker";
+            _tableManager.Table.ImageUri = @"C:\data\ruge\ruge.cardEngine\images\03H.jpg";
         }
 
         public void Start()
         {
-            var cv = new CanvasManager();
-            cv.CreateCanvas(100,60);
-            //cv.AddControl           
+            _dealerDeck = new Deck()
+            {
+                Visible = false,
+                DeckName = "Dealer Deck",
+                Options = new DeckOptions(52)
+            };
 
-            //string[] hand = new string[5];
+            _playerDeck = new Deck()
+            {
+                Visible = false,
+                DeckName = "Player Deck",
+                Options = new DeckOptions(5)
+            };
 
-            //int height = 15, width = 15, spacing = 2, xBlock = 10, y = 30;
-            //var x = xBlock;
-            //for (var i = 0; i <= 4; i++)
-            //{
-            //    hand[i] = CanvasManager.AddControl(ClickableControlMaker.Create().X(x).Y(y).Width(width).Height(height).AllUris(@"C:\data\ruge\cardEngine.lib\images\02S.jpg"));
-            //    x += width + spacing;
-            //}
-
-            //CanvasManager.SendEngineActionSet();
+            _tableManager.AddDecksToTable(_dealerDeck, _playerDeck);
+            _tableManager.FillDeck(_dealerDeck.DeckId);
+            _tableManager.ShuffleDeck(_dealerDeck.DeckId);
+            _tableManager.MoveCardToTopOfDeck(_dealerDeck.DeckId, _playerDeck.DeckId, 0);
+            _tableManager.MoveCardToTopOfDeck(_dealerDeck.DeckId, _playerDeck.DeckId, 0);
+            _tableManager.MoveCardToTopOfDeck(_dealerDeck.DeckId, _playerDeck.DeckId, 0);
+            _tableManager.MoveCardToTopOfDeck(_dealerDeck.DeckId, _playerDeck.DeckId, 0);
+            _tableManager.MoveCardToTopOfDeck(_dealerDeck.DeckId, _playerDeck.DeckId, 0);
         }
     }
 }

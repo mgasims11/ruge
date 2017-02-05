@@ -40,7 +40,9 @@
             {
                 for (var rank = 1; rank <= 13 && deck.Cards.Count < deck.Options.MaxCards; rank++)
                 {
-                    deck.Cards.Add(new Card((Ranks)rank, (Suits)suit, Orientations.FaceDown, deck, (int)rank));
+                    var newCard = new Card((Ranks)rank, (Suits)suit, Orientations.FaceDown, deck, (int)rank);
+                    deck.Cards.Add(newCard);
+                    _renderer.CardAddedToDeck(deckId, newCard,0);
                 }
             }
 
@@ -185,7 +187,7 @@
             _renderer.CardMoved(sourceDeckId, sourceCardId, destinationDeckId);
         }
 
-        private int GetRandomCardIndexFromDeck(Guid deckId)
+        public int GetRandomCardIndexFromDeck(Guid deckId)
         {
             var deck = GetDeck(deckId);
 

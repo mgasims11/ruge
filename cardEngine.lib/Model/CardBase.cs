@@ -26,6 +26,12 @@
             set { SetProperty("HomeDeckId", value); }
         }
 
+        public Guid CurrentDeckId
+        {
+            get { return GetGuidProperty("CurrentDeckId"); }
+            set { SetProperty("CurrentDeckId", value); }
+        }
+
         public string DisplayValue
         {
             get { return GetStringProperty("DisplayValue"); }

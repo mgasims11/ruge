@@ -12,7 +12,8 @@
         public Guid DeckId {get; protected set;}
         public string DeckName {get; set;}
         public List<Card> Cards {get; protected set;}
-        public DeckOptions Options {get; set;}                           
+        public DeckOptions Options {get; set;}    
+        public bool Visible { get; set; }
         public Deck()
         {            
             Cards = new List<Card>();

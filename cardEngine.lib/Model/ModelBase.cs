@@ -30,7 +30,7 @@ namespace CardEngine.Model
 
         protected object GetProperty(string propertyName)
         {
-            if (!PropertyBag.ContainsKey(propertyName))
+            if (PropertyBag.ContainsKey(propertyName))
                 return PropertyBag[propertyName];
             else
                 return null;

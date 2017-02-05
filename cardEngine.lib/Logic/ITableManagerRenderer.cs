@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+    using CardEngine.Model;
     
     public interface ITableManagerRenderer
     {
@@ -11,8 +12,7 @@
         void TableClearing(Guid tableId);
         void TableCleared(Guid tableId);
 
-        void DeckAddingToTable(Guid tableId, Guid deckId);
-        void DeckAddedToTable(Guid tableId, Guid deckId);
+        void DeckAddedToTable(Guid tableId, Deck deck);
         void DeckBeingRemovedFromTable(Guid tableId, Guid deckId);
         void DeckRemovedFromTable(Guid tableId, Guid deckId);
 
@@ -24,8 +24,7 @@
         void DeckFilling(Guid deckId);
         void DeckFilled(Guid deckId);
 
-        void CardBeingAddedToDeck(Guid deckId, Guid cardId, int position);
-        void CardAddedToDeck(Guid deckId, Guid cardId, int position);
+        void CardAddedToDeck(Guid deckId, Card card, int position);
         void CardBeingRemovedFromDeck(Guid deckId, Guid cardId);
         void CardRemovedFromDeck(Guid deckId, Guid cardId);
         void CardsSwappingInDeck(Guid soureceDeckId, Guid sourcecardId, Guid destinationDeckId, Guid destinationCardId);

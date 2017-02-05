@@ -19,5 +19,6 @@
 --reference:C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.1\System.dll
 --reference:C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.1\System.Core.dll
 --reference:C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.1\Microsoft.CSharp.dll
-C:\data\ruge\ruge.cardEngine\RugeTableManager.cs
+C:\data\ruge\ruge.cardEngine\DeckFrame.cs
+C:\data\ruge\ruge.cardEngine\RugeTableManagerRenderer.cs
 C:\data\ruge\ruge.cardEngine\Properties\AssemblyInfo.cs
