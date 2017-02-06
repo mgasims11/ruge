@@ -17,15 +17,26 @@
     public class RugeTableManagerRenderer : ITableManagerRenderer
     {
         public CanvasManager CanvasManager = null;
+        public List<Deck> _decks = null;
+        public List<DeckFrame> _deckFrames = null;
 
         public RugeTableManagerRenderer()
         {
             CanvasManager = new CanvasManager();
+            _decks = new List<Deck>();
+            _deckFrames = new List<DeckFrame>();
+        }
+
+        public void AddDeckFrame(DeckFrame deckFrame)
+        {
+            _deckFrames.Add(deckFrame);
         }
 
         public void CardAddedToDeck(Guid deckId, Card card, int position)
         {
-
+            var c = ClickableControlMaker.Create()
+                .X(_deckFrames)
+           //CanvasManager.AddControl(new Click)
         }
 
         public void CardBeingRemovedFromDeck(Guid deckId, Guid cardId)
@@ -70,7 +81,7 @@
 
         public void DeckAddedToTable(Guid tableId, Deck deck)
         {
-
+            _decks.Add(deck);
         }
 
         public void DeckBeingRemovedFromTable(Guid tableId, Guid deckId)
@@ -115,12 +126,11 @@
 
         public void TableCleared(Guid tableId)
         {
-
+            CanvasManager.CreateCanvas(100, 100);
         }
 
         public void TableClearing(Guid tableId)
         {
-
         }
     }
 }

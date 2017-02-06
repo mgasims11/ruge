@@ -56,11 +56,8 @@ namespace ruge.lib.logic {
         public Canvas CreateCanvas(int height, int width) {
             var canvas = new Canvas() {
                     CanvasId = "C" + Guid.NewGuid().ToString().Replace("-", ""),
-                    Dimensions = new XYPair() {
-                        X = height,
-                        Y = width
-                    }
-                };
+                    Dimensions = new XYPair(height,width)
+            };
             _canvas = canvas;
             this.RaiseEngineActionEvent(_canvas, EngineActionType.Create);
             this.InitializeEngineActionSet();
@@ -75,9 +72,9 @@ namespace ruge.lib.logic {
 
         public string AddControl(IControl control)
         {
-            this._controls.Add(control);
-            this.RaiseEngineActionEvent(control, EngineActionType.Create);
-            this.AddEngineAction(control, EngineActionType.Create);
+            _controls.Add(control);
+            RaiseEngineActionEvent(control, EngineActionType.Create);
+            AddEngineAction(control, EngineActionType.Create);
             return control.ControlId;
         }
 

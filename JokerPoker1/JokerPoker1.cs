@@ -26,13 +26,16 @@
 
         public JokerPoker()
         {
-            _tableManager = new TableManager(new RugeTableManagerRenderer());
+            _rugeTableManagerRenderer = new RugeTableManagerRenderer();
+            _tableManager = new TableManager(_rugeTableManagerRenderer);
             _tableManager.Table.TableName = "Joker Poker";
             _tableManager.Table.ImageUri = @"C:\data\ruge\ruge.cardEngine\images\03H.jpg";
         }
 
         public void Start()
         {
+            _tableManager.ClearTable();
+
             _dealerDeck = new Deck()
             {
                 Visible = false,
@@ -42,7 +45,7 @@
 
             _playerDeck = new Deck()
             {
-                Visible = false,
+                Visible = true,
                 DeckName = "Player Deck",
                 Options = new DeckOptions(5)
             };
@@ -55,6 +58,24 @@
             _tableManager.MoveCardToTopOfDeck(_dealerDeck.DeckId, _playerDeck.DeckId, 0);
             _tableManager.MoveCardToTopOfDeck(_dealerDeck.DeckId, _playerDeck.DeckId, 0);
             _tableManager.MoveCardToTopOfDeck(_dealerDeck.DeckId, _playerDeck.DeckId, 0);
+
+            var playerDeckFrame = new DeckFrame()
+            {
+                DeckId = _playerDeck.DeckId,
+                CardLocations = new List<XYPair>()
+                {
+                    new XYPair(10,10),
+                    new XYPair(15,10),
+                    new XYPair(30,10),
+                    new XYPair(35,10),
+                    new XYPair(40,10)
+                }
+            };
+
+            _rugeTableManagerRenderer.AddDeckFrame(playerDeckFrame);
+
+            _rugeTableManagerRenderer.CanvasManager.SendEngineActionSet();
         }
     }
 }
+
