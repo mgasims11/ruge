@@ -18,25 +18,45 @@
     {
         public CanvasManager CanvasManager = null;
         public List<Deck> _decks = null;
-        public List<DeckFrame> _deckFrames = null;
+        public List<CardControl> _cardControls = null;
 
         public RugeTableManagerRenderer()
         {
             CanvasManager = new CanvasManager();
             _decks = new List<Deck>();
-            _deckFrames = new List<DeckFrame>();
+            _cardControls = new List<CardControl>();
         }
 
-        public void AddDeckFrame(DeckFrame deckFrame)
+        public void AddCardLocation(Guid deckId, XYPair coordinates, int index, string imageUri)
         {
-            _deckFrames.Add(deckFrame);
+            _cardControls.Add(new cardEngine.CardControl()
+            {
+                DeckId = deckId,
+                Index = index,
+                CardLocation = coordinates
+                
+            });            
+        }
+
+        private void RenderCard(Deck deck, Card card)
+        {
+            var cardControl = _cardControls.FirstOrDefault(f => f.DeckId == deck.DeckId);
+
+            if (cardControl.Index == deck.Cards.IndexOf(card))
+            {
+                cardControl.ControlState = ControlState.Enabled;
+                cardControl.ImageUri = 
+            }
+
+
         }
 
         public void CardAddedToDeck(Guid deckId, Card card, int position)
         {
-            var c = ClickableControlMaker.Create()
-                .X(_deckFrames)
-           //CanvasManager.AddControl(new Click)
+            RenderCard(deckId, card);
+
+            var c = ClickableControlMaker.Create().X(deckFrame
+           //CanvasManager.AddControl(new C
         }
 
         public void CardBeingRemovedFromDeck(Guid deckId, Guid cardId)

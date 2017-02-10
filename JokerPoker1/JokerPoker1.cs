@@ -59,18 +59,18 @@
             _tableManager.MoveCardToTopOfDeck(_dealerDeck.DeckId, _playerDeck.DeckId, 0);
             _tableManager.MoveCardToTopOfDeck(_dealerDeck.DeckId, _playerDeck.DeckId, 0);
 
-            var playerDeckFrame = new DeckFrame()
-            {
-                DeckId = _playerDeck.DeckId,
-                CardLocations = new List<XYPair>()
-                {
-                    new XYPair(10,10),
-                    new XYPair(15,10),
-                    new XYPair(30,10),
-                    new XYPair(35,10),
-                    new XYPair(40,10)
-                }
-            };
+            //var playerDeckFrame = new DeckFrame()
+            //{
+            //    DeckId = _playerDeck.DeckId,
+            //    CardLocations = new List<XYPair>()
+            //    {
+            //        new XYPair(10,10),
+            //        new XYPair(15,10),
+            //        new XYPair(30,10),
+            //        new XYPair(35,10),
+            //        new XYPair(40,10)
+            //    }
+            //};
 
             _rugeTableManagerRenderer.AddDeckFrame(playerDeckFrame);
 
