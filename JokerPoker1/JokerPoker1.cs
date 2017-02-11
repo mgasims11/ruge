@@ -50,6 +50,11 @@
                 Options = new DeckOptions(5)
             };
 
+            _rugeTableManagerRenderer.AddCardLocation(
+                _playerDeck.DeckId,
+                new XYPair(3, 3),
+                0);
+
             _tableManager.AddDecksToTable(_dealerDeck, _playerDeck);
             _tableManager.FillDeck(_dealerDeck.DeckId);
             _tableManager.ShuffleDeck(_dealerDeck.DeckId);
@@ -59,22 +64,8 @@
             _tableManager.MoveCardToTopOfDeck(_dealerDeck.DeckId, _playerDeck.DeckId, 0);
             _tableManager.MoveCardToTopOfDeck(_dealerDeck.DeckId, _playerDeck.DeckId, 0);
 
-            //var playerDeckFrame = new DeckFrame()
-            //{
-            //    DeckId = _playerDeck.DeckId,
-            //    CardLocations = new List<XYPair>()
-            //    {
-            //        new XYPair(10,10),
-            //        new XYPair(15,10),
-            //        new XYPair(30,10),
-            //        new XYPair(35,10),
-            //        new XYPair(40,10)
-            //    }
-            //};
 
-            _rugeTableManagerRenderer.AddDeckFrame(playerDeckFrame);
-
-            _rugeTableManagerRenderer.CanvasManager.SendEngineActionSet();
+            _rugeTableManagerRenderer.SendEngineActionSet();
         }
     }
 }

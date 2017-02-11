@@ -102,12 +102,12 @@ namespace Ruge.Win.Test.Controls
             SetBackground(this._backgroundCurrent);
         }
 
-        private void SetBackground(string imageUrl)
+        private void SetBackground(string imageUri)
         {
-            if (!String.IsNullOrEmpty(imageUrl))
+            if (!String.IsNullOrEmpty(imageUri))
             {
                 if (IsEnabled)
-                    _backgroundCurrent = imageUrl;
+                    _backgroundCurrent = imageUri;
                 else
                     _backgroundCurrent = _backgroundDisabled;
 

@@ -12,6 +12,7 @@ namespace CardEngine.Logic
         public TableManager(ITableManagerRenderer renderer)
         {
             _renderer = renderer;
+            _renderer.TableManager = this;
             Table = new Table();
         }
 

@@ -8,6 +8,8 @@
     
     public interface ITableManagerRenderer
     {
+        TableManager TableManager { get; set; }
+
         // Table Events
         void TableClearing(Guid tableId);
         void TableCleared(Guid tableId);
