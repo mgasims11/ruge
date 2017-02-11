@@ -13,6 +13,7 @@
     using CardEngine;
     using CardEngine.Logic;
     using CardEngine.Model;
+    using ruge.cardEngine.logic;
 
     public class RugeTableManagerRenderer : ITableManagerRenderer
     {
@@ -33,13 +34,31 @@
             _cardControls = new List<CardControl>();
         }
 
-        public void AddCardLocation(Guid deckId, XYPair coordinates, int index)
+        public string AddCardControl(Guid deckId, int x, int y, int width, int height, int index)
+        {
+            var cardControl = CardControlMaker.Create()
+                .DeckId(deckId)
+                .Index(index)                
+                .Height(height)
+                .Width(width)
+                .X(x)
+                .Y(y)
+                .ControlState(ControlState.Enabled)
+                .IsVisible(true)
+                ;
+
+            _cardControls.Add(cardControl);
+
+            return cardControl.ControlId;
+        }
+
+        public void RemoveCardControl(Guid deckId, XYPair coordinates, int index)
         {
             _cardControls.Add(new cardEngine.CardControl()
             {
                 DeckId = deckId,
                 Index = index
-            });            
+            });
         }
 
         private void RenderCard(Guid deckId, Card card)
@@ -58,7 +77,10 @@
 
         public void CardAddedToDeck(Guid deckId, Card card, int position)
         {
-            RenderCard(deckId, card);
+            var deck = _tablemanager.GetDeck(deckId);
+            var cardControl = _cardControls.FirstOrDefault(f => f.DeckId == deck.DeckId);
+            
+            CanvasManager.AddEngineAction(cardControl, EngineActionType.Create);
         }
 
         public void CardBeingRemovedFromDeck(Guid deckId, Guid cardId)
@@ -157,23 +179,7 @@
 
         public void SendEngineActionSet()
         {
-            var actionSet = CreateActionSet();
             CanvasManager.SendEngineActionSet();
-        }
-
-        private CreateActionSet()
-        {
-            
-
-            foreach(var cardControl in _cardControls)
-            {
-                CanvasManager.ActionSet.EngineActions.Add(new EngineAction()
-                {
-                    ActionType = EngineActionType.Create,
-                    Control = cardControl
-                });                   
-            }
-            return actionSet;
         }
     }
 }

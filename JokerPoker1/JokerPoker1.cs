@@ -50,11 +50,8 @@
                 Options = new DeckOptions(5)
             };
 
-            _rugeTableManagerRenderer.AddCardLocation(
-                _playerDeck.DeckId,
-                new XYPair(3, 3),
-                0);
-
+            _rugeTableManagerRenderer.AddCardControl(_playerDeck.DeckId, 10, 10, 20, 20, 0);
+            
             _tableManager.AddDecksToTable(_dealerDeck, _playerDeck);
             _tableManager.FillDeck(_dealerDeck.DeckId);
             _tableManager.ShuffleDeck(_dealerDeck.DeckId);

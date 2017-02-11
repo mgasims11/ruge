@@ -53,7 +53,6 @@ namespace ruge.lib.logic {
             }
         }
 
-        ADD CONTROL
 
         public Canvas CreateCanvas(int height, int width) {
             var canvas = new Canvas() {
