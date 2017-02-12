@@ -34,18 +34,17 @@
             _cardControls = new List<CardControl>();
         }
 
-        public string AddCardControl(Guid deckId, int x, int y, int width, int height, int index)
+        public string CreateCardControl(Guid deckId, int x, int y, int width, int height, int index)
         {
             var cardControl = CardControlMaker.Create()
                 .DeckId(deckId)
-                .Index(index)                
+                .Index(index)
                 .Height(height)
                 .Width(width)
                 .X(x)
                 .Y(y)
                 .ControlState(ControlState.Enabled)
-                .IsVisible(true)
-                ;
+                .IsVisible(true);
 
             _cardControls.Add(cardControl);
 
@@ -54,33 +53,23 @@
 
         public void RemoveCardControl(Guid deckId, XYPair coordinates, int index)
         {
-            _cardControls.Add(new cardEngine.CardControl()
-            {
-                DeckId = deckId,
-                Index = index
-            });
+            _cardControls.RemoveAt(index);
         }
 
         private void RenderCard(Guid deckId, Card card)
         {
             var deck = _tablemanager.GetDeck(deckId);
-            var cardControl = _cardControls.FirstOrDefault(f => f.DeckId == deck.DeckId);
-            
+            var cardControl = _cardControls.FirstOrDefault(cc => cc.DeckId == deck.DeckId && cc.Index == deck.Cards.IndexOf(card));
             if (cardControl == null) return;
 
-            if (cardControl.Index == deck.Cards.IndexOf(card))
-            {
-                cardControl.ControlState = ControlState.Enabled;
-                cardControl.ImageUri = String.Format(@"C:\data\ruge\ruge.cardEngine\images\{0}.jpg",((int)card.Rank).ToString("{0:00}") + card.Suit.ToString().Substring(0,1));
-            }
+            cardControl.ControlState = ControlState.Enabled;
+            cardControl.ImageUri = String.Format(@"C:\data\ruge\ruge.cardEngine\images\{0}.jpg",((int)card.Rank).ToString("{0:00}") + card.Suit.ToString().Substring(0,1));
+
+            CanvasManager.AddEngineAction(cardControl, EngineActionType.Create);
         }
 
-        public void CardAddedToDeck(Guid deckId, Card card, int position)
+        public void CardAddedToDeck(Guid deckId, Card card, int index)
         {
-            var deck = _tablemanager.GetDeck(deckId);
-            var cardControl = _cardControls.FirstOrDefault(f => f.DeckId == deck.DeckId);
-            
-            CanvasManager.AddEngineAction(cardControl, EngineActionType.Create);
         }
 
         public void CardBeingRemovedFromDeck(Guid deckId, Guid cardId)
@@ -114,8 +103,8 @@
 
         public void CardsSwappedInDeck(Guid soureceDeckId, Guid sourcecardId, Guid destinationDeckId, Guid destinationCardId)
         {
-            RenderCard(soureceDeckId, _tablemanager.GetCard(soureceDeckId, sourcecardId));
-            RenderCard(destinationDeckId, _tablemanager.GetCard(destinationDeckId, destinationCardId));
+            //RenderCard(soureceDeckId, _tablemanager.GetCard(soureceDeckId, sourcecardId));
+            //RenderCard(destinationDeckId, _tablemanager.GetCard(destinationDeckId, destinationCardId));
         }
 
         public void CardsSwappingInDeck(Guid soureceDeckId, Guid sourcecardId, Guid destinationDeckId, Guid destinationCardId)
@@ -179,6 +168,11 @@
 
         public void SendEngineActionSet()
         {
+            foreach (var cardControl in _cardControls)
+            {
+                CanvasManager.AddEngineAction(cardControl, EngineActionType.Update);
+            }
+       
             CanvasManager.SendEngineActionSet();
         }
     }

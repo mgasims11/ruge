@@ -169,5 +169,11 @@ namespace ruge.cardEngine.logic
             return control;
         }
 
+        public static CardControl ControlId(this CardControl control, Guid cardId)
+        {
+            control.ControlId = ControlHelper.GetControlID(cardId);
+
+            return control;
+        }
     }
 }

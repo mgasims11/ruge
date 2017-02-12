@@ -43,11 +43,8 @@
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {          
+            _myGame.CanvasManager.EngineActionSetEvent += _canvasManager_EngineActionSetEvent;
             _myGame.Start();
-            
-            //_myGame.CanvasManager.EngineActionSetEvent += _canvasManager_EngineActionSetEvent;
-            //_myGame.RugeTableManager.RugeTableManager.EngineActionEvent += CanvasManager_EngineActionEvent;
-            //_myGame.Start();
         }
 
         private void CanvasManager_EngineActionEvent(object sender, EngineActionEventArgs e)

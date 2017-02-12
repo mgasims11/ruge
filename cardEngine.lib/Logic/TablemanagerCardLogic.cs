@@ -12,6 +12,12 @@
             return deck.Cards.FirstOrDefault(c => c.CardId == cardId);
         }
 
+        public Card GetCard(Guid deckId, int index)
+        {
+            var deck = GetDeck(deckId);
+            return deck.Cards[index];
+        }
+        
         public int GetCardIndex(Guid deckId, Guid cardId)
         {
             var deck = GetDeck(deckId);

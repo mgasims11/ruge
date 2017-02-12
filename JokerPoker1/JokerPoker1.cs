@@ -23,6 +23,10 @@
         public Deck _dealerDeck = null;
         public Deck _playerDeck = null;
 
+        public CanvasManager CanvasManager
+        {
+            get { return _rugeTableManagerRenderer.CanvasManager; }
+        }
 
         public JokerPoker()
         {
@@ -50,7 +54,7 @@
                 Options = new DeckOptions(5)
             };
 
-            _rugeTableManagerRenderer.AddCardControl(_playerDeck.DeckId, 10, 10, 20, 20, 0);
+            _rugeTableManagerRenderer.CreateCardControl(_playerDeck.DeckId, 10, 10, 20, 20, 0);
             
             _tableManager.AddDecksToTable(_dealerDeck, _playerDeck);
             _tableManager.FillDeck(_dealerDeck.DeckId);
@@ -60,7 +64,6 @@
             _tableManager.MoveCardToTopOfDeck(_dealerDeck.DeckId, _playerDeck.DeckId, 0);
             _tableManager.MoveCardToTopOfDeck(_dealerDeck.DeckId, _playerDeck.DeckId, 0);
             _tableManager.MoveCardToTopOfDeck(_dealerDeck.DeckId, _playerDeck.DeckId, 0);
-
 
             _rugeTableManagerRenderer.SendEngineActionSet();
         }

@@ -11,5 +11,11 @@ namespace ruge.lib.logic
         {
             return "C" + Guid.NewGuid().ToString().Replace("-", "");
         }
+
+        public static string GetControlID(Guid guid)
+        {
+            return "C" + guid.ToString().Replace("-", "");
+        }
+
     }
 }

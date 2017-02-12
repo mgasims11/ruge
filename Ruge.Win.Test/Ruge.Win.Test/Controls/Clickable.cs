@@ -68,6 +68,12 @@ namespace Ruge.Win.Test.Controls
 
         private void SetBackground(string imageUri)
         {
+            if (String.IsNullOrEmpty(imageUri))
+            {
+                imageUri = @"C:/data/ruge/Ruge.Win.Test/Ruge.Win.Test/placeholder.bmp";
+                            
+            }
+
             if (IsEnabled)
                 _backgroundCurrent = imageUri;
             else
