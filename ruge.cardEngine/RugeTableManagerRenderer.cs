@@ -160,6 +160,7 @@
         public void TableCleared(Guid tableId)
         {
             CanvasManager.CreateCanvas(100, 100);
+            CanvasManager.AddEngineAction(CanvasManager.Canvas, EngineActionType.Create);
         }
 
         public void TableClearing(Guid tableId)

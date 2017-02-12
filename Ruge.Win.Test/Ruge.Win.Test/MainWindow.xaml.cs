@@ -76,7 +76,8 @@
             {
                 if (action.ActionType == EngineActionType.Create || action.ActionType == EngineActionType.Update)
                 {
-                    Render(action.Control);
+                    if (action.Control is IControl)
+                        Render(action.Control);
                 }
             }
         }

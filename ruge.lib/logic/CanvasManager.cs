@@ -22,7 +22,7 @@ namespace ruge.lib.logic {
 
         private EngineActionSet _engineActionSet = new EngineActionSet();
 
-        private Canvas _canvas = null;
+        public Canvas Canvas = null;
 
         private List<IControl> _controls = new List<IControl>();
 
@@ -59,8 +59,8 @@ namespace ruge.lib.logic {
                     CanvasId = "C" + Guid.NewGuid().ToString().Replace("-", ""),
                     Dimensions = new XYPair(height,width)
             };
-            _canvas = canvas;
-            this.RaiseEngineActionEvent(_canvas, EngineActionType.Create);
+            Canvas = canvas;
+            this.RaiseEngineActionEvent(Canvas, EngineActionType.Create);
             this.InitializeEngineActionSet();
                       
             return canvas;
@@ -89,7 +89,7 @@ namespace ruge.lib.logic {
         public void InitializeEngineActionSet()
         {
 
-            _engineActionSet.CanvasId = _canvas.CanvasId;
+            _engineActionSet.CanvasId = Canvas.CanvasId;
             _engineActionSet.EngineActions = new List<EngineAction>();
         }
 

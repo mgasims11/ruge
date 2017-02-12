@@ -70,8 +70,7 @@ namespace Ruge.Win.Test.Controls
         {
             if (String.IsNullOrEmpty(imageUri))
             {
-                imageUri = @"C:/data/ruge/Ruge.Win.Test/Ruge.Win.Test/placeholder.bmp";
-                            
+                imageUri = "C:/data/ruge/Ruge.Win.Test/Ruge.Win.Test/placeholder.png";                            
             }
 
             if (IsEnabled)
