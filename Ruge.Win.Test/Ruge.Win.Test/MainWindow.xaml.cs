@@ -47,28 +47,28 @@
             _myGame.Start();
         }
 
-        private void CanvasManager_EngineActionEvent(object sender, EngineActionEventArgs e)
-        {
-            if (e is EngineCanvasActionEventArgs)
-            {
-                var o = (EngineCanvasActionEventArgs)e;
-                switch (o.ActionType)
-                {
-                    case EngineActionType.Create:
-                        MainCanvas.SetValue(WidthProperty, (double)o.Canvas.Dimensions.X);
-                        MainCanvas.SetValue(HeightProperty, (double)o.Canvas.Dimensions.Y);
-                        SetValue(BackgroundProperty, new BitmapImage(new Uri(o.Canvas.ImageUri)));
-                        break;
-                    case EngineActionType.Update:
-                        MainCanvas.SetValue(WidthProperty, (double)o.Canvas.Dimensions.X);
-                        MainCanvas.SetValue(HeightProperty, (double)o.Canvas.Dimensions.Y);
-                        SetValue(BackgroundProperty, new BitmapImage(new Uri(o.Canvas.ImageUri)));
-                        break;
-                    case EngineActionType.Delete:
-                        break;
-                }
-            }
-        }
+        //private void CanvasManager_EngineActionEvent(object sender, EngineActionEventArgs e)
+        //{
+        //    if (e is EngineCanvasActionEventArgs)
+        //    {
+        //        var o = (EngineCanvasActionEventArgs)e;
+        //        switch (o.ActionType)
+        //        {
+        //            case EngineActionType.Create:
+        //                MainCanvas.SetValue(WidthProperty, (double)o.Canvas.Dimensions.X);
+        //                MainCanvas.SetValue(HeightProperty, (double)o.Canvas.Dimensions.Y);
+        //                SetValue(BackgroundProperty, new BitmapImage(new Uri(o.Canvas.ImageUri)));
+        //                break;
+        //            case EngineActionType.Update:
+        //                MainCanvas.SetValue(WidthProperty, (double)o.Canvas.Dimensions.X);
+        //                MainCanvas.SetValue(HeightProperty, (double)o.Canvas.Dimensions.Y);
+        //                SetValue(BackgroundProperty, new BitmapImage(new Uri(o.Canvas.ImageUri)));
+        //                break;
+        //            case EngineActionType.Delete:
+        //                break;
+        //        }
+        //    }
+        //}
 
         private void _canvasManager_EngineActionSetEvent(object sender, EngineActionSetEventArgs e)
         {
@@ -77,12 +77,27 @@
                 if (action.ActionType == EngineActionType.Create || action.ActionType == EngineActionType.Update)
                 {
                     if (action.Control is IControl)
-                        Render(action.Control);
+                        RenderControl(action.Control);
+
+                    if (action.Control is ruge.lib.model.controls.Canvas)
+                    {
+                        RenderCanvas(action.Control as ruge.lib.model.controls.Canvas);
+                    }
                 }
             }
         }
 
-        private void Render(IControl control)
+        private void RenderCanvas(ruge.lib.model.controls.Canvas canvas)
+        {
+            MainCanvas.SetValue(WidthProperty, (double)canvas.Dimensions.X);
+            MainCanvas.SetValue(HeightProperty, (double)canvas.Dimensions.Y);
+            if (!String.IsNullOrEmpty(canvas.ImageUri))
+            {
+                SetValue(BackgroundProperty, new BitmapImage(new Uri(canvas.ImageUri)));
+            }            
+        }
+
+        private void RenderControl(IControl control)
         {
             if (control is TextControl)
             {
