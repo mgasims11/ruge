@@ -55,7 +55,9 @@
             };
 
             _rugeTableManagerRenderer.CreateCardControl(_playerDeck.DeckId, 10, 10, 20, 20, 0);
-            
+            _rugeTableManagerRenderer.CreateCardControl(_playerDeck.DeckId, 20, 20, 20, 20, 1);
+            _rugeTableManagerRenderer.CreateCardControl(_playerDeck.DeckId, 30, 30, 20, 20, 2);
+
             _tableManager.AddDecksToTable(_dealerDeck, _playerDeck);
             _tableManager.FillDeck(_dealerDeck.DeckId);
             _tableManager.ShuffleDeck(_dealerDeck.DeckId);

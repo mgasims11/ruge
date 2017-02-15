@@ -13,6 +13,11 @@
             return Table.Decks.FirstOrDefault(d => d.DeckId == deckId);
         }
 
+        public Deck GetDeckForCard(Guid cardId)
+        {
+            return Table.Decks.FirstOrDefault(d => d.Cards.Exists(c => c.CardId == cardId));
+        }
+
         public int GetDeckIndex(Guid deckId, Guid cardId)
         {
             var deck = GetDeck(deckId);
