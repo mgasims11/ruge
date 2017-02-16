@@ -47,29 +47,6 @@
             _myGame.Start();
         }
 
-        //private void CanvasManager_EngineActionEvent(object sender, EngineActionEventArgs e)
-        //{
-        //    if (e is EngineCanvasActionEventArgs)
-        //    {
-        //        var o = (EngineCanvasActionEventArgs)e;
-        //        switch (o.ActionType)
-        //        {
-        //            case EngineActionType.Create:
-        //                MainCanvas.SetValue(WidthProperty, (double)o.Canvas.Dimensions.X);
-        //                MainCanvas.SetValue(HeightProperty, (double)o.Canvas.Dimensions.Y);
-        //                SetValue(BackgroundProperty, new BitmapImage(new Uri(o.Canvas.ImageUri)));
-        //                break;
-        //            case EngineActionType.Update:
-        //                MainCanvas.SetValue(WidthProperty, (double)o.Canvas.Dimensions.X);
-        //                MainCanvas.SetValue(HeightProperty, (double)o.Canvas.Dimensions.Y);
-        //                SetValue(BackgroundProperty, new BitmapImage(new Uri(o.Canvas.ImageUri)));
-        //                break;
-        //            case EngineActionType.Delete:
-        //                break;
-        //        }
-        //    }
-        //}
-
         private void _canvasManager_EngineActionSetEvent(object sender, EngineActionSetEventArgs e)
         {
             foreach (var action in e.EngineActionSet.EngineActions)
@@ -175,7 +152,7 @@
             var userAction = new UserAction() { ControlId = control.Name, UserActionType = UserActionType.Click};
             var userActionSet = new UserActionSet();            
             userActionSet.UserActions.Add(userAction);
-            //_myGame.CanvasManager.ReceiveUserActionSet(userActionSet);            
+            _myGame.CanvasManager.ReceiveUserActionSet(userActionSet);            
         }
     }
 }

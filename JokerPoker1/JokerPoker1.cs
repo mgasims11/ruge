@@ -54,9 +54,11 @@
                 Options = new DeckOptions(5)
             };
 
-            _rugeTableManagerRenderer.CreateCardControl(_playerDeck.DeckId, 10, 10, 20, 20, 0);
-            _rugeTableManagerRenderer.CreateCardControl(_playerDeck.DeckId, 20, 20, 20, 20, 1);
-            _rugeTableManagerRenderer.CreateCardControl(_playerDeck.DeckId, 30, 30, 20, 20, 2);
+            _rugeTableManagerRenderer.CreateCardControl(_playerDeck.DeckId, 10, 30, 10, 20, 0);
+            _rugeTableManagerRenderer.CreateCardControl(_playerDeck.DeckId, 30, 30, 10, 20, 1);
+            _rugeTableManagerRenderer.CreateCardControl(_playerDeck.DeckId, 50, 30, 10, 20, 2);
+            _rugeTableManagerRenderer.CreateCardControl(_playerDeck.DeckId, 70, 30, 10, 20, 3);
+            _rugeTableManagerRenderer.CreateCardControl(_playerDeck.DeckId, 90, 30, 10, 20, 4);
 
             _tableManager.AddDecksToTable(_dealerDeck, _playerDeck);
             _tableManager.FillDeck(_dealerDeck.DeckId);

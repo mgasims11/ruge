@@ -63,7 +63,7 @@
             if (cardControl == null) return;
 
             cardControl.ControlState = ControlState.Enabled;
-            cardControl.ImageUri = String.Format(@"C:\data\ruge\ruge.cardEngine\images\{0}.jpg",((int)card.Rank).ToString("00") + card.Suit.ToString().Substring(0,1));
+            cardControl.ImageUri = String.Format(@"C:\data\ruge\ruge.cardEngine\images\{0}.jpg",((int)card.Rank).ToString("00") + card.Suit.ToString().Substring(0,1));            
 
             CanvasManager.AddEngineAction(cardControl, EngineActionType.Create);
         }
@@ -88,8 +88,6 @@
 
         public void CardMoved(Guid sourceDeckId, Guid sourcecardId, Guid destinationDeckId)
         {
-           //RenderCard(sourceDeckId, _tablemanager.GetCard(sourceDeckId, sourcecardId));
-           //RenderCard(destinationDeckId, _tablemanager.GetCard(destinationDeckId, sourcecardId));
         }
 
         public void CardMoving(Guid sourceDeckId, Guid sourcecardId, Guid destinationDeckId)
@@ -103,8 +101,6 @@
 
         public void CardsSwappedInDeck(Guid soureceDeckId, Guid sourcecardId, Guid destinationDeckId, Guid destinationCardId)
         {
-            //RenderCard(soureceDeckId, _tablemanager.GetCard(soureceDeckId, sourcecardId));
-            //RenderCard(destinationDeckId, _tablemanager.GetCard(destinationDeckId, destinationCardId));
         }
 
         public void CardsSwappingInDeck(Guid soureceDeckId, Guid sourcecardId, Guid destinationDeckId, Guid destinationCardId)
