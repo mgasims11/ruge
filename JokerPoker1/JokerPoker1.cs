@@ -16,8 +16,7 @@
     using CardEngine.Model;
 
     // TO DO:
-    // REFACTOR: Replace ALL discrete X and Y values for postion and size with XYPairs
-    // CHANGE: USer action event to card event or some such to tie card control back to a card in a deck
+    // REFACTOR: Replace ALL discrete X and Y values for postion and size with XYPairs    
     // Remember to test true images for mouseover events hover, down, and idle
     // Implement disabled, visible
 
@@ -82,7 +81,7 @@
 
         private void CanvasManager_UserActionEvent(object sender, UserActionEventArgs e)
         {
-            
+            var cardid = _rugeTableManagerRenderer.GetCardFromControlId(e.UserAction.ControlId);
         }
     }
 }

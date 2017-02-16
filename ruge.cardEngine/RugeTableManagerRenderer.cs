@@ -29,14 +29,24 @@
             set { _tablemanager = value; }
         }
 
-        public List<CardControl> _cardControls = null;
+        public List<CardControl> CardControls = null;
 
         public RugeTableManagerRenderer(double height, double width)
         {
             _height = height;
             _width = width;
             CanvasManager = new CanvasManager();
-            _cardControls = new List<CardControl>();
+            CardControls = new List<CardControl>();
+        }
+
+        public Guid GetCardFromControlId(string cardControlId)
+        {
+            var cardControl = CardControls.FirstOrDefault(cc => cc.ControlId == cardControlId);
+            if (cardControl != null)
+            {
+                return _tablemanager.GetDeck(cardControl.DeckId).Cards[cardControl.Index].CardId;
+            }
+            else return Guid.Empty;
         }
 
         public string CreateCardControl(Guid deckId, double x, double y, double width, double height, int index)
@@ -51,20 +61,20 @@
                 .ControlState(ControlState.Enabled)
                 .IsVisible(true);
 
-            _cardControls.Add(cardControl);
+            CardControls.Add(cardControl);
 
             return cardControl.ControlId;
         }
 
         public void RemoveCardControl(Guid deckId, XYPair coordinates, int index)
         {
-            _cardControls.RemoveAt(index);
+            CardControls.RemoveAt(index);
         }
 
         private void RenderCard(Guid deckId, Card card)
         {
             var deck = _tablemanager.GetDeck(deckId);
-            var cardControl = _cardControls.FirstOrDefault(cc => cc.DeckId == deck.DeckId && cc.Index == deck.Cards.IndexOf(card));
+            var cardControl = CardControls.FirstOrDefault(cc => cc.DeckId == deck.DeckId && cc.Index == deck.Cards.IndexOf(card));
             if (cardControl == null) return;
 
             cardControl.ControlState = ControlState.Enabled;
