@@ -15,7 +15,7 @@ namespace Ruge.Win.Test.Controls
         private string _backgroundIdle, _backgroundHover, _backgroundDown, _backgroundDisabled;
         private string _backgroundCurrent;
 
-        private Image _innerImage = new Image();
+        private Canvas _innerImage = new Canvas();
         private double _width = 0;
         private double _height = 0;
 
@@ -23,10 +23,10 @@ namespace Ruge.Win.Test.Controls
         private double _hoverScale = 1;
         private double _downScale = .90;
 
-        public Clickable(string controlid, int width, int height, string backgroundIdle, string backgroundHover, string backgroundDown, string backgroundDisabled, string tooltip) : base()
+        public Clickable(string controlid, double width, double height, string backgroundIdle, string backgroundHover, string backgroundDown, string backgroundDisabled, string tooltip) : base()
         {
-            _width = (double)width;
-            _height = (double)height;
+            _width = width;
+            _height = height;
 
             Children.Add(_innerImage);
             _innerImage.HorizontalAlignment = HorizontalAlignment.Center;
@@ -139,8 +139,8 @@ namespace Ruge.Win.Test.Controls
                 _backgroundCurrent = _backgroundDisabled;
 
             var bi = new BitmapImage(new Uri(_backgroundCurrent));
-
-            _innerImage.Source = bi;
+            var ib = new ImageBrush(bi);
+            _innerImage.Background = ib;
         }
     }
 }

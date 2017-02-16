@@ -14,7 +14,13 @@
     using ruge.cardEngine;
     using CardEngine.Logic;
     using CardEngine.Model;
-    
+
+    // TO DO:
+    // REFACTOR: Replace ALL discrete X and Y values for postion and size with XYPairs
+    // CHANGE: USer action event to card event or some such to tie card control back to a card in a deck
+    // Remember to test true images for mouseover events hover, down, and idle
+    // Implement disabled, visible
+
     public class JokerPoker : IGame
     {     
         public RugeTableManagerRenderer _rugeTableManagerRenderer;
@@ -30,7 +36,7 @@
 
         public JokerPoker()
         {
-            _rugeTableManagerRenderer = new RugeTableManagerRenderer();
+            _rugeTableManagerRenderer = new RugeTableManagerRenderer(7,4);
             _tableManager = new TableManager(_rugeTableManagerRenderer);
             _tableManager.Table.TableName = "Joker Poker";
             _tableManager.Table.ImageUri = @"C:\data\ruge\ruge.cardEngine\images\03H.jpg";
@@ -54,11 +60,11 @@
                 Options = new DeckOptions(5)
             };
 
-            _rugeTableManagerRenderer.CreateCardControl(_playerDeck.DeckId, 10, 30, 10, 20, 0);
-            _rugeTableManagerRenderer.CreateCardControl(_playerDeck.DeckId, 30, 30, 10, 20, 1);
-            _rugeTableManagerRenderer.CreateCardControl(_playerDeck.DeckId, 50, 30, 10, 20, 2);
-            _rugeTableManagerRenderer.CreateCardControl(_playerDeck.DeckId, 70, 30, 10, 20, 3);
-            _rugeTableManagerRenderer.CreateCardControl(_playerDeck.DeckId, 90, 30, 10, 20, 4);
+            _rugeTableManagerRenderer.CreateCardControl(_playerDeck.DeckId, 1, 2, 1, 1.375, 0);
+            _rugeTableManagerRenderer.CreateCardControl(_playerDeck.DeckId, 2, 2, 1, 1.375, 1);
+            _rugeTableManagerRenderer.CreateCardControl(_playerDeck.DeckId, 3, 2, 1, 1.375, 2);
+            _rugeTableManagerRenderer.CreateCardControl(_playerDeck.DeckId, 4, 2, 1, 1.375, 3);
+            _rugeTableManagerRenderer.CreateCardControl(_playerDeck.DeckId, 5, 2, 1, 1.375, 4);
 
             _tableManager.AddDecksToTable(_dealerDeck, _playerDeck);
             _tableManager.FillDeck(_dealerDeck.DeckId);
@@ -69,7 +75,14 @@
             _tableManager.MoveCardToTopOfDeck(_dealerDeck.DeckId, _playerDeck.DeckId, 0);
             _tableManager.MoveCardToTopOfDeck(_dealerDeck.DeckId, _playerDeck.DeckId, 0);
 
+            _rugeTableManagerRenderer.CanvasManager.UserActionEvent += CanvasManager_UserActionEvent;
+
             _rugeTableManagerRenderer.SendEngineActionSet();
+        }
+
+        private void CanvasManager_UserActionEvent(object sender, UserActionEventArgs e)
+        {
+            
         }
     }
 }

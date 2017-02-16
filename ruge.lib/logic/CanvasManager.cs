@@ -54,7 +54,7 @@ namespace ruge.lib.logic {
         }
 
 
-        public Canvas CreateCanvas(int height, int width) {
+        public Canvas CreateCanvas(double height, double width) {
             var canvas = new Canvas() {
                     CanvasId = "C" + Guid.NewGuid().ToString().Replace("-", ""),
                     Dimensions = new XYPair(height,width)

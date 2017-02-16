@@ -1,13 +1,13 @@
 namespace ruge.lib.model {
     public class XYPair {
-        public int X {get; set;}
-        public int Y {get; set;}
+        public double X {get; set;}
+        public double Y {get; set;}
 
         public XYPair()
         {
         }
 
-        public XYPair(int x, int y)
+        public XYPair(double x, double y)
         {
             X = x;
             Y = y;

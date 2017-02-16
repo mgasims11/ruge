@@ -19,7 +19,10 @@
     {
         public CanvasManager CanvasManager = null;
         private TableManager _tablemanager;
-        
+
+        private double _height = 0;
+        private double _width = 0;
+
         public TableManager TableManager
         {
             get { return _tablemanager; }
@@ -28,13 +31,15 @@
 
         public List<CardControl> _cardControls = null;
 
-        public RugeTableManagerRenderer()
+        public RugeTableManagerRenderer(double height, double width)
         {
+            _height = height;
+            _width = width;
             CanvasManager = new CanvasManager();
             _cardControls = new List<CardControl>();
         }
 
-        public string CreateCardControl(Guid deckId, int x, int y, int width, int height, int index)
+        public string CreateCardControl(Guid deckId, double x, double y, double width, double height, int index)
         {
             var cardControl = CardControlMaker.Create()
                 .DeckId(deckId)
@@ -155,7 +160,7 @@
 
         public void TableCleared(Guid tableId)
         {
-            CanvasManager.CreateCanvas(100, 100);
+            CanvasManager.CreateCanvas(_height, _width);
             CanvasManager.AddEngineAction(CanvasManager.Canvas, EngineActionType.Create);
         }
 
@@ -172,11 +177,6 @@
                     RenderCard(deck.DeckId, card);
                 }
             }
-
-            //foreach (var cardControl in _cardControls)
-            //{
-            //    CanvasManager.AddEngineAction(cardControl, EngineActionType.Update);
-            //}
        
             CanvasManager.SendEngineActionSet();
         }

@@ -12,11 +12,11 @@ namespace Ruge.Win.Test.Controls
 {
     public class StaticImage : Image
     {
-        public StaticImage(string controlid, int width, int height, string imageUri) : base()
+        public StaticImage(string controlid, double width, double height, string imageUri) : base()
         {
             Name = controlid;
-            SetValue(WidthProperty, (double)width);
-            SetValue(HeightProperty, (double)height);
+            SetValue(WidthProperty, width);
+            SetValue(HeightProperty, height);
             SetValue(SourceProperty, new BitmapImage(new Uri(imageUri)));
         }
     }

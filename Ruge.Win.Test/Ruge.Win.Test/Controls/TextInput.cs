@@ -16,10 +16,10 @@ namespace Ruge.Win.Test.Controls
         private string _backgroundIdle, _backgroundHover, _backgroundDown, _backgroundDisabled;
         private string _backgroundCurrent;
 
-        public TextInput(string controlid, int width, int height, string backgroundIdle, string backgroundHover, string backgroundDown, string backgroundDisabled, string text) :base()
+        public TextInput(string controlid, double width, double height, string backgroundIdle, string backgroundHover, string backgroundDown, string backgroundDisabled, string text) :base()
         {           
-            SetValue(WidthProperty, (double)width);
-            SetValue(HeightProperty, (double)height);
+            SetValue(WidthProperty, width);
+            SetValue(HeightProperty, height);
             SetValue(BorderThicknessProperty, new Thickness(0, 0, 0, 0));
             SetValue(FontSizeProperty, new FontSizeConverter().ConvertFromString((height * .75).ToString() + "px"));
             SetValue(PaddingProperty, new Thickness(0, 0, 0, 0));

@@ -66,8 +66,8 @@
 
         private void RenderCanvas(ruge.lib.model.controls.Canvas canvas)
         {
-            MainCanvas.SetValue(WidthProperty, (double)canvas.Dimensions.X);
-            MainCanvas.SetValue(HeightProperty, (double)canvas.Dimensions.Y);
+            MainCanvas.SetValue(WidthProperty, canvas.Dimensions.X);
+            MainCanvas.SetValue(HeightProperty, canvas.Dimensions.Y);
             if (!String.IsNullOrEmpty(canvas.ImageUri))
             {
                 SetValue(BackgroundProperty, new BitmapImage(new Uri(canvas.ImageUri)));
@@ -89,8 +89,8 @@
                             200 
                             );
                 MainCanvas.Children.Add(clientControl);
-                clientControl.SetValue(LeftProperty, (double)control.Location.X);
-                clientControl.SetValue(TopProperty, (double)control.Location.Y);                
+                clientControl.SetValue(LeftProperty, control.Location.X);
+                clientControl.SetValue(TopProperty, control.Location.Y);                
             }
 
             if (control is ClickableControl)
@@ -107,8 +107,8 @@
                             ""
                             );
                 MainCanvas.Children.Add(clientControl);
-                clientControl.SetValue(LeftProperty, (double)control.Location.X);
-                clientControl.SetValue(TopProperty, (double)control.Location.Y);
+                clientControl.SetValue(LeftProperty, control.Location.X);
+                clientControl.SetValue(TopProperty, control.Location.Y);
                 clientControl.MouseDown += Clickable_MouseDown;
             }
 
@@ -122,8 +122,8 @@
                             c.ImageUri
                             );
                 MainCanvas.Children.Add(clientControl);
-                clientControl.SetValue(LeftProperty, (double)control.Location.X);
-                clientControl.SetValue(TopProperty, (double)control.Location.Y);
+                clientControl.SetValue(LeftProperty, control.Location.X);
+                clientControl.SetValue(TopProperty, control.Location.Y);
             }
 
             if (control is TextInputControl)
@@ -140,8 +140,8 @@
                     c.Text
                 );
                 MainCanvas.Children.Add(clientControl);
-                clientControl.SetValue(TopProperty, (double)control.Location.X);
-                clientControl.SetValue(LeftProperty, (double)control.Location.Y);
+                clientControl.SetValue(TopProperty, control.Location.X);
+                clientControl.SetValue(LeftProperty, control.Location.Y);
 
             }
         }

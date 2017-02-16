@@ -20,7 +20,7 @@ namespace ruge.cardEngine.logic
             return control;
         }
 
-        public static CardControl X(this CardControl control, int x)
+        public static CardControl X(this CardControl control, double x)
         {
             if (control.Location == null)
             {
@@ -35,7 +35,7 @@ namespace ruge.cardEngine.logic
             return control;
         }
 
-        public static CardControl Y(this CardControl control, int y)
+        public static CardControl Y(this CardControl control, double y)
         {
             if (control.Location == null)
             {
@@ -50,7 +50,7 @@ namespace ruge.cardEngine.logic
             return control;
         }
 
-        public static CardControl Width(this CardControl control, int x)
+        public static CardControl Width(this CardControl control, double x)
         {
             if (control.Size == null)
             {
@@ -65,7 +65,7 @@ namespace ruge.cardEngine.logic
             return control;
         }
 
-        public static CardControl Height(this CardControl control, int y)
+        public static CardControl Height(this CardControl control, double y)
         {
             if (control.Size == null)
             {
