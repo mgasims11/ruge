@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace CardEngine.Logic.FluentFactories
 {
-    public class CardMaker
+    public class CardBuilder
     {
     }
 }

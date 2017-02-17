@@ -14,6 +14,7 @@
     using ruge.cardEngine;
     using CardEngine.Logic;
     using CardEngine.Model;
+    using ruge.cardEngine.Builders;
 
     // TO DO:
     // REFACTOR: Replace ALL discrete X and Y values for postion and size with XYPairs    
@@ -27,6 +28,8 @@
 
         public Deck _dealerDeck = null;
         public Deck _playerDeck = null;
+
+        public XYPair _CardSize = new XYPair(1.0, 1.375);
 
         public CanvasManager CanvasManager
         {
@@ -45,6 +48,7 @@
         {
             _tableManager.ClearTable();
 
+
             _dealerDeck = new Deck()
             {
                 Visible = false,
@@ -59,15 +63,22 @@
                 Options = new DeckOptions(5)
             };
 
-            _rugeTableManagerRenderer.CreateCardControl(_playerDeck.DeckId, 1, 2, 1, 1.375, 0);
-            _rugeTableManagerRenderer.CreateCardControl(_playerDeck.DeckId, 2, 2, 1, 1.375, 1);
-            _rugeTableManagerRenderer.CreateCardControl(_playerDeck.DeckId, 3, 2, 1, 1.375, 2);
-            _rugeTableManagerRenderer.CreateCardControl(_playerDeck.DeckId, 4, 2, 1, 1.375, 3);
-            _rugeTableManagerRenderer.CreateCardControl(_playerDeck.DeckId, 5, 2, 1, 1.375, 4);
+            for (int i = 0; i <= 5; i++)
+            {
+                _rugeTableManagerRenderer.AddCardControl(
+                    CardControlBuilder.Create()
+                        .SetDeckId(_playerDeck.DeckId)
+                        .SetIndex(i)
+                        .SetLocation(new XYPair(i * _CardSize.X, 2))
+                        .SetSize(_CardSize)
+                        );
+            };
 
             _tableManager.AddDecksToTable(_dealerDeck, _playerDeck);
+
             _tableManager.FillDeck(_dealerDeck.DeckId);
             _tableManager.ShuffleDeck(_dealerDeck.DeckId);
+
             _tableManager.MoveCardToTopOfDeck(_dealerDeck.DeckId, _playerDeck.DeckId, 0);
             _tableManager.MoveCardToTopOfDeck(_dealerDeck.DeckId, _playerDeck.DeckId, 0);
             _tableManager.MoveCardToTopOfDeck(_dealerDeck.DeckId, _playerDeck.DeckId, 0);

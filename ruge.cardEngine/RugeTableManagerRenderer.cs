@@ -13,7 +13,7 @@
     using CardEngine;
     using CardEngine.Logic;
     using CardEngine.Model;
-    using ruge.cardEngine.logic;
+    using ruge.cardEngine.Builders;
 
     public class RugeTableManagerRenderer : ITableManagerRenderer
     {
@@ -49,21 +49,9 @@
             else return Guid.Empty;
         }
 
-        public string CreateCardControl(Guid deckId, double x, double y, double width, double height, int index)
+        public void AddCardControl(CardControl cardControl)
         {
-            var cardControl = CardControlMaker.Create()
-                .DeckId(deckId)
-                .Index(index)
-                .Height(height)
-                .Width(width)
-                .X(x)
-                .Y(y)
-                .ControlState(ControlState.Enabled)
-                .IsVisible(true);
-
             CardControls.Add(cardControl);
-
-            return cardControl.ControlId;
         }
 
         public void RemoveCardControl(Guid deckId, XYPair coordinates, int index)

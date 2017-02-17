@@ -19,9 +19,9 @@ namespace Ruge.Win.Test.Controls
         private double _width = 0;
         private double _height = 0;
 
-        private double _idleScale = .95;
+        private double _idleScale = .97;
         private double _hoverScale = 1;
-        private double _downScale = .90;
+        private double _downScale = .94;
 
         public Clickable(string controlid, double width, double height, string backgroundIdle, string backgroundHover, string backgroundDown, string backgroundDisabled, string tooltip) : base()
         {
@@ -31,7 +31,6 @@ namespace Ruge.Win.Test.Controls
             Children.Add(_innerImage);
             _innerImage.HorizontalAlignment = HorizontalAlignment.Center;
             _innerImage.VerticalAlignment = VerticalAlignment.Center;
-
 
             SetValue(WidthProperty, _width);
             SetValue(HeightProperty, _height);

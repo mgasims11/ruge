@@ -7,27 +7,27 @@ namespace CardEngine.Logic.FluentFactories
     using System.Threading.Tasks;
     using CardEngine.Model;
 
-    public class DeckMaker
+    public class DeckBuilder
     {
         private Deck _deck = null;
 
-        public static DeckMaker Create()
+        public static DeckBuilder Create()
         {
-            return new DeckMaker();
+            return new DeckBuilder();
         }
 
-        public DeckMaker()
+        public DeckBuilder()
         {
             _deck = new Deck(); ;
         }
 
-        public DeckMaker DeckName(string deckName)
+        public DeckBuilder DeckName(string deckName)
         {
             _deck.DeckName = deckName;
             return this;
         }
 
-        public DeckMaker Options(DeckOptions deckOptions)
+        public DeckBuilder Options(DeckOptions deckOptions)
         {
             _deck.Options = deckOptions;
             return this;

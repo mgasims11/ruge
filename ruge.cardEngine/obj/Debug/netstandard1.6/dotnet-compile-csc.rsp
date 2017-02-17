@@ -57,5 +57,5 @@
 -r:"C:\data\ruge\ruge.lib\bin\Debug\netstandard1.6\ruge.lib.dll"
 "C:\data\ruge\ruge.cardEngine\CardControl.cs"
 "C:\data\ruge\ruge.cardEngine\RugeTableManagerRenderer.cs"
-"C:\data\ruge\ruge.cardEngine\logic\CardControlExtensions.cs"
+"C:\data\ruge\ruge.cardEngine\Builders\CardControlBuilder.cs"
 "C:\data\ruge\ruge.cardEngine\Properties\AssemblyInfo.cs"
