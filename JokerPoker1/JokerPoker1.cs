@@ -15,6 +15,7 @@
     using CardEngine.Logic;
     using CardEngine.Model;
     using ruge.cardEngine.Builders;
+    using CardEngine.Logic.Builders;
 
     // TO DO:
     // REFACTOR: Replace ALL discrete X and Y values for postion and size with XYPairs    
@@ -39,15 +40,18 @@
         public JokerPoker()
         {
             _rugeTableManagerRenderer = new RugeTableManagerRenderer(7,4);
-            _tableManager = new TableManager(_rugeTableManagerRenderer);
-            _tableManager.Table.TableName = "Joker Poker";
-            _tableManager.Table.ImageUri = @"C:\data\ruge\ruge.cardEngine\images\03H.jpg";
+
+            _tableManager = new TableManager(
+                TableBuilder.Create()
+                    .SetTableName("Joker Poker")
+                    .SetImageUri(@"C:\data\ruge\ruge.cardEngine\images\03H.jpg"),
+                _rugeTableManagerRenderer
+            );
         }
 
         public void Start()
         {
             _tableManager.ClearTable();
-
 
             _dealerDeck = new Deck()
             {

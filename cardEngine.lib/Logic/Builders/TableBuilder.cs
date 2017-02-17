@@ -4,32 +4,31 @@ using System.Linq;
 using System.Threading.Tasks;
 using CardEngine.Model;
 
-namespace CardEngine.Logic.FluentFactories
+namespace CardEngine.Logic.Builders
 {
-    public class TableMaker
+    public static class TableBuilder
     {
-        private Table _table = null;
-
-        public static TableMaker Create()
+        public static Table Create()
         {
-            return new TableMaker();
+            return new Table();
         }
 
-        public TableMaker()
+        public static Table SetImageUri(this Table table, string imageUri)
         {
-            _table = new Table();
+            table.ImageUri = imageUri;
+            return table;
         }
 
-        public TableMaker ImageUri(string imageUri)
+        public static Table SetTableName(this Table table, string tableName)
         {
-            _table.ImageUri = imageUri;
-            return this;
+            table.TableName = tableName;
+            return table;
         }
 
-        public TableMaker TableName(string tableName)
+        public static Table SetDecks(this Table table, List<Deck> decks)
         {
-            _table.TableName = tableName;
-            return this;
+            table.Decks = decks;
+            return table;
         }
 
     }

@@ -10,7 +10,7 @@
     {
         public Guid TableId {get; protected set;}
         public string TableName {get; set;}
-        public List<Deck> Decks {get; protected set;}
+        public List<Deck> Decks {get; set;}
         public string ImageUri { get; set; }
         public Table()
         {

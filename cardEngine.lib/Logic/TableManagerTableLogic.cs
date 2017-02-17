@@ -9,16 +9,11 @@ namespace CardEngine.Logic
         public Table Table {get;set;}
         public ITableManagerRenderer _renderer = null;
 
-        public TableManager(ITableManagerRenderer renderer)
+        public TableManager(Table table, ITableManagerRenderer renderer)
         {
             _renderer = renderer;
             _renderer.TableManager = this;
-            Table = new Table();
-        }
-
-        public TableManager()
-        {
-            Table = new Table();
+            Table = table;
         }
 
         public void ClearTable()

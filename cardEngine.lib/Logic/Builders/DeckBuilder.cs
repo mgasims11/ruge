@@ -32,5 +32,7 @@ namespace CardEngine.Logic.FluentFactories
             _deck.Options = deckOptions;
             return this;
         }
+
+
     }
 }
