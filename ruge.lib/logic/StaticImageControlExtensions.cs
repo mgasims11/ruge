@@ -84,9 +84,9 @@ namespace ruge.lib.logic
             return control;
         }
 
-        public static StaticImageControl ControlState(this StaticImageControl control, ControlState controlState)
+        public static StaticImageControl EnableState(this StaticImageControl control, EnableStates enableState)
         {
-            control.ControlState = controlState;
+            control.EnableState = enableState;
             return control;
         }
     }

@@ -16,6 +16,7 @@
     using CardEngine.Model;
     using ruge.cardEngine.Builders;
     using CardEngine.Logic.Builders;
+    using ruge.cardEngine;
 
     // TO DO:
     // REFACTOR: Replace ALL discrete X and Y values for postion and size with XYPairs    
@@ -53,19 +54,13 @@
         {
             _tableManager.ClearTable();
 
-            _dealerDeck = new Deck()
-            {
-                Visible = false,
-                DeckName = "Dealer Deck",
-                Options = new DeckOptions(52)
-            };
+            _dealerDeck = DeckBuilder.Create()
+                .DeckName("Dealer Deck")
+                .Options(new DeckOptions(52));
 
-            _playerDeck = new Deck()
-            {
-                Visible = true,
-                DeckName = "Player Deck",
-                Options = new DeckOptions(5)
-            };
+            _playerDeck = DeckBuilder.Create()
+                .DeckName("Player Deck")
+                .Options(new DeckOptions(5));
 
             for (int i = 0; i <= 5; i++)
             {

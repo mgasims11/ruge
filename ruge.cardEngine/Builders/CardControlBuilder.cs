@@ -15,179 +15,179 @@ namespace ruge.cardEngine.Builders
     {
         public static CardControl Create()
         {
-            var control = new CardControl();
-            control.ControlId = ControlHelper.GetNewControlID();
-            control.ControlState = ControlState.Enabled;
-            control.IsVisible = true;
-            return control;
+            var cardControl = new CardControl();
+            cardControl.ControlId = ControlHelper.GetNewControlID();
+            cardControl.EnableState = EnableStates.Enabled;
+            cardControl.Opacity = 100;
+            return cardControl;
         }
 
-        public static CardControl SetX(this CardControl control, double x)
+        public static CardControl SetX(this CardControl cardControl, double x)
         {
-            if (control.Location == null)
+            if (cardControl.Location == null)
             {
-                control.Location = new XYPair();
-                control.Location.X = x;
-                control.Location.Y = 0;
+                cardControl.Location = new XYPair();
+                cardControl.Location.X = x;
+                cardControl.Location.Y = 0;
             }
             else
             {
-                control.Location.X = x;
+                cardControl.Location.X = x;
             }
-            return control;
+            return cardControl;
         }
 
-        public static CardControl SetLocation(this CardControl control, XYPair location)
+        public static CardControl SetLocation(this CardControl cardControl, XYPair location)
         {
-            control.Location = location;
-            return control;
+            cardControl.Location = location;
+            return cardControl;
         }
 
-        public static CardControl SetSize(this CardControl control, XYPair size)
+        public static CardControl SetSize(this CardControl cardControl, XYPair size)
         {
-            control.Size = size;
-            return control;
+            cardControl.Size = size;
+            return cardControl;
         }
 
-        public static CardControl SetY(this CardControl control, double y)
+        public static CardControl SetY(this CardControl cardControl, double y)
         {
-            if (control.Location == null)
+            if (cardControl.Location == null)
             {
-                control.Location = new XYPair();
-                control.Location.X = 0;
-                control.Location.Y = y;
+                cardControl.Location = new XYPair();
+                cardControl.Location.X = 0;
+                cardControl.Location.Y = y;
             }
             else
             {
-                control.Location.Y = y;
+                cardControl.Location.Y = y;
             }
-            return control;
+            return cardControl;
         }
 
-        public static CardControl SetWidth(this CardControl control, double x)
+        public static CardControl SetWidth(this CardControl cardControl, double x)
         {
-            if (control.Size == null)
+            if (cardControl.Size == null)
             {
-                control.Size = new XYPair();
-                control.Size.X = x;
-                control.Size.Y = x;
+                cardControl.Size = new XYPair();
+                cardControl.Size.X = x;
+                cardControl.Size.Y = x;
             }
             else
             {
-                control.Size.X = x;
+                cardControl.Size.X = x;
             }
-            return control;
+            return cardControl;
         }
 
-        public static CardControl SetHeight(this CardControl control, double y)
+        public static CardControl SetHeight(this CardControl cardControl, double y)
         {
-            if (control.Size == null)
+            if (cardControl.Size == null)
             {
-                control.Size = new XYPair();
-                control.Size.X = y;
-                control.Size.Y = y;
+                cardControl.Size = new XYPair();
+                cardControl.Size.X = y;
+                cardControl.Size.Y = y;
             }
             else
             {
-                control.Size.Y = y;
+                cardControl.Size.Y = y;
             }
-            return control;
+            return cardControl;
         }
 
-        public static CardControl SetImageUriTemplate(this CardControl control, string template, string token)
+        public static CardControl SetImageUriTemplate(this CardControl cardControl, string template, string token)
         {
-            SetImageUriTemplate(control, template, token, "normal", "hover", "down", "disabled");
-            return control;
+            SetImageUriTemplate(cardControl, template, token, "normal", "hover", "down", "disabled");
+            return cardControl;
         }
 
-        public static CardControl SetImageUriTemplate(this CardControl control, string template, string token, string normal, string hover, string down, string disabled)
+        public static CardControl SetImageUriTemplate(this CardControl cardControl, string template, string token, string normal, string hover, string down, string disabled)
         {
-            control.ImageUri = template.Replace(token,normal);
-            control.ImageUriHover = template.Replace(token, hover);
-            control.ImageUriDown = template.Replace(token, down);
-            control.ImageUriDisabled = template.Replace(token, disabled);
-            return control;
+            cardControl.ImageUri = template.Replace(token,normal);
+            cardControl.ImageUriHover = template.Replace(token, hover);
+            cardControl.ImageUriDown = template.Replace(token, down);
+            cardControl.ImageUriDisabled = template.Replace(token, disabled);
+            return cardControl;
         }
 
-        public static CardControl SetImageUri(this CardControl control, string uri)
+        public static CardControl SetImageUri(this CardControl cardControl, string uri)
         {
-            control.ImageUri = uri;
-            UpdateEmptyUris(control,uri);
-            return control;
+            cardControl.ImageUri = uri;
+            UpdateEmptyUris(cardControl, uri);
+            return cardControl;
         }
 
-        public static CardControl SetControlState(this CardControl control, ControlState controlState)
+        public static CardControl SetEnableState(this CardControl cardControl, EnableStates enableState)
         {
-            control.ControlState = controlState;
-            return control;
+            cardControl.EnableState = enableState;
+            return cardControl;
         }
 
-        public static CardControl SetImageUriHover(this CardControl control, string uri)
+        public static CardControl SetImageUriHover(this CardControl cardControl, string uri)
         {
-            control.ImageUriHover = uri;
-            UpdateEmptyUris(control, uri);
-            return control;
+            cardControl.ImageUriHover = uri;
+            UpdateEmptyUris(cardControl, uri);
+            return cardControl;
         }
 
-        public static CardControl SetImageUriDown(this CardControl control, string uri)
+        public static CardControl SetImageUriDown(this CardControl cardControl, string uri)
         {
-            control.ImageUriDown = uri;
-            UpdateEmptyUris(control, uri);
-            return control;
+            cardControl.ImageUriDown = uri;
+            UpdateEmptyUris(cardControl, uri);
+            return cardControl;
         }
 
-        public static CardControl SetImageUriDisabled(this CardControl control, string uri)
+        public static CardControl SetImageUriDisabled(this CardControl cardControl, string uri)
         {
-            control.ImageUriDisabled = uri;
-            UpdateEmptyUris(control, uri);
-            return control;
+            cardControl.ImageUriDisabled = uri;
+            UpdateEmptyUris(cardControl, uri);
+            return cardControl;
         }
 
-        public static CardControl SetAllUris(this CardControl control, string uri)
+        public static CardControl SetAllUris(this CardControl cardControl, string uri)
         {
-            control.ImageUri = uri;
-            control.ImageUriHover = uri;
-            control.ImageUriDown = uri;
-            control.ImageUriDisabled = uri;
+            cardControl.ImageUri = uri;
+            cardControl.ImageUriHover = uri;
+            cardControl.ImageUriDown = uri;
+            cardControl.ImageUriDisabled = uri;
 
-            return control;
+            return cardControl;
         }
 
-        private static CardControl UpdateEmptyUris(CardControl control, string uri)
+        private static CardControl UpdateEmptyUris(CardControl cardControl, string uri)
         {
-            if (control.ImageUriHover == null) control.ImageUriHover = uri;
-            if (control.ImageUriDown == null) control.ImageUriDown = uri;
-            if (control.ImageUriDisabled == null) control.ImageUriDisabled = uri;
+            if (cardControl.ImageUriHover == null) cardControl.ImageUriHover = uri;
+            if (cardControl.ImageUriDown == null) cardControl.ImageUriDown = uri;
+            if (cardControl.ImageUriDisabled == null) cardControl.ImageUriDisabled = uri;
 
-            return control;
+            return cardControl;
         }
 
-        public static CardControl  SetDeckId(this CardControl control, Guid deckId)
+        public static CardControl  SetDeckId(this CardControl cardControl, Guid deckId)
         {
-            control.DeckId = deckId;
+            cardControl.DeckId = deckId;
 
-            return control;
+            return cardControl;
         }
 
-        public static CardControl SetIndex(this CardControl control, int index)
+        public static CardControl SetIndex(this CardControl cardControl, int index)
         {
-            control.Index = index;
+            cardControl.Index = index;
 
-            return control;
+            return cardControl;
         }
 
-        public static CardControl SetIsVisible(this CardControl control, bool isVisible)
+        public static CardControl SetVisibilityState(this CardControl cardControl, int opacity)
         {
-            control.IsVisible = isVisible;
+            cardControl.Opacity = opacity;
 
-            return control;
+            return cardControl;
         }
 
-        public static CardControl SetControlId(this CardControl control, Guid cardId)
+        public static CardControl SetControlId(this CardControl cardControl, Guid cardId)
         {
-            control.ControlId = ControlHelper.GetControlID(cardId);
+            cardControl.ControlId = ControlHelper.GetControlID(cardId);
 
-            return control;
+            return cardControl;
         }
     }
 }

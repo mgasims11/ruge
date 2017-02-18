@@ -12,9 +12,9 @@ namespace ruge.lib.model.controls
             set {}
         }
 
-        public ControlState ControlState
+        public EnableStates EnableState
         {
-            get { return ControlState.Enabled; }
+            get { return EnableStates.Enabled; }
             set {}
         }
 
@@ -25,5 +25,6 @@ namespace ruge.lib.model.controls
         public XYPair Location { get; set; }
 
         public XYPair Size { get; set; }
+
     }
 }

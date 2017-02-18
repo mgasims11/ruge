@@ -7,10 +7,11 @@ namespace ruge.lib.model.controls.interfaces
 {
     public interface IControl
     {
-        string ControlId { get; set; }        
+        string ControlId { get; set; }
+        EnableStates EnableState { get; set; }
+        string ImageUri { get; set; }
         XYPair Location { get; set; }
         XYPair Size { get; set; }
-        string ImageUri { get; set; }
-        ControlState ControlState { get; set; }
+
     }
 }

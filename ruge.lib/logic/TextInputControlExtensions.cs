@@ -84,9 +84,9 @@ namespace ruge.lib.logic
             return control;
         }
 
-        public static TextInputControl ControlState(this TextInputControl control, ControlState controlState)
+        public static TextInputControl EnableState(this TextInputControl control, EnableStates enableState)
         {
-            control.ControlState = controlState;
+            control.EnableState = enableState;
             return control;
         }
 

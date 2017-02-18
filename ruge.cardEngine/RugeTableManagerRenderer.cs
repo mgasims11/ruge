@@ -65,7 +65,7 @@
             var cardControl = CardControls.FirstOrDefault(cc => cc.DeckId == deck.DeckId && cc.Index == deck.Cards.IndexOf(card));
             if (cardControl == null) return;
 
-            cardControl.ControlState = ControlState.Enabled;
+            cardControl.EnableState = EnableStates.Enabled;
             cardControl.ImageUri = String.Format(@"C:\data\ruge\ruge.cardEngine\images\{0}.jpg",((int)card.Rank).ToString("00") + card.Suit.ToString().Substring(0,1));            
 
             CanvasManager.AddEngineAction(cardControl, EngineActionType.Create);

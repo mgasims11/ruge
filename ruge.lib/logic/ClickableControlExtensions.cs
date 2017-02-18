@@ -100,9 +100,9 @@ namespace ruge.lib.logic
             return control;
         }
 
-        public static ClickableControl ControlState(this ClickableControl control, ControlState controlState)
+        public static ClickableControl EnableState(this ClickableControl control, EnableStates enableState)
         {
-            control.ControlState = controlState;
+            control.EnableState = enableState;
             return control;
         }
 

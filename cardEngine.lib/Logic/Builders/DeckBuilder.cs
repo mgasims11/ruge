@@ -1,5 +1,5 @@
 ﻿
-namespace CardEngine.Logic.FluentFactories
+namespace CardEngine.Logic.Builders
 {
     using System;
     using System.Collections.Generic;
@@ -7,30 +7,24 @@ namespace CardEngine.Logic.FluentFactories
     using System.Threading.Tasks;
     using CardEngine.Model;
 
-    public class DeckBuilder
+    public static class DeckBuilder
     {
-        private Deck _deck = null;
 
-        public static DeckBuilder Create()
+        public static Deck Create()
         {
-            return new DeckBuilder();
+            return new Deck();
+        }
+     
+        public static Deck DeckName(this Deck deck,  string deckName)
+        {
+            deck.DeckName = deckName;
+            return deck;
         }
 
-        public DeckBuilder()
+        public static Deck Options(this Deck deck, DeckOptions deckOptions)
         {
-            _deck = new Deck(); ;
-        }
-
-        public DeckBuilder DeckName(string deckName)
-        {
-            _deck.DeckName = deckName;
-            return this;
-        }
-
-        public DeckBuilder Options(DeckOptions deckOptions)
-        {
-            _deck.Options = deckOptions;
-            return this;
+            deck.Options = deckOptions;
+            return deck;
         }
 
 

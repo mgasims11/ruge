@@ -1,5 +1,5 @@
 namespace ruge.lib.model.controls {
-    public enum ControlState {
+    public enum EnableStates {
         Enabled,
         Disabled
     }    
