@@ -39,14 +39,54 @@
             CardControls = new List<CardControl>();
         }
 
-        public Guid GetCardFromControlId(string cardControlId)
+        public Deck GetDeck(Guid deckId)
+        {
+            return _tablemanager.Table.Decks.FirstOrDefault(d => d.DeckId == deckId);
+        }
+
+        public bool FindCardInDecks(Guid cardId, out Guid deckId, out int index)
+        {
+            var result = false;
+
+            index = 0;
+            deckId = Guid.Empty;
+                                   
+            foreach(var deck in _tablemanager.Table.Decks)
+            {                
+                if (deck.Cards.Exists(c => c.CardId == cardId))
+                {
+                    result = true;
+                    deckId = deck.DeckId;
+                    var card = deck.Cards.FirstOrDefault(c => c.CardId == cardId);
+                    index = deck.Cards.IndexOf(card);
+                }
+            }
+            
+            return result;
+        }
+
+        public CardControl GetControlForCard(Guid cardId)
+        {
+            CardControl cardControl = null;
+            var deckId = Guid.Empty;
+            var index = 0;
+
+            if (FindCardInDecks(cardId,out deckId, out index))
+            {
+                cardControl = CardControls.FirstOrDefault(c => c.DeckId == deckId && c.Index == index);
+            }
+
+            return cardControl;
+        }
+
+        public Card GetCardFromControlId(string cardControlId)
         {
             var cardControl = CardControls.FirstOrDefault(cc => cc.ControlId == cardControlId);
             if (cardControl != null)
             {
-                return _tablemanager.GetDeck(cardControl.DeckId).Cards[cardControl.Index].CardId;
+                return _tablemanager.GetDeck(cardControl.DeckId).Cards[cardControl.Index];
             }
-            else return Guid.Empty;
+            else return null;
         }
 
         public void AddCardControl(CardControl cardControl)
@@ -79,12 +119,38 @@
         {
         }
 
-        public void CardChangedOrientation(Guid cardId)
-        {
-
+        public void CardChangedOrientation(Guid cardId, Orientations orientation)
+        {            
+            OrientCard(cardId, orientation);
         }
 
-        public void CardChangingOrientation(Guid cardId)
+        public void OrientCard(Guid cardId, Orientations orientation)
+        {
+            Guid deckId = Guid.Empty;
+            int index = 0;
+            Card card = null;
+
+            if (FindCardInDecks(cardId, out deckId, out index))
+            {
+                card = GetDeck(deckId).Cards[index];
+            }
+
+            var cardControl = GetControlForCard(cardId);
+           
+            switch (orientation)
+            {
+                case Orientations.FaceUp:
+                    cardControl.ImageUri = String.Format(@"C:\data\ruge\ruge.cardEngine\images\{0}.jpg", ((int)card.Rank).ToString("00") + card.Suit.ToString().Substring(0, 1));
+                    CanvasManager.AddEngineAction(cardControl, EngineActionType.Update);
+                    break;
+                case Orientations.FaceDown:
+                    cardControl.ImageUri = (@"C:\data\ruge\ruge.cardEngine\images\BackBlue.jpg");
+                    CanvasManager.AddEngineAction(cardControl, EngineActionType.Update);
+                    break;
+            }
+        }
+
+        public void CardChangingOrientation(Guid cardId, Orientations orientation)
         {
 
         }

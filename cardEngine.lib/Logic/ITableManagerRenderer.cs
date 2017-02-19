@@ -35,7 +35,7 @@
         void CardMoved(Guid sourceDeckId, Guid sourcecardId, Guid destinationDeckId);
 
         // Card Events
-        void CardChangingOrientation(Guid cardId);
-        void CardChangedOrientation(Guid cardId);
+        void CardChangingOrientation(Guid cardId, Orientations orientation);
+        void CardChangedOrientation(Guid cardId, Orientations orientation);
     }
 }

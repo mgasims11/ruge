@@ -18,6 +18,9 @@
     using CardEngine.Logic.Builders;
     using ruge.cardEngine;
 
+
+    "CLEAR UP AND STREAMLINE RUGE/CARD INTEERFACE"
+    "Problem causing incorrect card to be retrieved for orientation"
     // TO DO:
     // REFACTOR: Replace ALL discrete X and Y values for postion and size with XYPairs    
     // Remember to test true images for mouseover events hover, down, and idle
@@ -78,11 +81,7 @@
             _tableManager.FillDeck(_dealerDeck.DeckId);
             _tableManager.ShuffleDeck(_dealerDeck.DeckId);
 
-            _tableManager.MoveCardToTopOfDeck(_dealerDeck.DeckId, _playerDeck.DeckId, 0);
-            _tableManager.MoveCardToTopOfDeck(_dealerDeck.DeckId, _playerDeck.DeckId, 0);
-            _tableManager.MoveCardToTopOfDeck(_dealerDeck.DeckId, _playerDeck.DeckId, 0);
-            _tableManager.MoveCardToTopOfDeck(_dealerDeck.DeckId, _playerDeck.DeckId, 0);
-            _tableManager.MoveCardToTopOfDeck(_dealerDeck.DeckId, _playerDeck.DeckId, 0);
+            _tableManager.DealCardsFromTopToTop(_dealerDeck.DeckId, _playerDeck.DeckId, 5);
 
             _rugeTableManagerRenderer.CanvasManager.UserActionEvent += CanvasManager_UserActionEvent;
 
@@ -91,7 +90,15 @@
 
         private void CanvasManager_UserActionEvent(object sender, UserActionEventArgs e)
         {
-            var cardid = _rugeTableManagerRenderer.GetCardFromControlId(e.UserAction.ControlId);
+           var card = _rugeTableManagerRenderer.GetCardFromControlId(e.UserAction.ControlId);
+           Guid deckId = Guid.Empty;
+           int index = 0;
+
+            if (_rugeTableManagerRenderer.FindCardInDecks(card.CardId, out deckId, out index))
+            {
+                _tableManager.ChangeOrientation(deckId, card.CardId, Orientations.FaceDown);
+                _rugeTableManagerRenderer.SendEngineActionSet();
+            }
         }
     }
 }

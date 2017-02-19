@@ -26,9 +26,12 @@
         }
 
         public void ChangeOrientation(Guid deckId, Guid cardId, Orientations orientation)
-        {           
+        {                       
             var card = GetCard(deckId, cardId);
+            _renderer.CardChangingOrientation(card.CardId, orientation);
             card.Orientation = orientation;
+            _renderer.CardChangedOrientation(card.CardId, orientation);
+
         }
     }
 }

@@ -157,6 +157,14 @@
             MoveCard(sourceDeckId, sourceCardIndex, destinationDeckId, destinationCardIndex);
         }
 
+        public void DealCardsFromTopToTop(Guid sourceDeckId, Guid destinationDeckId, int numberOfCards)
+        {
+            for (var i = 0; i<=numberOfCards - 1; i++)
+            {
+                MoveCardToTopOfDeck(sourceDeckId, destinationDeckId, 0);
+            }
+        }
+
         public void MoveCardToTopOfDeck(Guid sourceDeckId, Guid destinationDeckId, int sourceCardIndex)
         {
             var sourceDeck = GetDeck(sourceDeckId);
