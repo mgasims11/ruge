@@ -85,15 +85,17 @@
 
         private void CanvasManager_UserActionEvent(object sender, UserActionEventArgs e)
         {
-            var control = (Renderer.CanvasManager.GetControl(e.UserAction.ControlId)) as CardControl;
-            var card = control.Deck.Cards[control.Index];
-
-            //var card = _rugeTableManagerRenderer.GetCardFromControlId(e.UserAction.ControlId);
+            var card = Renderer.GetCardFromControlId(e.UserAction.ControlId);
+            
             int index = 0;
             Deck deck;
             if (Renderer.FindCardInDecks(card, out deck, out index))
             {
+                if (card.Orientation == Orientations.FaceUp)
                 _tableManager.ChangeOrientation(deck, card, Orientations.FaceDown);
+                else
+                    _tableManager.ChangeOrientation(deck, card, Orientations.FaceUp);
+
                 Renderer.SendEngineActionSet();
             }
         }

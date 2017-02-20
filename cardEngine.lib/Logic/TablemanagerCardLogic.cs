@@ -24,12 +24,10 @@
         }
 
         public void ChangeOrientation(Deck deck, Card card, Orientations orientation)
-        {                       
-            
+        {                                   
             _renderer.CardChangingOrientation(card, orientation);
             card.Orientation = orientation;
             _renderer.CardChangedOrientation(card, orientation);
-
         }
     }
 }

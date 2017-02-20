@@ -102,8 +102,18 @@
             if (cardControl == null) return;
 
             cardControl.EnableState = EnableStates.Enabled;
-            cardControl.ImageUri = String.Format(@"C:\data\ruge\ruge.cardEngine\images\{0}.jpg",((int)card.Rank).ToString("00") + card.Suit.ToString().Substring(0,1));            
 
+            switch (card.Orientation)
+            {
+                case Orientations.FaceUp:
+                    cardControl.ImageUri = String.Format(@"C:\data\ruge\ruge.cardEngine\images\{0}.jpg", ((int)card.Rank).ToString("00") + card.Suit.ToString().Substring(0, 1));
+                    CanvasManager.AddEngineAction(cardControl, EngineActionType.Update);
+                    break;
+                case Orientations.FaceDown:
+                    cardControl.ImageUri = (@"C:\data\ruge\ruge.cardEngine\images\BackBlue.jpg");
+                    CanvasManager.AddEngineAction(cardControl, EngineActionType.Update);
+                    break;
+            }
             CanvasManager.AddEngineAction(cardControl, EngineActionType.Create);
         }
 
@@ -122,19 +132,19 @@
 
         public void OrientCard(Card card, Orientations orientation)
         {
-            var cardControl = GetControlForCard(card);
+            //var cardControl = GetControlForCard(card);
            
-            switch (orientation)
-            {
-                case Orientations.FaceUp:
-                    cardControl.ImageUri = String.Format(@"C:\data\ruge\ruge.cardEngine\images\{0}.jpg", ((int)card.Rank).ToString("00") + card.Suit.ToString().Substring(0, 1));
-                    CanvasManager.AddEngineAction(cardControl, EngineActionType.Update);
-                    break;
-                case Orientations.FaceDown:
-                    cardControl.ImageUri = (@"C:\data\ruge\ruge.cardEngine\images\BackBlue.jpg");
-                    CanvasManager.AddEngineAction(cardControl, EngineActionType.Update);
-                    break;
-            }
+            //switch (orientation)
+            //{
+            //    case Orientations.FaceUp:
+            //        cardControl.ImageUri = String.Format(@"C:\data\ruge\ruge.cardEngine\images\{0}.jpg", ((int)card.Rank).ToString("00") + card.Suit.ToString().Substring(0, 1));
+            //        CanvasManager.AddEngineAction(cardControl, EngineActionType.Update);
+            //        break;
+            //    case Orientations.FaceDown:
+            //        cardControl.ImageUri = (@"C:\data\ruge\ruge.cardEngine\images\BackBlue.jpg");
+            //        CanvasManager.AddEngineAction(cardControl, EngineActionType.Update);
+            //        break;
+            //}
         }
 
         public void CardChangingOrientation(Card card, Orientations orientation)

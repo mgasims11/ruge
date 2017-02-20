@@ -43,6 +43,7 @@
                 for (var rank = 1; rank <= 13 && deck.Cards.Count < deck.Options.MaxCards; rank++)
                 {
                     var newCard = new Card((Ranks)rank, (Suits)suit, Orientations.FaceDown, deck, (int)rank);
+                    newCard.Orientation = Orientations.FaceUp;
                     deck.Cards.Add(newCard);
                     _renderer.CardAddedToDeck(deck, newCard,0);
                 }

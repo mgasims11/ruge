@@ -24,8 +24,6 @@ namespace ruge.lib.logic {
 
         public Canvas Canvas = null;
 
-        private List<IControl> _controls = new List<IControl>();
-
         private void RaiseEngineActionEvent(object sender, EngineActionEventArgs args) {
             if (this.EngineActionEvent != null) {
                 this.EngineActionEvent(sender,args);
@@ -53,7 +51,6 @@ namespace ruge.lib.logic {
             }
         }
 
-
         public Canvas CreateCanvas(double height, double width) {
             var canvas = new Canvas() {
                     CanvasId = "C" + Guid.NewGuid().ToString().Replace("-", ""),
@@ -65,20 +62,6 @@ namespace ruge.lib.logic {
                       
             return canvas;
         }
-
-        public IControl GetControl(string controlId)
-        {
-            return _controls.FirstOrDefault<IControl>(c => c.ControlId == controlId);
-        }
-
-        //public string AddControl(IControl control)
-        //{
-        //    _controls.Add(control);
-        //    RaiseEngineActionEvent(control, EngineActionType.Create);
-        //    AddEngineAction(control, EngineActionType.Create);
-        //    return control.ControlId;
-        //}
-
 
         public void SendEngineActionSet()
         {

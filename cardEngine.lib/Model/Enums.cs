@@ -12,6 +12,7 @@
     public enum Ranks
     {
         None,
+        AceLow,
         Two,
         Three,
         Four,
