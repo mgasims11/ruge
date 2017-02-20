@@ -162,9 +162,9 @@ namespace ruge.cardEngine.Builders
             return cardControl;
         }
 
-        public static CardControl  SetDeckId(this CardControl cardControl, Guid deckId)
+        public static CardControl  SetDeck(this CardControl cardControl, Deck deck)
         {
-            cardControl.DeckId = deckId;
+            cardControl.Deck = deck;
 
             return cardControl;
         }

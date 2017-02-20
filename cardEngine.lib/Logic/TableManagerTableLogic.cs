@@ -18,22 +18,22 @@ namespace CardEngine.Logic
 
         public void ClearTable()
         {
-            if (_renderer != null) { _renderer.TableClearing(Table.TableId); }          
+            if (_renderer != null) { _renderer.TableClearing(Table); }          
             Table.Decks.Clear();
-            if (_renderer != null) { _renderer.TableCleared(Table.TableId); }
+            if (_renderer != null) { _renderer.TableCleared(Table); }
         }
 
         public void AddDeckToTable(Deck deck)
         {          
             Table.Decks.Add(deck);
-            if (_renderer != null) { _renderer.DeckAddedToTable(Table.TableId, deck); }
+            if (_renderer != null) { _renderer.DeckAddedToTable(Table, deck); }
         }
 
         public void RemoveDeckFromTable(Deck deck)
         {
-            if (_renderer != null) { _renderer.DeckBeingRemovedFromTable(Table.TableId, deck.DeckId); }           
+            if (_renderer != null) { _renderer.DeckBeingRemovedFromTable(Table, deck); }           
             Table.Decks.Remove(deck);
-            if (_renderer != null) { _renderer.DeckRemovedFromTable(Table.TableId, deck.DeckId); }        
+            if (_renderer != null) { _renderer.DeckRemovedFromTable(Table, deck); }        
         }
  
         public void AddDecksToTable(params Deck[] decks)

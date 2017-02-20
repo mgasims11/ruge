@@ -43,7 +43,7 @@
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {          
-            _myGame.CanvasManager.EngineActionSetEvent += _canvasManager_EngineActionSetEvent;
+            _myGame.Renderer.CanvasManager.EngineActionSetEvent += _canvasManager_EngineActionSetEvent;
             _myGame.Start();
         }
 
@@ -152,7 +152,7 @@
             var userAction = new UserAction() { ControlId = control.Name, UserActionType = UserActionType.Click};
             var userActionSet = new UserActionSet();            
             userActionSet.UserActions.Add(userAction);
-            _myGame.CanvasManager.ReceiveUserActionSet(userActionSet);            
+            _myGame.Renderer.CanvasManager.ReceiveUserActionSet(userActionSet);            
         }
     }
 }

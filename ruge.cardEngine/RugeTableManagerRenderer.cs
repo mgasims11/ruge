@@ -44,36 +44,33 @@
             return _tablemanager.Table.Decks.FirstOrDefault(d => d.DeckId == deckId);
         }
 
-        public bool FindCardInDecks(Guid cardId, out Guid deckId, out int index)
+        public bool FindCardInDecks(Card card, out Deck deckOut, out int index)
         {
-            var result = false;
-
             index = 0;
-            deckId = Guid.Empty;
-                                   
-            foreach(var deck in _tablemanager.Table.Decks)
-            {                
-                if (deck.Cards.Exists(c => c.CardId == cardId))
+            deckOut = null;
+
+            foreach (var deck in _tablemanager.Table.Decks)
+            {
+                if (deck.Cards.Contains(card))
                 {
-                    result = true;
-                    deckId = deck.DeckId;
-                    var card = deck.Cards.FirstOrDefault(c => c.CardId == cardId);
+                    deckOut = deck;
                     index = deck.Cards.IndexOf(card);
+                    return true;
                 }
             }
-            
-            return result;
+
+            return false;
         }
 
-        public CardControl GetControlForCard(Guid cardId)
+        public CardControl GetControlForCard(Card card)
         {
             CardControl cardControl = null;
-            var deckId = Guid.Empty;
+            Deck deck;
             var index = 0;
 
-            if (FindCardInDecks(cardId,out deckId, out index))
+            if (FindCardInDecks(card, out deck, out index))
             {
-                cardControl = CardControls.FirstOrDefault(c => c.DeckId == deckId && c.Index == index);
+                cardControl = CardControls.FirstOrDefault(c => c.Deck.DeckId == deck.DeckId && c.Index == index);
             }
 
             return cardControl;
@@ -84,7 +81,7 @@
             var cardControl = CardControls.FirstOrDefault(cc => cc.ControlId == cardControlId);
             if (cardControl != null)
             {
-                return _tablemanager.GetDeck(cardControl.DeckId).Cards[cardControl.Index];
+                return cardControl.Deck.Cards[cardControl.Index];
             }
             else return null;
         }
@@ -99,10 +96,9 @@
             CardControls.RemoveAt(index);
         }
 
-        private void RenderCard(Guid deckId, Card card)
+        private void RenderCard(Deck deck, Card card)
         {
-            var deck = _tablemanager.GetDeck(deckId);
-            var cardControl = CardControls.FirstOrDefault(cc => cc.DeckId == deck.DeckId && cc.Index == deck.Cards.IndexOf(card));
+            var cardControl = CardControls.FirstOrDefault(cc => cc.Deck.DeckId == deck.DeckId && cc.Index == deck.Cards.IndexOf(card));
             if (cardControl == null) return;
 
             cardControl.EnableState = EnableStates.Enabled;
@@ -111,31 +107,22 @@
             CanvasManager.AddEngineAction(cardControl, EngineActionType.Create);
         }
 
-        public void CardAddedToDeck(Guid deckId, Card card, int index)
+        public void CardAddedToDeck(Deck deck, Card card, int index)
         {
         }
 
-        public void CardBeingRemovedFromDeck(Guid deckId, Guid cardId)
+        public void CardBeingRemovedFromDeck(Deck deck, Card card)
         {
         }
 
-        public void CardChangedOrientation(Guid cardId, Orientations orientation)
+        public void CardChangedOrientation(Card card, Orientations orientation)
         {            
-            OrientCard(cardId, orientation);
+            OrientCard(card, orientation);
         }
 
-        public void OrientCard(Guid cardId, Orientations orientation)
+        public void OrientCard(Card card, Orientations orientation)
         {
-            Guid deckId = Guid.Empty;
-            int index = 0;
-            Card card = null;
-
-            if (FindCardInDecks(cardId, out deckId, out index))
-            {
-                card = GetDeck(deckId).Cards[index];
-            }
-
-            var cardControl = GetControlForCard(cardId);
+            var cardControl = GetControlForCard(card);
            
             switch (orientation)
             {
@@ -150,85 +137,85 @@
             }
         }
 
-        public void CardChangingOrientation(Guid cardId, Orientations orientation)
+        public void CardChangingOrientation(Card card, Orientations orientation)
         {
 
         }
 
-        public void CardMoved(Guid sourceDeckId, Guid sourcecardId, Guid destinationDeckId)
+        public void CardMoved(Deck sourceDeck, Card sourcecard, Deck destinationDeck)
         {
         }
 
-        public void CardMoving(Guid sourceDeckId, Guid sourcecardId, Guid destinationDeckId)
+        public void CardMoving(Deck sourceDeck, Card sourcecard, Deck destinationDeck)
         {
         }
 
-        public void CardRemovedFromDeck(Guid deckId, Guid cardId)
+        public void CardRemovedFromDeck(Deck deck, Card card)
         {
-            RenderCard(deckId, _tablemanager.GetCard(deckId,cardId));
+            RenderCard(deck, card);
         }
 
-        public void CardsSwappedInDeck(Guid soureceDeckId, Guid sourcecardId, Guid destinationDeckId, Guid destinationCardId)
+        public void CardsSwappedInDeck(Deck soureceDeckId, Card sourcecardId, Deck destinationDeckId, Card destinationCardId)
         {
         }
 
-        public void CardsSwappingInDeck(Guid soureceDeckId, Guid sourcecardId, Guid destinationDeckId, Guid destinationCardId)
+        public void CardsSwappingInDeck(Deck soureceDeckId, Card sourcecardId, Deck destinationDeckId, Card destinationCardId)
         {
 
         }
 
-        public void DeckAddedToTable(Guid tableId, Deck deck)
+        public void DeckAddedToTable(Table table, Deck deck)
         {
             
         }
 
-        public void DeckBeingRemovedFromTable(Guid tableId, Guid deckId)
+        public void DeckBeingRemovedFromTable(Table table, Deck deck)
         {
 
         }
 
-        public void DeckCleared(Guid deckId)
+        public void DeckCleared(Deck deck)
         {
 
         }
 
-        public void DeckClearing(Guid deckId)
+        public void DeckClearing(Deck deck)
         {
 
         }
 
-        public void DeckFilled(Guid deckId)
+        public void DeckFilled(Deck deck)
         {
 
         }
 
-        public void DeckFilling(Guid deckId)
+        public void DeckFilling(Deck deck)
         {
 
         }
 
-        public void DeckRemovedFromTable(Guid tableId, Guid deckId)
+        public void DeckRemovedFromTable(Table tableId, Deck deck)
         {
 
         }
 
-        public void DeckShuffled(Guid deckId)
+        public void DeckShuffled(Deck deck)
         {
 
         }
 
-        public void DeckShuffling(Guid deckId)
+        public void DeckShuffling(Deck deck)
         {
 
         }
 
-        public void TableCleared(Guid tableId)
+        public void TableCleared(Table table)
         {
             CanvasManager.CreateCanvas(_height, _width);
             CanvasManager.AddEngineAction(CanvasManager.Canvas, EngineActionType.Create);
         }
 
-        public void TableClearing(Guid tableId)
+        public void TableClearing(Table table)
         {
         }
 
@@ -238,12 +225,16 @@
             {
                 foreach (var card in deck.Cards)
                 {
-                    RenderCard(deck.DeckId, card);
+                    RenderCard(deck, card);
                 }
             }
        
             CanvasManager.SendEngineActionSet();
         }
 
+        public void CardBeingRemovedFromDeck(Deck deck, Guid cardId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

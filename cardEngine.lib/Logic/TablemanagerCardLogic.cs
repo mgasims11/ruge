@@ -18,19 +18,17 @@
             return deck.Cards[index];
         }
         
-        public int GetCardIndex(Guid deckId, Guid cardId)
+        public int GetCardIndex(Deck deck, Card card)
         {
-            var deck = GetDeck(deckId);
-            var card = deck.Cards.FirstOrDefault(c => c.CardId == cardId);
             return deck.Cards.IndexOf(card);
         }
 
-        public void ChangeOrientation(Guid deckId, Guid cardId, Orientations orientation)
+        public void ChangeOrientation(Deck deck, Card card, Orientations orientation)
         {                       
-            var card = GetCard(deckId, cardId);
-            _renderer.CardChangingOrientation(card.CardId, orientation);
+            
+            _renderer.CardChangingOrientation(card, orientation);
             card.Orientation = orientation;
-            _renderer.CardChangedOrientation(card.CardId, orientation);
+            _renderer.CardChangedOrientation(card, orientation);
 
         }
     }

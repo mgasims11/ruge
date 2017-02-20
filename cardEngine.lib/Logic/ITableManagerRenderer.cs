@@ -11,31 +11,31 @@
         TableManager TableManager { get; set; }
 
         // Table Events
-        void TableClearing(Guid tableId);
-        void TableCleared(Guid tableId);
+        void TableClearing(Table table);
+        void TableCleared(Table table);
 
-        void DeckAddedToTable(Guid tableId, Deck deck);
-        void DeckBeingRemovedFromTable(Guid tableId, Guid deckId);
-        void DeckRemovedFromTable(Guid tableId, Guid deckId);
+        void DeckAddedToTable(Table table, Deck deck);
+        void DeckBeingRemovedFromTable(Table table, Deck deck);
+        void DeckRemovedFromTable(Table table, Deck deck);
 
         // Deck Events
-        void DeckClearing(Guid deckId);
-        void DeckCleared(Guid deckId);
-        void DeckShuffling(Guid deckId);
-        void DeckShuffled(Guid deckId);
-        void DeckFilling(Guid deckId);
-        void DeckFilled(Guid deckId);
+        void DeckClearing(Deck deck);
+        void DeckCleared(Deck deck);
+        void DeckShuffling(Deck deck);
+        void DeckShuffled(Deck deck);
+        void DeckFilling(Deck deck);
+        void DeckFilled(Deck deck);
 
-        void CardAddedToDeck(Guid deckId, Card card, int position);
-        void CardBeingRemovedFromDeck(Guid deckId, Guid cardId);
-        void CardRemovedFromDeck(Guid deckId, Guid cardId);
-        void CardsSwappingInDeck(Guid soureceDeckId, Guid sourcecardId, Guid destinationDeckId, Guid destinationCardId);
-        void CardsSwappedInDeck(Guid soureceDeckId, Guid sourcecardId, Guid destinationDeckId, Guid destinationCardId);
-        void CardMoving(Guid sourceDeckId, Guid sourcecardId, Guid destinationDeckId);
-        void CardMoved(Guid sourceDeckId, Guid sourcecardId, Guid destinationDeckId);
+        void CardAddedToDeck(Deck deckId, Card card, int position);
+        void CardBeingRemovedFromDeck(Deck deck, Guid cardId);
+        void CardRemovedFromDeck(Deck deck, Card card);
+        void CardsSwappingInDeck(Deck soureceDeck, Card sourcecard, Deck destinationDeck, Card destinationCard);
+        void CardsSwappedInDeck(Deck soureceDeck, Card sourcecard, Deck destinationDeck, Card destinationCard);
+        void CardMoving(Deck sourceDeck, Card sourcecard, Deck destinationDeck);
+        void CardMoved(Deck sourceDeck, Card sourcecard, Deck destinationDeck);
 
         // Card Events
-        void CardChangingOrientation(Guid cardId, Orientations orientation);
-        void CardChangedOrientation(Guid cardId, Orientations orientation);
+        void CardChangingOrientation(Card card, Orientations orientation);
+        void CardChangedOrientation(Card card, Orientations orientation);
     }
 }

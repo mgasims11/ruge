@@ -71,13 +71,13 @@ namespace ruge.lib.logic {
             return _controls.FirstOrDefault<IControl>(c => c.ControlId == controlId);
         }
 
-        public string AddControl(IControl control)
-        {
-            _controls.Add(control);
-            RaiseEngineActionEvent(control, EngineActionType.Create);
-            AddEngineAction(control, EngineActionType.Create);
-            return control.ControlId;
-        }
+        //public string AddControl(IControl control)
+        //{
+        //    _controls.Add(control);
+        //    RaiseEngineActionEvent(control, EngineActionType.Create);
+        //    AddEngineAction(control, EngineActionType.Create);
+        //    return control.ControlId;
+        //}
 
 
         public void SendEngineActionSet()
