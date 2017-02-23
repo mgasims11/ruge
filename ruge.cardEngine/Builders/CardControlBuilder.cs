@@ -43,6 +43,12 @@ namespace ruge.cardEngine.Builders
             return cardControl;
         }
 
+        public static CardControl SetOpacity(this CardControl cardControl, int opacity)
+        {
+            cardControl.Opacity = opacity;
+            return cardControl;
+        }
+
         public static CardControl SetSize(this CardControl cardControl, XYPair size)
         {
             cardControl.Size = size;

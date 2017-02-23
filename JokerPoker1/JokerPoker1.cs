@@ -68,6 +68,7 @@
                         .SetIndex(i)
                         .SetLocation(new XYPair(i * _CardSize.X, 2))
                         .SetSize(_CardSize)
+                        .SetOpacity(100)
                         );
             };
 

@@ -12,80 +12,168 @@ namespace Ruge.Win.Test.Controls
 {
     public class Clickable : Grid
     {
-        private string _backgroundIdle, _backgroundHover, _backgroundDown, _backgroundDisabled;
-        private string _backgroundCurrent;
-
-        private Canvas _innerImage = new Canvas();
-        private double _width = 0;
-        private double _height = 0;
-
         private double _idleScale = .97;
         private double _hoverScale = 1;
         private double _downScale = .94;
+        private Canvas _innerImage = null;
+        
+        private string _imageCurrent;
+        private string _imageNormal;
+        private string _imageHover;
+        private string _imageDown;
+        private string _imageDisabled;
 
-        public Clickable(string controlid, double width, double height, string backgroundIdle, string backgroundHover, string backgroundDown, string backgroundDisabled, string tooltip) : base()
+        public string ImageCurrent
         {
-            _width = width;
-            _height = height;
+            get {return _imageCurrent; }
+            set { _imageCurrent = value; }
+        }
+        public string ImageNormal
+        {
+            get { return _imageNormal; }
+            set {
+                _imageNormal = value;
+                SetBackground(value);
+            }
+        }
+        public string ImageHover
+        {
+            get { return _imageHover; }
+            set { _imageHover = value; }
+        }
+        public string ImageDown
+        {
+            get { return _imageDown; }
+            set { _imageDown = value; }
+        }
+        public string ImageDisabled
+        {
+            get { return _imageDisabled; }
+            set { _imageDisabled = value; }
+        }
+        public new double Width
+        {
+            get { return base.Width; ; }
+            set {
+                base.Width = value;
+                SetValue(WidthProperty, value);
+            }
+        }
+        public new double Height
+        {
+            get { return base.Height; ; }
+            set {
+                base.Height = value;
+                SetValue(HeightProperty, value);
+            }
+        }
+        public new double Opacity
+        {
+            get { return base.Opacity; ; }
+            set
+            {
+                base.Opacity = value;
+                SetValue(OpacityProperty, (double)value / 100);
+            }
+        }
+        public new string ToolTip
+        {
+            get { return base.ToolTip.ToString(); }
+            set { base.ToolTip = value; }
+        }
 
-            Children.Add(_innerImage);
-            _innerImage.HorizontalAlignment = HorizontalAlignment.Center;
-            _innerImage.VerticalAlignment = VerticalAlignment.Center;
+        public new string Name
+        {
+            get { return base.Name; }
+            set { base.Name = value; }
+        }
 
-            SetValue(WidthProperty, _width);
-            SetValue(HeightProperty, _height);
+        public Clickable(string name, int opacity, double width, double height, string backgroundIdle, string backgroundHover, string backgroundDown, string backgroundDisabled, string tooltip) : base()
+        {
+            Width = width;
+            Height = height;
 
-            _innerImage.SetValue(WidthProperty, _width * _idleScale );
-            _innerImage.SetValue(HeightProperty, _height * _idleScale );
+            CreateCanvas();
+            SetStateNormal();
 
-            Name = controlid;
+            Name = name;
+
             if (!String.IsNullOrEmpty(tooltip)) SetValue(ToolTipProperty, tooltip);
+            RegisterMouseEvents();
+
+            IsEnabledChanged += Clickable_IsEnabledChanged;
+
+            ImageNormal = backgroundIdle;
+            ImageHover = backgroundHover;
+            ImageDown = backgroundDown;
+            ImageDisabled = backgroundDisabled;
+
+            SetBackground(ImageNormal);            
+        }
+
+        private void RegisterMouseEvents()
+        {
             MouseEnter += Clickable_MouseEnter;
             MouseDown += Clickable_MouseDown;
             MouseLeave += Clickable_MouseLeave;
             MouseUp += Clickable_MouseUp;
-            IsEnabledChanged += Clickable_IsEnabledChanged;           
+        }
 
-            _backgroundIdle = backgroundIdle;
-            _backgroundHover = backgroundHover;
-            _backgroundDown = backgroundDown;
-            _backgroundDisabled = backgroundDisabled;
+        private void CreateCanvas()
+        {
+            _innerImage = new Canvas();
+            Children.Add(_innerImage);
 
-            SetBackground(backgroundIdle);            
+            _innerImage.HorizontalAlignment = HorizontalAlignment.Center;
+            _innerImage.VerticalAlignment = VerticalAlignment.Center;
+        }
+
+        private void SetStateNormal()
+        {
+            _innerImage.SetValue(WidthProperty, Width * _idleScale);
+            _innerImage.SetValue(HeightProperty, Height * _idleScale);
+        }
+
+        private void SetStateHover()
+        {
+            _innerImage.SetValue(WidthProperty, Width * _hoverScale);
+            _innerImage.SetValue(HeightProperty, Height * _hoverScale);
+        }
+
+        private void SetStateDown()
+        {
+            _innerImage.SetValue(WidthProperty, Width * _downScale);
+            _innerImage.SetValue(HeightProperty, Height * _downScale);
         }
 
         private void Clickable_MouseUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            if (String.IsNullOrEmpty(_backgroundDown))
+            if (String.IsNullOrEmpty(ImageDown))
             {
                 if (((UIElement)e.Source).IsMouseOver)
-                { 
-                
-                    _innerImage.SetValue(WidthProperty, _width * _hoverScale);
-                    _innerImage.SetValue(HeightProperty, _height * _hoverScale);
+                {
+                    SetStateHover();
                 }
                 else
                 {
-                    _innerImage.SetValue(WidthProperty, _width * _idleScale);
-                    _innerImage.SetValue(HeightProperty, _height * _idleScale);
+                    SetStateNormal();
                 }
             }
             else
             {
-                SetBackground(_backgroundIdle);
+                SetBackground(ImageNormal);
             }
         }
 
         private void Clickable_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
         {
-            if (String.IsNullOrEmpty(_backgroundHover))
+            if (String.IsNullOrEmpty(ImageHover))
             {
-                _innerImage.SetValue(WidthProperty, _width * _idleScale);
-                _innerImage.SetValue(HeightProperty, _height * _idleScale);
+                SetStateNormal();
             }
             else
             {
-                SetBackground(_backgroundIdle);
+                SetBackground(ImageNormal);
             }
         }
 
@@ -96,33 +184,31 @@ namespace Ruge.Win.Test.Controls
 
         private void Clickable_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            if (String.IsNullOrEmpty(_backgroundDown))
+            if (String.IsNullOrEmpty(ImageDown))
             {
-                _innerImage.SetValue(WidthProperty, _width * _downScale);
-                _innerImage.SetValue(HeightProperty, _height * _downScale);
+                SetStateDown();
             }
             else
             {
-                SetBackground(_backgroundIdle);
+                SetBackground(ImageNormal);
             }
         }
 
         private void Clickable_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
         {
-            if (String.IsNullOrEmpty(_backgroundHover))
+            if (String.IsNullOrEmpty(ImageHover))
             {
-                _innerImage.SetValue(WidthProperty, _width * _hoverScale);
-                _innerImage.SetValue(HeightProperty, _height * _hoverScale);
+                SetStateHover();
             }
             else
             {
-                SetBackground(_backgroundHover);
+                SetBackground(ImageHover);
             }
         }
 
         private void SetBackground()
         {
-            SetBackground(this._backgroundCurrent);
+            SetBackground(ImageNormal);
         }
 
         private void SetBackground(string imageUri)
@@ -133,11 +219,11 @@ namespace Ruge.Win.Test.Controls
             }
 
             if (IsEnabled)
-                _backgroundCurrent = imageUri;
+                ImageCurrent = imageUri;
             else
-                _backgroundCurrent = _backgroundDisabled;
+                ImageCurrent = ImageDisabled;
 
-            var bi = new BitmapImage(new Uri(_backgroundCurrent));
+            var bi = new BitmapImage(new Uri(ImageCurrent));
             var ib = new ImageBrush(bi);
             _innerImage.Background = ib;
         }

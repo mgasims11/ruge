@@ -96,8 +96,12 @@
             if (control is ClickableControl)
             {
                 var c = control as ClickableControl;
-                var clientControl = new Clickable(
+                var clientControl = LogicalTreeHelper.FindLogicalNode(MainCanvas, c.ControlId) as Clickable;
+                if (clientControl == null)
+                {
+                    clientControl = new Clickable(
                             c.ControlId,
+                            c.Opacity,
                             c.Size.X,
                             c.Size.Y,
                             c.ImageUri,
@@ -106,10 +110,26 @@
                             c.ImageUriDisabled,
                             ""
                             );
-                MainCanvas.Children.Add(clientControl);
+
+                    MainCanvas.Children.Add(clientControl);
+                    clientControl.MouseDown += Clickable_MouseDown;
+                }
+                else
+                {
+                    clientControl.Name = c.ControlId;
+                    clientControl.Opacity = c.Opacity;
+                    clientControl.Width = c.Size.X;
+                    clientControl.Height = c.Size.Y;
+                    clientControl.ImageNormal = c.ImageUri;
+                    clientControl.ImageHover = c.ImageUriHover;
+                    clientControl.ImageDown = c.ImageUriDown;
+                    clientControl.ImageDisabled = c.ImageUriDisabled;
+                    clientControl.ToolTip = "";
+                }
+                                
                 clientControl.SetValue(LeftProperty, control.Location.X);
                 clientControl.SetValue(TopProperty, control.Location.Y);
-                clientControl.MouseDown += Clickable_MouseDown;
+               
             }
 
             if (control is StaticImageControl)
