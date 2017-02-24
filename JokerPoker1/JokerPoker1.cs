@@ -20,11 +20,10 @@
 
 
     //"CLEAR UP AND STREAMLINE RUGE/CARD INTEERFACE"
-    //"Problem causing incorrect card to be retrieved for orientation"
     // TO DO:
-    // REFACTOR: Replace ALL discrete X and Y values for postion and size with XYPairs    
-    // Remember to test true images for mouseover events hover, down, and idle
-    // Implement disabled, visible
+    // New name "RULE" - Really Useful Layout Engine
+    // Implement disabled, visible, rotation, zorder
+    //What happened to CanvasManager? Why are we not adding controls through it?
 
     public class JokerPoker : IGame
     {     
@@ -69,6 +68,7 @@
                         .SetLocation(new XYPair(i * _CardSize.X, 2))
                         .SetSize(_CardSize)
                         .SetOpacity(100)
+                        .SetZOrder(50)
                         );
             };
 
@@ -93,7 +93,7 @@
             if (Renderer.FindCardInDecks(card, out deck, out index))
             {
                 if (card.Orientation == Orientations.FaceUp)
-                _tableManager.ChangeOrientation(deck, card, Orientations.FaceDown);
+                    _tableManager.ChangeOrientation(deck, card, Orientations.FaceDown);
                 else
                     _tableManager.ChangeOrientation(deck, card, Orientations.FaceUp);
 

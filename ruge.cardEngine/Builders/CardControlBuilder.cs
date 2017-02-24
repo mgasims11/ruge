@@ -195,5 +195,12 @@ namespace ruge.cardEngine.Builders
 
             return cardControl;
         }
+
+        public static CardControl SetZOrder(this CardControl cardControl, int zOrder)
+        {
+            cardControl.ZOrder = zOrder;
+
+            return cardControl;
+        }
     }
 }

@@ -57,7 +57,7 @@
 --reference:C:\Users\Michael\.nuget\packages\System.Xml.ReaderWriter\4.0.11\ref\netstandard1.3\System.Xml.ReaderWriter.dll
 --reference:C:\Users\Michael\.nuget\packages\System.Xml.XDocument\4.0.11\ref\netstandard1.3\System.Xml.XDocument.dll
 C:\data\ruge\ruge.lib\logic\CanvasManager.cs
-C:\data\ruge\ruge.lib\logic\ClickableControlExtensions.cs
+C:\data\ruge\ruge.lib\logic\ClickableControlBuilder.cs
 C:\data\ruge\ruge.lib\logic\ControlHelper.cs
 C:\data\ruge\ruge.lib\logic\StaticImageControlExtensions.cs
 C:\data\ruge\ruge.lib\logic\TextControlExtensions.cs

@@ -18,7 +18,7 @@
 --reference:C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.1\System.Core.dll
 --reference:C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.1\Microsoft.CSharp.dll
 C:\data\ruge\ruge.lib\logic\CanvasManager.cs
-C:\data\ruge\ruge.lib\logic\ClickableControlExtensions.cs
+C:\data\ruge\ruge.lib\logic\ClickableControlBuilder.cs
 C:\data\ruge\ruge.lib\logic\ControlHelper.cs
 C:\data\ruge\ruge.lib\logic\StaticImageControlExtensions.cs
 C:\data\ruge\ruge.lib\logic\TextControlExtensions.cs

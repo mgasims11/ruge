@@ -9,7 +9,7 @@ namespace ruge.lib.logic
     using ruge.lib.model.controls;
     using ruge.lib.model.controls.interfaces;
 
-    public static class ClickableControlMaker
+    public static class ClickableControlBuilder
     {
         public static ClickableControl Create()
         {
@@ -18,7 +18,23 @@ namespace ruge.lib.logic
             return control;
         }
 
-        public static ClickableControl X(this ClickableControl control, int x)
+        public static ClickableControl SetOpacity(this ClickableControl control, int opacity)
+        {
+            control.Opacity = opacity;
+            return control;
+        }
+        public static ClickableControl SetZOrder(this ClickableControl control, int zOrder)
+        {
+            control.ZOrder = zOrder;
+            return control;
+        }
+        public static ClickableControl SetEnableState(this ClickableControl control, int rotation)
+        {
+            control.Rotation = rotation;
+            return control;
+        }
+
+        public static ClickableControl SetX(this ClickableControl control, int x)
         {
             if (control.Location == null)
             {
@@ -33,7 +49,7 @@ namespace ruge.lib.logic
             return control;
         }
 
-        public static ClickableControl Y(this ClickableControl control, int y)
+        public static ClickableControl SetY(this ClickableControl control, int y)
         {
             if (control.Location == null)
             {
@@ -48,7 +64,7 @@ namespace ruge.lib.logic
             return control;
         }
 
-        public static ClickableControl Width(this ClickableControl control, int x)
+        public static ClickableControl SetWidth(this ClickableControl control, int x)
         {
             if (control.Size == null)
             {
@@ -63,7 +79,7 @@ namespace ruge.lib.logic
             return control;
         }
 
-        public static ClickableControl Height(this ClickableControl control, int y)
+        public static ClickableControl SetHeight(this ClickableControl control, int y)
         {
             if (control.Size == null)
             {
@@ -78,13 +94,13 @@ namespace ruge.lib.logic
             return control;
         }
 
-        public static ClickableControl UseImageUriTemplate(this ClickableControl control, string template, string token)
+        public static ClickableControl SetImageUriTemplate(this ClickableControl control, string template, string token)
         {
-            UseImageUriTemplate(control, template, token, "normal", "hover", "down", "disabled");
+            SetImageUriTemplate(control, template, token, "normal", "hover", "down", "disabled");
             return control;
         }
 
-        public static ClickableControl UseImageUriTemplate(this ClickableControl control, string template, string token, string normal, string hover, string down, string disabled)
+        public static ClickableControl SetImageUriTemplate(this ClickableControl control, string template, string token, string normal, string hover, string down, string disabled)
         {
             control.ImageUri = template.Replace(token,normal);
             control.ImageUriHover = template.Replace(token, hover);
@@ -93,41 +109,41 @@ namespace ruge.lib.logic
             return control;
         }
 
-        public static ClickableControl ImageUri(this ClickableControl control, string uri)
+        public static ClickableControl SetImageUri(this ClickableControl control, string uri)
         {
             control.ImageUri = uri;
             UpdateEmptyUris(control,uri);
             return control;
         }
 
-        public static ClickableControl EnableState(this ClickableControl control, EnableStates enableState)
+        public static ClickableControl SetEnableState(this ClickableControl control, EnableStates enableState)
         {
             control.EnableState = enableState;
             return control;
         }
 
-        public static ClickableControl ImageUriHover(this ClickableControl control, string uri)
+        public static ClickableControl SetImageUriHover(this ClickableControl control, string uri)
         {
             control.ImageUriHover = uri;
             UpdateEmptyUris(control, uri);
             return control;
         }
 
-        public static ClickableControl ImageUriDown(this ClickableControl control, string uri)
+        public static ClickableControl SetImageUriDown(this ClickableControl control, string uri)
         {
             control.ImageUriDown = uri;
             UpdateEmptyUris(control, uri);
             return control;
         }
 
-        public static ClickableControl ImageUriDisabled(this ClickableControl control, string uri)
+        public static ClickableControl SetImageUriDisabled(this ClickableControl control, string uri)
         {
             control.ImageUriDisabled = uri;
             UpdateEmptyUris(control, uri);
             return control;
         }
 
-        public static ClickableControl AllUris(this ClickableControl control, string uri)
+        public static ClickableControl SetAllUris(this ClickableControl control, string uri)
         {
             control.ImageUri = uri;
             control.ImageUriHover = uri;
