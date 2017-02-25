@@ -107,14 +107,14 @@
             {
                 case Orientations.FaceUp:
                     cardControl.ImageUri = String.Format(@"C:\data\ruge\ruge.cardEngine\images\{0}.jpg", ((int)card.Rank).ToString("00") + card.Suit.ToString().Substring(0, 1));
-                    CanvasManager.AddEngineAction(cardControl, EngineActionType.Update);
+                    CanvasManager.Update(cardControl);
                     break;
                 case Orientations.FaceDown:
                     cardControl.ImageUri = (@"C:\data\ruge\ruge.cardEngine\images\BackBlue.jpg");
-                    CanvasManager.AddEngineAction(cardControl, EngineActionType.Update);
+                    CanvasManager.Update(cardControl);
                     break;
             }
-            CanvasManager.AddEngineAction(cardControl, EngineActionType.Create);
+            CanvasManager.Update(cardControl);
         }
 
         public void CardAddedToDeck(Deck deck, Card card, int index)
@@ -131,20 +131,7 @@
         }
 
         public void OrientCard(Card card, Orientations orientation)
-        {
-            //var cardControl = GetControlForCard(card);
-           
-            //switch (orientation)
-            //{
-            //    case Orientations.FaceUp:
-            //        cardControl.ImageUri = String.Format(@"C:\data\ruge\ruge.cardEngine\images\{0}.jpg", ((int)card.Rank).ToString("00") + card.Suit.ToString().Substring(0, 1));
-            //        CanvasManager.AddEngineAction(cardControl, EngineActionType.Update);
-            //        break;
-            //    case Orientations.FaceDown:
-            //        cardControl.ImageUri = (@"C:\data\ruge\ruge.cardEngine\images\BackBlue.jpg");
-            //        CanvasManager.AddEngineAction(cardControl, EngineActionType.Update);
-            //        break;
-            //}
+        {          
         }
 
         public void CardChangingOrientation(Card card, Orientations orientation)
@@ -221,8 +208,7 @@
 
         public void TableCleared(Table table)
         {
-            CanvasManager.CreateCanvas(_height, _width);
-            CanvasManager.AddEngineAction(CanvasManager.Canvas, EngineActionType.Create);
+            CanvasManager.CreateCanvas(_height, _width);           
         }
 
         public void TableClearing(Table table)
@@ -244,7 +230,7 @@
 
         public void CardBeingRemovedFromDeck(Deck deck, Guid cardId)
         {
-            throw new NotImplementedException();
+
         }
     }
 }

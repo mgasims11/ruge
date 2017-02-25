@@ -57,9 +57,10 @@ namespace ruge.lib.logic {
                     Dimensions = new XYPair(height,width)
             };
             Canvas = canvas;
-            this.RaiseEngineActionEvent(Canvas, EngineActionType.Create);
+            this.RaiseEngineActionEvent(Canvas, EngineActionType.Update);
             this.InitializeEngineActionSet();
-                      
+            Update(Canvas);
+
             return canvas;
         }
 
@@ -99,6 +100,11 @@ namespace ruge.lib.logic {
             {
                 this.UserActionEvent(this, args);
             }
+        }
+
+        public void Update(IControl iControl)
+        {
+            AddEngineAction(iControl, EngineActionType.Update);
         }
     }
 }

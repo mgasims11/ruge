@@ -51,7 +51,7 @@
         {
             foreach (var action in e.EngineActionSet.EngineActions)
             {
-                if (action.ActionType == EngineActionType.Create || action.ActionType == EngineActionType.Update)
+                if (action.ActionType == EngineActionType.Update)
                 {
                     if (action.Control is IControl)
                         RenderControl(action.Control);
