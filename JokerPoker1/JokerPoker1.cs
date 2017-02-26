@@ -21,8 +21,8 @@
 
     //"CLEAR UP AND STREAMLINE RUGE/CARD INTEERFACE"
     // TO DO:   
-    // Implement disabled, visible, rotation, zorder
-    //What happened to CanvasManager? Why are we not adding controls through it?
+    // Implement disabled, visible, rotation
+    // Need to add VISIBILITY... to remove HOLD overlays
 
     public class JokerPoker : IGame
     {     
