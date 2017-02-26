@@ -69,11 +69,19 @@ namespace Ruge.Win.Test.Controls
         }
         public new double Opacity
         {
-            get { return base.Opacity; ; }
+            get { return (int)(base.Opacity * 100);}
             set
             {
                 base.Opacity = value;
                 SetValue(OpacityProperty, (double)value / 100);
+            }
+        }
+        public Int32 ZIndex
+        {
+            get { return (Int32)base.GetValue(Canvas.ZIndexProperty); }
+            set
+            {
+                SetValue(ZIndexProperty, value);
             }
         }
         public new string ToolTip
@@ -88,7 +96,7 @@ namespace Ruge.Win.Test.Controls
             set { base.Name = value; }
         }
 
-        public Clickable(string name, int opacity, double width, double height, string backgroundIdle, string backgroundHover, string backgroundDown, string backgroundDisabled, string tooltip) : base()
+        public Clickable(string name, int opacity, double width, double height, string backgroundIdle, string backgroundHover, string backgroundDown, string backgroundDisabled, string tooltip, int zIndex) : base()
         {
             Width = width;
             Height = height;
@@ -108,6 +116,7 @@ namespace Ruge.Win.Test.Controls
             ImageDown = backgroundDown;
             ImageDisabled = backgroundDisabled;
 
+            ZIndex = zIndex;
             SetBackground(ImageNormal);            
         }
 

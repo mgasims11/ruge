@@ -78,7 +78,7 @@
 
         public Card GetCardFromControlId(string cardControlId)
         {
-            var cardControl = CardControls.FirstOrDefault(cc => cc.ControlId == cardControlId);
+            var cardControl = CardControls.FirstOrDefault(cc => cc.ElementId == cardControlId);
             if (cardControl != null)
             {
                 return cardControl.Deck.Cards[cardControl.Index];

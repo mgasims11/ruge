@@ -11,6 +11,9 @@ namespace ruge.lib.logic {
 
 
     public class CanvasManager {
+
+        private Dictionary<string, IElement> _iElements;
+
         public delegate void EngineActionEventHandler(object sender, EngineActionEventArgs e);
         public event EngineActionEventHandler EngineActionEvent;
 
@@ -30,10 +33,9 @@ namespace ruge.lib.logic {
             }
         }
         
-        public void RaiseEngineActionEvent(IControl control, EngineActionType actionType) {
-            var args = new EngineControlActionEventArgs(control.ControlId, actionType);
+        public void RaiseEngineActionEvent(IElement control, EngineActionType actionType) {
+            var args = new EngineControlActionEventArgs(control.ElementId, actionType);
             this.RaiseEngineActionEvent(this,args);
-            //var x = new ruge.lib.model.engine.EngineControlActionEventArgs(control, actionType);
         }
 
         public void RaiseEngineActionEvent(Canvas canvas, EngineActionType actionType) {
@@ -59,6 +61,7 @@ namespace ruge.lib.logic {
             Canvas = canvas;
             this.RaiseEngineActionEvent(Canvas, EngineActionType.Update);
             this.InitializeEngineActionSet();
+            _iElements = null;
             Update(Canvas);
 
             return canvas;
@@ -77,11 +80,11 @@ namespace ruge.lib.logic {
             _engineActionSet.EngineActions.Clear();
         }
 
-        public void AddEngineAction(IControl control, EngineActionType actionType)
+        public void AddEngineAction(IElement control, EngineActionType actionType)
         {
             var engineAction = new EngineAction();
             engineAction.ActionType = actionType;
-            engineAction.Control = control;
+            engineAction.Element = control;
             _engineActionSet.EngineActions.Add(engineAction);
         }
 
@@ -95,16 +98,22 @@ namespace ruge.lib.logic {
 
         public void RaiseUserActionEvent(UserAction userAction)
         {
-            var args = new UserActionEventArgs(userAction);
+            var args = new UserActionEventArgs(userAction, _iElements[userAction.ControlId]);
             if (this.UserActionEvent != null)
             {
                 this.UserActionEvent(this, args);
             }
         }
 
-        public void Update(IControl iControl)
+        public void Update(IElement iElement)
         {
-            AddEngineAction(iControl, EngineActionType.Update);
+            if (_iElements == null) _iElements = new Dictionary<string, IElement>();
+
+            if (!_iElements.ContainsKey(iElement.ElementId))
+            {
+                _iElements.Add(iElement.ElementId, iElement);
+            }
+            AddEngineAction(iElement, EngineActionType.Update);
         }
     }
 }

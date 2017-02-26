@@ -14,7 +14,7 @@ namespace ruge.lib.logic
         public static StaticImageControl Create()
         {
             var control = new StaticImageControl();
-            control.ControlId = ControlHelper.GetNewControlID();
+            control.ElementId = ControlHelper.GetNewControlID();
             return control;
         }
 

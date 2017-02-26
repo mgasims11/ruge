@@ -5,13 +5,12 @@ using System.Threading.Tasks;
 
 namespace ruge.lib.model.controls.interfaces
 {
-    public interface IControl
+    public interface IElement
     {
-        string ControlId { get; set; }
+        string ElementId { get; set; }
         EnableStates EnableState { get; set; }
         string ImageUri { get; set; }
         XYPair Location { get; set; }
         XYPair Size { get; set; }
-
     }
 }

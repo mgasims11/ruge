@@ -8,14 +8,13 @@ namespace ruge.lib.model.controls
     using controls;
     using ruge.lib.model.controls.interfaces;
 
-    public abstract class Control : IControl
+    public abstract class Control : IElement
     {
         private int _opacity;
         private int _zOrder;
         private int _rotation;
         
-
-        public string ControlId { get; set; }
+        public string ElementId { get; set; }
         public EnableStates EnableState { get; set; }        
         public string ImageUri { get; set; }
         public XYPair Location { get; set; }
@@ -34,7 +33,7 @@ namespace ruge.lib.model.controls
             }
         }
 
-        public int ZOrder
+        public int ZIndex
         {
             get
             {
@@ -42,7 +41,7 @@ namespace ruge.lib.model.controls
             }
             set
             {
-                if (value > 100 || value< 0) throw new OverflowException("Range for ZOrder values is 0 through 100");
+                if (value > 100 || value< 0) throw new OverflowException("Range for ZIndex values is 0 through 100");
                 _zOrder = value;
             }
         }

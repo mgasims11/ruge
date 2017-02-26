@@ -14,7 +14,7 @@ namespace ruge.lib.logic
         public static TextInputControl Create()
         {
             var control = new TextInputControl();
-            control.ControlId = ControlHelper.GetNewControlID();
+            control.ElementId = ControlHelper.GetNewControlID();
             return control;
         }
 

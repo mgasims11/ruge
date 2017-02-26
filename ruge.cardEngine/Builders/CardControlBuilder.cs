@@ -16,7 +16,7 @@ namespace ruge.cardEngine.Builders
         public static CardControl Create()
         {
             var cardControl = new CardControl();
-            cardControl.ControlId = ControlHelper.GetNewControlID();
+            cardControl.ElementId = ControlHelper.GetNewControlID();
             cardControl.EnableState = EnableStates.Enabled;
             cardControl.Opacity = 100;
             return cardControl;
@@ -191,14 +191,14 @@ namespace ruge.cardEngine.Builders
 
         public static CardControl SetControlId(this CardControl cardControl, Guid cardId)
         {
-            cardControl.ControlId = ControlHelper.GetControlID(cardId);
+            cardControl.ElementId = ControlHelper.GetControlID(cardId);
 
             return cardControl;
         }
 
-        public static CardControl SetZOrder(this CardControl cardControl, int zOrder)
+        public static CardControl SetZIndex(this CardControl cardControl, int zOrder)
         {
-            cardControl.ZOrder = zOrder;
+            cardControl.ZIndex = zOrder;
 
             return cardControl;
         }

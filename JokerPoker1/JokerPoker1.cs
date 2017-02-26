@@ -20,8 +20,7 @@
 
 
     //"CLEAR UP AND STREAMLINE RUGE/CARD INTEERFACE"
-    // TO DO:
-    // New name "RULE" - Really Useful Layout Engine
+    // TO DO:   
     // Implement disabled, visible, rotation, zorder
     //What happened to CanvasManager? Why are we not adding controls through it?
 
@@ -65,10 +64,10 @@
                     CardControlBuilder.Create()
                         .SetDeck(_playerDeck)
                         .SetIndex(i)
-                        .SetLocation(new XYPair(i * _CardSize.X, 2))
+                        .SetLocation(new XYPair(i * _CardSize.X * .75, 2))
                         .SetSize(_CardSize)
                         .SetOpacity(100)
-                        .SetZOrder(50)
+                        .SetZIndex(10  - i)
                         );
             };
 
@@ -87,17 +86,20 @@
         private void CanvasManager_UserActionEvent(object sender, UserActionEventArgs e)
         {
             var card = Renderer.GetCardFromControlId(e.UserAction.ControlId);
+            //e.Control
             
             int index = 0;
             Deck deck;
             if (Renderer.FindCardInDecks(card, out deck, out index))
             {
-                if (card.Orientation == Orientations.FaceUp)
-                    _tableManager.ChangeOrientation(deck, card, Orientations.FaceDown);
-                else
-                    _tableManager.ChangeOrientation(deck, card, Orientations.FaceUp);
+                
+                //e.Control.
+                //if (card.Orientation == Orientations.FaceUp)
+                //    _tableManager.ChangeOrientation(deck, card, Orientations.FaceDown);
+                //else
+                //    _tableManager.ChangeOrientation(deck, card, Orientations.FaceUp);
 
-                Renderer.SendEngineActionSet();
+                //Renderer.SendEngineActionSet();
             }
         }
     }

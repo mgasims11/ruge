@@ -2,11 +2,11 @@ namespace ruge.lib.model.controls
 {
     using System;
     using ruge.lib.model.controls.interfaces;
-    public class Canvas: IControl
+    public class Canvas: IElement
     {
         public string CanvasId {get;set;}
 
-        public string ControlId
+        public string ElementId
         {
             get { return "CANVAS"; }
             set {}

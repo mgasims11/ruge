@@ -4,13 +4,17 @@
     using ruge.lib.model;
     using ruge.lib.logic;
     using ruge.lib.model.controls;
+    using ruge.lib.model.controls.interfaces;
+
     public class UserActionEventArgs
     {
         public UserAction UserAction { get; private set; }
+        public IElement Control { get; private set; }
 
-        public UserActionEventArgs(UserAction userAction)
+        public UserActionEventArgs(UserAction userAction, IElement control)
         {
-            this.UserAction = userAction;
+            UserAction = userAction;
+            Control = control;
         }
     }
 }

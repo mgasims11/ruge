@@ -14,7 +14,7 @@ namespace ruge.lib.logic
         public static ClickableControl Create()
         {
             var control = new ClickableControl();
-            control.ControlId = ControlHelper.GetNewControlID();
+            control.ElementId = ControlHelper.GetNewControlID();
             return control;
         }
 
@@ -23,9 +23,9 @@ namespace ruge.lib.logic
             control.Opacity = opacity;
             return control;
         }
-        public static ClickableControl SetZOrder(this ClickableControl control, int zOrder)
+        public static ClickableControl SetZIndex(this ClickableControl control, int zIndex)
         {
-            control.ZOrder = zOrder;
+            control.ZIndex = zIndex;
             return control;
         }
         public static ClickableControl SetEnableState(this ClickableControl control, int rotation)

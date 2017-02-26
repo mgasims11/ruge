@@ -53,12 +53,12 @@
             {
                 if (action.ActionType == EngineActionType.Update)
                 {
-                    if (action.Control is IControl)
-                        RenderControl(action.Control);
+                    if (action.Element is ruge.lib.model.controls.Control)
+                        RenderControl(action.Element as ruge.lib.model.controls.Control);
 
-                    if (action.Control is ruge.lib.model.controls.Canvas)
+                    if (action.Element is ruge.lib.model.controls.Canvas)
                     {
-                        RenderCanvas(action.Control as ruge.lib.model.controls.Canvas);
+                        RenderCanvas(action.Element as ruge.lib.model.controls.Canvas);
                     }
                 }
             }
@@ -74,13 +74,13 @@
             }            
         }
 
-        private void RenderControl(IControl control)
+        private void RenderControl(ruge.lib.model.controls.Control control)
         {
             if (control is TextControl)
             {
                 var c = control as TextControl;
                 var clientControl = new Text(
-                            c.ControlId,
+                            c.ElementId,
                             c.Size.X,
                             c.Size.Y,
                             c.Text,
@@ -96,11 +96,11 @@
             if (control is ClickableControl)
             {
                 var c = control as ClickableControl;
-                var clientControl = LogicalTreeHelper.FindLogicalNode(MainCanvas, c.ControlId) as Clickable;
+                var clientControl = LogicalTreeHelper.FindLogicalNode(MainCanvas, c.ElementId) as Clickable;
                 if (clientControl == null)
                 {
                     clientControl = new Clickable(
-                            c.ControlId,
+                            c.ElementId,
                             c.Opacity,
                             c.Size.X,
                             c.Size.Y,
@@ -108,7 +108,8 @@
                             c.ImageUriHover,
                             c.ImageUriDown,
                             c.ImageUriDisabled,
-                            ""
+                            "",
+                            c.ZIndex
                             );
 
                     MainCanvas.Children.Add(clientControl);
@@ -116,7 +117,7 @@
                 }
                 else
                 {
-                    clientControl.Name = c.ControlId;
+                    clientControl.Name = c.ElementId;
                     clientControl.Opacity = c.Opacity;
                     clientControl.Width = c.Size.X;
                     clientControl.Height = c.Size.Y;
@@ -136,7 +137,7 @@
             {
                 var c = control as StaticImageControl;
                 var clientControl = new StaticImage(
-                            c.ControlId,
+                            c.ElementId,
                             c.Size.X,
                             c.Size.Y,
                             c.ImageUri
@@ -150,7 +151,7 @@
             {
                 var c = control as TextInputControl;
                 var clientControl = new TextInput(
-                    c.ControlId,
+                    c.ElementId,
                     c.Size.X,
                     c.Size.Y,
                     c.ImageUri,
