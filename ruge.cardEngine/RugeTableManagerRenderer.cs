@@ -107,11 +107,9 @@
             {
                 case Orientations.FaceUp:
                     cardControl.ImageUri = String.Format(@"C:\data\ruge\ruge.cardEngine\images\{0}.jpg", ((int)card.Rank).ToString("00") + card.Suit.ToString().Substring(0, 1));
-                    CanvasManager.Update(cardControl);
                     break;
                 case Orientations.FaceDown:
                     cardControl.ImageUri = (@"C:\data\ruge\ruge.cardEngine\images\BackBlue.jpg");
-                    CanvasManager.Update(cardControl);
                     break;
             }
             CanvasManager.Update(cardControl);

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ruge.lib.model;
 
 namespace ruge.lib.logic
 {
@@ -23,6 +24,18 @@ namespace ruge.lib.logic
             control.Opacity = opacity;
             return control;
         }
+        public static ClickableControl SetLocation(this ClickableControl clickableControl, XYPair location)
+        {
+            clickableControl.Location = location;
+            return clickableControl;
+        }
+
+        public static ClickableControl SetSize(this ClickableControl clickableControl, XYPair size)
+        {
+            clickableControl.Size = size;
+            return clickableControl;
+        }
+
         public static ClickableControl SetZIndex(this ClickableControl control, int zIndex)
         {
             control.ZIndex = zIndex;

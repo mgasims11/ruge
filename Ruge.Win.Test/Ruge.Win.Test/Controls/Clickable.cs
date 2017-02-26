@@ -81,7 +81,7 @@ namespace Ruge.Win.Test.Controls
             get { return (Int32)base.GetValue(Canvas.ZIndexProperty); }
             set
             {
-                SetValue(ZIndexProperty, value);
+                SetValue(Canvas.ZIndexProperty, value);
             }
         }
         public new string ToolTip

@@ -58,16 +58,25 @@
                 .DeckName("Player Deck")
                 .Options(new DeckOptions(5));
 
-            for (int i = 0; i <= 5; i++)
+            for (int i = 0; i <= 4; i++)
             {
                 Renderer.AddCardControl(
                     CardControlBuilder.Create()
                         .SetDeck(_playerDeck)
                         .SetIndex(i)
-                        .SetLocation(new XYPair(i * _CardSize.X * .75, 2))
+                        .SetLocation(new XYPair(i * _CardSize.X, 2))
                         .SetSize(_CardSize)
                         .SetOpacity(100)
-                        .SetZIndex(10  - i)
+                        .SetZIndex(51)
+                        );
+
+                Renderer.CanvasManager.Update(                   
+                    ClickableControlBuilder.Create()                                          
+                        .SetLocation(new XYPair(i * _CardSize.X, 2))
+                        .SetSize(_CardSize)
+                        .SetOpacity(100)
+                        .SetZIndex(100)
+                        .SetAllUris(@"C:\data\ruge\ruge.cardEngine\images\Hold.png")
                         );
             };
 
