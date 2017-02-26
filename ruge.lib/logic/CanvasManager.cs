@@ -55,8 +55,9 @@ namespace ruge.lib.logic {
 
         public Canvas CreateCanvas(double height, double width) {
             var canvas = new Canvas() {
-                    CanvasId = "C" + Guid.NewGuid().ToString().Replace("-", ""),
-                    Dimensions = new XYPair(height,width)
+                CanvasId = "C" + Guid.NewGuid().ToString().Replace("-", ""),
+                Dimensions = new XYPair(height, width),
+                IsVisible = true                    
             };
             Canvas = canvas;
             this.RaiseEngineActionEvent(Canvas, EngineActionType.Update);
@@ -113,7 +114,11 @@ namespace ruge.lib.logic {
             {
                 _iElements.Add(iElement.ElementId, iElement);
             }
-            AddEngineAction(iElement, EngineActionType.Update);
+
+            if (iElement.IsVisible)
+                AddEngineAction(iElement, EngineActionType.Update); 
+            else
+                AddEngineAction(iElement, EngineActionType.Delete);
         }
     }
 }

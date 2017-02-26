@@ -68,16 +68,17 @@
                         .SetSize(_CardSize)
                         .SetOpacity(100)
                         .SetZIndex(51)
+                        .SetIsVisible(true)
                         );
 
-                Renderer.CanvasManager.Update(                   
-                    ClickableControlBuilder.Create()                                          
-                        .SetLocation(new XYPair(i * _CardSize.X, 2))
-                        .SetSize(_CardSize)
-                        .SetOpacity(100)
-                        .SetZIndex(100)
-                        .SetAllUris(@"C:\data\ruge\ruge.cardEngine\images\Hold.png")
-                        );
+                //Renderer.CanvasManager.Update(                   
+                //    ClickableControlBuilder.Create()                                          
+                //        .SetLocation(new XYPair(i * _CardSize.X, 2))
+                //        .SetSize(_CardSize)
+                //        .SetOpacity(100)
+                //        .SetZIndex(100)
+                //        .SetAllUris(@"C:\data\ruge\ruge.cardEngine\images\Hold.png")
+                //        );
             };
 
             _tableManager.AddDecksToTable(_dealerDeck, _playerDeck);
@@ -94,13 +95,17 @@
 
         private void CanvasManager_UserActionEvent(object sender, UserActionEventArgs e)
         {
-            var card = Renderer.GetCardFromControlId(e.UserAction.ControlId);
-            //e.Control
-            
-            int index = 0;
-            Deck deck;
-            if (Renderer.FindCardInDecks(card, out deck, out index))
+            if (e.UserAction.UserActionType == UserActionType.Click)
             {
+                var card = Renderer.GetCardFromControlId(e.UserAction.ControlId);
+                e.Control.IsVisible = false;
+                Renderer.SendEngineActionSet();
+            }
+                       
+            //int index = 0;
+            //Deck deck;
+            //if (Renderer.FindCardInDecks(card, out deck, out index))
+            //{
                 
                 //e.Control.
                 //if (card.Orientation == Orientations.FaceUp)
@@ -109,7 +114,7 @@
                 //    _tableManager.ChangeOrientation(deck, card, Orientations.FaceUp);
 
                 //Renderer.SendEngineActionSet();
-            }
+            
         }
     }
 }

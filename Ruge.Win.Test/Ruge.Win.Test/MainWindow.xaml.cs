@@ -61,7 +61,18 @@
                         RenderCanvas(action.Element as ruge.lib.model.controls.Canvas);
                     }
                 }
+                else
+                {
+                    if (action.Element is ruge.lib.model.controls.Control)
+                        DeleteControl(action.Element as ruge.lib.model.controls.Control);
+                }
             }
+        }
+
+        private void DeleteControl(ruge.lib.model.controls.Control control)
+        {
+            var clientControl = LogicalTreeHelper.FindLogicalNode(MainCanvas, control.ElementId) as Clickable;
+            MainCanvas.Children.Remove(clientControl);
         }
 
         private void RenderCanvas(ruge.lib.model.controls.Canvas canvas)

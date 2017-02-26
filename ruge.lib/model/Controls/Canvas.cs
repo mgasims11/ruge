@@ -26,5 +26,6 @@ namespace ruge.lib.model.controls
 
         public XYPair Size { get; set; }
 
+        public bool IsVisible { get; set; }
     }
 }

@@ -12,5 +12,6 @@ namespace ruge.lib.model.controls.interfaces
         string ImageUri { get; set; }
         XYPair Location { get; set; }
         XYPair Size { get; set; }
+        bool IsVisible {get;set;}
     }
 }

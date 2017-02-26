@@ -30,6 +30,12 @@ namespace ruge.lib.logic
             return clickableControl;
         }
 
+        public static ClickableControl SetIsVisible(this ClickableControl clickableControl, bool isVisible)
+        {
+            clickableControl.IsVisible = isVisible;
+            return clickableControl;
+        }
+
         public static ClickableControl SetSize(this ClickableControl clickableControl, XYPair size)
         {
             clickableControl.Size = size;

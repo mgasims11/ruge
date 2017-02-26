@@ -43,6 +43,12 @@ namespace ruge.cardEngine.Builders
             return cardControl;
         }
 
+        public static CardControl SetIsVisible(this CardControl cardControl, bool isVisible)
+        {
+            cardControl.IsVisible = isVisible;
+            return cardControl;
+        }
+
         public static CardControl SetOpacity(this CardControl cardControl, int opacity)
         {
             cardControl.Opacity = opacity;
@@ -178,13 +184,6 @@ namespace ruge.cardEngine.Builders
         public static CardControl SetIndex(this CardControl cardControl, int index)
         {
             cardControl.Index = index;
-
-            return cardControl;
-        }
-
-        public static CardControl SetVisibilityState(this CardControl cardControl, int opacity)
-        {
-            cardControl.Opacity = opacity;
 
             return cardControl;
         }
