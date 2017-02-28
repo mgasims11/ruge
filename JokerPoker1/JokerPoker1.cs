@@ -33,6 +33,7 @@
         public Deck _playerDeck = null;
 
         public XYPair _CardSize = new XYPair(1.0, 1.375);
+        public XYPair _HoldButtonSize = new XYPair(1.0, 0.5);
 
         public JokerPoker()
         {
@@ -60,15 +61,22 @@
 
             for (int i = 0; i <= 4; i++)
             {
-                Renderer.AddCardControl(
-                    CardControlBuilder.Create()
+                var cardControl = CardControlBuilder.Create()
                         .SetDeck(_playerDeck)
                         .SetIndex(i)
                         .SetLocation(new XYPair(i * _CardSize.X, 2))
                         .SetSize(_CardSize)
                         .SetOpacity(100)
                         .SetZIndex(51)
-                        .SetIsVisible(true)
+                        .SetIsVisible(true);
+
+                Renderer.AddCardControl(cardControl);
+
+                Renderer.CanvasManager.Update(                   
+                    ClickableControlBuilder.Create()                                          
+                        .SetLocation(new XYPair(cardControl.Location.X,cardControl.Location.Y + cardControl.Size.Y + 0.03))
+                        .SetImageUri(@"C:\data\ruge\ruge.cardEngine\images\HoldButton.png")
+                        .SetSize(_HoldButtonSize)
                         );
 
                 //Renderer.CanvasManager.Update(                   

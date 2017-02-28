@@ -16,6 +16,11 @@ namespace ruge.lib.logic
         {
             var control = new ClickableControl();
             control.ElementId = ControlHelper.GetNewControlID();
+            control.IsVisible = true;
+            control.Opacity = 100;
+            control.Location = new XYPair(0, 0);
+            control.Size = new XYPair();
+            control.ZIndex = 50;
             return control;
         }
 
