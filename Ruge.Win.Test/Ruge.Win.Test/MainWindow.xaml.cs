@@ -44,7 +44,9 @@
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {          
             _myGame.Renderer.CanvasManager.EngineActionSetEvent += _canvasManager_EngineActionSetEvent;
+            CANVAS.MouseDown += Clickable_MouseDown;
             _myGame.Start();
+            
         }
 
         private void _canvasManager_EngineActionSetEvent(object sender, EngineActionSetEventArgs e)
@@ -71,14 +73,14 @@
 
         private void DeleteControl(ruge.lib.model.controls.Control control)
         {
-            var clientControl = LogicalTreeHelper.FindLogicalNode(MainCanvas, control.ElementId) as Clickable;
-            MainCanvas.Children.Remove(clientControl);
+            var clientControl = LogicalTreeHelper.FindLogicalNode(CANVAS, control.ElementId) as Clickable;
+            CANVAS.Children.Remove(clientControl);
         }
 
         private void RenderCanvas(ruge.lib.model.controls.Canvas canvas)
         {
-            MainCanvas.SetValue(WidthProperty, canvas.Dimensions.X);
-            MainCanvas.SetValue(HeightProperty, canvas.Dimensions.Y);
+            CANVAS.SetValue(WidthProperty, canvas.Dimensions.X);
+            CANVAS.SetValue(HeightProperty, canvas.Dimensions.Y);
             if (!String.IsNullOrEmpty(canvas.ImageUri))
             {
                 SetValue(BackgroundProperty, new BitmapImage(new Uri(canvas.ImageUri)));
@@ -99,7 +101,7 @@
                             200,
                             200 
                             );
-                MainCanvas.Children.Add(clientControl);
+                CANVAS.Children.Add(clientControl);
                 clientControl.SetValue(LeftProperty, control.Location.X);
                 clientControl.SetValue(TopProperty, control.Location.Y);                
             }
@@ -107,7 +109,7 @@
             if (control is ClickableControl)
             {
                 var c = control as ClickableControl;
-                var clientControl = LogicalTreeHelper.FindLogicalNode(MainCanvas, c.ElementId) as Clickable;
+                var clientControl = LogicalTreeHelper.FindLogicalNode(CANVAS, c.ElementId) as Clickable;
                 if (clientControl == null)
                 {
                     clientControl = new Clickable(
@@ -123,7 +125,7 @@
                             c.ZIndex
                             );
 
-                    MainCanvas.Children.Add(clientControl);
+                    CANVAS.Children.Add(clientControl);
                     clientControl.MouseDown += Clickable_MouseDown;
                 }
                 else
@@ -153,7 +155,7 @@
                             c.Size.Y,
                             c.ImageUri
                             );
-                MainCanvas.Children.Add(clientControl);
+                CANVAS.Children.Add(clientControl);
                 clientControl.SetValue(LeftProperty, control.Location.X);
                 clientControl.SetValue(TopProperty, control.Location.Y);
             }
@@ -171,7 +173,7 @@
                     c.ImageUriDisabled,
                     c.Text
                 );
-                MainCanvas.Children.Add(clientControl);
+                CANVAS.Children.Add(clientControl);
                 clientControl.SetValue(TopProperty, control.Location.X);
                 clientControl.SetValue(LeftProperty, control.Location.Y);
 
@@ -180,11 +182,12 @@
 
         private void Clickable_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            var control = sender as Clickable;
+            var control = sender as FrameworkElement;
             var userAction = new UserAction() { ControlId = control.Name, UserActionType = UserActionType.Click};
             var userActionSet = new UserActionSet();            
             userActionSet.UserActions.Add(userAction);
-            _myGame.Renderer.CanvasManager.ReceiveUserActionSet(userActionSet);            
+            _myGame.Renderer.CanvasManager.ReceiveUserActionSet(userActionSet);
+            e.Handled = true;
         }
     }
 }

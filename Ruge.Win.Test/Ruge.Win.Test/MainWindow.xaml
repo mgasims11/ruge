@@ -8,7 +8,7 @@
         Title="MainWindow" >
 
     <Viewbox>
-        <Canvas x:Name="MainCanvas" Background="Green">
+        <Canvas x:Name="CANVAS" Background="Green">
         </Canvas>
     </Viewbox>
 </Window>

@@ -95,26 +95,36 @@
 
         private void CanvasManager_UserActionEvent(object sender, UserActionEventArgs e)
         {
-            if (e.UserAction.UserActionType == UserActionType.Click)
+            if (e.Control is CardControl && e.UserAction.UserActionType == UserActionType.Click)
             {
                 var card = Renderer.GetCardFromControlId(e.UserAction.ControlId);
                 e.Control.IsVisible = false;
                 Renderer.SendEngineActionSet();
             }
-                       
+
+            if (e.Control is Canvas && e.UserAction.UserActionType == UserActionType.Click)
+            {
+                foreach (var cardControl in Renderer.CardControls)
+                {
+                    cardControl.IsVisible = true;
+                    Renderer.SendEngineActionSet();
+                }
+                Renderer.SendEngineActionSet();
+            }
+
             //int index = 0;
             //Deck deck;
             //if (Renderer.FindCardInDecks(card, out deck, out index))
             //{
-                
-                //e.Control.
-                //if (card.Orientation == Orientations.FaceUp)
-                //    _tableManager.ChangeOrientation(deck, card, Orientations.FaceDown);
-                //else
-                //    _tableManager.ChangeOrientation(deck, card, Orientations.FaceUp);
 
-                //Renderer.SendEngineActionSet();
-            
+            //e.Control.
+            //if (card.Orientation == Orientations.FaceUp)
+            //    _tableManager.ChangeOrientation(deck, card, Orientations.FaceDown);
+            //else
+            //    _tableManager.ChangeOrientation(deck, card, Orientations.FaceUp);
+
+            //Renderer.SendEngineActionSet();
+
         }
     }
 }
