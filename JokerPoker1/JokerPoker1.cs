@@ -16,7 +16,6 @@
     using CardEngine.Model;
     using ruge.cardEngine.Builders;
     using CardEngine.Logic.Builders;
-    using ruge.cardEngine;
 
 
     //"CLEAR UP AND STREAMLINE RUGE/CARD INTEERFACE"
@@ -61,32 +60,37 @@
 
             for (int i = 0; i <= 4; i++)
             {
-                var cardControl = CardControlBuilder.Create()
+                CardControl cardControl = CardControlBuilder.Create()
                         .SetDeck(_playerDeck)
                         .SetIndex(i)
                         .SetLocation(new XYPair(i * _CardSize.X, 2))
                         .SetSize(_CardSize)
                         .SetOpacity(100)
                         .SetZIndex(51)
-                        .SetIsVisible(true);
+                        .SetIsVisible(true)
+                        .SetName(String.Format("card_{0}", i));
 
                 Renderer.AddCardControl(cardControl);
+
+                Renderer.CanvasManager.Update(
+                   StaticImageControlBuilder.Create()
+                       .SetLocation(new XYPair(i * _CardSize.X, 2))
+                       .SetSize(_CardSize)
+                       .SetOpacity(100)
+                       .SetZIndex(0)
+                       .SetImageUri(@"C:\data\ruge\ruge.cardEngine\images\Hold.png")
+                       .SetName(String.Format("overlay_{0}", i))
+                       .SetIsVisible(false)
+                       );
 
                 Renderer.CanvasManager.Update(                   
                     ClickableControlBuilder.Create()                                          
                         .SetLocation(new XYPair(cardControl.Location.X,cardControl.Location.Y + cardControl.Size.Y + 0.03))
                         .SetImageUri(@"C:\data\ruge\ruge.cardEngine\images\HoldButton.png")
                         .SetSize(_HoldButtonSize)
+                        .SetName(String.Format("holdbutton_{0}", i))
                         );
-
-                //Renderer.CanvasManager.Update(                   
-                //    ClickableControlBuilder.Create()                                          
-                //        .SetLocation(new XYPair(i * _CardSize.X, 2))
-                //        .SetSize(_CardSize)
-                //        .SetOpacity(100)
-                //        .SetZIndex(100)
-                //        .SetAllUris(@"C:\data\ruge\ruge.cardEngine\images\Hold.png")
-                //        );
+               
             };
 
             _tableManager.AddDecksToTable(_dealerDeck, _playerDeck);
@@ -103,22 +107,41 @@
 
         private void CanvasManager_UserActionEvent(object sender, UserActionEventArgs e)
         {
-            if (e.Control is CardControl && e.UserAction.UserActionType == UserActionType.Click)
+            if (e.Control.Name.Contains("holdbutton_"))
             {
-                var card = Renderer.GetCardFromControlId(e.UserAction.ControlId);
-                e.Control.IsVisible = false;
-                Renderer.SendEngineActionSet();
+                var i = Int32.Parse(e.Control.Name.Split('_')[1]);
+                var overlay = Renderer.CanvasManager.GetElementByName(String.Format("overlay_", i));
+                overlay.IsVisible = true;
             }
 
-            if (e.Control is Canvas && e.UserAction.UserActionType == UserActionType.Click)
-            {
-                foreach (var cardControl in Renderer.CardControls)
-                {
-                    cardControl.IsVisible = true;
-                    Renderer.SendEngineActionSet();
-                }
-                Renderer.SendEngineActionSet();
-            }
+
+
+            //if (e.Control is CardControl && e.UserAction.UserActionType == UserActionType.Click)
+            //{
+            //    var card = Renderer.GetCardFromControlId(e.UserAction.ControlId);
+            //    e.Control.IsVisible = false;
+            //    Renderer.SendEngineActionSet();
+            //}
+
+            //if (e.Control is Canvas && e.UserAction.UserActionType == UserActionType.Click)
+            //{
+            //    foreach (var cardControl in Renderer.CardControls)
+            //    {
+            //        cardControl.IsVisible = true;
+            //        Renderer.SendEngineActionSet();
+            //    }
+            //    Renderer.SendEngineActionSet();
+            //}
+
+            //if (e.Control is Canvas && e.UserAction.UserActionType == UserActionType.Click)
+            //{
+            //    foreach (var cardControl in Renderer.CardControls)
+            //    {
+            //        cardControl.IsVisible = true;
+            //        Renderer.SendEngineActionSet();
+            //    }
+            //    Renderer.SendEngineActionSet();
+            //}
 
             //int index = 0;
             //Deck deck;

@@ -89,7 +89,7 @@
         public void AddCardControl(CardControl cardControl)
         {
             CardControls.Add(cardControl);
-        }
+         }
 
         public void RemoveCardControl(Guid deckId, XYPair coordinates, int index)
         {

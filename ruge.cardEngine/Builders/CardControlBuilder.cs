@@ -201,5 +201,11 @@ namespace ruge.cardEngine.Builders
 
             return cardControl;
         }
+
+        public static CardControl SetName(this CardControl control, string name)
+        {
+            control.Name = name;
+            return control;
+        }
     }
 }

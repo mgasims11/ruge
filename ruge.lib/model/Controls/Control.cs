@@ -60,5 +60,7 @@ namespace ruge.lib.model.controls
                 _rotation = value;
             }
         }
+
+        public string Name { get; set; }
     }
 }

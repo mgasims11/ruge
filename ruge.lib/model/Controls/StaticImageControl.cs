@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 namespace ruge.lib.model.controls
 {
    using controls;
-    using ruge.lib.model.controls.interfaces;
+   using ruge.lib.model.controls.interfaces;
+
     public class StaticImageControl : Control
     {
     }

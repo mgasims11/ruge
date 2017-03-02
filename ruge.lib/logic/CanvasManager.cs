@@ -120,5 +120,10 @@ namespace ruge.lib.logic {
             else
                 AddEngineAction(iElement, EngineActionType.Delete);
         }
+
+        public IElement GetElementByName(string name)
+        {
+            return _iElements.FirstOrDefault(e => e.Value.Name == name).Value;        
+        }
     }
 }

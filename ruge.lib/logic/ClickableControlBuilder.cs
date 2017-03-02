@@ -185,5 +185,11 @@ namespace ruge.lib.logic
 
             return control;
         }
+
+        public static ClickableControl SetName(this ClickableControl control, string name)
+        {
+            control.Name = name;
+            return control;
+        }
     }
 }
