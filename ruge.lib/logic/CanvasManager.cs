@@ -102,7 +102,7 @@ namespace ruge.lib.logic {
             var args = new UserActionEventArgs(userAction, _iElements[userAction.ControlId]);
             if (this.UserActionEvent != null)
             {
-                this.UserActionEvent(this, args);
+                UserActionEvent(this, args);
             }
         }
 

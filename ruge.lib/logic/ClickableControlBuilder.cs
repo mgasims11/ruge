@@ -136,7 +136,6 @@ namespace ruge.lib.logic
         public static ClickableControl SetImageUri(this ClickableControl control, string uri)
         {
             control.ImageUri = uri;
-            UpdateEmptyUris(control,uri);
             return control;
         }
 

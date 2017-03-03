@@ -73,7 +73,7 @@
 
         private void DeleteControl(ruge.lib.model.controls.Control control)
         {
-            var clientControl = LogicalTreeHelper.FindLogicalNode(CANVAS, control.ElementId) as Clickable;
+            var clientControl = LogicalTreeHelper.FindLogicalNode(CANVAS, control.ElementId) as FrameworkElement;
             CANVAS.Children.Remove(clientControl);
         }
 
@@ -149,15 +149,31 @@
             if (control is StaticImageControl)
             {
                 var c = control as StaticImageControl;
-                var clientControl = new StaticImage(
-                            c.ElementId,
-                            c.Size.X,
-                            c.Size.Y,
-                            c.ImageUri
-                            );
-                CANVAS.Children.Add(clientControl);
+                var clientControl = LogicalTreeHelper.FindLogicalNode(CANVAS, c.ElementId) as StaticImage;
+                if (clientControl == null)
+                {
+                    clientControl = new StaticImage(
+                                c.ElementId,
+                                c.Size.X,
+                                c.Size.Y,
+                                c.ImageUri,
+                                c.ZIndex
+                                );
+                    CANVAS.Children.Add(clientControl);
+                }
+                else
+                {
+                    clientControl.Name = c.ElementId;
+                    clientControl.Opacity = c.Opacity;
+                    clientControl.Width = c.Size.X;
+                    clientControl.Height = c.Size.Y;
+                    clientControl.ImageUri = c.ImageUri;
+                    clientControl.ToolTip = "";
+                }
+
                 clientControl.SetValue(LeftProperty, control.Location.X);
                 clientControl.SetValue(TopProperty, control.Location.Y);
+                
             }
 
             if (control is TextInputControl)

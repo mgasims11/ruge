@@ -77,7 +77,7 @@
                        .SetLocation(new XYPair(i * _CardSize.X, 2))
                        .SetSize(_CardSize)
                        .SetOpacity(100)
-                       .SetZIndex(0)
+                       .SetZIndex(100)
                        .SetImageUri(@"C:\data\ruge\ruge.cardEngine\images\Hold.png")
                        .SetName(String.Format("overlay_{0}", i))
                        .SetIsVisible(false)
@@ -110,8 +110,11 @@
             if (e.Control.Name.Contains("holdbutton_"))
             {
                 var i = Int32.Parse(e.Control.Name.Split('_')[1]);
-                var overlay = Renderer.CanvasManager.GetElementByName(String.Format("overlay_", i));
-                overlay.IsVisible = true;
+                var overlay = Renderer.CanvasManager.GetElementByName(String.Format("overlay_{0}", i));
+                overlay.IsVisible = !overlay.IsVisible;
+                Renderer.CanvasManager.Update(overlay);
+                _tableManager.ShuffleDeck(_dealerDeck);
+                Renderer.SendEngineActionSet();
             }
 
 
