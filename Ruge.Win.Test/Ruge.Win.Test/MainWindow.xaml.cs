@@ -31,7 +31,6 @@
     /// </summary>
     public partial class MainWindow : Window
     {
-
         JokerPoker _myGame = new JokerPoker();
 
         public MainWindow()

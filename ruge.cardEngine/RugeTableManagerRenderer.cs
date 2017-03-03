@@ -196,7 +196,7 @@
 
         public void DeckShuffled(Deck deck)
         {
-
+            SendEngineActionSet();
         }
 
         public void DeckShuffling(Deck deck)

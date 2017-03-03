@@ -113,7 +113,7 @@
                 var overlay = Renderer.CanvasManager.GetElementByName(String.Format("overlay_{0}", i));
                 overlay.IsVisible = !overlay.IsVisible;
                 Renderer.CanvasManager.Update(overlay);
-                _tableManager.ShuffleDeck(_dealerDeck);
+                _tableManager.ShuffleDeck(_playerDeck);
                 Renderer.SendEngineActionSet();
             }
 
