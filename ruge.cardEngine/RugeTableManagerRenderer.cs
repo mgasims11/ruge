@@ -106,10 +106,10 @@
             switch (card.Orientation)
             {
                 case Orientations.FaceUp:
-                    cardControl.ImageUri = String.Format(@"C:\data\ruge\ruge.cardEngine\images\{0}.jpg", ((int)card.Rank).ToString("00") + card.Suit.ToString().Substring(0, 1));
+                    cardControl.SetAllUris(String.Format(@"C:\data\ruge\ruge.cardEngine\images\{0}.jpg", ((int)card.Rank).ToString("00") + card.Suit.ToString().Substring(0, 1)));
                     break;
                 case Orientations.FaceDown:
-                    cardControl.ImageUri = (@"C:\data\ruge\ruge.cardEngine\images\BackBlue.jpg");
+                    cardControl.SetAllUris(@"C:\data\ruge\ruge.cardEngine\images\BackBlue.jpg");
                     break;
             }
             CanvasManager.Update(cardControl);

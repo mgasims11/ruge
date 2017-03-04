@@ -20,11 +20,27 @@
 
     //"CLEAR UP AND STREAMLINE RUGE/CARD INTEERFACE"
     // TO DO:   
-    // Implement disabled, visible, rotation
-    // Need to add VISIBILITY... to remove HOLD overlays
-
+    // Implement disabled, rotation
+    // Add textbox, textblock
+    ///  Add sound
+    ///  Add programmed delay
+     
     public class JokerPoker : IGame
-    {     
+    {
+
+        // Idle - Waiting to start game (end of last game?)
+        // Hold buttons - disabled
+        // Bet Up button / Bet Down button - Enabled
+        // Deal Button - Enabled
+
+        public enum GameMode
+        {
+            BetMode,
+            SelectMode
+        }
+
+        public GameMode CurrentGameMode { get; set; }
+
         public RugeTableManagerRenderer Renderer;
         public TableManager _tableManager;
 
@@ -37,13 +53,7 @@
         public JokerPoker()
         {
             Renderer = new RugeTableManagerRenderer(7,4);
-
-            _tableManager = new TableManager(
-                TableBuilder.Create()
-                    .SetTableName("Joker Poker")
-                    .SetImageUri(@"C:\data\ruge\ruge.cardEngine\images\03H.jpg"),
-                Renderer
-            );
+            _tableManager = new TableManager(TableBuilder.Create().SetTableName("Joker Poker"),Renderer);
         }
 
         public void Start()
@@ -89,76 +99,83 @@
                         .SetImageUri(@"C:\data\ruge\ruge.cardEngine\images\HoldButton.png")
                         .SetSize(_HoldButtonSize)
                         .SetName(String.Format("holdbutton_{0}", i))
-                        );
-               
+                        );               
             };
 
+            Renderer.CanvasManager.Update(
+                    ClickableControlBuilder.Create()
+                        .SetLocation(new XYPair(5.3,2))
+                        .SetImageUri(@"C:\data\ruge\ruge.cardEngine\images\DealButton.png")
+                        .SetSize(_HoldButtonSize)
+                        .SetName("DealButton")
+                        );
+
+            Renderer.CanvasManager.Update(
+                    ClickableControlBuilder.Create()
+                        .SetLocation(new XYPair(5.3, 2.5))
+                        .SetImageUri(@"C:\data\ruge\ruge.cardEngine\images\BetButton.png")
+                        .SetSize(_HoldButtonSize)
+                        .SetName("DealButton")
+                        );
+
             _tableManager.AddDecksToTable(_dealerDeck, _playerDeck);
-
-            _tableManager.FillDeck(_dealerDeck);
-            _tableManager.ShuffleDeck(_dealerDeck);
-
-            _tableManager.DealCardsFromTopToTop(_dealerDeck, _playerDeck, 5);
-
             Renderer.CanvasManager.UserActionEvent += CanvasManager_UserActionEvent;
-
             Renderer.SendEngineActionSet();
         }
 
         private void CanvasManager_UserActionEvent(object sender, UserActionEventArgs e)
         {
-            if (e.Control.Name.Contains("holdbutton_"))
+
+            switch (CurrentGameMode)
             {
-                var i = Int32.Parse(e.Control.Name.Split('_')[1]);
-                var overlay = Renderer.CanvasManager.GetElementByName(String.Format("overlay_{0}", i));
-                overlay.IsVisible = !overlay.IsVisible;
-                Renderer.CanvasManager.Update(overlay);
-                _tableManager.ShuffleDeck(_playerDeck);
-                Renderer.SendEngineActionSet();
+                case GameMode.BetMode:
+                    BetModeEvent(e.Control, e.UserAction);
+                    break;
+                case GameMode.SelectMode:
+                    SelectModeEvent(e.Control, e.UserAction);
+                    break;    
             }
+        }
 
+        private void BetModeEvent(IElement element, UserAction userAction)
+        {
+            if (element is ClickableControl)
+            {
+                var clickableControl = element as ClickableControl;
 
+                if (clickableControl.Name == "DealButton")
+                {
+                    StartNewRound();
+                }
+            }
+        }
 
-            //if (e.Control is CardControl && e.UserAction.UserActionType == UserActionType.Click)
-            //{
-            //    var card = Renderer.GetCardFromControlId(e.UserAction.ControlId);
-            //    e.Control.IsVisible = false;
-            //    Renderer.SendEngineActionSet();
-            //}
+        private void SelectModeEvent(IElement element, UserAction userAction)
+        {
+            if (element is ClickableControl)
+            {
+                var clickableControl = element as ClickableControl;
+                if (clickableControl.Name.Contains("holdbutton_"))
+                {
+                    var overlayName = String.Format("overlay_{0}", clickableControl.Name.Split('_')[1]);
+                    var overlay = Renderer.CanvasManager.GetElementByName(overlayName);
+                    overlay.IsVisible = !overlay.IsVisible;
+                    Renderer.CanvasManager.Update(overlay);                    
+                    Renderer.SendEngineActionSet();
+                }
+            }
+        }
 
-            //if (e.Control is Canvas && e.UserAction.UserActionType == UserActionType.Click)
-            //{
-            //    foreach (var cardControl in Renderer.CardControls)
-            //    {
-            //        cardControl.IsVisible = true;
-            //        Renderer.SendEngineActionSet();
-            //    }
-            //    Renderer.SendEngineActionSet();
-            //}
-
-            //if (e.Control is Canvas && e.UserAction.UserActionType == UserActionType.Click)
-            //{
-            //    foreach (var cardControl in Renderer.CardControls)
-            //    {
-            //        cardControl.IsVisible = true;
-            //        Renderer.SendEngineActionSet();
-            //    }
-            //    Renderer.SendEngineActionSet();
-            //}
-
-            //int index = 0;
-            //Deck deck;
-            //if (Renderer.FindCardInDecks(card, out deck, out index))
-            //{
-
-            //e.Control.
-            //if (card.Orientation == Orientations.FaceUp)
-            //    _tableManager.ChangeOrientation(deck, card, Orientations.FaceDown);
-            //else
-            //    _tableManager.ChangeOrientation(deck, card, Orientations.FaceUp);
-
-            //Renderer.SendEngineActionSet();
-
+        private void StartNewRound()
+        {           
+            if (_dealerDeck.Cards.Count < 5)
+            {
+                _tableManager.FillDeck(_dealerDeck);
+                _tableManager.ShuffleDeck(_dealerDeck);           
+            }
+            _tableManager.DealCardsFromTopToTop(_dealerDeck, _playerDeck, 5);
+            Renderer.SendEngineActionSet();
+            CurrentGameMode = GameMode.SelectMode;
         }
     }
 }
