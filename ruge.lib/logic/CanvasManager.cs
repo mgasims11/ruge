@@ -125,5 +125,11 @@ namespace ruge.lib.logic {
         {
             return _iElements.FirstOrDefault(e => e.Value.Name == name).Value;        
         }
+
+        public List<IElement> GetElementsByNameMatch(string searchString)
+        {
+            var q =_iElements.Where(e => e.Key.Contains(searchString));
+            return q.Select(z => z.Value).ToList();
+        }
     }
 }

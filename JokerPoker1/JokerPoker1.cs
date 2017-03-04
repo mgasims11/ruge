@@ -104,7 +104,7 @@
 
             Renderer.CanvasManager.Update(
                     ClickableControlBuilder.Create()
-                        .SetLocation(new XYPair(5.3,2))
+                        .SetLocation(new XYPair(5.3, 2 + _CardSize.Y + 0.03))
                         .SetImageUri(@"C:\data\ruge\ruge.cardEngine\images\DealButton.png")
                         .SetSize(_HoldButtonSize)
                         .SetName("DealButton")
@@ -115,12 +115,26 @@
                         .SetLocation(new XYPair(5.3, 2.5))
                         .SetImageUri(@"C:\data\ruge\ruge.cardEngine\images\BetButton.png")
                         .SetSize(_HoldButtonSize)
-                        .SetName("DealButton")
+                        .SetName("BetButton")
                         );
 
             _tableManager.AddDecksToTable(_dealerDeck, _playerDeck);
             Renderer.CanvasManager.UserActionEvent += CanvasManager_UserActionEvent;
-            Renderer.SendEngineActionSet();
+
+            _tableManager.FillDeck(_playerDeck);
+            TurnCardsFaceDown();
+            Renderer.SendEngineActionSet();            
+        }
+
+        private void TurnCardsFaceDown()
+        {
+            _playerDeck.Cards.ForEach(c => c.Orientation = Orientations.FaceDown);
+        }
+
+        private void TurnHeldCardsFaceDown()
+        {
+            var e = Renderer.CanvasManager.GetElementsByNameMatch("overlay_");
+            _playerDeck.Cards.ForEach(c => c.Orientation = Orientations.FaceDown);
         }
 
         private void CanvasManager_UserActionEvent(object sender, UserActionEventArgs e)
@@ -163,6 +177,12 @@
                     Renderer.CanvasManager.Update(overlay);                    
                     Renderer.SendEngineActionSet();
                 }
+
+                if (clickableControl.Name == "DealButton")
+                {
+                    
+                }
+
             }
         }
 
