@@ -52,9 +52,9 @@ namespace ruge.lib.logic
             control.ZIndex = zIndex;
             return control;
         }
-        public static ClickableControl SetEnableState(this ClickableControl control, int rotation)
+        public static ClickableControl SetIsEnabled(this ClickableControl control, bool IsEnabled)
         {
-            control.Rotation = rotation;
+            control.IsEnabled = IsEnabled;
             return control;
         }
 
@@ -136,12 +136,6 @@ namespace ruge.lib.logic
         public static ClickableControl SetImageUri(this ClickableControl control, string uri)
         {
             control.ImageUri = uri;
-            return control;
-        }
-
-        public static ClickableControl SetEnableState(this ClickableControl control, EnableStates enableState)
-        {
-            control.EnableState = enableState;
             return control;
         }
 

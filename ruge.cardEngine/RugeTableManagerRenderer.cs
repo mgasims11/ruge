@@ -101,7 +101,7 @@
             var cardControl = CardControls.FirstOrDefault(cc => cc.Deck.DeckId == deck.DeckId && cc.Index == deck.Cards.IndexOf(card));
             if (cardControl == null) return;
 
-            cardControl.EnableState = EnableStates.Enabled;
+            cardControl.IsEnabled = true;
 
             switch (card.Orientation)
             {

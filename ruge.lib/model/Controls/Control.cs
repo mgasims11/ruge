@@ -15,7 +15,6 @@ namespace ruge.lib.model.controls
         private int _rotation;
                 
         public string ElementId { get; set; }
-        public EnableStates EnableState { get; set; }        
         public string ImageUri { get; set; }
         public XYPair Location { get; set; }
         public XYPair Size { get; set; }

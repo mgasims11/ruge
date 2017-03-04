@@ -122,13 +122,13 @@
             Renderer.CanvasManager.UserActionEvent += CanvasManager_UserActionEvent;
 
             _tableManager.FillDeck(_playerDeck);
-            TurnCardsFaceDown();
+            TurnCards(Orientations.FaceDown);
             Renderer.SendEngineActionSet();            
         }
 
-        private void TurnCardsFaceDown()
+        private void TurnCards(Orientations orientation)
         {
-            _playerDeck.Cards.ForEach(c => c.Orientation = Orientations.FaceDown);
+            _playerDeck.Cards.ForEach(c => c.Orientation = orientation);
         }
 
         private void TurnHeldCardsFaceDown()
@@ -151,6 +151,34 @@
             }
         }
 
+        private void DealCards()
+        {
+            if (_dealerDeck.Cards.Count < 5)
+            {
+                _tableManager.FillDeck(_dealerDeck);
+                _tableManager.ShuffleDeck(_dealerDeck);
+                _tableManager.DealCardsFromTopToTop(_dealerDeck, _playerDeck, 5);
+            }
+
+            SetBetMode();            
+        }
+
+        private void SetBetMode()
+        {
+            CurrentGameMode = GameMode.BetMode;
+            var e = Renderer.CanvasManager.GetElementsByNameMatch("holdbutton_");
+            e.ForEach(c => { ((ClickableControl)c).IsEnabled = false; });
+            Renderer.SendEngineActionSet();
+        }
+    
+        private void SetCardSelectMode()
+        {
+            CurrentGameMode = GameMode.SelectMode;
+            var e = Renderer.CanvasManager.GetElementsByNameMatch("holdbutton_");
+            e.ForEach(c => { ((ClickableControl)c).IsEnabled = true; });
+            Renderer.SendEngineActionSet();
+        }
+    
         private void BetModeEvent(IElement element, UserAction userAction)
         {
             if (element is ClickableControl)
@@ -159,7 +187,9 @@
 
                 if (clickableControl.Name == "DealButton")
                 {
-                    StartNewRound();
+                    DealCards();
+                    TurnCards(Orientations.FaceUp);
+                    SetCardSelectMode();
                 }
             }
         }
@@ -180,23 +210,14 @@
 
                 if (clickableControl.Name == "DealButton")
                 {
-                    
+                   
+                   
+                    SetBetMode();   
                 }
-
             }
         }
 
-        private void StartNewRound()
-        {           
-            if (_dealerDeck.Cards.Count < 5)
-            {
-                _tableManager.FillDeck(_dealerDeck);
-                _tableManager.ShuffleDeck(_dealerDeck);           
-            }
-            _tableManager.DealCardsFromTopToTop(_dealerDeck, _playerDeck, 5);
-            Renderer.SendEngineActionSet();
-            CurrentGameMode = GameMode.SelectMode;
-        }
+      
     }
 }
 

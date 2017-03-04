@@ -17,7 +17,7 @@ namespace ruge.cardEngine.Builders
         {
             var cardControl = new CardControl();
             cardControl.ElementId = ControlHelper.GetNewControlID();
-            cardControl.EnableState = EnableStates.Enabled;
+            cardControl.IsEnabled = true;
             cardControl.Opacity = 100;
             return cardControl;
         }
@@ -128,9 +128,9 @@ namespace ruge.cardEngine.Builders
             return cardControl;
         }
 
-        public static CardControl SetEnableState(this CardControl cardControl, EnableStates enableState)
+        public static CardControl SetIsEnabled(this CardControl cardControl, bool isEnabled)
         {
-            cardControl.EnableState = enableState;
+            cardControl.IsEnabled = isEnabled;
             return cardControl;
         }
 

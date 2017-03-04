@@ -12,12 +12,6 @@ namespace ruge.lib.model.controls
             set {}
         }
 
-        public EnableStates EnableState
-        {
-            get { return EnableStates.Enabled; }
-            set {}
-        }
-
         public XYPair Dimensions {get;set;}
 
         public string ImageUri { get; set; }

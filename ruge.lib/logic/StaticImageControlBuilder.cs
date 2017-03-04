@@ -52,11 +52,6 @@ namespace ruge.lib.logic
             control.ZIndex = zIndex;
             return control;
         }
-        public static StaticImageControl SetEnableState(this StaticImageControl control, int rotation)
-        {
-            control.Rotation = rotation;
-            return control;
-        }
 
         public static StaticImageControl SetX(this StaticImageControl control, int x)
         {

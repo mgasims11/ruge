@@ -7,8 +7,13 @@ namespace ruge.lib.model.controls
 {
     using controls;
     using ruge.lib.model.controls.interfaces;
-    public class TextControl : Control, IText
+    public class TextControl : Control, IText, IResponsive
     {
+        public string ImageUriDisabled { get; set; }
+        public string ImageUriDown { get; set; }
+        public string ImageUriHover { get; set; }
+        public bool IsEnabled { get; set; }
+
         public string Text { get; set; }
     }
 }
