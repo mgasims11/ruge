@@ -107,7 +107,7 @@
                         .SetLocation(new XYPair(5.3, 2 + _CardSize.Y + 0.03))
                         .SetImageUri(@"C:\data\ruge\ruge.cardEngine\images\DealButton.png")
                         .SetSize(_HoldButtonSize)
-                        .SetName("DealButton")
+                        .SetName("dealbutton")
                         );
 
             Renderer.CanvasManager.Update(
@@ -115,7 +115,7 @@
                         .SetLocation(new XYPair(5.3, 2.5))
                         .SetImageUri(@"C:\data\ruge\ruge.cardEngine\images\BetButton.png")
                         .SetSize(_HoldButtonSize)
-                        .SetName("BetButton")
+                        .SetName("betbutton")
                         );
 
             _tableManager.AddDecksToTable(_dealerDeck, _playerDeck);
@@ -123,18 +123,8 @@
 
             _tableManager.FillDeck(_playerDeck);
             TurnCards(Orientations.FaceDown);
-            Renderer.SendEngineActionSet();            
-        }
 
-        private void TurnCards(Orientations orientation)
-        {
-            _playerDeck.Cards.ForEach(c => c.Orientation = orientation);
-        }
-
-        private void TurnHeldCardsFaceDown()
-        {
-            var e = Renderer.CanvasManager.GetElementsByNameMatch("overlay_");
-            _playerDeck.Cards.ForEach(c => c.Orientation = Orientations.FaceDown);
+            PutGameIntoBetMode();
         }
 
         private void CanvasManager_UserActionEvent(object sender, UserActionEventArgs e)
@@ -160,23 +150,7 @@
                 _tableManager.DealCardsFromTopToTop(_dealerDeck, _playerDeck, 5);
             }
 
-            SetBetMode();            
-        }
-
-        private void SetBetMode()
-        {
-            CurrentGameMode = GameMode.BetMode;
-            var e = Renderer.CanvasManager.GetElementsByNameMatch("holdbutton_");
-            e.ForEach(c => { ((ClickableControl)c).IsEnabled = false; });
-            Renderer.SendEngineActionSet();
-        }
-    
-        private void SetCardSelectMode()
-        {
-            CurrentGameMode = GameMode.SelectMode;
-            var e = Renderer.CanvasManager.GetElementsByNameMatch("holdbutton_");
-            e.ForEach(c => { ((ClickableControl)c).IsEnabled = true; });
-            Renderer.SendEngineActionSet();
+            PutGameIntoBetMode();            
         }
     
         private void BetModeEvent(IElement element, UserAction userAction)
@@ -185,11 +159,11 @@
             {
                 var clickableControl = element as ClickableControl;
 
-                if (clickableControl.Name == "DealButton")
+                if (clickableControl.Name == "dealbutton")
                 {
                     DealCards();
                     TurnCards(Orientations.FaceUp);
-                    SetCardSelectMode();
+                    PutGameIntoSelectMode();
                 }
             }
         }
@@ -204,20 +178,78 @@
                     var overlayName = String.Format("overlay_{0}", clickableControl.Name.Split('_')[1]);
                     var overlay = Renderer.CanvasManager.GetElementByName(overlayName);
                     overlay.IsVisible = !overlay.IsVisible;
-                    Renderer.CanvasManager.Update(overlay);                    
+                    Renderer.CanvasManager.Update(overlay);
                     Renderer.SendEngineActionSet();
                 }
 
-                if (clickableControl.Name == "DealButton")
+                if (clickableControl.Name == "dealbutton")
                 {
-                   
-                   
-                    SetBetMode();   
+
+
+                    PutGameIntoBetMode();
                 }
             }
         }
+        private void DisableHoldButtons()
+        {
+            var e = Renderer.CanvasManager.GetElementsByNameMatch("holdbutton_");
+            e.ForEach(c => { ((ClickableControl)c).IsEnabled = false; });
+        }
+        private void EnableHoldButtons()
+        {
+            var e = Renderer.CanvasManager.GetElementsByNameMatch("holdbutton_");
+            e.ForEach(c => { ((ClickableControl)c).IsEnabled = true; });
+        }
+        private void EnableDealButton()
+        {
+            var dealButton = Renderer.CanvasManager.GetElementByName("dealbutton");
+            ((ClickableControl)dealButton).IsEnabled = true;
+        }
+        private void DisableDealButton()
+        {
+            var dealButton = Renderer.CanvasManager.GetElementByName("dealbutton");
+            ((ClickableControl)dealButton).IsEnabled = false;
+        }
+        private void EnableBetButton()
+        {
+            var dealButton = Renderer.CanvasManager.GetElementByName("betbutton");
+            ((ClickableControl)dealButton).IsEnabled = true;
+        }
+        private void DisableBetButton()
+        {
+            var dealButton = Renderer.CanvasManager.GetElementByName("betbutton");
+            ((ClickableControl)dealButton).IsEnabled = false;
+        }
 
-      
+        private void TurnCards(Orientations orientation)
+        {
+            _playerDeck.Cards.ForEach(c => c.Orientation = orientation);
+        }
+
+        private void TurnHeldCardsFaceDown()
+        {
+            var e = Renderer.CanvasManager.GetElementsByNameMatch("overlay_");
+            _playerDeck.Cards.ForEach(c => c.Orientation = Orientations.FaceDown);
+        }
+
+        private void PutGameIntoBetMode()
+        {
+            CurrentGameMode = GameMode.BetMode;
+            DisableHoldButtons();
+            EnableBetButton();
+            EnableDealButton();
+            Renderer.SendEngineActionSet();
+        }
+
+        private void PutGameIntoSelectMode()
+        {
+            CurrentGameMode = GameMode.SelectMode;
+            EnableHoldButtons();
+            EnableDealButton();
+            DisableBetButton();
+            Renderer.SendEngineActionSet();
+        }
     }
 }
+
 

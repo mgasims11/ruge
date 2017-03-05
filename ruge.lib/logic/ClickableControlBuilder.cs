@@ -21,6 +21,7 @@ namespace ruge.lib.logic
             control.Location = new XYPair(0, 0);
             control.Size = new XYPair();
             control.ZIndex = 50;
+            control.IsEnabled = true;
             return control;
         }
 
@@ -29,6 +30,13 @@ namespace ruge.lib.logic
             control.Opacity = opacity;
             return control;
         }
+
+        public static ClickableControl SetBehavior(this ClickableControl control, Behaviors Behavior)
+        {
+            control.Behavior = Behavior;
+            return control;
+        }
+
         public static ClickableControl SetLocation(this ClickableControl clickableControl, XYPair location)
         {
             clickableControl.Location = location;

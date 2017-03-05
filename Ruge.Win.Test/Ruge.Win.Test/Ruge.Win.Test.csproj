@@ -75,7 +75,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Controls\StaticImage.cs" />
+    <Compile Include="Controls\ClickableImaged.cs" />
+    <Compile Include="Controls\ClickableSized.cs" />
     <Compile Include="Controls\Text.cs" />
     <Compile Include="Controls\TextInput.cs" />
     <Compile Include="Controls\Clickable.cs" />

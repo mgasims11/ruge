@@ -13,7 +13,7 @@ namespace ruge.lib.model.controls
         public string ImageUriDown { get; set; }
         public string ImageUriHover { get; set; }
         public bool IsEnabled { get; set; }
-
+        public Behaviors Behavior { get; set; }
         public string Text { get; set; }
     }
 }

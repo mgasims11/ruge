@@ -88,26 +88,27 @@
 
         private void RenderControl(ruge.lib.model.controls.Control control)
         {
-            if (control is TextControl)
-            {
-                var c = control as TextControl;
-                var clientControl = new Text(
-                            c.ElementId,
-                            c.Size.X,
-                            c.Size.Y,
-                            c.Text,
-                            200, 
-                            200,
-                            200 
-                            );
-                CANVAS.Children.Add(clientControl);
-                clientControl.SetValue(LeftProperty, control.Location.X);
-                clientControl.SetValue(TopProperty, control.Location.Y);                
-            }
+            //if (control is TextControl)
+            //{
+            //    var c = control as TextControl;
+            //    var clientControl = new Text(
+            //                c.ElementId,
+            //                c.Size.X,
+            //                c.Size.Y,
+            //                c.Text,
+            //                200, 
+            //                200,
+            //                200 
+            //                );
+            //    CANVAS.Children.Add(clientControl);
+            //    clientControl.SetValue(LeftProperty, control.Location.X);
+            //    clientControl.SetValue(TopProperty, control.Location.Y);                
+            //}
 
             if (control is ClickableControl)
             {
                 var c = control as ClickableControl;
+
                 var clientControl = LogicalTreeHelper.FindLogicalNode(CANVAS, c.ElementId) as Clickable;
                 if (clientControl == null)
                 {
@@ -117,11 +118,8 @@
                             c.Size.X,
                             c.Size.Y,
                             c.ImageUri,
-                            c.ImageUriHover,
-                            c.ImageUriDown,
-                            c.ImageUriDisabled,
-                            "",
-                            c.ZIndex
+                            c.ZIndex,
+                            c.IsEnabled
                             );
 
                     CANVAS.Children.Add(clientControl);
@@ -133,32 +131,35 @@
                     clientControl.Opacity = c.Opacity;
                     clientControl.Width = c.Size.X;
                     clientControl.Height = c.Size.Y;
-                    clientControl.ImageNormal = c.ImageUri;
-                    clientControl.ImageHover = c.ImageUriHover;
-                    clientControl.ImageDown = c.ImageUriDown;
-                    clientControl.ImageDisabled = c.ImageUriDisabled;
+                    clientControl.Image = c.ImageUri;
                     clientControl.ToolTip = "";
+                    clientControl.IsEnabled = c.IsEnabled;
                 }
-                                
+
                 clientControl.SetValue(LeftProperty, control.Location.X);
                 clientControl.SetValue(TopProperty, control.Location.Y);
-               
+
             }
 
             if (control is StaticImageControl)
             {
                 var c = control as StaticImageControl;
-                var clientControl = LogicalTreeHelper.FindLogicalNode(CANVAS, c.ElementId) as StaticImage;
+
+                var clientControl = LogicalTreeHelper.FindLogicalNode(CANVAS, c.ElementId) as Clickable;
                 if (clientControl == null)
                 {
-                    clientControl = new StaticImage(
-                                c.ElementId,
-                                c.Size.X,
-                                c.Size.Y,
-                                c.ImageUri,
-                                c.ZIndex
-                                );
+                    clientControl = new Clickable(
+                            c.ElementId,
+                            c.Opacity,
+                            c.Size.X,
+                            c.Size.Y,
+                            c.ImageUri,
+                            c.ZIndex,
+                            false
+                            );
+
                     CANVAS.Children.Add(clientControl);
+                    clientControl.MouseDown += Clickable_MouseDown;
                 }
                 else
                 {
@@ -166,13 +167,13 @@
                     clientControl.Opacity = c.Opacity;
                     clientControl.Width = c.Size.X;
                     clientControl.Height = c.Size.Y;
-                    clientControl.ImageUri = c.ImageUri;
+                    clientControl.Image = c.ImageUri;
                     clientControl.ToolTip = "";
                 }
-
+                                
                 clientControl.SetValue(LeftProperty, control.Location.X);
                 clientControl.SetValue(TopProperty, control.Location.Y);
-                
+               
             }
 
             if (control is TextInputControl)

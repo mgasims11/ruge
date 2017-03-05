@@ -62,7 +62,7 @@
 "C:\data\ruge\ruge.lib\model\Controls\StaticImageControl.cs"
 "C:\data\ruge\ruge.lib\model\Controls\TextControl.cs"
 "C:\data\ruge\ruge.lib\model\Controls\TextInputControl.cs"
-"C:\data\ruge\ruge.lib\model\Controls\Enums\ControlStates.cs"
+"C:\data\ruge\ruge.lib\model\Controls\Enums\Behaviors.cs"
 "C:\data\ruge\ruge.lib\model\Controls\Interfaces\IElement.cs"
 "C:\data\ruge\ruge.lib\model\Controls\Interfaces\IGame.cs"
 "C:\data\ruge\ruge.lib\model\Controls\Interfaces\IResponsive.cs"
