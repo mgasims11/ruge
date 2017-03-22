@@ -12,8 +12,7 @@ namespace Ruge.Win.Test.Controls
 {
     public class Clickable : Grid
     {
-
-        Image _image;
+        protected Canvas InnerCanvas = new Canvas();
 
         public new double Opacity
         {
@@ -33,15 +32,14 @@ namespace Ruge.Win.Test.Controls
 
         public string Image
         {
-            get { return ((BitmapImage)_image.Source).UriSource.AbsoluteUri; }
             set
             {
-                if (_image == null)
-                {
-                    _image = new System.Windows.Controls.Image();
-                    Children.Add(_image);
-                }
-                _image.Source = new BitmapImage(new Uri(value));
+                var bi = new BitmapImage(new Uri(value));
+                InnerCanvas.Background = new ImageBrush(bi);
+                if (Width == 0)
+                    InnerCanvas.Width = InnerCanvas.Height * bi.Width / bi.Height;
+                if (Height == 0)
+                    InnerCanvas.Height = InnerCanvas.Width * bi.Height / bi.Width;
             }
         }
 
@@ -50,9 +48,20 @@ namespace Ruge.Win.Test.Controls
             Name = name;
             Width = width;
             Height = height;
+            InnerCanvas.Width = width;
+            InnerCanvas.Height = height;
             ZIndex = zIndex;            
             IsEnabled = isEnabled;
             Image = image;
+
+            Children.Add(InnerCanvas);
+        }
+
+        protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
+        {
+            if (e.Property == WidthProperty || e.Property == HeightProperty)
+            { }
+            base.OnPropertyChanged(e);
         }
     }
 }

@@ -109,36 +109,112 @@
             {
                 var c = control as ClickableControl;
 
-                var clientControl = LogicalTreeHelper.FindLogicalNode(CANVAS, c.ElementId) as Clickable;
-                if (clientControl == null)
+                if (c.Behavior == Behaviors.Static)
                 {
-                    clientControl = new Clickable(
-                            c.ElementId,
-                            c.Opacity,
-                            c.Size.X,
-                            c.Size.Y,
-                            c.ImageUri,
-                            c.ZIndex,
-                            c.IsEnabled
-                            );
+                    var clientControl = LogicalTreeHelper.FindLogicalNode(CANVAS, c.ElementId) as Clickable;
+                    if (clientControl == null)
+                    {
+                        clientControl = new Clickable(
+                                c.ElementId,
+                                c.Opacity,
+                                c.Size.X,
+                                c.Size.Y,
+                                c.ImageUri,
+                                c.ZIndex,
+                                c.IsEnabled
+                                );
 
-                    CANVAS.Children.Add(clientControl);
-                    clientControl.MouseDown += Clickable_MouseDown;
+                        CANVAS.Children.Add(clientControl);
+                        clientControl.MouseDown += Clickable_MouseDown;
+                    }
+                    else
+                    {
+                        clientControl.Name = c.ElementId;
+                        clientControl.Opacity = c.Opacity;
+                        clientControl.Width = c.Size.X;
+                        clientControl.Height = c.Size.Y;
+                        clientControl.Image = c.ImageUri;
+                        clientControl.ToolTip = "";
+                        clientControl.IsEnabled = c.IsEnabled;
+                    }
+
+                    clientControl.SetValue(LeftProperty, control.Location.X);
+                    clientControl.SetValue(TopProperty, control.Location.Y);
                 }
-                else
+                
+                if (c.Behavior == Behaviors.Size)
                 {
-                    clientControl.Name = c.ElementId;
-                    clientControl.Opacity = c.Opacity;
-                    clientControl.Width = c.Size.X;
-                    clientControl.Height = c.Size.Y;
-                    clientControl.Image = c.ImageUri;
-                    clientControl.ToolTip = "";
-                    clientControl.IsEnabled = c.IsEnabled;
+                    var clientControl = LogicalTreeHelper.FindLogicalNode(CANVAS, c.ElementId) as ClickableSized;
+                    if (clientControl == null)
+                    {
+                        clientControl = new ClickableSized(
+                                c.ElementId,
+                                c.Opacity,
+                                c.Size.X,
+                                c.Size.Y,
+                                c.ImageUri,
+                                c.ZIndex,
+                                c.IsEnabled
+                                );
+
+                        CANVAS.Children.Add(clientControl);
+                        clientControl.MouseDown += Clickable_MouseDown;
+                    }
+                    else
+                    {
+                        clientControl.Name = c.ElementId;
+                        clientControl.Opacity = c.Opacity;
+                        clientControl.Width = c.Size.X;
+                        clientControl.Height = c.Size.Y;
+                        clientControl.Image = c.ImageUri;
+                        clientControl.ToolTip = "";
+                        clientControl.IsEnabled = c.IsEnabled;
+                    }
+
+                    clientControl.SetValue(LeftProperty, control.Location.X);
+                    clientControl.SetValue(TopProperty, control.Location.Y);
                 }
 
-                clientControl.SetValue(LeftProperty, control.Location.X);
-                clientControl.SetValue(TopProperty, control.Location.Y);
+                if (c.Behavior == Behaviors.Image)
+                {
+                    var clientControl = LogicalTreeHelper.FindLogicalNode(CANVAS, c.ElementId) as ClickableImaged;
+                    if (clientControl == null)
+                    {
+                        clientControl = new ClickableImaged(
+                                c.ElementId,
+                                c.Opacity,
+                                c.Size.X,
+                                c.Size.Y,
+                                c.ImageUri,
+                                c.ImageUriHover,
+                                c.ImageUriDown,
+                                c.ImageUriDisabled,
+                                c.ZIndex,
+                                c.IsEnabled
+                                );
 
+                        CANVAS.Children.Add(clientControl);
+                        clientControl.MouseDown += Clickable_MouseDown;
+                    }
+                    else
+                    {
+                        clientControl.Name = c.ElementId;
+                        clientControl.Opacity = c.Opacity;
+                        clientControl.Width = c.Size.X;
+                        clientControl.Height = c.Size.Y;
+                        clientControl.Image = c.ImageUri;
+                        clientControl.ImageHover = c.ImageUriHover;
+                        clientControl.ImageDown = c.ImageUriDown;
+                        clientControl.ImageNormal = c.ImageUri;
+                        clientControl.ImageDisabled = c.ImageUriDisabled;
+                        clientControl.Image = c.ImageUri;
+                        clientControl.ToolTip = "";
+                        clientControl.IsEnabled = c.IsEnabled;
+                    }
+
+                    clientControl.SetValue(LeftProperty, control.Location.X);
+                    clientControl.SetValue(TopProperty, control.Location.Y);
+                }
             }
 
             if (control is StaticImageControl)

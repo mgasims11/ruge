@@ -49,6 +49,7 @@
 
         public XYPair _CardSize = new XYPair(1.0, 1.375);
         public XYPair _HoldButtonSize = new XYPair(1.0, 0.5);
+        public XYPair _HoldOverlaySize = new XYPair(1.0, 0);      
 
         public JokerPoker()
         {
@@ -73,31 +74,35 @@
                 CardControl cardControl = CardControlBuilder.Create()
                         .SetDeck(_playerDeck)
                         .SetIndex(i)
-                        .SetLocation(new XYPair(i * _CardSize.X, 2))
+                        .SetLocation(new XYPair(i * (_CardSize.X + .03), 2))
                         .SetSize(_CardSize)
                         .SetOpacity(100)
                         .SetZIndex(51)
                         .SetIsVisible(true)
+                        .SetBehavior(Behaviors.Static)
                         .SetName(String.Format("card_{0}", i));
 
                 Renderer.AddCardControl(cardControl);
 
                 Renderer.CanvasManager.Update(
-                   StaticImageControlBuilder.Create()
-                       .SetLocation(new XYPair(i * _CardSize.X, 2))
-                       .SetSize(_CardSize)
+                   ClickableControlBuilder.Create()
+                       .SetLocation(new XYPair(i * (_CardSize.X + .03), 2.375))
+                       .SetSize(_HoldOverlaySize)
                        .SetOpacity(100)
                        .SetZIndex(100)
                        .SetImageUri(@"C:\data\ruge\ruge.cardEngine\images\Hold.png")
                        .SetName(String.Format("overlay_{0}", i))
+                       .SetBehavior(Behaviors.Static)
                        .SetIsVisible(false)
                        );
+
 
                 Renderer.CanvasManager.Update(                   
                     ClickableControlBuilder.Create()                                          
                         .SetLocation(new XYPair(cardControl.Location.X,cardControl.Location.Y + cardControl.Size.Y + 0.03))
                         .SetImageUri(@"C:\data\ruge\ruge.cardEngine\images\HoldButton.png")
                         .SetSize(_HoldButtonSize)
+                        .SetBehavior(Behaviors.Size)
                         .SetName(String.Format("holdbutton_{0}", i))
                         );               
             };
@@ -107,6 +112,7 @@
                         .SetLocation(new XYPair(5.3, 2 + _CardSize.Y + 0.03))
                         .SetImageUri(@"C:\data\ruge\ruge.cardEngine\images\DealButton.png")
                         .SetSize(_HoldButtonSize)
+                        .SetBehavior(Behaviors.Size)
                         .SetName("dealbutton")
                         );
 
@@ -117,6 +123,19 @@
                         .SetSize(_HoldButtonSize)
                         .SetName("betbutton")
                         );
+
+            Renderer.CanvasManager.Update(
+                  ClickableControlBuilder.Create()
+                      .SetLocation(new XYPair(5.3, 1.3))
+                      .SetImageUri(@"C:\data\ruge\ruge.cardEngine\images\Normal.png")
+                      .SetImageUriHover(@"C:\data\ruge\ruge.cardEngine\images\Hover.png")
+                      .SetImageUriDown(@"C:\data\ruge\ruge.cardEngine\images\Down.png")
+                      .SetImageUriDisabled(@"C:\data\ruge\ruge.cardEngine\images\Disabled.png")
+                      .SetBehavior(Behaviors.Image)
+                      .SetSize(_HoldButtonSize)
+                      .SetName("imagebutton")
+                      
+                      );
 
             _tableManager.AddDecksToTable(_dealerDeck, _playerDeck);
             Renderer.CanvasManager.UserActionEvent += CanvasManager_UserActionEvent;

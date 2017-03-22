@@ -37,6 +37,12 @@ namespace ruge.cardEngine.Builders
             return cardControl;
         }
 
+        public static CardControl SetBehavior(this CardControl cardControl, Behaviors behavior)
+        {
+            cardControl.Behavior = behavior;
+            return cardControl;
+        }
+
         public static CardControl SetLocation(this CardControl cardControl, XYPair location)
         {
             cardControl.Location = location;
