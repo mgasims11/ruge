@@ -21,8 +21,6 @@ namespace Ruge.Win.Test.Controls
         
         public ClickableImaged(string name, int opacity, double width, double height, string image, string imageHover, string imageDown, string imageDisabled, int zIndex, bool isEnabled) : base(name, opacity, width, height, image, zIndex, isEnabled)
         {
-            IsEnabledChanged += ClickableSized_IsEnabledChanged;
-
             ImageNormal = image;
             ImageHover = imageHover;
             ImageDown = imageDown; ;
@@ -56,14 +54,6 @@ namespace Ruge.Win.Test.Controls
         private void ClickableSized_MouseEnter(object sender, MouseEventArgs e)
         {
             Image = ImageHover;
-        }
-
-        private void ClickableSized_IsEnabledChanged(object sender, DependencyPropertyChangedEventArgs e)
-        {
-            if (!(bool)e.NewValue)
-                InnerCanvas.SetValue(OpacityProperty, .6);
-            else
-                InnerCanvas.SetValue(OpacityProperty, 1);
         }
     }
 }

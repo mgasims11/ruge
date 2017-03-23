@@ -19,8 +19,6 @@ namespace Ruge.Win.Test.Controls
 
         public ClickableSized(string name, int opacity, double width, double height, string image, int zIndex, bool isEnabled) : base(name, opacity, width, height, image, zIndex, isEnabled)
         {
-            IsEnabledChanged += ClickableSized_IsEnabledChanged;
-
             NormalScale = .97;
             HoverScale = 1;
             DownScale = .94;
@@ -64,14 +62,6 @@ namespace Ruge.Win.Test.Controls
         {
             InnerCanvas.SetValue(WidthProperty, Width * HoverScale);
             InnerCanvas.SetValue(HeightProperty, Height * HoverScale);
-        }
-
-        private void ClickableSized_IsEnabledChanged(object sender, DependencyPropertyChangedEventArgs e)
-        {
-            if (!(bool)e.NewValue)
-                InnerCanvas.SetValue(OpacityProperty, .6);
-            else
-                InnerCanvas.SetValue(OpacityProperty, 1);
         }
 
          private void CreateCanvas()

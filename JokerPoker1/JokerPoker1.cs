@@ -1,14 +1,9 @@
 ﻿namespace JokerPoker1
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
-    using ruge.lib;
     using ruge.lib.logic;
     using ruge.lib.model;
     using ruge.lib.model.controls;
-    using ruge.lib.model.engine;
     using ruge.lib.model.controls.interfaces;
     using ruge.lib.model.user;
     using ruge.cardEngine;
@@ -18,16 +13,14 @@
     using CardEngine.Logic.Builders;
 
 
-    //"CLEAR UP AND STREAMLINE RUGE/CARD INTEERFACE"
     // TO DO:   
     // Implement disabled, rotation
     // Add textbox, textblock
-    ///  Add sound
-    ///  Add programmed delay
+    // Add sound
+    // Add programmed delay
      
     public class JokerPoker : IGame
     {
-
         // Idle - Waiting to start game (end of last game?)
         // Hold buttons - disabled
         // Bet Up button / Bet Down button - Enabled
@@ -123,19 +116,6 @@
                         .SetSize(_HoldButtonSize)
                         .SetName("betbutton")
                         );
-
-            Renderer.CanvasManager.Update(
-                  ClickableControlBuilder.Create()
-                      .SetLocation(new XYPair(5.3, 1.3))
-                      .SetImageUri(@"C:\data\ruge\ruge.cardEngine\images\Normal.png")
-                      .SetImageUriHover(@"C:\data\ruge\ruge.cardEngine\images\Hover.png")
-                      .SetImageUriDown(@"C:\data\ruge\ruge.cardEngine\images\Down.png")
-                      .SetImageUriDisabled(@"C:\data\ruge\ruge.cardEngine\images\Disabled.png")
-                      .SetBehavior(Behaviors.Image)
-                      .SetSize(_HoldButtonSize)
-                      .SetName("imagebutton")
-                      
-                      );
 
             _tableManager.AddDecksToTable(_dealerDeck, _playerDeck);
             Renderer.CanvasManager.UserActionEvent += CanvasManager_UserActionEvent;

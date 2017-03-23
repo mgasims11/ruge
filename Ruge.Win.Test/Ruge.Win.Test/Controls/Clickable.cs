@@ -55,6 +55,17 @@ namespace Ruge.Win.Test.Controls
             Image = image;
 
             Children.Add(InnerCanvas);
+
+            IsEnabledChanged += OnIsEnabledChanged;
+
+        }
+
+        private void OnIsEnabledChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if (!(bool)e.NewValue)
+                InnerCanvas.SetValue(OpacityProperty, .6);
+            else
+                InnerCanvas.SetValue(OpacityProperty, 1);
         }
 
         protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)

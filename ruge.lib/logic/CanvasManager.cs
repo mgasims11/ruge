@@ -128,7 +128,7 @@ namespace ruge.lib.logic {
 
         public List<IElement> GetElementsByNameMatch(string searchString)
         {
-            var q =_iElements.Where(e => e.Key.Contains(searchString));
+            var q =_iElements.Where(e => e.Value.Name != null && e.Value.Name.Contains(searchString));
             return q.Select(z => z.Value).ToList();
         }
     }
