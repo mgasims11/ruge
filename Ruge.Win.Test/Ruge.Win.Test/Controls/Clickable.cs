@@ -65,7 +65,7 @@ namespace Ruge.Win.Test.Controls
             if (!(bool)e.NewValue)
                 InnerCanvas.SetValue(OpacityProperty, .6);
             else
-                InnerCanvas.SetValue(OpacityProperty, 1);
+                InnerCanvas.SetValue(OpacityProperty, 1.0);
         }
 
         protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)

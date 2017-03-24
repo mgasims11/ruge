@@ -197,27 +197,33 @@
         private void EnableHoldButtons()
         {
             var e = Renderer.CanvasManager.GetElementsByNameMatch("holdbutton_");
-            e.ForEach(c => { ((ClickableControl)c).IsEnabled = true; });
+            e.ForEach(c => { ((ClickableControl)c).IsEnabled = true; Renderer.CanvasManager.Update(c); });
+            
         }
+
         private void EnableDealButton()
         {
             var dealButton = Renderer.CanvasManager.GetElementByName("dealbutton");
             ((ClickableControl)dealButton).IsEnabled = true;
+            Renderer.CanvasManager.Update(dealButton);
         }
         private void DisableDealButton()
         {
-            var dealButton = Renderer.CanvasManager.GetElementByName("dealbutton");
+            var dealButton = Renderer.CanvasManager.GetElementByName("dealButton");
             ((ClickableControl)dealButton).IsEnabled = false;
+            Renderer.CanvasManager.Update(dealButton);
         }
         private void EnableBetButton()
         {
-            var dealButton = Renderer.CanvasManager.GetElementByName("betbutton");
-            ((ClickableControl)dealButton).IsEnabled = true;
+            var betButton = Renderer.CanvasManager.GetElementByName("betbutton");
+            ((ClickableControl)betButton).IsEnabled = true;
+            Renderer.CanvasManager.Update(betButton);
         }
         private void DisableBetButton()
         {
-            var dealButton = Renderer.CanvasManager.GetElementByName("betbutton");
-            ((ClickableControl)dealButton).IsEnabled = false;
+            var betButton = Renderer.CanvasManager.GetElementByName("betbutton");
+            ((ClickableControl)betButton).IsEnabled = false;
+            Renderer.CanvasManager.Update(betButton);
         }
 
         private void TurnCards(Orientations orientation)
