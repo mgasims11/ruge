@@ -24,6 +24,7 @@
     using Ruge.Win.Test.Controls;
     using ruge.cardEngine;
     using JokerPoker1;
+    using System.Threading;
 
 
     /// <summary>
@@ -55,7 +56,10 @@
                 if (action.ActionType == EngineActionType.Update)
                 {
                     if (action.Element is ruge.lib.model.controls.Control)
-                        RenderControl(action.Element as ruge.lib.model.controls.Control);
+                    {
+                        var c = action.Element as ruge.lib.model.controls.Control;
+                        RenderControl(c);
+                    }
 
                     if (action.Element is ruge.lib.model.controls.Canvas)
                     {

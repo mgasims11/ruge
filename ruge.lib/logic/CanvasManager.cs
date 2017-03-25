@@ -25,31 +25,39 @@ namespace ruge.lib.logic {
 
         private EngineActionSet _engineActionSet = new EngineActionSet();
 
+        public EngineActionSet EngineActionSet
+            {
+            get
+                {
+                    return _engineActionSet;
+                }
+            }
+
         public Canvas Canvas = null;
 
         private void RaiseEngineActionEvent(object sender, EngineActionEventArgs args) {
-            if (this.EngineActionEvent != null) {
-                this.EngineActionEvent(sender,args);
+            if (EngineActionEvent != null) {
+                EngineActionEvent(sender,args);
             }
         }
         
         public void RaiseEngineActionEvent(IElement control, EngineActionType actionType) {
             var args = new EngineControlActionEventArgs(control.ElementId, actionType);
-            this.RaiseEngineActionEvent(this,args);
+            RaiseEngineActionEvent(this,args);
         }
 
         public void RaiseEngineActionEvent(Canvas canvas, EngineActionType actionType) {
            var args = new EngineCanvasActionEventArgs(canvas, actionType);
-           this.RaiseEngineActionEvent(this,args);
+           RaiseEngineActionEvent(this,args);
         }
 
         public void RaiseEngineActionSetEvent(CanvasManager canvasManager, EngineActionSet engineActionSet)
         {
             var args = new EngineActionSetEventArgs(this, engineActionSet);
 
-            if (this.EngineActionSetEvent != null)
+            if (EngineActionSetEvent != null)
             {
-                this.EngineActionSetEvent(this, args);
+                EngineActionSetEvent(this, args);
             }
         }
 
@@ -60,8 +68,8 @@ namespace ruge.lib.logic {
                 IsVisible = true                    
             };
             Canvas = canvas;
-            this.RaiseEngineActionEvent(Canvas, EngineActionType.Update);
-            this.InitializeEngineActionSet();
+            RaiseEngineActionEvent(Canvas, EngineActionType.Update);
+            InitializeEngineActionSet();
             _iElements = null;
             Update(Canvas);
 
@@ -70,7 +78,7 @@ namespace ruge.lib.logic {
 
         public void SendEngineActionSet()
         {
-            this.RaiseEngineActionSetEvent(this, _engineActionSet);
+            RaiseEngineActionSetEvent(this, _engineActionSet);
             InitializeEngineActionSet();
         }
 
@@ -93,14 +101,14 @@ namespace ruge.lib.logic {
         {
             foreach (var userAction in userActionSet.UserActions)
             {
-                this.RaiseUserActionEvent(userAction);
+                RaiseUserActionEvent(userAction);
             }
         }
 
         public void RaiseUserActionEvent(UserAction userAction)
         {
             var args = new UserActionEventArgs(userAction, _iElements[userAction.ControlId]);
-            if (this.UserActionEvent != null)
+            if (UserActionEvent != null)
             {
                 UserActionEvent(this, args);
             }

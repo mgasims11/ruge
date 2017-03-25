@@ -208,10 +208,17 @@ namespace ruge.cardEngine.Builders
             return cardControl;
         }
 
-        public static CardControl SetName(this CardControl control, string name)
+        public static CardControl SetName(this CardControl cardControl, string name)
         {
-            control.Name = name;
-            return control;
+            cardControl.Name = name;
+            return cardControl;
         }
+
+        public static CardControl SetDelay(this CardControl cardControl, int delayInMiliseconds)
+        {
+            cardControl.Delay = delayInMiliseconds;
+            return cardControl;
+        }
+
     }
 }

@@ -196,7 +196,7 @@
 
         public void DeckShuffled(Deck deck)
         {
-            SendEngineActionSet();
+            //SendEngineActionSet();
         }
 
         public void DeckShuffling(Deck deck)
@@ -222,7 +222,7 @@
                     RenderCard(deck, card);
                 }
             }
-       
+                   
             CanvasManager.SendEngineActionSet();
         }
 

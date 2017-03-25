@@ -14,7 +14,7 @@
 
 
     // TO DO:   
-    // Implement disabled, rotation
+    // Implement rotation
     // Add textbox, textblock
     // Add sound
     // Add programmed delay
@@ -25,7 +25,7 @@
         // Hold buttons - disabled
         // Bet Up button / Bet Down button - Enabled
         // Deal Button - Enabled
-
+        create storyboard animation in XAML! apply to delayed controls
         public enum GameMode
         {
             BetMode,
@@ -73,7 +73,8 @@
                         .SetZIndex(51)
                         .SetIsVisible(true)
                         .SetBehavior(Behaviors.Static)
-                        .SetName(String.Format("card_{0}", i));
+                        .SetName(String.Format("card_{0}", i))
+                        .SetDelay(i * 500);
 
                 Renderer.AddCardControl(cardControl);
 
@@ -148,8 +149,6 @@
                 _tableManager.ShuffleDeck(_dealerDeck);
                 _tableManager.DealCardsFromTopToTop(_dealerDeck, _playerDeck, 5);
             }
-
-            PutGameIntoBetMode();            
         }
     
         private void BetModeEvent(IElement element, UserAction userAction)

@@ -19,7 +19,8 @@ namespace ruge.lib.model.controls
         public XYPair Location { get; set; }
         public XYPair Size { get; set; }
         public bool IsVisible { get; set; }
-
+        public int Delay { get; set; }
+        
         public int Opacity
         {
             get
@@ -61,5 +62,6 @@ namespace ruge.lib.model.controls
         }
 
         public string Name { get; set; }
+
     }
 }

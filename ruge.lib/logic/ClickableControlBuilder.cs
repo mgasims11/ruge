@@ -192,5 +192,11 @@ namespace ruge.lib.logic
             control.Name = name;
             return control;
         }
+
+        public static ClickableControl DetDelay(this ClickableControl control, int delayInMiliseconds)
+        {
+            control.Delay = delayInMiliseconds;
+            return control;
+        }
     }
 }

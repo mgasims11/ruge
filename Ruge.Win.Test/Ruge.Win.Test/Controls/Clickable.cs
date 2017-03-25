@@ -30,18 +30,26 @@ namespace Ruge.Win.Test.Controls
             set { SetValue(Canvas.ZIndexProperty, value); }
         }
 
+        private string _image = "";
+
         public string Image
         {
             set
             {
-                var bi = new BitmapImage(new Uri(value));
-                InnerCanvas.Background = new ImageBrush(bi);
-                if (Width == 0)
-                    InnerCanvas.Width = InnerCanvas.Height * bi.Width / bi.Height;
-                if (Height == 0)
-                    InnerCanvas.Height = InnerCanvas.Width * bi.Height / bi.Width;
+                
+                if (_image != value)
+                {
+                    _image = value;
+                    var bi = new BitmapImage(new Uri(value));
+                    InnerCanvas.Background = new ImageBrush(bi);
+                    if (Width == 0)
+                        InnerCanvas.Width = InnerCanvas.Height * bi.Width / bi.Height;
+                    if (Height == 0)
+                        InnerCanvas.Height = InnerCanvas.Width * bi.Height / bi.Width;
+                }
             }
         }
+
 
         public Clickable(string name, int opacity, double width, double height, string image, int zIndex, bool isEnabled) : base()
         {
