@@ -187,6 +187,14 @@ namespace ruge.cardEngine.Builders
             return cardControl;
         }
 
+
+        public static CardControl SetCard(this CardControl cardControl, Card card)
+        {
+            cardControl.Card = card;
+
+            return cardControl;
+        }
+
         public static CardControl SetIndex(this CardControl cardControl, int index)
         {
             cardControl.Index = index;

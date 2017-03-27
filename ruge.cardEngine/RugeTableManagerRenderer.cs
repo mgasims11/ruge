@@ -89,6 +89,7 @@
         public void AddCardControl(CardControl cardControl)
         {
             CardControls.Add(cardControl);
+            RenderCard(cardControl);
          }
 
         public void RemoveCardControl(Guid deckId, XYPair coordinates, int index)
@@ -96,12 +97,11 @@
             CardControls.RemoveAt(index);
         }
 
-        private void RenderCard(Deck deck, Card card)
+        private void RenderCard(CardControl cardControl)
         {
-            var cardControl = CardControls.FirstOrDefault(cc => cc.Deck.DeckId == deck.DeckId && cc.Index == deck.Cards.IndexOf(card));
-            if (cardControl == null) return;
-
             cardControl.IsEnabled = true;
+
+            var card = GetCardFromControlId(cardControl.ElementId);
 
             switch (card.Orientation)
             {
@@ -147,7 +147,7 @@
 
         public void CardRemovedFromDeck(Deck deck, Card card)
         {
-            RenderCard(deck, card);
+            RenderCard(GetControlForCard(card));
         }
 
         public void CardsSwappedInDeck(Deck soureceDeckId, Card sourcecardId, Deck destinationDeckId, Card destinationCardId)
@@ -196,7 +196,7 @@
 
         public void DeckShuffled(Deck deck)
         {
-            //SendEngineActionSet();
+
         }
 
         public void DeckShuffling(Deck deck)
@@ -215,13 +215,13 @@
 
         public void SendEngineActionSet()
         {
-            foreach (var deck in TableManager.Table.Decks)
-            {
-                foreach (var card in deck.Cards)
-                {
-                    RenderCard(deck, card);
-                }
-            }
+            //foreach (var deck in TableManager.Table.Decks)
+            //{
+            //    foreach (var card in deck.Cards)
+            //    {
+            //        RenderCard(deck, card);
+            //    }
+            //}
                    
             CanvasManager.SendEngineActionSet();
         }

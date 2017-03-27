@@ -45,6 +45,7 @@
                     var newCard = new Card((Ranks)rank, (Suits)suit, Orientations.FaceDown, deck, (int)rank);
                     newCard.Orientation = Orientations.FaceUp;
                     deck.Cards.Add(newCard);
+                    if (_renderer != null)
                     _renderer.CardAddedToDeck(deck, newCard,0);
                 }
             }
@@ -136,10 +137,12 @@
             
             Card sourceCard = sourceDeck.Cards[sourceCardIndex];
 
-            _renderer.CardMoving(sourceDeck, sourceCard, destinationDeck);
+            if (_renderer != null)
+                _renderer.CardMoving(sourceDeck, sourceCard, destinationDeck);
             destinationDeck.Cards.Insert(destinationCardIndex, sourceCard);
             sourceDeck.Cards.Remove(sourceCard);
-            _renderer.CardMoved(sourceDeck, sourceCard, destinationDeck);
+            if (_renderer != null)
+                _renderer.CardMoved(sourceDeck, sourceCard, destinationDeck);
         }
 
         public void MoveCard(Deck sourceDeck, Card sourceCard, Deck destinationDeck, int destinationCardIndex)
@@ -180,9 +183,11 @@
         {
             var sourceCardIndex = GetCardIndex(sourceDeck, sourceCard);
 
-            _renderer.CardMoving(sourceDeck, sourceCard, destinationDeck);
+            if (_renderer != null)
+                _renderer.CardMoving(sourceDeck, sourceCard, destinationDeck);
             MoveCardToBottomOfDeck(destinationDeck, sourceDeck, sourceCardIndex);
-            _renderer.CardMoved(sourceDeck, sourceCard, destinationDeck);
+            if (_renderer != null)
+                _renderer.CardMoved(sourceDeck, sourceCard, destinationDeck);
         }
 
         public int GetRandomCardIndexFromDeck(Deck deck)

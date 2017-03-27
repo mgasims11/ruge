@@ -43,7 +43,7 @@
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {          
-            _myGame.Renderer.CanvasManager.EngineActionSetEvent += _canvasManager_EngineActionSetEvent;
+            _myGame._canvasManager.EngineActionSetEvent += _canvasManager_EngineActionSetEvent;
             CANVAS.MouseDown += Clickable_MouseDown;
             _myGame.Start();
             
@@ -92,25 +92,10 @@
 
         private void RenderControl(ruge.lib.model.controls.Control control)
         {
-            //if (control is TextControl)
-            //{
-            //    var c = control as TextControl;
-            //    var clientControl = new Text(
-            //                c.ElementId,
-            //                c.Size.X,
-            //                c.Size.Y,
-            //                c.Text,
-            //                200, 
-            //                200,
-            //                200 
-            //                );
-            //    CANVAS.Children.Add(clientControl);
-            //    clientControl.SetValue(LeftProperty, control.Location.X);
-            //    clientControl.SetValue(TopProperty, control.Location.Y);                
-            //}
 
             if (control is ClickableControl)
             {
+                
                 var c = control as ClickableControl;
 
                 if (c.Behavior == Behaviors.Static)
@@ -282,7 +267,7 @@
             var userAction = new UserAction() { ControlId = control.Name, UserActionType = UserActionType.Click};
             var userActionSet = new UserActionSet();            
             userActionSet.UserActions.Add(userAction);
-            _myGame.Renderer.CanvasManager.ReceiveUserActionSet(userActionSet);
+            _myGame._canvasManager.ReceiveUserActionSet(userActionSet);
             e.Handled = true;
         }
     }

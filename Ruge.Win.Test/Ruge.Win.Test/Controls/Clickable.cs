@@ -65,7 +65,6 @@ namespace Ruge.Win.Test.Controls
             Children.Add(InnerCanvas);
 
             IsEnabledChanged += OnIsEnabledChanged;
-
         }
 
         private void OnIsEnabledChanged(object sender, DependencyPropertyChangedEventArgs e)
