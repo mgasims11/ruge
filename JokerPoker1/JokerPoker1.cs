@@ -67,7 +67,7 @@
 
             _tableManager.AddDecksToTable(_dealerDeck, _playerDeck);
             _canvasManager.UserActionEvent += CanvasManager_UserActionEvent;
-
+            
             DealCards();
 
             for (int i = 0; i <= 4; i++)
@@ -127,7 +127,8 @@
                         .SetSize(_HoldButtonSize)
                         .SetName("betbutton")
                         );
-            
+
+            TurnPlayerCards(Orientations.FaceDown);
             PutGameIntoBetMode();
         }
 
@@ -153,7 +154,7 @@
                 _tableManager.FillDeck(_dealerDeck);
                 _tableManager.ShuffleDeck(_dealerDeck);
             }
-
+            _playerDeck.Cards.Clear();
             _tableManager.DealCardsFromTopToTop(_dealerDeck, _playerDeck, 5);
 
             var i = 0;
@@ -193,12 +194,30 @@
 
                 if (clickableControl.Name == "dealbutton")
                 {
-
-
+                    DealUnheldCards();
                     PutGameIntoBetMode();
                 }
             }
         }
+
+        private void DealUnheldCards()
+        {
+            var overlays = _canvasManager.GetElementsByNameMatch("overlay_");
+            var i = 0;
+            var cardControls = _canvasManager.GetElementsByNameMatch("card_");
+            foreach (var overlay in overlays)
+            {
+                if (!overlay.IsVisible)
+                {
+                    _tableManager.RemoveCard(_playerDeck, i);
+                    _tableManager.MoveCard(_dealerDeck, 0, _playerDeck, i);
+                    ((CardControl)cardControls[i]).Card = _playerDeck.Cards[i];
+                    ((CardControl)cardControls[i]).SetAllUris(GetCardImage(((CardControl)cardControls[i]).Card));
+                }
+                i++;
+            }
+        }
+
         private void DisableHoldButtons()
         {
             var e = _canvasManager.GetElementsByNameMatch("holdbutton_");
@@ -250,9 +269,7 @@
         {
             var cardControls = _canvasManager.GetElementsByNameMatch("card_");
 
-            cardControls.ForEach(c => {
-            _canvasManager.Update(c);
-            });
+            cardControls.ForEach(c => {_canvasManager.Update(c);});
         }
 
 
@@ -274,7 +291,6 @@
             DisableHoldButtons();
             EnableBetButton();
             EnableDealButton();
-            TurnPlayerCards(Orientations.FaceDown);
             UpdatePlayerCards();
             _canvasManager.SendEngineActionSet();
         }
