@@ -195,9 +195,15 @@
                 if (clickableControl.Name == "dealbutton")
                 {
                     DealUnheldCards();
+                    TestForWin();
                     PutGameIntoBetMode();
                 }
             }
+        }
+
+        private void TestForWin()
+        {
+
         }
 
         private void DealUnheldCards()

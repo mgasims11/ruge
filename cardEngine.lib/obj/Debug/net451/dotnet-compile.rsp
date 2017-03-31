@@ -17,6 +17,7 @@
 --reference:C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.1\System.dll
 --reference:C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.1\System.Core.dll
 --reference:C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.1\Microsoft.CSharp.dll
+C:\data\ruge\cardEngine.lib\Logic\HandEvaluator.cs
 C:\data\ruge\cardEngine.lib\Logic\ITableManagerRenderer.cs
 C:\data\ruge\cardEngine.lib\Logic\TableManagerCardLogic.cs
 C:\data\ruge\cardEngine.lib\Logic\TableManagerDeckLogic.cs

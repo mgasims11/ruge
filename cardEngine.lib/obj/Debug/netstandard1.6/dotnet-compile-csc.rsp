@@ -53,6 +53,7 @@
 -r:"C:\Users\Michael\.nuget\packages\System.Threading.Timer\4.0.1\ref\netstandard1.2\System.Threading.Timer.dll"
 -r:"C:\Users\Michael\.nuget\packages\System.Xml.ReaderWriter\4.0.11\ref\netstandard1.3\System.Xml.ReaderWriter.dll"
 -r:"C:\Users\Michael\.nuget\packages\System.Xml.XDocument\4.0.11\ref\netstandard1.3\System.Xml.XDocument.dll"
+"C:\data\ruge\cardEngine.lib\Logic\HandEvaluator.cs"
 "C:\data\ruge\cardEngine.lib\Logic\ITableManagerRenderer.cs"
 "C:\data\ruge\cardEngine.lib\Logic\TableManagerCardLogic.cs"
 "C:\data\ruge\cardEngine.lib\Logic\TableManagerDeckLogic.cs"
