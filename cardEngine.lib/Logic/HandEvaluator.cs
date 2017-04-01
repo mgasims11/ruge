@@ -36,6 +36,43 @@ namespace CardEngine.Logic
             return isFlush;
         }
 
+        public bool IsStraight(Card[] hand)
+        {
+            var handList = hand.ToList();
+            var existsLowAce = handList.Exists(c => c.Value == 1);
+            var existsHighAce = handList.Exists(c => c.Value == 14);
+
+            if (existsLowAce && !existsHighAce)
+                handList.Add(new Logic.HandEvaluator.Card() { Value = 14 });
+
+            if (!existsLowAce && existsHighAce)
+                handList.Add(new Logic.HandEvaluator.Card() { Value = 1 });
+
+            var sortedHand = handList.OrderBy(h => h.Value).ToList();
+
+            var i = 0;
+            var matches = 1;
+            while (i < sortedHand.Count)
+            {
+                if (i > 0)
+                {
+                    if (((sortedHand[i].Value == (sortedHand[i - 1].Value) + 1)))
+                    {
+                        matches++;
+                    } 
+                    else
+                    {
+                        matches = 1;
+                    }
+                }
+                
+                i++;
+            }
+
+            return matches == 5;
+            
+        }
+
         
     }
 }
