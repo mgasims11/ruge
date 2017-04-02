@@ -12,12 +12,13 @@ namespace CardEngine.Test
         {
             var pr = new CardEngine.Logic.HandEvaluator();
 
-            var result = pr.IsStraight(new HandEvaluator.Card[] {
-                new HandEvaluator.Card() { Value = 5, Suit = 2 },
+            pr.Evaluate()
+            var result = pr.GetMatches(new HandEvaluator.Card[] {
                 new HandEvaluator.Card() { Value = 9, Suit = 3 },
-                new HandEvaluator.Card() { Value = 6, Suit = 1 },
-                new HandEvaluator.Card() { Value = 8, Suit = 2 },
-                new HandEvaluator.Card() { Value = 7, Suit = 1 }
+                new HandEvaluator.Card() { Value = 7, Suit = 3 },
+                new HandEvaluator.Card() { Value = 7, Suit = 3 },
+                new HandEvaluator.Card() { Value = 10, Suit = 3 },
+                new HandEvaluator.Card() { Value = 10, Suit = 3 }
                 }
             );
         }
