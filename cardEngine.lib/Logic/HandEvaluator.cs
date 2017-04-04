@@ -27,18 +27,35 @@ namespace CardEngine.Logic
             public int Suit { get; set; }
         }
 
+
+        public PokerRanking Evaluate(
+            int rank1, int suit1,
+            int rank2, int suit2,
+            int rank3, int suit3,
+            int rank4, int suit4,
+            int rank5, int suit5
+            )
+        {
+            return Evaluate(
+            new HandEvaluator.Card() { Value = rank1, Suit = suit1 },
+            new HandEvaluator.Card() { Value = rank2, Suit = suit2 },
+            new HandEvaluator.Card() { Value = rank3, Suit = suit3 },
+            new HandEvaluator.Card() { Value = rank4, Suit = suit4 },
+            new HandEvaluator.Card() { Value = rank5, Suit = suit5 }
+            );
+        }
+
         public PokerRanking Evaluate(params Card[] hand)
         {
-
             if (IsRoyalFlush(hand)) return PokerRanking.RoyalFlush;
-            if (IsStraightFlush(hand)) return PokerRanking.RoyalFlush;
-            if (IsFourOfAKind(hand)) return PokerRanking.RoyalFlush;
-            if (IsFullHouse(hand)) return PokerRanking.RoyalFlush;
-            if (IsFlush(hand)) return PokerRanking.RoyalFlush;
-            if (IsStraight(hand)) return PokerRanking.RoyalFlush;
-            if (IsThreeOfAKind(hand)) return PokerRanking.RoyalFlush;
-            if (IsTwoPair(hand)) return PokerRanking.RoyalFlush;
-            if (IsPair(hand)) return PokerRanking.RoyalFlush;
+            if (IsStraightFlush(hand)) return PokerRanking.StraightFlush;
+            if (IsFourOfAKind(hand)) return PokerRanking.FourOfAKind;
+            if (IsFullHouse(hand)) return PokerRanking.FullHouse;
+            if (IsFlush(hand)) return PokerRanking.Flush;
+            if (IsStraight(hand)) return PokerRanking.Straight;
+            if (IsThreeOfAKind(hand)) return PokerRanking.ThreeOfAKind;
+            if (IsTwoPair(hand)) return PokerRanking.TwoPair;
+            if (IsPair(hand)) return PokerRanking.Pair;
 
             return PokerRanking.HighCard; ;
         }
@@ -134,31 +151,37 @@ namespace CardEngine.Logic
         public bool IsPair(Card[] hand)
         {
             var matches = GetMatches(hand);
-            return (matches.Count == 1 && matches[0] == 2);
+            var x = matches.Where(m => m.Value == 2);
+            return (x.Count() == 1);
         }
 
         public bool IsTwoPair(Card[] hand)
         {
             var matches = GetMatches(hand);
-            return (matches.Count == 2 && matches[0] == 2 && matches[1] == 2);
+            var x = matches.Where(m => m.Value == 2);
+            return (x.Count() == 2);
         }
 
         public bool IsFullHouse(Card[] hand)
         {
             var matches = GetMatches(hand);
-            return (matches.Count == 2 && matches[0] == 2 && matches[1] == 3);
+            var x = matches.Where(m => m.Value == 2);
+            var y = matches.Where(m => m.Value == 3);
+            return (x.Count() == 1 && y.Count() == 1);
         }
 
         public bool IsFourOfAKind(Card[] hand)
         {
             var matches = GetMatches(hand);
-            return (matches.Count == 1 && matches[0] == 4);
+            var x = matches.Where(m => m.Value == 4);
+            return (x.Count() == 1);
         }
 
         public bool IsThreeOfAKind(Card[] hand)
         {
             var matches = GetMatches(hand);
-            return (matches.Count == 1 && matches[0] == 3);
+            var x = matches.Where(m => m.Value == 3);
+            return (x.Count() == 1);
         }
 
     }
