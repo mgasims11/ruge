@@ -203,7 +203,14 @@
 
         private void TestForWin()
         {
-
+            var he = new HandEvaluator();
+            var result = he.Evaluate(
+                (int)_playerDeck.Cards[0].Rank, (int)_playerDeck.Cards[0].Suit,
+                (int)_playerDeck.Cards[1].Rank, (int)_playerDeck.Cards[1].Suit,
+                (int)_playerDeck.Cards[2].Rank, (int)_playerDeck.Cards[2].Suit,
+                (int)_playerDeck.Cards[3].Rank, (int)_playerDeck.Cards[3].Suit,
+                (int)_playerDeck.Cards[4].Rank, (int)_playerDeck.Cards[4].Suit
+                );
         }
 
         private void DealUnheldCards()
