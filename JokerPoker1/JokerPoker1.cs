@@ -128,6 +128,15 @@
                         .SetName("betbutton")
                         );
 
+            _canvasManager.Update(
+                    TextControlBuilder.Create()
+                        .SetLocation(new XYPair(5.3, 2.5))
+                        //.SetImageUri(@"C:\data\ruge\ruge.cardEngine\images\BetButton.png")
+                        .SetSize(_HoldButtonSize)
+                        .SetName("betbutton")
+                        .SetText("Hello World!")
+                        );
+
             TurnPlayerCards(Orientations.FaceDown);
             PutGameIntoBetMode();
         }

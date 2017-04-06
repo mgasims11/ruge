@@ -241,9 +241,9 @@
                
             }
 
-            if (control is TextInputControl)
+            if (control is TextControl)
             {
-                var c = control as TextInputControl;
+                var c = control as TextControl;
                 var clientControl = new TextInput(
                     c.ElementId,
                     c.Size.X,
@@ -254,9 +254,20 @@
                     c.ImageUriDisabled,
                     c.Text
                 );
-                CANVAS.Children.Add(clientControl);
+
+                clientControl.Name = c.ElementId;
+                clientControl.Opacity = c.Opacity;
+                clientControl.Width = c.Size.X;
+                clientControl.Height = c.Size.Y;
+                //clientControl.Background = c.ImageUri;
+                clientControl.ToolTip = "";
+                clientControl.IsEnabled = c.IsEnabled;
+
                 clientControl.SetValue(TopProperty, control.Location.X);
                 clientControl.SetValue(LeftProperty, control.Location.Y);
+
+                CANVAS.Children.Add(clientControl);
+                clientControl.MouseDown += Clickable_MouseDown;
 
             }
         }
