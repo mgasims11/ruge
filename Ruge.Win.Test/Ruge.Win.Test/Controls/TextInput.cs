@@ -19,12 +19,21 @@ namespace Ruge.Win.Test.Controls
         public TextInput(string controlid, double width, double height, string backgroundIdle, string backgroundHover, string backgroundDown, string backgroundDisabled, string text) :base()
         {
 
+            width = 4;
+            height = 1;
+            
             var textBox = new TextBox();
 
-            textBox.Width = 100;
-            //textBox.Height = 100.0 * height / width;
-            textBox.SetValue(IsEnabledProperty, true);
+            Stretch = Stretch.Fill;
+            textBox.FontWeight = FontWeights.Bold;            
+            textBox.BorderThickness = new Thickness(0, 0, 0, 0);
 
+            textBox.MaxLength = 10;
+            textBox.FontSize = 10;
+            textBox.Width = 20 * width;
+            
+
+            textBox.SetValue(IsEnabledProperty, true);
             Width = width;
             Height = height;
 

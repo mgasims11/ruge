@@ -260,8 +260,6 @@
 
                 clientControl.SetValue(TopProperty, control.Location.X);
                 clientControl.SetValue(LeftProperty, control.Location.Y);
-                clientControl.SetValue(TopProperty, 0.0);
-                clientControl.SetValue(LeftProperty,0.0);
 
                 CANVAS.Children.Add(clientControl);
                 clientControl.MouseDown += Clickable_MouseDown;

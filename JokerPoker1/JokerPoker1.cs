@@ -130,8 +130,9 @@
 
             _canvasManager.Update(
                     TextControlBuilder.Create()
-                        .SetLocation(new XYPair(1.9, 5.3))
-                        //.SetImageUri(@"C:\data\ruge\ruge.cardEngine\images\BetButton.png")
+                        //.SetLocation(new XYPair(1.9, 5.3))
+                        .SetLocation(new XYPair(1,1))
+                        .SetImageUri(@"C:\data\ruge\ruge.cardEngine\images\BetButton.png")
                         .SetSize(_HoldButtonSize)
                         .SetName("betbutton")
                         .SetText("Hello World!")
