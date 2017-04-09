@@ -257,14 +257,11 @@
 
                 clientControl.Name = c.ElementId;
                 clientControl.Opacity = c.Opacity;
-                clientControl.Width = c.Size.X;
-                clientControl.Height = c.Size.Y;
-                //clientControl.Background = c.ImageUri;
-                clientControl.ToolTip = "";
-                clientControl.IsEnabled = c.IsEnabled;
 
                 clientControl.SetValue(TopProperty, control.Location.X);
                 clientControl.SetValue(LeftProperty, control.Location.Y);
+                clientControl.SetValue(TopProperty, 0.0);
+                clientControl.SetValue(LeftProperty,0.0);
 
                 CANVAS.Children.Add(clientControl);
                 clientControl.MouseDown += Clickable_MouseDown;

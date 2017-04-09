@@ -11,20 +11,22 @@ using System.Drawing;
 
 namespace Ruge.Win.Test.Controls
 {
-    public class TextInput : TextBox
+    public class TextInput : Viewbox
     {
         private string _backgroundIdle, _backgroundHover, _backgroundDown, _backgroundDisabled;
         private string _backgroundCurrent;
 
         public TextInput(string controlid, double width, double height, string backgroundIdle, string backgroundHover, string backgroundDown, string backgroundDisabled, string text) :base()
-        {           
-            SetValue(WidthProperty, width);
-            SetValue(HeightProperty, height);
-            SetValue(BorderThicknessProperty, new Thickness(0, 0, 0, 0));
-            SetValue(FontSizeProperty, new FontSizeConverter().ConvertFromString((height * .75).ToString() + "px"));
-            SetValue(PaddingProperty, new Thickness(0, 0, 0, 0));
-            SetValue(IsEnabledProperty, true);
-            SetValue(ScrollViewer.PaddingProperty, new Thickness(0, 0, 0, 0));
+        {
+
+            var textBox = new TextBox();
+
+            textBox.Width = 100;
+            //textBox.Height = 100.0 * height / width;
+            textBox.SetValue(IsEnabledProperty, true);
+
+            Width = width;
+            Height = height;
 
             Name = controlid;
             MouseEnter += Clickable_MouseEnter;
@@ -38,38 +40,8 @@ namespace Ruge.Win.Test.Controls
             _backgroundDown = backgroundDown;
             _backgroundDisabled = backgroundDisabled;
 
-            SetBackground(backgroundIdle);            
-        }
-
-        protected override void OnRender(DrawingContext drawingContext)
-        {
-            base.OnRender(drawingContext);
-            SetInnerMargin();
-
-        }
-        private void TextInput_Initialized(object sender, EventArgs e)
-        {
-            SetInnerMargin();
-        }
-
-        private void SetInnerMargin()
-        {
-            var b = VisualTreeHelper.GetChild(this,0);
-            var s = VisualTreeHelper.GetChild(b, 0);
-
-            s.SetValue(PaddingProperty, new Thickness(0, 0, 0, 0));
-            s.SetValue(MarginProperty, new Thickness(0, 0, 0, 0));
-            b.SetValue(PaddingProperty, new Thickness(0, 0, 0, 0));
-            b.SetValue(MarginProperty, new Thickness(0, 0, 0, 0));
-
-            //VisualTreeHelper.
-            //var contentHost = VisualTreeHelper.
-            //if (contentHost != null && contentHost.Content != null && contentHost.Content is FrameworkElement)
-            //{
-            //    var textBoxView = contentHost.Content as FrameworkElement;
-            //    textBoxView.Margin = new Thickness(0, 0, 0, 0);
-            //}
-
+            SetBackground(backgroundIdle);
+            this.Child = textBox;            
         }
 
         private void Clickable_MouseUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
@@ -112,7 +84,7 @@ namespace Ruge.Win.Test.Controls
                     _backgroundCurrent = _backgroundDisabled;
 
                 var bi = new BitmapImage(new Uri(_backgroundCurrent));
-                //SetValue(BackgroundProperty, bi);
+                
             }
         }
     }
