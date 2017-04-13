@@ -244,22 +244,32 @@
             if (control is TextControl)
             {
                 var c = control as TextControl;
-                var clientControl = new TextInput(
-                    c.ElementId,
-                    c.Size.X,
-                    c.Size.Y,
-                    c.ImageUri,
-                    c.ImageUriHover,
-                    c.ImageUriDown,
-                    c.ImageUriDisabled,
-                    c.Text
-                );
+                var clientControl = LogicalTreeHelper.FindLogicalNode(CANVAS, c.ElementId) as TextInput;
 
-                clientControl.Name = c.ElementId;
-                clientControl.Opacity = c.Opacity;
+                if (clientControl == null)
+                {
+                    clientControl = new TextInput(
+                        c.ElementId,
+                        c.Size.X,
+                        c.Size.Y,
+                        c.ImageUri,
+                        c.ImageUriHover,
+                        c.ImageUriDown,
+                        c.ImageUriDisabled,
+                        c.Text
+                    );
+                }
+                else
+                {
+                    NEED TO ADD PROPERTIES TO CONTROL!
+                    clientControl.Name = c.ElementId;
+                    clientControl.Opacity = c.Opacity;
+                    clientControl.Width = c.Size.X;
+                    clientControl.Height = c.Size.Y;
+                }
 
-                clientControl.SetValue(TopProperty, control.Location.X);
-                clientControl.SetValue(LeftProperty, control.Location.Y);
+                clientControl.SetValue(LeftProperty, control.Location.X);
+                clientControl.SetValue(TopProperty, control.Location.Y);
 
                 CANVAS.Children.Add(clientControl);
                 clientControl.MouseDown += Clickable_MouseDown;

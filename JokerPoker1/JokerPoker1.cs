@@ -45,6 +45,7 @@
 
         public XYPair _CardSize = new XYPair(1.0, 1.375);
         public XYPair _HoldButtonSize = new XYPair(1.0, 0.5);
+        public XYPair _BetButtonSize = new XYPair(0.5, 0.5);
         public XYPair _HoldOverlaySize = new XYPair(1.0, 0);
 
         public JokerPoker()
@@ -121,21 +122,29 @@
                         );
 
             _canvasManager.Update(
+                  TextControlBuilder.Create()
+                      .SetLocation(new XYPair(5.3, 1.9))
+                      .SetSize(_HoldButtonSize)
+                      .SetName("betValue")
+                      .SetText("Hello World!")
+                      );
+
+            _canvasManager.Update(
                     ClickableControlBuilder.Create()
                         .SetLocation(new XYPair(5.3, 2.5))
-                        .SetImageUri(@"C:\data\ruge\ruge.cardEngine\images\BetButton.png")
-                        .SetSize(_HoldButtonSize)
-                        .SetName("betbutton")
+                        .SetImageUri(@"C:\data\ruge\ruge.cardEngine\images\BetUp.png")
+                        .SetBehavior(Behaviors.Size)
+                        .SetSize(_BetButtonSize)
+                        .SetName("betUpButton")
                         );
 
             _canvasManager.Update(
-                    TextControlBuilder.Create()
-                        //.SetLocation(new XYPair(1.9, 5.3))
-                        .SetLocation(new XYPair(1,1))
-                        .SetImageUri(@"C:\data\ruge\ruge.cardEngine\images\BetButton.png")
-                        .SetSize(_HoldButtonSize)
-                        .SetName("betbutton")
-                        .SetText("Hello World!")
+                    ClickableControlBuilder.Create()
+                        .SetLocation(new XYPair(6.0, 2.5))
+                        .SetImageUri(@"C:\data\ruge\ruge.cardEngine\images\BetDown.png")
+                        .SetBehavior(Behaviors.Size)
+                        .SetSize(_BetButtonSize)
+                        .SetName("betDownButton")
                         );
 
             TurnPlayerCards(Orientations.FaceDown);
@@ -181,11 +190,48 @@
             {
                 var clickableControl = element as ClickableControl;
 
-                if (clickableControl.Name == "dealbutton")
+                switch (clickableControl.Name)
                 {
-                    PutGameIntoSelectMode();
+                    case "dealbutton":
+                        PutGameIntoSelectMode();
+                        break;
+                    case "betUpButton":
+                        BetUpButtonClicked();
+                        break;
+                    case "betDownButton":
+                        BetDownButtonClicked();
+                        break;
                 }
             }
+        }
+
+        private void AddBetButtonClicked(int increment)
+        {
+            var betValue = _canvasManager.GetElementByName("betValue") as TextControl;
+            if (betValue != null)
+            { 
+                var intValue = 0;
+                if (Int32.TryParse(betValue.Text, out intValue))
+                {
+                    betValue.Text = (intValue + increment).ToString();
+                }
+                else
+                {
+                    betValue.Text = "5";
+                }
+                _canvasManager.Update(betValue);
+                _canvasManager.SendEngineActionSet();
+            }
+        }
+
+        private void BetUpButtonClicked()
+        {
+            AddBetButtonClicked(5);
+        }
+
+        private void BetDownButtonClicked()
+        {
+            AddBetButtonClicked(-5);
         }
 
         private void SelectModeEvent(IElement element, UserAction userAction)
@@ -253,31 +299,22 @@
 
         }
 
-        private void EnableDealButton()
+        private void EnableDealButton(bool enabled)
         {
             var dealButton = _canvasManager.GetElementByName("dealbutton");
-            ((ClickableControl)dealButton).IsEnabled = true;
+            ((ClickableControl)dealButton).IsEnabled = enabled;
             _canvasManager.Update(dealButton);
-        }
-        private void DisableDealButton()
-        {
-            var dealButton = _canvasManager.GetElementByName("dealButton");
-            ((ClickableControl)dealButton).IsEnabled = false;
-            _canvasManager.Update(dealButton);
-        }
-        private void EnableBetButton()
-        {
-            var betButton = _canvasManager.GetElementByName("betbutton");
-            ((ClickableControl)betButton).IsEnabled = true;
-            _canvasManager.Update(betButton);
-        }
-        private void DisableBetButton()
-        {
-            var betButton = _canvasManager.GetElementByName("betbutton");
-            ((ClickableControl)betButton).IsEnabled = false;
-            _canvasManager.Update(betButton);
         }
 
+        private void EnableBetButtons(bool enabled)
+        {
+            var betUpButton = _canvasManager.GetElementByName("betDownButton");
+            var betDownButton = _canvasManager.GetElementByName("betUpButton");
+            ((ClickableControl)betUpButton).IsEnabled = enabled;
+            ((ClickableControl)betDownButton).IsEnabled = enabled;
+            _canvasManager.Update(betUpButton);
+            _canvasManager.Update(betDownButton);
+        }
         private void TurnPlayerCards(Orientations orientation)
         {
 
@@ -295,7 +332,6 @@
             cardControls.ForEach(c => {_canvasManager.Update(c);});
         }
 
-
         private void TurnCard(CardControl cardControl, Orientations orientation)
         {
             cardControl.Card.Orientation = orientation;
@@ -312,8 +348,7 @@
         {
             CurrentGameMode = GameMode.BetMode;
             DisableHoldButtons();
-            EnableBetButton();
-            EnableDealButton();
+            EnableBetButtons(true);
             UpdatePlayerCards();
             _canvasManager.SendEngineActionSet();
         }
@@ -322,8 +357,7 @@
         {
             CurrentGameMode = GameMode.SelectMode;
             EnableHoldButtons();
-            EnableDealButton();
-            DisableBetButton();
+            EnableBetButtons(false);
             DealCards();
             TurnPlayerCards(Orientations.FaceUp);
             UpdatePlayerCards();

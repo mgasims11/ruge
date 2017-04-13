@@ -18,10 +18,7 @@ namespace Ruge.Win.Test.Controls
 
         public TextInput(string controlid, double width, double height, string backgroundIdle, string backgroundHover, string backgroundDown, string backgroundDisabled, string text) :base()
         {
-
-            width = 4;
-            height = 1;
-            
+           
             var textBox = new TextBox();
 
             Stretch = Stretch.Fill;
@@ -30,8 +27,7 @@ namespace Ruge.Win.Test.Controls
 
             textBox.MaxLength = 10;
             textBox.FontSize = 10;
-            textBox.Width = 20 * width;
-            
+            textBox.Width = 20 * width;           
 
             textBox.SetValue(IsEnabledProperty, true);
             Width = width;
