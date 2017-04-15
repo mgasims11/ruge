@@ -237,8 +237,7 @@
                 }
                                 
                 clientControl.SetValue(LeftProperty, control.Location.X);
-                clientControl.SetValue(TopProperty, control.Location.Y);
-               
+                clientControl.SetValue(TopProperty, control.Location.Y);               
             }
 
             if (control is TextControl)
@@ -256,7 +255,9 @@
                             c.ImageUri,
                             c.ZIndex,
                             false,
-                            c.Text
+                            c.Text,
+                            c.FontSize,
+                            c.MaxLength
                             );
                     CANVAS.Children.Add(clientControl);
                     clientControl.MouseDown += Clickable_MouseDown;
@@ -270,7 +271,8 @@
                     clientControl.Image = c.ImageUri;
                     clientControl.ToolTip = "";
                     clientControl.Text = c.Text;
-
+                    clientControl.FontSize = c.FontSize;
+                    clientControl.MaxLength = c.MaxLength;
                 }
                 clientControl.SetValue(LeftProperty, control.Location.X);
                 clientControl.SetValue(TopProperty, control.Location.Y);

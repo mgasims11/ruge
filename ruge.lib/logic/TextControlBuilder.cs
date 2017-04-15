@@ -25,25 +25,17 @@ namespace ruge.lib.logic
             return control;
         }
 
-        //public string ImageUriDisabled { get; set; }
-        //  public string SetImageUriDown { get; set; }
-        //public string SetImageUriHover { get; set; }
-        //public bool SetIsEnabled { get; set; }
-        //public Behaviors SetBehavior { get; set; }
-        //public string SetText { get; set; }
-        //public string SetElementId { get; set; }
-        //public string SetImageUri { get; set; }
-        //public XYPair SetLocation { get; set; }
-        //public int SetX { get; set; }       
-        //public int SetY { get; set; }       
-        //public XYPair SetSize { get; set; }
-        //public int SetWidth { get; set; }       
-        //public int SetHeight { get; set; }       
-        //public bool SetIsVisible { get; set; }
-        //public int SetDelay { get; set; }       
-        //public int SetOpacity
-        //public int SetRotation 
-        //public string SetName { get; set; }
+        public static TextControl SetFontSize(this TextControl control, double fontSize)
+        {
+            control.FontSize = fontSize;
+            return control;
+        }
+
+        public static TextControl SetMaxLength(this TextControl control, int maxLength)
+        {
+            control.MaxLength = maxLength;
+            return control;
+        }
 
         public static TextControl SetText(this TextControl control, string text)
         {

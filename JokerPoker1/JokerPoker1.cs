@@ -124,14 +124,16 @@
             _canvasManager.Update(
                   TextControlBuilder.Create()
                       .SetLocation(new XYPair(5.3, 1.9))
-                      .SetSize(_HoldButtonSize)
+                      .SetSize(new XYPair(1.3, 0))
                       .SetName("betValue")
                       .SetText("Hello World!")
+                      .SetMaxLength(3)
+                      .SetFontSize(20)
                       );
 
             _canvasManager.Update(
                     ClickableControlBuilder.Create()
-                        .SetLocation(new XYPair(5.3, 2.5))
+                        .SetLocation(new XYPair(6.0, 2.5))                     
                         .SetImageUri(@"C:\data\ruge\ruge.cardEngine\images\BetUp.png")
                         .SetBehavior(Behaviors.Size)
                         .SetSize(_BetButtonSize)
@@ -140,7 +142,7 @@
 
             _canvasManager.Update(
                     ClickableControlBuilder.Create()
-                        .SetLocation(new XYPair(6.0, 2.5))
+                        .SetLocation(new XYPair(5.3, 2.5))
                         .SetImageUri(@"C:\data\ruge\ruge.cardEngine\images\BetDown.png")
                         .SetBehavior(Behaviors.Size)
                         .SetSize(_BetButtonSize)
@@ -205,20 +207,16 @@
             }
         }
 
-        private void AddBetButtonClicked(int increment)
+        double _betNum = 0.50;
+        private void AddBetButtonClicked(double increment)
         {
             var betValue = _canvasManager.GetElementByName("betValue") as TextControl;
+                                   
             if (betValue != null)
-            { 
-                var intValue = 0;
-                if (Int32.TryParse(betValue.Text, out intValue))
-                {
-                    betValue.Text = (intValue + increment).ToString();
-                }
-                else
-                {
-                    betValue.Text = "5";
-                }
+            {
+                _betNum += increment;
+
+                betValue.Text = string.Format("{0:C}", _betNum);
                 _canvasManager.Update(betValue);
                 _canvasManager.SendEngineActionSet();
             }
@@ -226,12 +224,14 @@
 
         private void BetUpButtonClicked()
         {
-            AddBetButtonClicked(5);
+            if (_betNum < 10.00)
+            AddBetButtonClicked(0.50);
         }
 
         private void BetDownButtonClicked()
         {
-            AddBetButtonClicked(-5);
+            if (_betNum > 0.50)
+                AddBetButtonClicked(-0.50);
         }
 
         private void SelectModeEvent(IElement element, UserAction userAction)

@@ -15,5 +15,7 @@ namespace ruge.lib.model.controls
         public bool IsEnabled { get; set; }
         public Behaviors Behavior { get; set; }
         public string Text { get; set; }
+        public double FontSize { get; set; }
+        public int MaxLength { get; set; }
     }
 }

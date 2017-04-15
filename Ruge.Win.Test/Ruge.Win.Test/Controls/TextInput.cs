@@ -13,7 +13,7 @@ namespace Ruge.Win.Test.Controls
 {
     public class TextInput : Viewbox
     {
-        protected TextBox InnerTextBox = new TextBox();
+        private TextBox InnerTextBox = new TextBox();
 
         public new double Opacity
         {
@@ -30,6 +30,52 @@ namespace Ruge.Win.Test.Controls
             get { return (int)GetValue(Canvas.ZIndexProperty); }
             set { SetValue(Canvas.ZIndexProperty, value); }
         }
+      
+        public int MaxLength
+        {
+            get
+            {
+                return InnerTextBox.MaxLength;
+            }
+            set
+            {
+                InnerTextBox.MaxLength = value;
+            }
+        }
+
+        public new double Height
+        {
+            get {
+                return base.Height;
+            }
+            set
+            {
+                //base.Height = value;
+                //InnerTextBox.Height = base.Height / base.Width * 1000;               
+            }
+        }
+
+        public new double Width
+        {
+            get {
+                return base.Width;
+            }
+            set {
+                base.Width = value;
+                InnerTextBox.Width = 1000;
+            }
+        }
+
+        public double FontSize
+        {
+            get {
+                return InnerTextBox.FontSize * 4;
+            }
+            set {
+                InnerTextBox.FontSize = value * 4;
+
+            }
+        }
 
         public string Text
         {
@@ -37,8 +83,7 @@ namespace Ruge.Win.Test.Controls
             {
                 return InnerTextBox.Text;
             }
-            set
-            {
+            set {
                 InnerTextBox.Text = value;
             }
         }
@@ -56,30 +101,28 @@ namespace Ruge.Win.Test.Controls
                     var bi = new BitmapImage(new Uri(value));
                     InnerTextBox.Background = new ImageBrush(bi);
                     if (Width == 0)
-                        InnerTextBox.Width = InnerTextBox.Height * bi.Width / bi.Height;
+                        Width = Height * bi.Width / bi.Height;
                     if (Height == 0)
-                        InnerTextBox.Height = InnerTextBox.Width * bi.Height / bi.Width;
+                        Height = Width * bi.Height / bi.Width;
                 }
             }
         }
-        public TextInput(string name, int opacity, double width, double height, string image, int zIndex, bool isEnabled, string text) : base()
+        public TextInput(string name, int opacity, double width, double height, string image, int zIndex, bool isEnabled, string text, double fontSize, int maxLength) : base()
         {
-
+            Child = InnerTextBox;
             Stretch = Stretch.Fill;
+            Width = width;
+            //Height = height;
+            InnerTextBox.Margin = new Thickness(0, 0, 0, 0);
+            InnerTextBox.Padding = new Thickness(0, 0, 0, 0);
             InnerTextBox.FontWeight = FontWeights.Bold;
             InnerTextBox.BorderThickness = new Thickness(0, 0, 0, 0);
-
             InnerTextBox.MaxLength = 10;
             InnerTextBox.FontSize = 10;
-            InnerTextBox.Width = 20 * width;
-
-            InnerTextBox.SetValue(IsEnabledProperty, true);
-            Width = width;
-            Height = height;
-
+            SetValue(IsEnabledProperty, true);
             Name = name;
-
-            this.Child = InnerTextBox;
+            InnerTextBox.FontSize = fontSize;
+            InnerTextBox.MaxLength = maxLength;            
         }
     } 
 }
