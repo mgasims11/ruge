@@ -43,14 +43,14 @@
         public Deck _dealerDeck = null;
         public Deck _playerDeck = null;
 
-        public XYPair _CardSize = new XYPair(1.0, 1.375);
-        public XYPair _HoldButtonSize = new XYPair(1.0, 0.5);
-        public XYPair _BetButtonSize = new XYPair(0.5, 0.5);
-        public XYPair _HoldOverlaySize = new XYPair(1.0, 0);
+        public XYPair _CardSize = new XYPair(1000, 1375);
+        public XYPair _HoldButtonSize = new XYPair(1000, 0500);
+        public XYPair _BetButtonSize = new XYPair(0500, 0500);
+        public XYPair _HoldOverlaySize = new XYPair(1000, 0);
 
         public JokerPoker()
         {
-            _canvasManager.CreateCanvas(7, 4);
+            _canvasManager.CreateCanvas(7000, 4000);
             _tableManager = new TableManager(TableBuilder.Create().SetTableName("Joker Poker"), null);
         }
 
@@ -78,7 +78,7 @@
                         .SetDeck(_playerDeck)
                         .SetCard(_playerDeck.Cards[i])
                         .SetIndex(i)
-                        .SetLocation(new XYPair(i * (_CardSize.X + .03), 2))
+                        .SetLocation(new XYPair(i * (_CardSize.X + .03), 2000))
                         .SetSize(_CardSize)
                         .SetOpacity(100)
                         .SetZIndex(51)
@@ -92,7 +92,7 @@
             
             _canvasManager.Update(
                    ClickableControlBuilder.Create()
-                       .SetLocation(new XYPair(i * (_CardSize.X + .03), 2.375))
+                       .SetLocation(new XYPair(i * (_CardSize.X + .03), 2375))
                        .SetSize(_HoldOverlaySize)
                        .SetOpacity(100)
                        .SetZIndex(100)
@@ -123,17 +123,17 @@
 
             _canvasManager.Update(
                   TextControlBuilder.Create()
-                      .SetLocation(new XYPair(5.3, 1.9))
-                      .SetSize(new XYPair(1.3, 0))
+                      .SetLocation(new XYPair(5300, 1900))
+                      .SetSize(new XYPair(1400, 500))
                       .SetName("betValue")
                       .SetText("Hello World!")
                       .SetMaxLength(3)
-                      .SetFontSize(20)
+                      .SetFontSize(450)
                       );
 
             _canvasManager.Update(
                     ClickableControlBuilder.Create()
-                        .SetLocation(new XYPair(6.0, 2.5))                     
+                        .SetLocation(new XYPair(6000, 2500))
                         .SetImageUri(@"C:\data\ruge\ruge.cardEngine\images\BetUp.png")
                         .SetBehavior(Behaviors.Size)
                         .SetSize(_BetButtonSize)
@@ -142,7 +142,7 @@
 
             _canvasManager.Update(
                     ClickableControlBuilder.Create()
-                        .SetLocation(new XYPair(5.3, 2.5))
+                        .SetLocation(new XYPair(5300, 2500))
                         .SetImageUri(@"C:\data\ruge\ruge.cardEngine\images\BetDown.png")
                         .SetBehavior(Behaviors.Size)
                         .SetSize(_BetButtonSize)

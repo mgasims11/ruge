@@ -11,9 +11,8 @@ using System.Drawing;
 
 namespace Ruge.Win.Test.Controls
 {
-    public class TextInput : Viewbox
+    public class TextInput : TextBox
     {
-        private TextBox InnerTextBox = new TextBox();
 
         public new double Opacity
         {
@@ -31,63 +30,6 @@ namespace Ruge.Win.Test.Controls
             set { SetValue(Canvas.ZIndexProperty, value); }
         }
       
-        public int MaxLength
-        {
-            get
-            {
-                return InnerTextBox.MaxLength;
-            }
-            set
-            {
-                InnerTextBox.MaxLength = value;
-            }
-        }
-
-        public new double Height
-        {
-            get {
-                return base.Height;
-            }
-            set
-            {
-                //base.Height = value;
-                //InnerTextBox.Height = base.Height / base.Width * 1000;               
-            }
-        }
-
-        public new double Width
-        {
-            get {
-                return base.Width;
-            }
-            set {
-                base.Width = value;
-                InnerTextBox.Width = 1000;
-            }
-        }
-
-        public double FontSize
-        {
-            get {
-                return InnerTextBox.FontSize * 4;
-            }
-            set {
-                InnerTextBox.FontSize = value * 4;
-
-            }
-        }
-
-        public string Text
-        {
-            get
-            {
-                return InnerTextBox.Text;
-            }
-            set {
-                InnerTextBox.Text = value;
-            }
-        }
-
         private string _image = "";
 
         public string Image
@@ -99,7 +41,7 @@ namespace Ruge.Win.Test.Controls
                 {
                     _image = value;
                     var bi = new BitmapImage(new Uri(value));
-                    InnerTextBox.Background = new ImageBrush(bi);
+                    Background = new ImageBrush(bi);
                     if (Width == 0)
                         Width = Height * bi.Width / bi.Height;
                     if (Height == 0)
@@ -109,20 +51,18 @@ namespace Ruge.Win.Test.Controls
         }
         public TextInput(string name, int opacity, double width, double height, string image, int zIndex, bool isEnabled, string text, double fontSize, int maxLength) : base()
         {
-            Child = InnerTextBox;
-            Stretch = Stretch.Fill;
             Width = width;
-            //Height = height;
-            InnerTextBox.Margin = new Thickness(0, 0, 0, 0);
-            InnerTextBox.Padding = new Thickness(0, 0, 0, 0);
-            InnerTextBox.FontWeight = FontWeights.Bold;
-            InnerTextBox.BorderThickness = new Thickness(0, 0, 0, 0);
-            InnerTextBox.MaxLength = 10;
-            InnerTextBox.FontSize = 10;
+            Height = height;
+            Margin = new Thickness(0, 0, 0, 0);
+            Padding = new Thickness(0, 0, 0, 0);
+            FontWeight = FontWeights.Bold;
+            BorderThickness = new Thickness(0, 0, 0, 0);
+            MaxLength = 10;
+            FontSize = 10;
             SetValue(IsEnabledProperty, true);
             Name = name;
-            InnerTextBox.FontSize = fontSize;
-            InnerTextBox.MaxLength = maxLength;            
+            FontSize = fontSize;
+            MaxLength = maxLength;            
         }
     } 
 }
