@@ -249,31 +249,31 @@
                 if (clientControl == null)
                 {
                     clientControl = new TextInput(
-                        c.ElementId,
-                        c.Size.X,
-                        c.Size.Y,
-                        c.ImageUri,
-                        c.ImageUriHover,
-                        c.ImageUriDown,
-                        c.ImageUriDisabled,
-                        c.Text
-                    );
+                         c.ElementId,
+                            c.Opacity,
+                            c.Size.X,
+                            c.Size.Y,
+                            c.ImageUri,
+                            c.ZIndex,
+                            false,
+                            c.Text
+                            );
+                    CANVAS.Children.Add(clientControl);
+                    clientControl.MouseDown += Clickable_MouseDown;
                 }
                 else
                 {
-                    NEED TO ADD PROPERTIES TO CONTROL!
                     clientControl.Name = c.ElementId;
                     clientControl.Opacity = c.Opacity;
                     clientControl.Width = c.Size.X;
                     clientControl.Height = c.Size.Y;
-                }
+                    clientControl.Image = c.ImageUri;
+                    clientControl.ToolTip = "";
+                    clientControl.Text = c.Text;
 
+                }
                 clientControl.SetValue(LeftProperty, control.Location.X);
                 clientControl.SetValue(TopProperty, control.Location.Y);
-
-                CANVAS.Children.Add(clientControl);
-                clientControl.MouseDown += Clickable_MouseDown;
-
             }
         }
 

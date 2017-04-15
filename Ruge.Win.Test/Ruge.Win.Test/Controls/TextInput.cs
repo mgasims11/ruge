@@ -13,84 +13,73 @@ namespace Ruge.Win.Test.Controls
 {
     public class TextInput : Viewbox
     {
-        private string _backgroundIdle, _backgroundHover, _backgroundDown, _backgroundDisabled;
-        private string _backgroundCurrent;
+        protected TextBox InnerTextBox = new TextBox();
 
-        public TextInput(string controlid, double width, double height, string backgroundIdle, string backgroundHover, string backgroundDown, string backgroundDisabled, string text) :base()
+        public new double Opacity
         {
-           
-            var textBox = new TextBox();
+            get { return (int)(base.Opacity * 100); }
+            set
+            {
+                base.Opacity = value;
+                SetValue(OpacityProperty, (double)value / 100);
+            }
+        }
+
+        public int ZIndex
+        {
+            get { return (int)GetValue(Canvas.ZIndexProperty); }
+            set { SetValue(Canvas.ZIndexProperty, value); }
+        }
+
+        public string Text
+        {
+            get
+            {
+                return InnerTextBox.Text;
+            }
+            set
+            {
+                InnerTextBox.Text = value;
+            }
+        }
+
+        private string _image = "";
+
+        public string Image
+        {
+            set
+            {
+
+                if (value != null && _image != value)
+                {
+                    _image = value;
+                    var bi = new BitmapImage(new Uri(value));
+                    InnerTextBox.Background = new ImageBrush(bi);
+                    if (Width == 0)
+                        InnerTextBox.Width = InnerTextBox.Height * bi.Width / bi.Height;
+                    if (Height == 0)
+                        InnerTextBox.Height = InnerTextBox.Width * bi.Height / bi.Width;
+                }
+            }
+        }
+        public TextInput(string name, int opacity, double width, double height, string image, int zIndex, bool isEnabled, string text) : base()
+        {
 
             Stretch = Stretch.Fill;
-            textBox.FontWeight = FontWeights.Bold;            
-            textBox.BorderThickness = new Thickness(0, 0, 0, 0);
+            InnerTextBox.FontWeight = FontWeights.Bold;
+            InnerTextBox.BorderThickness = new Thickness(0, 0, 0, 0);
 
-            textBox.MaxLength = 10;
-            textBox.FontSize = 10;
-            textBox.Width = 20 * width;           
+            InnerTextBox.MaxLength = 10;
+            InnerTextBox.FontSize = 10;
+            InnerTextBox.Width = 20 * width;
 
-            textBox.SetValue(IsEnabledProperty, true);
+            InnerTextBox.SetValue(IsEnabledProperty, true);
             Width = width;
             Height = height;
 
-            Name = controlid;
-            MouseEnter += Clickable_MouseEnter;
-            MouseDown += Clickable_MouseDown;
-            MouseLeave += Clickable_MouseLeave;
-            MouseUp += Clickable_MouseUp;
-            IsEnabledChanged += Clickable_IsEnabledChanged;
-            
-            _backgroundIdle = backgroundIdle;
-            _backgroundHover = backgroundHover;
-            _backgroundDown = backgroundDown;
-            _backgroundDisabled = backgroundDisabled;
+            Name = name;
 
-            SetBackground(backgroundIdle);
-            this.Child = textBox;            
+            this.Child = InnerTextBox;
         }
-
-        private void Clickable_MouseUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            SetBackground(_backgroundIdle);
-        }
-
-        private void Clickable_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
-        {
-            SetBackground(_backgroundIdle);
-        }
-
-        private void Clickable_IsEnabledChanged(object sender, DependencyPropertyChangedEventArgs e)
-        {
-            SetBackground();
-        }
-
-        private void Clickable_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            SetBackground(_backgroundDown);
-        }
-
-        private void Clickable_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
-        {
-            SetBackground(_backgroundHover);
-        }
-
-        private void SetBackground()
-        {
-            SetBackground(this._backgroundCurrent);
-        }
-
-        private void SetBackground(string imageUri)
-        {
-            if (!String.IsNullOrEmpty(imageUri))
-            {
-                if (IsEnabled)
-                    _backgroundCurrent = imageUri;
-                else
-                    _backgroundCurrent = _backgroundDisabled;
-
-                var bi = new BitmapImage(new Uri(_backgroundCurrent));
-                
-            }
-        }
-    }
+    } 
 }
