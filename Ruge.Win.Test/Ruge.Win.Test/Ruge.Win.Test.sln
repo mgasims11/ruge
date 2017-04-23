@@ -15,6 +15,8 @@ Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "CardEngine", "..\..\cardEng
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CardEngine.Test", "..\CardEngine.Test\CardEngine.Test.csproj", "{3216B228-3AAC-47FA-BE41-6B546DB01AD9}"
 EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Ruge.Api", "..\..\Ruge.Api\Ruge.Api.xproj", "{C6CCEB91-3F34-4E2E-A974-0FAB7BABBBDD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{3216B228-3AAC-47FA-BE41-6B546DB01AD9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3216B228-3AAC-47FA-BE41-6B546DB01AD9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3216B228-3AAC-47FA-BE41-6B546DB01AD9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C6CCEB91-3F34-4E2E-A974-0FAB7BABBBDD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6CCEB91-3F34-4E2E-A974-0FAB7BABBBDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6CCEB91-3F34-4E2E-A974-0FAB7BABBBDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6CCEB91-3F34-4E2E-A974-0FAB7BABBBDD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

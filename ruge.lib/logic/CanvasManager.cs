@@ -84,9 +84,8 @@ namespace ruge.lib.logic {
 
         public void InitializeEngineActionSet()
         {
-
+            _engineActionSet = new EngineActionSet();
             _engineActionSet.CanvasId = Canvas.CanvasId;
-            _engineActionSet.EngineActions.Clear();
         }
 
         public void AddEngineAction(IElement control, EngineActionType actionType)

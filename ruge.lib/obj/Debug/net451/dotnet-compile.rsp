@@ -32,8 +32,8 @@ C:\data\ruge\ruge.lib\model\Controls\TextControl.cs
 C:\data\ruge\ruge.lib\model\Controls\TextInputControl.cs
 C:\data\ruge\ruge.lib\model\Controls\Enums\Behaviors.cs
 C:\data\ruge\ruge.lib\model\Controls\Interfaces\IElement.cs
-C:\data\ruge\ruge.lib\model\Controls\Interfaces\IGame.cs
 C:\data\ruge\ruge.lib\model\Controls\Interfaces\IResponsive.cs
+C:\data\ruge\ruge.lib\model\Controls\Interfaces\IRugeApp.cs
 C:\data\ruge\ruge.lib\model\Controls\Interfaces\IText.cs
 C:\data\ruge\ruge.lib\model\Engine\EngineAction.cs
 C:\data\ruge\ruge.lib\model\Engine\EngineActionEventArgs.cs

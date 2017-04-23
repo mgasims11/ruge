@@ -9,6 +9,7 @@ C:\data\ruge\Ruge.Win.Test\Ruge.Win.Test\bin\Debug\cardEngine.lib.pdb
 C:\data\ruge\Ruge.Win.Test\Ruge.Win.Test\bin\Debug\JokerPoker1.pdb
 C:\data\ruge\Ruge.Win.Test\Ruge.Win.Test\bin\Debug\ruge.cardEngine.pdb
 C:\data\ruge\Ruge.Win.Test\Ruge.Win.Test\bin\Debug\ruge.lib.pdb
+C:\data\ruge\Ruge.Win.Test\Ruge.Win.Test\obj\Debug\Ruge.Win.Test.csprojResolveAssemblyReference.cache
 C:\data\ruge\Ruge.Win.Test\Ruge.Win.Test\obj\Debug\MainWindow.g.cs
 C:\data\ruge\Ruge.Win.Test\Ruge.Win.Test\obj\Debug\App.g.cs
 C:\data\ruge\Ruge.Win.Test\Ruge.Win.Test\obj\Debug\Ruge.Win.Test_MarkupCompile.cache
@@ -19,4 +20,3 @@ C:\data\ruge\Ruge.Win.Test\Ruge.Win.Test\obj\Debug\Ruge.Win.Test.Properties.Reso
 C:\data\ruge\Ruge.Win.Test\Ruge.Win.Test\obj\Debug\Ruge.Win.Test.csproj.GenerateResource.Cache
 C:\data\ruge\Ruge.Win.Test\Ruge.Win.Test\obj\Debug\Ruge.Win.Test.exe
 C:\data\ruge\Ruge.Win.Test\Ruge.Win.Test\obj\Debug\Ruge.Win.Test.pdb
-C:\data\ruge\Ruge.Win.Test\Ruge.Win.Test\obj\Debug\Ruge.Win.Test.csprojResolveAssemblyReference.cache

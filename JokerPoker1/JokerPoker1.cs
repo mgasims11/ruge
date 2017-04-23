@@ -78,7 +78,7 @@
                         .SetDeck(_playerDeck)
                         .SetCard(_playerDeck.Cards[i])
                         .SetIndex(i)
-                        .SetLocation(new XYPair(i * (_CardSize.X + .03), 2000))
+                        .SetLocation(new XYPair(i * (_CardSize.X + 30), 2000))
                         .SetSize(_CardSize)
                         .SetOpacity(100)
                         .SetZIndex(51)
@@ -88,9 +88,9 @@
                         .SetDelay(i * 500)
                         .SetAllUris(GetCardImage(_playerDeck.Cards[i]));
 
-            _canvasManager.Update(cardControl);
+                _canvasManager.Update(cardControl);
             
-            _canvasManager.Update(
+                _canvasManager.Update(
                    ClickableControlBuilder.Create()
                        .SetLocation(new XYPair(i * (_CardSize.X + .03), 2375))
                        .SetSize(_HoldOverlaySize)
@@ -112,9 +112,10 @@
                         );
             };
 
+            var firstHoldButton = _canvasManager.GetElementByName("holdbutton_1") as ClickableControl;
             _canvasManager.Update(
                     ClickableControlBuilder.Create()
-                        .SetLocation(new XYPair(5.3, 2 + _CardSize.Y + 0.03))
+                        .SetLocation(new XYPair(5300, firstHoldButton.Location.Y))
                         .SetImageUri(@"C:\data\ruge\ruge.cardEngine\images\DealButton.png")
                         .SetSize(_HoldButtonSize)
                         .SetBehavior(Behaviors.Size)
@@ -125,8 +126,7 @@
                   TextControlBuilder.Create()
                       .SetLocation(new XYPair(5300, 1900))
                       .SetSize(new XYPair(1400, 500))
-                      .SetName("betValue")
-                      .SetText("Hello World!")
+                      .SetName("betValue")                    
                       .SetMaxLength(3)
                       .SetFontSize(450)
                       );
@@ -150,6 +150,9 @@
                         );
 
             TurnPlayerCards(Orientations.FaceDown);
+
+            _betNum = .50;
+            SetBetButtonValue();
             PutGameIntoBetMode();
         }
 
@@ -210,17 +213,22 @@
         double _betNum = 0.50;
         private void AddBetButtonClicked(double increment)
         {
+            _betNum += increment;
+            SetBetButtonValue();
+            _canvasManager.SendEngineActionSet();            
+        }
+
+        private void SetBetButtonValue()
+        {
             var betValue = _canvasManager.GetElementByName("betValue") as TextControl;
-                                   
             if (betValue != null)
             {
-                _betNum += increment;
-
                 betValue.Text = string.Format("{0:C}", _betNum);
-                _canvasManager.Update(betValue);
-                _canvasManager.SendEngineActionSet();
+                _canvasManager.Update(betValue);             
             }
         }
+
+
 
         private void BetUpButtonClicked()
         {

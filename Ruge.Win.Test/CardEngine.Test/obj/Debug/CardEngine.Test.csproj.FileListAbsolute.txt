@@ -1,8 +1,8 @@
-C:\data\ruge\Ruge.Win.Test\CardEngine.Test\obj\Debug\CardEngine.Test.csprojResolveAssemblyReference.cache
 C:\data\ruge\Ruge.Win.Test\CardEngine.Test\bin\Debug\CardEngine.Test.dll
 C:\data\ruge\Ruge.Win.Test\CardEngine.Test\bin\Debug\CardEngine.Test.pdb
 C:\data\ruge\Ruge.Win.Test\CardEngine.Test\bin\Debug\cardEngine.lib.dll
 C:\data\ruge\Ruge.Win.Test\CardEngine.Test\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
 C:\data\ruge\Ruge.Win.Test\CardEngine.Test\bin\Debug\cardEngine.lib.pdb
+C:\data\ruge\Ruge.Win.Test\CardEngine.Test\obj\Debug\CardEngine.Test.csprojResolveAssemblyReference.cache
 C:\data\ruge\Ruge.Win.Test\CardEngine.Test\obj\Debug\CardEngine.Test.dll
 C:\data\ruge\Ruge.Win.Test\CardEngine.Test\obj\Debug\CardEngine.Test.pdb
